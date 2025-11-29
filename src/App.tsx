@@ -5,6 +5,7 @@ import { ClientItineraryView } from './components/ClientItineraryView';
 import { SikkimShowcase } from './components/SikkimShowcase';
 import { BookingOptions } from './components/BookingOptions';
 import { SplashScreen } from './components/SplashScreen';
+import { SikkimSherpa } from './components/SikkimSherpa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
@@ -96,6 +97,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SikkimSherpa />
     </div>
   );
 }

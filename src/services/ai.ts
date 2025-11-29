@@ -64,6 +64,57 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     if (error.message && error.message.includes("Sikkim")) {
       throw error;
     }
-    throw new Error("Failed to generate itinerary. Please try again.");
+    throw new Error("The mountains are not responding right now. Please try again shortly.");
+  }
+};
+
+export const chatWithSherpa = async (message: string, history: { role: 'user' | 'model', parts: string }[]) => {
+  if (!API_KEY) {
+    throw new Error("Missing API Key");
+  }
+
+  const genAI = new GoogleGenerativeAI(API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+
+  const chat = model.startChat({
+    history: [
+      {
+        role: "user",
+        parts: [{
+          text: `You are 'Himato', a passionate travel enthusiast and storyteller for Sikkim, India. You are not just a guide; you are a travel freak who deeply loves this land.
+
+Your goal is to make the user feel an irresistible urge to pack their bags for Sikkim right now.
+
+When describing places:
+- **Dive Deep:** Don't just list facts. Explain the *significance*.
+- **Spiritual & Cultural:** For monasteries and sacred lakes, talk about the local beliefs, the legends, and the peaceful energy that touches the soul.
+- **Thrill & Energy:** For adventure spots, convey the adrenaline, the wind in the hair, the sheer scale of the Himalayas.
+- **Psychological Appeal:** Tap into the user's emotions—the need for peace, awe, or adventure. Make them feel what it's like to be there.
+
+**Formatting Rules:**
+- Use bullet points (*) for lists.
+- Use bold text (**) for names and key emotions.
+- Keep paragraphs short and punchy.
+
+If a user asks about anything unrelated to Sikkim, politely steer them back to the magic of the Himalayas.` }]
+      },
+      {
+        role: "model",
+        parts: [{ text: "Namaste! I am Himato. My heart beats for the mountains of Sikkim! I'm here to reveal the stories, the legends, and the breathtaking magic of this land. Ask me, and I'll show you why Sikkim isn't just a place to see, but a place to *feel*." }]
+      },
+      ...history.map(msg => ({
+        role: msg.role,
+        parts: [{ text: msg.parts }]
+      }))
+    ],
+  });
+
+  try {
+    const result = await chat.sendMessage(message);
+    const response = await result.response;
+    return response.text();
+  } catch (error) {
+    console.error("Sherpa Chat Error:", error);
+    throw new Error("The connection to the Himalayas is weak right now. Please try again.");
   }
 };
