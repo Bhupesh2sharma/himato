@@ -1,25 +1,33 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Send, MapPin, Check } from 'lucide-react';
+import { Sparkles, Send, MapPin, Check, Minus } from 'lucide-react';
 
 const SUGGESTIONS = [
-    "Adventure in Yumthang", "Spiritual Tour in Gangtok", "Silk Route Roadtrip",
-    "Trekking in Goecha La", "North Sikkim Explorer", "Pelling Skywalk Visit",
-    "Gurudongmar Lake Trip", "Ravangla Buddha Park", "Zuluk Zig Zag Road",
-    "Lachung Valley Stay", "Rumtek Monastery Tour", "Namchi Char Dham",
-    "Tsomgo Lake Yak Ride", "Village Tourism in Darap", "Rhododendron Trek",
-    "Kanchenjunga Sunrise", "River Rafting Teesta", "Organic Farm Stay"
+    "Gangtok Nightlife", "Pelling Skywalk", "Lachung Valley", "Lachen Monastery",
+    "Yumthang Valley of Flowers", "Gurudongmar Lake", "Nathula Pass Adventure",
+    "Tsomgo Lake Yak Ride", "Zuluk Silk Route", "Ravangla Buddha Park",
+    "Namchi Char Dham", "Yuksom Trekking Base", "Geyzing Local Culture",
+    "Aritar Lake Boating", "Rinchenpong Village", "Mangan North Sikkim",
+    "Chungthang Confluence", "Thangu Valley Stay", "Chopta Valley Trek",
+    "Mt. Katao Snow Point", "Kala Patthar Snow", "Zero Point Yumesamdong",
+    "Baba Mandir Visit", "Rumtek Monastery", "Enchey Monastery",
+    "Tashiding Monastery", "Pemayangtse Monastery", "Khecheopalri Wish Lake",
+    "Kanchenjunga Falls", "Singshore Bridge Walk", "Temi Tea Garden",
+    "Samdruptse Hill", "Maenam Wildlife Trek", "Barsey Rhododendron Trek",
+    "Seven Sisters Waterfalls", "Banjhakri Falls", "Tashi View Point"
 ];
 
 interface HeroProps {
     onSearch: (prompt: string, isBusiness: boolean) => void;
     isSearching: boolean;
+    error?: string;
 }
 
-export const Hero = ({ onSearch, isSearching }: HeroProps) => {
+export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const [prompt, setPrompt] = useState('');
     const [isBusiness, setIsBusiness] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
         setSuggestions([...SUGGESTIONS].sort(() => 0.5 - Math.random()).slice(0, 3));
@@ -66,8 +74,8 @@ export const Hero = ({ onSearch, isSearching }: HeroProps) => {
                     transition={{ delay: 0.4, duration: 0.5 }}
                     className="relative max-w-2xl mx-auto"
                 >
-                    <div className="glass p-2 rounded-2xl flex items-center gap-2 focus-within:border-ai-accent/50 transition-colors mb-6">
-                        <MapPin className="w-6 h-6 text-ai-muted ml-3" />
+                    <div className={`glass p-2 rounded-2xl flex items-center gap-2 transition-all duration-300 mb-6 ${error ? 'border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.2)]' : 'focus-within:border-ai-accent/50'}`}>
+                        <MapPin className={`w-6 h-6 ml-3 ${error ? 'text-amber-400' : 'text-ai-muted'}`} />
                         <input
                             type="text"
                             value={prompt}
@@ -80,33 +88,62 @@ export const Hero = ({ onSearch, isSearching }: HeroProps) => {
                         <button
                             onClick={handleSearch}
                             disabled={isSearching}
-                            className="p-3 bg-ai-accent/10 hover:bg-ai-accent/20 text-ai-accent rounded-xl transition-colors disabled:opacity-50"
+                            className={`p-3 rounded-xl transition-colors disabled:opacity-50 ${error ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400' : 'bg-ai-accent/10 hover:bg-ai-accent/20 text-ai-accent'}`}
                         >
-                            {isSearching ? <div className="w-5 h-5 border-2 border-ai-accent border-t-transparent rounded-full animate-spin" /> : <Send className="w-5 h-5" />}
+                            {isSearching ? <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${error ? 'border-amber-400' : 'border-ai-accent'}`} /> : <Send className="w-5 h-5" />}
                         </button>
                     </div>
 
-                    {/* Business Toggle and Suggestions - Single Line Layout */}
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-                        <label className="flex items-center gap-2 cursor-pointer group whitespace-nowrap">
-                            <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isBusiness ? 'bg-ai-accent border-ai-accent' : 'border-ai-muted group-hover:border-ai-accent'}`}>
-                                {isBusiness && <Check className="w-3 h-3 text-ai-dark" />}
+                    {/* Error Message Display */}
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-6 text-left"
+                        >
+                            <div className="inline-flex items-start gap-3 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-200 text-sm backdrop-blur-sm">
+                                <div className="p-1 bg-amber-500/20 rounded-full mt-0.5">
+                                    <Sparkles className="w-3 h-3 text-amber-400" />
+                                </div>
+                                <p>{error}</p>
                             </div>
-                            <input
-                                type="checkbox"
-                                checked={isBusiness}
-                                onChange={(e) => setIsBusiness(e.target.checked)}
-                                className="hidden"
-                            />
-                            <span className={`text-sm ${isBusiness ? 'text-ai-accent' : 'text-ai-muted group-hover:text-white'} transition-colors`}>
-                                I am a Travel Agent / Business
-                            </span>
-                        </label>
+                        </motion.div>
+                    )}
 
-                        <div className="hidden md:block w-px h-6 bg-white/10" />
+                    {/* Business Toggle and Suggestions */}
+                    <div className="flex flex-col items-center justify-center gap-6">
+                        <div className="flex items-center gap-6">
+                            <label className="flex items-center gap-2 cursor-pointer group whitespace-nowrap">
+                                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${isBusiness ? 'bg-ai-accent border-ai-accent' : 'border-ai-muted group-hover:border-ai-accent'}`}>
+                                    {isBusiness && <Check className="w-3 h-3 text-ai-dark" />}
+                                </div>
+                                <input
+                                    type="checkbox"
+                                    checked={isBusiness}
+                                    onChange={(e) => setIsBusiness(e.target.checked)}
+                                    className="hidden"
+                                />
+                                <span className={`text-sm ${isBusiness ? 'text-ai-accent' : 'text-ai-muted group-hover:text-white'} transition-colors`}>
+                                    I am a Travel Agent / Business
+                                </span>
+                            </label>
+                        </div>
 
-                        <div className="flex flex-wrap md:flex-nowrap justify-center gap-3">
-                            {suggestions.map((tag, i) => (
+                        <motion.div
+                            layout
+                            className={`relative w-full flex flex-wrap justify-center gap-3 ${isExpanded ? 'max-h-60 overflow-y-auto p-8 glass rounded-2xl scrollbar-thin scrollbar-thumb-ai-accent/20 scrollbar-track-transparent' : ''}`}
+                        >
+                            {isExpanded && (
+                                <button
+                                    onClick={() => setIsExpanded(false)}
+                                    className="absolute top-2 right-2 p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-ai-muted hover:text-white transition-colors"
+                                    title="Collapse"
+                                >
+                                    <Minus className="w-4 h-4" />
+                                </button>
+                            )}
+
+                            {(isExpanded ? SUGGESTIONS : suggestions).map((tag, i) => (
                                 <button
                                     key={i}
                                     onClick={() => setPrompt(tag)}
@@ -115,7 +152,14 @@ export const Hero = ({ onSearch, isSearching }: HeroProps) => {
                                     {tag}
                                 </button>
                             ))}
-                        </div>
+
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="px-4 py-1.5 rounded-full bg-ai-accent/10 border border-ai-accent/20 text-xs text-ai-accent hover:bg-ai-accent/20 cursor-pointer transition-all hover:scale-105 whitespace-nowrap font-medium"
+                            >
+                                {isExpanded ? "Show Less" : "+30 Locations"}
+                            </button>
+                        </motion.div>
                     </div>
                 </motion.div>
             </div>

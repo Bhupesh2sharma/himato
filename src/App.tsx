@@ -5,6 +5,7 @@ import { ClientItineraryView } from './components/ClientItineraryView';
 import { SikkimShowcase } from './components/SikkimShowcase';
 import { BookingOptions } from './components/BookingOptions';
 import { SplashScreen } from './components/SplashScreen';
+import { SikkimSherpa } from './components/SikkimSherpa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
@@ -34,9 +35,9 @@ function App() {
       const data = await generateItinerary(prompt, isBusiness);
       setItineraryData(data);
       setView('results');
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError('Failed to generate plan. Please check your API key or try again.');
+      setError(err.message || 'Failed to generate plan. Please check your API key or try again.');
     } finally {
       setIsSearching(false);
     }
@@ -62,12 +63,7 @@ function App() {
           >
             {view === 'home' ? (
               <>
-                <Hero onSearch={handleSearch} isSearching={isSearching} />
-                {error && (
-                  <div className="max-w-md mx-auto p-4 mb-6 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200 text-center">
-                    {error}
-                  </div>
-                )}
+                <Hero onSearch={handleSearch} isSearching={isSearching} error={error} />
                 <SikkimShowcase />
               </>
             ) : (
@@ -101,6 +97,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SikkimSherpa />
     </div>
   );
 }

@@ -148,11 +148,11 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                     <div className="flex flex-wrap justify-center gap-6 text-gray-400 mb-8">
                         <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
                             <Globe className="w-5 h-5" />
-                            <span>www.himato.com</span>
+                            <span>www.himato.in</span>
                         </div>
                         <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
                             <Phone className="w-5 h-5" />
-                            <span>+91 98765 43210</span>
+                            <span>+91 9733814168</span>
                         </div>
                         <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
                             <Mail className="w-5 h-5" />
@@ -160,9 +160,17 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         </div>
                     </div>
 
-                    <button className="bg-ai-accent hover:bg-ai-secondary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-ai-accent/20">
+                    <button
+                        onClick={() => window.location.href = '/'}
+                        className="bg-ai-accent hover:bg-ai-secondary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-ai-accent/20 mb-12"
+                    >
                         Plan Your Next Trip
                     </button>
+
+                    <div className="text-ai-muted text-sm space-y-2 border-t border-white/5 pt-8">
+                        <p>© {new Date().getFullYear()} Waglogy. All rights reserved.</p>
+                        <p className="opacity-75">Himato by Waglogy</p>
+                    </div>
                 </div>
             </div>
         </div>
