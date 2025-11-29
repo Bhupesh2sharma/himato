@@ -16,10 +16,17 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
 
   const systemPrompt = `
     You are an expert travel planner for Sikkim, India.
-    ${toneInstruction}
-    Generate a detailed itinerary based on this request: "${prompt}".
+    First, validate the user's request: "${prompt}".
 
-    Strictly follow this JSON format:
+    1. If the request is NOT about travel or tourism, OR if it is about a location strictly outside of Sikkim (e.g., "Plan a trip to Goa", "Recipe for momos"), return this EXACT JSON:
+    {
+      "error": "I specialize exclusively in Sikkim tourism. Please ask me to plan a trip within Sikkim!"
+    }
+
+    2. If the request IS valid (related to Sikkim travel), generate a detailed itinerary.
+    ${toneInstruction}
+
+    Strictly follow this JSON format for valid itineraries:
     {
       "days": [
         {
@@ -45,9 +52,18 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
 
     // Clean up markdown code blocks if present
     const jsonString = text.replace(/```json/g, '').replace(/```/g, '').trim();
-    return JSON.parse(jsonString);
-  } catch (error) {
+    const data = JSON.parse(jsonString);
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data;
+  } catch (error: any) {
     console.error("AI Generation Error:", error);
+    if (error.message && error.message.includes("Sikkim")) {
+      throw error;
+    }
     throw new Error("Failed to generate itinerary. Please try again.");
   }
 };
