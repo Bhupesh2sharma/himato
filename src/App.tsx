@@ -6,6 +6,7 @@ import { SikkimShowcase } from './components/SikkimShowcase';
 import { BookingOptions } from './components/BookingOptions';
 import { SplashScreen } from './components/SplashScreen';
 import { SikkimSherpa } from './components/SikkimSherpa';
+import { SEO } from './components/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
@@ -49,8 +50,10 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30">
-      <AnimatePresence mode="wait">
+    <>
+      <SEO />
+      <main className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30" role="main">
+        <AnimatePresence mode="wait">
         {showSplash ? (
           <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
         ) : (
@@ -98,7 +101,8 @@ function App() {
         )}
       </AnimatePresence>
       <SikkimSherpa />
-    </div>
+    </main>
+    </>
   );
 }
 
