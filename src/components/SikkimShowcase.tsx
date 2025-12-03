@@ -28,11 +28,11 @@ const destinations = [
 
 export const SikkimShowcase = () => {
     return (
-        <div className="py-20 px-4">
+        <section className="py-20 px-4" aria-label="Top Sikkim tourism destinations">
             <div className="max-w-6xl mx-auto">
                 <h2 className="text-3xl font-bold mb-12 text-center">
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-ai-accent to-ai-secondary">
-                        Trending Destinations
+                        Top Sikkim Tourism Destinations
                     </span>
                 </h2>
 
@@ -48,7 +48,10 @@ export const SikkimShowcase = () => {
                         >
                             <img
                                 src={dest.image}
-                                alt={dest.name}
+                                alt={`${dest.name} - Sikkim tourism destination. ${dest.tags.join(' and ')} attraction at ${dest.height} elevation. Rated ${dest.rating} stars. Popular Sikkim tourism place.`}
+                                loading="lazy"
+                                width="400"
+                                height="384"
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-ai-dark via-ai-dark/50 to-transparent opacity-80" />
@@ -81,6 +84,6 @@ export const SikkimShowcase = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 };

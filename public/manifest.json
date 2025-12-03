@@ -1,0 +1,22 @@
+{
+  "name": "Himato - Sikkim Tourism Travel Planner",
+  "short_name": "Sikkim Tourism",
+  "description": "Sikkim tourism made easy! Plan your perfect Sikkim tourism trip with AI-powered travel itineraries. Discover Sikkim tourism destinations: Gangtok, Pelling, Gurudongmar Lake, Yumthang Valley, and 30+ attractions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "lifestyle", "productivity"],
+  "lang": "en",
+  "dir": "ltr"
+}
+

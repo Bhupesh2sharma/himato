@@ -13,7 +13,7 @@ export const SikkimSherpa = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'model', parts: "Namaste! I am Himato, your personal guide to the mystical land of Sikkim. From hidden monasteries to snow-capped peaks, I'm here to help you plan the perfect journey. What would you like to explore today?" }
+        { role: 'model', parts: "Namaste! I am Himato, your personal Sikkim tourism guide. From hidden monasteries to snow-capped peaks, I'm here to help you plan the perfect Sikkim tourism journey. What Sikkim tourism destination would you like to explore today?" }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -139,7 +139,7 @@ export const SikkimSherpa = () => {
                                     value={input}
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                    placeholder="Ask Himato about Sikkim..."
+                                    placeholder="Ask about Sikkim tourism destinations..."
                                     className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-ai-accent/50 placeholder-ai-muted transition-all"
                                 />
                                 <button

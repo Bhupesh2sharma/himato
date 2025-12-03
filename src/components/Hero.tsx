@@ -40,7 +40,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     };
 
     return (
-        <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+        <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" role="banner">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ai-secondary/20 rounded-full blur-[100px] animate-pulse-slow" />
@@ -55,16 +55,19 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass text-ai-accent text-sm font-mono">
                         <Sparkles className="w-4 h-4" />
-                        <span>AI-POWERED SIKKIM EXPLORER</span>
+                        <span>AI-POWERED SIKKIM TOURISM PLANNER</span>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
-                        Experience Sikkim <br />
-                        <span className="text-ai-accent text-glow">Like Never Before</span>
+                        Sikkim Tourism <br />
+                        <span className="text-ai-accent text-glow">AI-Powered Travel Planner</span>
                     </h1>
 
-                    <p className="text-ai-muted text-lg mb-12 max-w-2xl mx-auto">
-                        Let our AI craft your perfect itinerary. From the monasteries of Pelling to the frozen lakes of Gurudongmar.
+                    <p className="text-ai-muted text-lg mb-6 max-w-2xl mx-auto">
+                        Discover the best of Sikkim tourism with our AI-powered travel planner. From the monasteries of Pelling to the frozen lakes of Gurudongmar - explore Sikkim tourism destinations like never before.
+                    </p>
+                    <p className="text-ai-muted text-sm mb-12 max-w-2xl mx-auto">
+                        Plan your Sikkim tourism trip with our free AI travel planner. Get custom Sikkim tourism itineraries for Gangtok, North Sikkim, Pelling, and 30+ Sikkim tourism destinations. Perfect for solo travelers, families, and travel agents planning Sikkim tourism packages.
                     </p>
                 </motion.div>
 
@@ -81,7 +84,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                            placeholder="Describe your dream trip (e.g., '7 days hiking in North Sikkim with monastery visits')..."
+                            placeholder="Plan your Sikkim tourism trip (e.g., '7 days Sikkim tourism package in North Sikkim with monastery visits')..."
                             className="flex-1 bg-transparent border-none outline-none text-white placeholder-ai-muted p-2"
                             disabled={isSearching}
                         />
@@ -163,6 +166,6 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                     </div>
                 </motion.div>
             </div>
-        </div>
+        </header>
     );
 };
