@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Hero } from './components/Hero';
 import { ItineraryResult } from './components/ItineraryResult';
 import { ClientItineraryView } from './components/ClientItineraryView';
@@ -6,12 +7,14 @@ import { SikkimShowcase } from './components/SikkimShowcase';
 import { BookingOptions } from './components/BookingOptions';
 import { SplashScreen } from './components/SplashScreen';
 import { SikkimSherpa } from './components/SikkimSherpa';
+import { Footer } from './components/Footer';
+import { ReachUs } from './components/ReachUs';
 import { SEO } from './components/SEO';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
 
-function App() {
+function HomePage() {
   const [showSplash, setShowSplash] = useState(true);
   const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
   const [isSearching, setIsSearching] = useState(false);
@@ -50,10 +53,8 @@ function App() {
   }
 
   return (
-    <>
-      <SEO />
-      <main className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30" role="main">
-        <AnimatePresence mode="wait">
+    <main className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30" role="main">
+      <AnimatePresence mode="wait">
         {showSplash ? (
           <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
         ) : (
@@ -102,6 +103,21 @@ function App() {
       </AnimatePresence>
       <SikkimSherpa />
     </main>
+  );
+}
+
+function App() {
+  const location = useLocation();
+  const isSharedView = location.pathname === '/' && location.search.includes('itinerary');
+
+  return (
+    <>
+      <SEO />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/reach_us" element={<ReachUs />} />
+      </Routes>
+      {!isSharedView && <Footer />}
     </>
   );
 }
