@@ -53,7 +53,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-ai-muted">
                 <Mail className="w-5 h-5 text-ai-accent flex-shrink-0" />
-                <span>hello@himato.com</span>
+                <span>hello@himato.in</span>
               </li>
               <li className="flex items-center gap-3 text-ai-muted">
                 <Building2 className="w-5 h-5 text-ai-accent flex-shrink-0" />

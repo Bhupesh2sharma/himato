@@ -34,10 +34,10 @@ export const ReachUs = () => {
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(formData)
       // });
-      
+
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', company: '', message: '' });
     } catch (error) {
@@ -90,7 +90,7 @@ export const ReachUs = () => {
               <p className="text-ai-muted mb-8 leading-relaxed">
                 We're always looking to partner with travel agents and tour operators who share our passion for showcasing the beauty of Sikkim. Fill out the form and we'll get back to you soon.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-4 text-gray-300">
                   <div className="p-3 bg-ai-accent/20 rounded-full">
@@ -98,10 +98,10 @@ export const ReachUs = () => {
                   </div>
                   <div>
                     <p className="text-sm text-ai-muted">Email</p>
-                    <p className="font-medium">hello@himato.com</p>
+                    <p className="font-medium">hello@himato.in</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 text-gray-300">
                   <div className="p-3 bg-ai-accent/20 rounded-full">
                     <Phone className="w-5 h-5 text-ai-accent" />
@@ -111,7 +111,7 @@ export const ReachUs = () => {
                     <p className="font-medium">+91 9733814168</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 text-gray-300">
                   <div className="p-3 bg-ai-accent/20 rounded-full">
                     <Building2 className="w-5 h-5 text-ai-accent" />
@@ -133,7 +133,7 @@ export const ReachUs = () => {
             className="glass p-6 sm:p-8 rounded-2xl border border-white/10"
           >
             <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
-            
+
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -143,7 +143,7 @@ export const ReachUs = () => {
                 Thank you! We've received your message and will get back to you soon.
               </motion.div>
             )}
-            
+
             {submitStatus === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}

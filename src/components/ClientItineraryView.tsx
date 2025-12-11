@@ -156,7 +156,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         </div>
                         <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
                             <Mail className="w-5 h-5" />
-                            <span>hello@himato.com</span>
+                            <span>hello@himato.in</span>
                         </div>
                     </div>
 

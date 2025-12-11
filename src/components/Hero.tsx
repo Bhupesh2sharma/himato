@@ -29,12 +29,21 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
 
+    const [localIsSubmitting, setLocalIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        if (!isSearching) {
+            setLocalIsSubmitting(false);
+        }
+    }, [isSearching]);
+
     useEffect(() => {
         setSuggestions([...SUGGESTIONS].sort(() => 0.5 - Math.random()).slice(0, 3));
     }, []);
 
     const handleSearch = () => {
-        if (prompt.trim()) {
+        if (prompt.trim() && !localIsSubmitting && !isSearching) {
+            setLocalIsSubmitting(true);
             onSearch(prompt, isBusiness);
         }
     };
@@ -86,11 +95,11 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                             placeholder="Plan your Sikkim tourism trip (e.g., '7 days Sikkim tourism package in North Sikkim with monastery visits')..."
                             className="flex-1 bg-transparent border-none outline-none text-white placeholder-ai-muted p-2"
-                            disabled={isSearching}
+                            disabled={isSearching || localIsSubmitting}
                         />
                         <button
                             onClick={handleSearch}
-                            disabled={isSearching}
+                            disabled={isSearching || localIsSubmitting}
                             className={`p-3 rounded-xl transition-colors disabled:opacity-50 ${error ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400' : 'bg-ai-accent/10 hover:bg-ai-accent/20 text-ai-accent'}`}
                         >
                             {isSearching ? <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${error ? 'border-amber-400' : 'border-ai-accent'}`} /> : <Send className="w-5 h-5" />}

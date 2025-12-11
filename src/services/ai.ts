@@ -8,7 +8,7 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
   }
 
   const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const toneInstruction = isBusiness
     ? "Use professional 'we' and 'our' language as if you are a premium travel agency planning this trip for a client."
@@ -61,6 +61,12 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     return data;
   } catch (error: any) {
     console.error("AI Generation Error:", error);
+
+    // Check for quota exceeded / rate limit errors
+    if (error.message?.includes('429') || error.message?.includes('quota')) {
+      throw new Error("High traffic. Please wait 10-15 seconds before trying again.");
+    }
+
     if (error.message && error.message.includes("Sikkim")) {
       throw error;
     }
@@ -74,7 +80,7 @@ export const chatWithSherpa = async (message: string, history: { role: 'user' | 
   }
 
   const genAI = new GoogleGenerativeAI(API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const chat = model.startChat({
     history: [
