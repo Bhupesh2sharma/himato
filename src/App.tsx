@@ -10,6 +10,10 @@ import { SikkimSherpa } from './components/SikkimSherpa';
 import { Footer } from './components/Footer';
 import { ReachUs } from './components/ReachUs';
 import { SEO } from './components/SEO';
+import { Login } from './components/Login';
+import { Register } from './components/Register';
+import { TermsAndConditions } from './pages/TermsAndConditions';
+import { NavigationHeader } from './components/NavigationHeader';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
@@ -109,15 +113,21 @@ function HomePage() {
 function App() {
   const location = useLocation();
   const isSharedView = location.pathname === '/' && location.search.includes('itinerary');
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const isTermsPage = location.pathname === '/terms';
 
   return (
     <>
       <SEO />
+      <NavigationHeader />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/reach_us" element={<ReachUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
       </Routes>
-      {!isSharedView && <Footer />}
+      {!isSharedView && !isAuthPage && !isTermsPage && <Footer />}
     </>
   );
 }

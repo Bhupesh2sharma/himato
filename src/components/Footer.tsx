@@ -36,6 +36,14 @@ export const Footer = () => {
                   Reach Us
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/terms"
+                  className="text-ai-muted hover:text-ai-accent transition-colors"
+                >
+                  Terms and Conditions
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -76,6 +84,7 @@ export const Footer = () => {
     </footer>
   );
 };
+
 
 
 

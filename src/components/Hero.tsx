@@ -49,7 +49,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     };
 
     return (
-        <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" role="banner">
+        <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16" role="banner">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ai-secondary/20 rounded-full blur-[100px] animate-pulse-slow" />

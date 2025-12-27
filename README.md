@@ -1,6 +1,98 @@
-# React + TypeScript + Vite
+# Sikkim Tourism AI-Powered Travel Planner
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, AI-powered travel planning application for Sikkim tourism with authentication, user registration, and itinerary generation.
+
+## Features
+
+- 🤖 AI-powered itinerary generation
+- 🔐 User authentication (Login/Register)
+- 👥 Support for regular and business users
+- 🎫 Guest access (use without login)
+- 📋 Terms and Conditions page
+- 🎨 Modern, responsive UI with glassmorphism design
+- 🚀 Production-ready authentication system
+
+## Setup Instructions
+
+### 1. Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Backend API Base URL
+# Add your backend API URL here (e.g., https://api.yourdomain.com)
+VITE_API_BASE_URL=http://localhost:3000
+
+# Google Gemini API Key for AI itinerary generation
+VITE_API_KEY=your_google_gemini_api_key_here
+```
+
+### 2. Backend API Endpoints
+
+The application expects the following backend endpoints:
+
+- `POST /api/users/login` - User login
+- `POST /api/users/register` - User registration
+- `GET /api/users/me` - Get current user (requires authentication token)
+
+#### Login Request Format:
+```json
+{
+  "email": "user@example.com",
+  "password": "userpassword123"
+}
+```
+
+#### Registration Request Format:
+```json
+{
+  "name": "Bhupesh Sharma",
+  "email": "techbhupesh@gmail.com",
+  "phoneNo": "9733814168",
+  "password": "userpassword123",
+  "acceptTermsAndConditions": true,
+  "business": false,
+  "businessName": ""
+}
+```
+
+**Note:** For business users, set `business: true` and provide `businessName`. For regular users, `business` should be `false` and `businessName` can be empty.
+
+### 3. Installation
+
+```bash
+npm install
+```
+
+### 4. Development
+
+```bash
+npm run dev
+```
+
+### 5. Build
+
+```bash
+npm run build
+```
+
+## Authentication Features
+
+- **Guest Access**: Users can use the platform without creating an account
+- **User Registration**: Support for both regular and business users
+- **Secure Authentication**: JWT token-based authentication with localStorage
+- **Terms Acceptance**: Required checkbox for terms and conditions during registration
+- **Business Toggle**: Optional business account with business name field
+
+## Tech Stack
+
+- React 19
+- TypeScript
+- Vite
+- React Router
+- Framer Motion (animations)
+- Tailwind CSS
+- Lucide React (icons)
 
 Currently, two official plugins are available:
 
