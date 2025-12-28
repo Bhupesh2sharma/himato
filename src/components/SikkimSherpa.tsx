@@ -21,7 +21,6 @@ export const SikkimSherpa = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isLoadingHistory, setIsLoadingHistory] = useState(true);
     const [isClearing, setIsClearing] = useState(false);
     const [showClearConfirm, setShowClearConfirm] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -59,8 +58,6 @@ export const SikkimSherpa = () => {
             } catch (error) {
                 console.error('Failed to load chat history:', error);
                 // Continue with default welcome message if history load fails
-            } finally {
-                setIsLoadingHistory(false);
             }
         };
 
