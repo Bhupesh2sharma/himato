@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Sparkles, Mountain, User, Maximize2, Minimize2 } from 'lucide-react';
-import { chatWithSherpa } from '../services/ai';
+import { chatWithSherpa, getChatSessionId, setChatSessionId } from '../services/ai';
+import { apiClient } from '../services/api';
 import ReactMarkdown from 'react-markdown';
 
 interface Message {
@@ -17,7 +18,35 @@ export const SikkimSherpa = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingHistory, setIsLoadingHistory] = useState(true);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Load chat history on component mount
+    useEffect(() => {
+        const loadChatHistory = async () => {
+            try {
+                const sessionId = getChatSessionId();
+                if (sessionId) {
+                    const history = await apiClient.getChatHistory(sessionId);
+                    if (history.status === 'success' && history.data.messages.length > 0) {
+                        // Convert backend format to frontend format
+                        const formattedMessages = history.data.messages.map((msg: { role: string; content: string }) => ({
+                            role: msg.role as 'user' | 'model',
+                            parts: msg.content
+                        }));
+                        setMessages(formattedMessages);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load chat history:', error);
+                // Continue with default welcome message if history load fails
+            } finally {
+                setIsLoadingHistory(false);
+            }
+        };
+
+        loadChatHistory();
+    }, []);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,8 +65,8 @@ export const SikkimSherpa = () => {
         setIsLoading(true);
 
         try {
-            const history = messages.slice(1);
-            const response = await chatWithSherpa(userMessage, history);
+            const sessionId = getChatSessionId();
+            const response = await chatWithSherpa(userMessage);
             setMessages(prev => [...prev, { role: 'model', parts: response }]);
         } catch (error: any) {
             setMessages(prev => [...prev, { role: 'model', parts: error.message || "The connection to the Himalayas is weak right now. Please try again." }]);

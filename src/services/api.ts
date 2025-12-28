@@ -67,7 +67,8 @@ class ApiClient {
 
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {}
+    options: RequestInit = {},
+    requireAuth: boolean = false
   ): Promise<T> {
     if (!this.baseURL) {
       throw new Error('API base URL is not configured. Please set VITE_API_BASE_URL in your .env file.');
@@ -82,6 +83,8 @@ class ApiClient {
 
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+    } else if (requireAuth) {
+      throw new Error('Authentication required');
     }
 
     try {
@@ -133,6 +136,54 @@ class ApiClient {
   async logout(): Promise<void> {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
+  }
+
+  // Itinerary endpoints
+  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string } }> {
+    return this.request('/api/itinerary/generate', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getItineraryHistory(page: number = 1, limit: number = 10): Promise<any> {
+    return this.request(`/api/itinerary/history?page=${page}&limit=${limit}`, {
+      method: 'GET',
+    });
+  }
+
+  async getItineraryById(id: string): Promise<any> {
+    return this.request(`/api/itinerary/${id}`, {
+      method: 'GET',
+    });
+  }
+
+  async deleteItinerary(id: string): Promise<void> {
+    return this.request(`/api/itinerary/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
+  // Chat endpoints
+  async sendChatMessage(data: { message: string; sessionId?: string }): Promise<{ status: string; data: { response: string; sessionId: string; history: any[] } }> {
+    return this.request('/api/chat/send', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getChatHistory(sessionId?: string): Promise<any> {
+    const query = sessionId ? `?sessionId=${sessionId}` : '';
+    return this.request(`/api/chat/history${query}`, {
+      method: 'GET',
+    });
+  }
+
+  async clearChatHistory(sessionId?: string): Promise<void> {
+    return this.request('/api/chat/history', {
+      method: 'DELETE',
+      body: JSON.stringify({ sessionId }),
+    });
   }
 }
 

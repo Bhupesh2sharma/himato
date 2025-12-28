@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Send, MapPin, Check, Minus } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { ItineraryHistoryPreview } from './ItineraryHistoryPreview';
 
 const SUGGESTIONS = [
     "Gangtok Nightlife", "Pelling Skywalk", "Lachung Valley", "Lachen Monastery",
@@ -18,12 +20,13 @@ const SUGGESTIONS = [
 ];
 
 interface HeroProps {
-    onSearch: (prompt: string, isBusiness: boolean) => void;
+    onSearch: (prompt: string, isBusiness: boolean, businessName?: string) => void;
     isSearching: boolean;
     error?: string;
 }
 
 export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
+    const { user } = useAuth();
     const [prompt, setPrompt] = useState('');
     const [isBusiness, setIsBusiness] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -44,7 +47,9 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const handleSearch = () => {
         if (prompt.trim() && !localIsSubmitting && !isSearching) {
             setLocalIsSubmitting(true);
-            onSearch(prompt, isBusiness);
+            // If user is a business user, use their businessName, otherwise use undefined
+            const businessName = (isBusiness && user?.business && user?.businessName) ? user.businessName : undefined;
+            onSearch(prompt, isBusiness, businessName);
         }
     };
 
@@ -67,14 +72,11 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                         <span>AI-POWERED SIKKIM TOURISM PLANNER</span>
                     </div>
 
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
-                        Sikkim Tourism <br />
-                        <span className="text-ai-accent text-glow">AI-Powered Travel Planner</span>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                        <span className="text-white">AI-Powered</span> <br />
+                        <span className="text-ai-accent text-glow">Travel Planner</span>
                     </h1>
 
-                    <p className="text-ai-muted text-lg mb-6 max-w-2xl mx-auto">
-                        Discover the best of Sikkim tourism with our AI-powered travel planner. From the monasteries of Pelling to the frozen lakes of Gurudongmar - explore Sikkim tourism destinations like never before.
-                    </p>
                     <p className="text-ai-muted text-sm mb-12 max-w-2xl mx-auto">
                         Plan your Sikkim tourism trip with our free AI travel planner. Get custom Sikkim tourism itineraries for Gangtok, North Sikkim, Pelling, and 30+ Sikkim tourism destinations. Perfect for solo travelers, families, and travel agents planning Sikkim tourism packages.
                     </p>
@@ -173,6 +175,9 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             </button>
                         </motion.div>
                     </div>
+                    
+                    {/* Itinerary History Preview */}
+                    <ItineraryHistoryPreview />
                 </motion.div>
             </div>
         </header>

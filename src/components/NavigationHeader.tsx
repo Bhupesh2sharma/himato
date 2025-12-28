@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, ChevronDown, Building2 } from 'lucide-react';
+import { User, LogOut, ChevronDown, Building2, Sparkles, Clock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export const NavigationHeader = () => {
@@ -32,6 +32,7 @@ export const NavigationHeader = () => {
             to="/"
             className="flex items-center gap-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-accent hover:opacity-80 transition-opacity"
           >
+            <Sparkles className="w-5 h-5 text-ai-accent" />
             <span className="text-ai-accent">Himato</span>
           </Link>
 
@@ -78,6 +79,14 @@ export const NavigationHeader = () => {
                             </div>
                           )}
                         </div>
+                        <Link
+                          to="/history"
+                          onClick={() => setShowUserMenu(false)}
+                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-white hover:bg-white/5 rounded-lg transition-colors text-sm"
+                        >
+                          <Clock className="w-4 h-4" />
+                          My Itineraries
+                        </Link>
                         <button
                           onClick={handleLogout}
                           className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-200 hover:bg-red-500/10 rounded-lg transition-colors text-sm"

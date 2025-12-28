@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useParams, useNavigate } from 'react-router-dom';
 import { Hero } from './components/Hero';
 import { ItineraryResult } from './components/ItineraryResult';
 import { ClientItineraryView } from './components/ClientItineraryView';
@@ -13,12 +13,16 @@ import { SEO } from './components/SEO';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { TermsAndConditions } from './pages/TermsAndConditions';
+import { ItineraryHistory } from './pages/ItineraryHistory';
 import { NavigationHeader } from './components/NavigationHeader';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
+import { apiClient } from './services/api';
 
 function HomePage() {
+  const { id } = useParams<{ id?: string }>();
+  const navigate = useNavigate();
   const [showSplash, setShowSplash] = useState(true);
   const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
   const [isSearching, setIsSearching] = useState(false);
@@ -31,21 +35,44 @@ function HomePage() {
     if (sharedPlan) {
       setItineraryData(sharedPlan);
       setView('shared');
-      // Don't show splash screen if loading a shared link for faster access
       setShowSplash(false);
+      return;
     }
-  }, []);
 
-  const handleSearch = async (prompt: string, isBusiness: boolean) => {
+    // Check if URL has itinerary ID (from history page or direct link)
+    if (id) {
+      loadSavedItinerary(id);
+    }
+  }, [id]);
+
+  const loadSavedItinerary = async (id: string) => {
     setIsSearching(true);
     setError('');
     try {
-      const data = await generateItinerary(prompt, isBusiness);
+      const response = await apiClient.getItineraryById(id);
+      if (response.status === 'success') {
+        setItineraryData(response.data.itinerary.itineraryData);
+        setView('results');
+        setShowSplash(false);
+      }
+    } catch (error: any) {
+      console.error('Failed to load itinerary:', error);
+      setError(error.message || 'Failed to load itinerary. Please try again.');
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
+    setIsSearching(true);
+    setError('');
+    try {
+      const data = await generateItinerary(prompt, isBusiness, businessName);
       setItineraryData(data);
       setView('results');
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'Failed to generate plan. Please check your API key or try again.');
+      setError(err.message || 'Failed to generate plan. Please try again.');
     } finally {
       setIsSearching(false);
     }
@@ -80,14 +107,20 @@ function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="min-h-screen py-6 sm:py-12"
+                className="min-h-screen pt-24 pb-6 sm:pt-28 sm:pb-12"
               >
                 <div className="container mx-auto px-4 sm:px-6">
                   <button
-                    onClick={() => setView('home')}
+                    onClick={() => {
+                      if (id) {
+                        navigate('/');
+                      } else {
+                        setView('home');
+                      }
+                    }}
                     className="mb-6 sm:mb-8 text-ai-muted hover:text-white transition-colors flex items-center gap-2 text-sm sm:text-base"
                   >
-                    ← Back to Search
+                    ← Back to Home
                   </button>
                   {error && (
                     <div className="p-4 mb-6 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200">
@@ -122,6 +155,8 @@ function App() {
       <NavigationHeader />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/itinerary/:id" element={<HomePage />} />
+        <Route path="/history" element={<ItineraryHistory />} />
         <Route path="/reach_us" element={<ReachUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
