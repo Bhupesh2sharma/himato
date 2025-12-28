@@ -172,17 +172,28 @@ class ApiClient {
     });
   }
 
-  async getChatHistory(sessionId?: string): Promise<any> {
-    const query = sessionId ? `?sessionId=${sessionId}` : '';
-    return this.request(`/api/chat/history${query}`, {
-      method: 'GET',
-    });
+  async getChatHistory(sessionId?: string, isAuthenticated: boolean = false): Promise<any> {
+    // For authenticated users, don't send sessionId (backend uses userId from token)
+    // For guest users, send sessionId as query parameter
+    if (isAuthenticated) {
+      return this.request('/api/chat/history', {
+        method: 'GET',
+      });
+    } else {
+      const query = sessionId ? `?sessionId=${sessionId}` : '';
+      return this.request(`/api/chat/history${query}`, {
+        method: 'GET',
+      });
+    }
   }
 
-  async clearChatHistory(sessionId?: string): Promise<void> {
+  async clearChatHistory(sessionId?: string, isAuthenticated: boolean = false): Promise<void> {
+    // For authenticated users, send empty body (backend uses userId from token)
+    // For guest users, send sessionId in body
+    const body = isAuthenticated ? {} : { sessionId: sessionId || undefined };
     return this.request('/api/chat/history', {
       method: 'DELETE',
-      body: JSON.stringify({ sessionId }),
+      body: JSON.stringify(body),
     });
   }
 }
