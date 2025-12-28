@@ -27,6 +27,7 @@ function HomePage() {
   const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
   const [isSearching, setIsSearching] = useState(false);
   const [itineraryData, setItineraryData] = useState(null);
+  const [itineraryId, setItineraryId] = useState<string | null>(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -52,6 +53,7 @@ function HomePage() {
       const response = await apiClient.getItineraryById(id);
       if (response.status === 'success') {
         setItineraryData(response.data.itinerary.itineraryData);
+        setItineraryId(response.data.itinerary._id);
         setView('results');
         setShowSplash(false);
       }
@@ -66,6 +68,7 @@ function HomePage() {
   const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
     setIsSearching(true);
     setError('');
+    setItineraryId(null); // Reset ID for new itineraries
     try {
       const data = await generateItinerary(prompt, isBusiness, businessName);
       setItineraryData(data);
@@ -127,7 +130,7 @@ function HomePage() {
                       {error}
                     </div>
                   )}
-                  <ItineraryResult data={itineraryData} />
+                  <ItineraryResult data={itineraryData} itineraryId={itineraryId} />
                   {itineraryData && <BookingOptions />}
                   <div className="mt-12 sm:mt-20">
                     <SikkimShowcase />

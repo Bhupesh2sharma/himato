@@ -164,6 +164,13 @@ class ApiClient {
     });
   }
 
+  async updateItinerary(id: string, data: { itineraryData?: any; prompt?: string }): Promise<any> {
+    return this.request(`/api/itinerary/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    });
+  }
+
   // Chat endpoints
   async sendChatMessage(data: { message: string; sessionId?: string }): Promise<{ status: string; data: { response: string; sessionId: string; history: any[] } }> {
     return this.request('/api/chat/send', {
