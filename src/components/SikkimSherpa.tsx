@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Sparkles, Mountain, User, Maximize2, Minimize2 } from 'lucide-react';
-import { chatWithSherpa } from '../services/ai';
+import { MessageSquare, X, Send, Sparkles, Mountain, User, Maximize2, Minimize2, Trash2 } from 'lucide-react';
+import { chatWithSherpa, getChatSessionId, setChatSessionId, clearChatSession } from '../services/ai';
+import { apiClient } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import { ConfirmationModal } from './ConfirmationModal';
 import ReactMarkdown from 'react-markdown';
 
 interface Message {
@@ -10,6 +13,7 @@ interface Message {
 }
 
 export const SikkimSherpa = () => {
+    const { isAuthenticated } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [isFullScreen, setIsFullScreen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -17,7 +21,48 @@ export const SikkimSherpa = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isClearing, setIsClearing] = useState(false);
+    const [showClearConfirm, setShowClearConfirm] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Load chat history on component mount
+    useEffect(() => {
+        const loadChatHistory = async () => {
+            try {
+                let history;
+                
+                if (isAuthenticated) {
+                    // For authenticated users, no sessionId needed
+                    history = await apiClient.getChatHistory(undefined, true);
+                } else {
+                    // For guest users, use sessionId from storage
+                    const sessionId = getChatSessionId();
+                    if (sessionId) {
+                        history = await apiClient.getChatHistory(sessionId, false);
+                    }
+                }
+
+                if (history && history.status === 'success' && history.data.messages && history.data.messages.length > 0) {
+                    // Convert backend format to frontend format
+                    const formattedMessages = history.data.messages.map((msg: { role: string; content: string }) => ({
+                        role: msg.role as 'user' | 'model',
+                        parts: msg.content
+                    }));
+                    setMessages(formattedMessages);
+                    
+                    // Update sessionId for guest users if returned from backend
+                    if (!isAuthenticated && history.data.sessionId) {
+                        setChatSessionId(history.data.sessionId);
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to load chat history:', error);
+                // Continue with default welcome message if history load fails
+            }
+        };
+
+        loadChatHistory();
+    }, [isAuthenticated]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,13 +81,40 @@ export const SikkimSherpa = () => {
         setIsLoading(true);
 
         try {
-            const history = messages.slice(1);
-            const response = await chatWithSherpa(userMessage, history);
+            const response = await chatWithSherpa(userMessage, isAuthenticated);
             setMessages(prev => [...prev, { role: 'model', parts: response }]);
         } catch (error: any) {
             setMessages(prev => [...prev, { role: 'model', parts: error.message || "The connection to the Himalayas is weak right now. Please try again." }]);
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleClearChat = async () => {
+        setIsClearing(true);
+        try {
+            if (isAuthenticated) {
+                // For authenticated users, clear from backend
+                await apiClient.clearChatHistory(undefined, true);
+            } else {
+                // For guest users, clear from backend and local storage
+                const sessionId = getChatSessionId();
+                if (sessionId) {
+                    await apiClient.clearChatHistory(sessionId, false);
+                }
+                clearChatSession();
+            }
+            
+            // Reset to welcome message
+            setMessages([
+                { role: 'model', parts: "Namaste! I am Himato, your personal Sikkim tourism guide. From hidden monasteries to snow-capped peaks, I'm here to help you plan the perfect Sikkim tourism journey. What Sikkim tourism destination would you like to explore today?" }
+            ]);
+            setShowClearConfirm(false);
+        } catch (error) {
+            console.error('Failed to clear chat history:', error);
+            alert('Failed to clear chat history. Please try again.');
+        } finally {
+            setIsClearing(false);
         }
     };
 
@@ -74,6 +146,16 @@ export const SikkimSherpa = () => {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
+                                {messages.length > 1 && (
+                                    <button
+                                        onClick={() => setShowClearConfirm(true)}
+                                        disabled={isClearing}
+                                        className="p-2 hover:bg-red-500/10 rounded-full text-ai-muted hover:text-red-400 transition-colors disabled:opacity-50"
+                                        title="Clear chat history"
+                                    >
+                                        <Trash2 className="w-5 h-5" />
+                                    </button>
+                                )}
                                 <button
                                     onClick={() => setIsFullScreen(!isFullScreen)}
                                     className="p-2 hover:bg-white/5 rounded-full text-ai-muted hover:text-white transition-colors"
@@ -166,6 +248,19 @@ export const SikkimSherpa = () => {
                     {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
                 </motion.button>
             )}
+
+            {/* Clear Chat Confirmation Modal */}
+            <ConfirmationModal
+                isOpen={showClearConfirm}
+                onClose={() => setShowClearConfirm(false)}
+                onConfirm={handleClearChat}
+                title="Clear Chat History"
+                message="Are you sure you want to clear all chat messages? This action cannot be undone."
+                confirmText="Clear"
+                cancelText="Cancel"
+                isDestructive={true}
+                isLoading={isClearing}
+            />
         </div>
     );
 };
