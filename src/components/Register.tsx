@@ -9,7 +9,7 @@ interface RegisterProps {
   onSwitchToLogin?: () => void;
 }
 
-export const Register = ({ onSuccess, onSwitchToLogin }: RegisterProps) => {
+export const Register = ({ onSwitchToLogin }: RegisterProps) => {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
