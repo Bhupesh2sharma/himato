@@ -105,17 +105,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       const response: AuthResponse = await apiClient.register(data);
       
-      // Handle new response format with nested data
+      // Handle new response format with nested data and token (auto-login)
       if (response.data && response.data.token && response.data.user) {
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user);
       } 
-      // Handle legacy format
+      // Handle new response format with user data but no token (registration only)
+      else if (response.data && response.data.user) {
+        // Registration successful but no auto-login token
+        // User will need to log in separately
+        // We don't set authToken or user here since there's no token
+        return; // Success, but no auto-login
+      }
+      // Handle legacy format with token
       else if (response.token && response.user) {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         setUser(response.user);
+      } 
+      // Handle legacy format with user only
+      else if (response.user) {
+        // Registration successful but no token
+        return; // Success, but no auto-login
       } else {
         throw new Error('Invalid response from server');
       }

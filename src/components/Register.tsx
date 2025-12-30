@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, Lock, User, Phone, Building2, Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, Lock, User, Phone, Building2, Check, AlertCircle, Eye, EyeOff, CheckCircle2, LogIn } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,8 @@ export const Register = ({ onSuccess, onSwitchToLogin }: RegisterProps) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -49,14 +51,78 @@ export const Register = ({ onSuccess, onSwitchToLogin }: RegisterProps) => {
         ...formData,
         businessName: formData.business ? formData.businessName : '',
       });
-      onSuccess?.();
-      navigate('/');
+      // Show success message
+      setRegisteredEmail(formData.email);
+      setShowSuccess(true);
+      // Clear form
+      setFormData({
+        name: '',
+        email: '',
+        phoneNo: '',
+        password: '',
+        acceptTermsAndConditions: false,
+        business: false,
+        businessName: '',
+      });
     } catch (err: any) {
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleGoToLogin = () => {
+    if (onSwitchToLogin) {
+      onSwitchToLogin();
+    } else {
+      // Navigate to login page with email pre-filled if possible
+      navigate('/login', { state: { email: registeredEmail } });
+    }
+  };
+
+  // Show success message and login form
+  if (showSuccess) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md"
+        >
+          <div className="glass rounded-2xl p-8">
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="text-center"
+              >
+                <div className="mb-6 flex justify-center">
+                  <div className="w-20 h-20 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center">
+                    <CheckCircle2 className="w-10 h-10 text-green-400" />
+                  </div>
+                </div>
+                <h2 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
+                  Registration Successful!
+                </h2>
+                <p className="text-ai-muted mb-6">
+                  Your account has been created successfully. Please sign in to continue.
+                </p>
+                <button
+                  onClick={handleGoToLogin}
+                  className="w-full py-3 bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent/50 text-ai-accent font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <LogIn className="w-5 h-5" />
+                  Go to Sign In
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark">
