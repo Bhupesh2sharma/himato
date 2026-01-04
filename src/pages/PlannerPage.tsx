@@ -60,10 +60,12 @@ export function PlannerPage() {
     const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
         setIsSearching(true);
         setError('');
-        setItineraryId(null); // Reset ID for new itineraries
+        setItineraryId(null);
         try {
-            const data = await generateItinerary(prompt, isBusiness, businessName);
-            setItineraryData(data);
+            // generateItinerary now returns { itinerary, id }
+            const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
+            setItineraryData(itinerary);
+            setItineraryId(id || null);
             setView('results');
         } catch (err: any) {
             console.error(err);

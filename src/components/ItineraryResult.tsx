@@ -204,6 +204,7 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 isOpen={showBusinessModal}
                 onClose={() => setShowBusinessModal(false)}
                 data={data}
+                itineraryId={itineraryId}
             />
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">

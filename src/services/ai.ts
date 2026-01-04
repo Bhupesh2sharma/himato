@@ -26,12 +26,15 @@ const storeSessionId = (sessionId: string | null): void => {
 
 export const generateItinerary = async (prompt: string, isBusiness: boolean = false, businessName?: string) => {
   try {
-    const response = await apiClient.generateItinerary({ 
-      prompt, 
+    const response = await apiClient.generateItinerary({
+      prompt,
       isBusiness,
       ...(businessName && { businessName })
     });
-    return response.data.itinerary;
+    return {
+      itinerary: response.data.itinerary,
+      id: response.data.itineraryId
+    };
   } catch (error: any) {
     throw new Error(error.message || 'Failed to generate itinerary');
   }
@@ -42,17 +45,17 @@ export const chatWithSherpa = async (message: string, isAuthenticated: boolean =
     // For authenticated users, don't send sessionId (backend generates it from userId)
     // For guest users, send sessionId if we have one stored
     const sessionId = isAuthenticated ? undefined : getStoredSessionId() || undefined;
-    
-    const response = await apiClient.sendChatMessage({ 
-      message, 
+
+    const response = await apiClient.sendChatMessage({
+      message,
       sessionId
     });
-    
+
     // Store session ID for guest users (authenticated users don't need it)
     if (response.data.sessionId && !isAuthenticated) {
       storeSessionId(response.data.sessionId);
     }
-    
+
     return response.data.response;
   } catch (error: any) {
     throw new Error(error.message || 'Failed to send chat message');
