@@ -148,14 +148,14 @@ function HomePage() {
 
 function App() {
   const location = useLocation();
-  const isSharedView = location.pathname === '/' && location.search.includes('itinerary');
+  const isSharedView = location.pathname === '/' && (location.search.includes('itinerary') || location.search.includes('plan'));
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
   const isTermsPage = location.pathname === '/terms';
 
   return (
     <>
       <SEO />
-      <NavigationHeader />
+      {!isSharedView && <NavigationHeader />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/itinerary/:id" element={<HomePage />} />

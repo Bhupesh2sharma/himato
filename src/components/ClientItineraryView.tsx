@@ -20,6 +20,8 @@ interface ClientItineraryViewProps {
         businessName?: string;
         agentName?: string;
         contactNumber?: string;
+        brandColor?: string;
+        welcomeNote?: string;
         pricing?: {
             total: string;
             perGuest?: string;
@@ -32,6 +34,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
     if (!data) return null;
 
     const hasAgentBranding = data.businessName || data.agentName;
+    const accentColor = data.brandColor || '#22C55E'; // Default Green (matches tailwind config)
 
     return (
         <div className="w-full min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30 relative">
@@ -42,7 +45,10 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
                         <div className="flex items-center gap-2">
                             {/* Simple Avatar/Logo Placeholder */}
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-ai-accent to-blue-600 flex items-center justify-center font-bold text-white text-xs">
+                            <div
+                                className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-xs shadow-lg"
+                                style={{ background: `linear-gradient(135deg, ${accentColor}, #000)` }}
+                            >
                                 {data.businessName ? data.businessName[0] : (data.agentName ? data.agentName[0] : 'A')}
                             </div>
                             <span className="font-bold text-lg tracking-tight text-white">
@@ -54,7 +60,8 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                                 href={`https://wa.me/${data.contactNumber}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-sm font-medium text-ai-accent hover:text-white transition-colors"
+                                className="flex items-center gap-2 text-sm font-medium hover:text-white transition-colors"
+                                style={{ color: accentColor }}
                             >
                                 <Phone className="w-4 h-4" />
                                 <span className="hidden sm:inline">Call Me</span>
@@ -66,7 +73,10 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
 
             {/* Main Hero Header */}
             <div className={`relative py-16 px-6 sm:px-12 overflow-hidden border-b border-white/10 ${hasAgentBranding ? 'pt-8' : ''}`}>
-                <div className="absolute top-0 right-0 w-96 h-96 bg-ai-accent/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none"></div>
+                <div
+                    className="absolute top-0 right-0 w-96 h-96 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none transition-colors duration-500"
+                    style={{ backgroundColor: accentColor, opacity: 0.15 }}
+                />
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
 
                     {/* Agent Introduction Badge */}
@@ -74,9 +84,9 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+                            className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
                         >
-                            {data.agentName && <User className="w-4 h-4 text-ai-accent" />}
+                            {data.agentName && <User className="w-4 h-4" style={{ color: accentColor }} />}
                             <span className="text-ai-muted text-sm">
                                 Curated by <span className="text-white font-semibold">{data.agentName || "Your Travel Expert"}</span>
                             </span>
@@ -89,14 +99,39 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                             animate={{ opacity: 1, y: 0 }}
                             className="mb-6 inline-block"
                         >
-                            <span className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-ai-accent font-bold tracking-wide uppercase text-sm backdrop-blur-sm">
+                            <span
+                                className="px-4 py-2 rounded-full bg-white/5 border border-white/10 font-bold tracking-wide uppercase text-sm backdrop-blur-sm"
+                                style={{ color: accentColor }}
+                            >
                                 {data.businessName}
                             </span>
                         </motion.div>
                     )}
 
+                    {/* PERSONAL WELCOME NOTE */}
+                    {data.welcomeNote && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="mb-10 max-w-2xl mx-auto relative group"
+                        >
+                            <div className="absolute inset-0 bg-white/5 rounded-2xl -rotate-1 group-hover:rotate-0 transition-transform duration-300" />
+                            <div className="relative bg-ai-card border border-white/10 p-6 rounded-2xl text-left flex gap-4 shadow-xl">
+                                <div className="flex-shrink-0">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                        <MessageCircle className="w-5 h-5" style={{ color: accentColor }} />
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-gray-400 mb-1 uppercase tracking-wider">Note from Agent</p>
+                                    <p className="text-white italic leading-relaxed">"{data.welcomeNote}"</p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
                     <h1 className="text-4xl sm:text-6xl font-bold mb-4 tracking-tight">
-                        Your <span className="text-ai-accent">Sikkim</span> Itinerary
+                        Your <span style={{ color: accentColor }}>Sikkim</span> Itinerary
                     </h1>
                     <p className="text-ai-muted text-lg sm:text-xl max-w-2xl mx-auto">
                         A personalized journey designed just for you.
@@ -108,7 +143,8 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="mt-12 max-w-2xl mx-auto glass p-6 rounded-2xl border border-ai-accent/20"
+                            className="mt-12 max-w-2xl mx-auto glass p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-colors"
+                            style={{ borderColor: `${accentColor}33` }}
                         >
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
                                 <div className="text-center">
@@ -118,7 +154,12 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                                 {data.pricing.perGuest && (
                                     <div className="text-center sm:border-l border-white/10 sm:pl-16">
                                         <p className="text-ai-muted text-sm uppercase tracking-wider mb-1">Price Per Guest</p>
-                                        <p className="text-2xl sm:text-3xl font-bold text-ai-accent">{data.pricing.perGuest}</p>
+                                        <p
+                                            className="text-2xl sm:text-3xl font-bold"
+                                            style={{ color: accentColor }}
+                                        >
+                                            {data.pricing.perGuest}
+                                        </p>
                                     </div>
                                 )}
                             </div>
@@ -138,25 +179,28 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         className="relative pl-4 sm:pl-8 border-l-2 border-ai-muted/20"
                     >
                         {/* Timeline Dot */}
-                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-ai-secondary border-4 border-ai-dark" />
+                        <div
+                            className="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 border-ai-dark"
+                            style={{ backgroundColor: accentColor }}
+                        />
 
                         <div className="flex items-center gap-4 mb-8">
                             <h2 className="text-2xl sm:text-3xl font-bold text-white">
-                                <span className="text-ai-accent">Day {day.day}:</span> {day.title}
+                                <span style={{ color: accentColor }}>Day {day.day}:</span> {day.title}
                             </h2>
                         </div>
 
                         <div className="grid gap-6">
                             {day.activities.map((activity, i) => (
-                                <div key={i} className="glass p-6 rounded-2xl hover:bg-ai-card/60 transition-colors border border-white/5 hover:border-ai-accent/20">
+                                <div key={i} className="glass p-6 rounded-2xl hover:bg-ai-card/60 transition-colors border border-white/5 hover:border-white/20">
                                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-3">
                                         <h3 className="text-xl font-bold text-white">{activity.title}</h3>
                                         <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-ai-muted">
                                             <span className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                                                <Clock className="w-4 h-4 text-ai-accent" /> {activity.time}
+                                                <Clock className="w-4 h-4" style={{ color: accentColor }} /> {activity.time}
                                             </span>
                                             <span className="flex items-center gap-1 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                                                <MapPin className="w-4 h-4 text-ai-accent" /> {activity.location}
+                                                <MapPin className="w-4 h-4" style={{ color: accentColor }} /> {activity.location}
                                             </span>
                                         </div>
                                     </div>
@@ -176,7 +220,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         className="glass p-8 rounded-2xl border border-white/10 mt-12"
                     >
                         <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                            <span className="w-1 h-6 bg-ai-accent rounded-full"></span>
+                            <span className="w-1 h-6 rounded-full" style={{ backgroundColor: accentColor }}></span>
                             Important Notes & Terms
                         </h3>
                         <p className="text-gray-400 whitespace-pre-line leading-relaxed">
@@ -197,7 +241,8 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                             {data.contactNumber && (
                                 <a
                                     href={`https://wa.me/${data.contactNumber}`}
-                                    className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-[#25D366]/20 mb-12"
+                                    className="inline-flex items-center gap-2 text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg mb-12"
+                                    style={{ backgroundColor: '#25D366', boxShadow: '0 0 20px rgba(37, 211, 102, 0.3)' }}
                                 >
                                     <MessageCircle className="w-5 h-5" />
                                     Chat on WhatsApp
@@ -205,7 +250,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                             )}
 
                             <div className="text-ai-muted text-sm space-y-2 border-t border-white/5 pt-8">
-                                <p>Powered by <span className="text-ai-accent font-semibold">Himato</span></p>
+                                <p>Powered by <span className="font-semibold" style={{ color: accentColor }}>Himato</span></p>
                             </div>
                         </>
                     ) : (
