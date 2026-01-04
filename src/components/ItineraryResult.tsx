@@ -102,15 +102,15 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
             await apiClient.updateItinerary(itineraryId, {
                 itineraryData: editedData
             });
-            
+
             // Update local data immediately
             if (data) {
                 data.days = editedData.days;
             }
-            
+
             setIsEditing(false);
             setEditedData(null);
-            
+
             // Reload to get the latest version from server (includes updatedAt timestamp)
             setTimeout(() => {
                 window.location.reload();
@@ -201,6 +201,7 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 isOpen={showBusinessModal}
                 onClose={() => setShowBusinessModal(false)}
                 data={data}
+                itineraryId={itineraryId}
             />
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">

@@ -21,7 +21,7 @@ import { decodeItineraryFromUrl } from './utils/sharing';
 import { apiClient } from './services/api';
 
 function HomePage() {
-  const { id } = useParams<{ id?: string }>();
+  const { id, shareId } = useParams<{ id?: string, shareId?: string }>();
   const navigate = useNavigate();
   const [showSplash, setShowSplash] = useState(true);
   const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
@@ -31,7 +31,7 @@ function HomePage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Check for shared itinerary in URL
+    // Check for shared itinerary in URL (Legacy ?plan=...)
     const sharedPlan = decodeItineraryFromUrl();
     if (sharedPlan) {
       setItineraryData(sharedPlan);
@@ -40,21 +40,27 @@ function HomePage() {
       return;
     }
 
-    // Check if URL has itinerary ID (from history page or direct link)
-    if (id) {
-      loadSavedItinerary(id);
+    // Check for specific shared ID (Short URL /share/:id)
+    if (shareId) {
+      loadSavedItinerary(shareId, true);
+      return;
     }
-  }, [id]);
 
-  const loadSavedItinerary = async (id: string) => {
+    // Check if URL has itinerary ID (from history page or direct link /itinerary/:id)
+    if (id) {
+      loadSavedItinerary(id, false);
+    }
+  }, [id, shareId]);
+
+  const loadSavedItinerary = async (loadId: string, isSharedView: boolean) => {
     setIsSearching(true);
     setError('');
     try {
-      const response = await apiClient.getItineraryById(id);
+      const response = await apiClient.getItineraryById(loadId);
       if (response.status === 'success') {
         setItineraryData(response.data.itinerary.itineraryData);
         setItineraryId(response.data.itinerary._id);
-        setView('results');
+        setView(isSharedView ? 'shared' : 'results'); // KEY CHANGE: 'shared' for shareId
         setShowSplash(false);
       }
     } catch (error: any) {
@@ -68,10 +74,12 @@ function HomePage() {
   const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
     setIsSearching(true);
     setError('');
-    setItineraryId(null); // Reset ID for new itineraries
+    setItineraryId(null);
     try {
-      const data = await generateItinerary(prompt, isBusiness, businessName);
-      setItineraryData(data);
+      // Expecting { itinerary, id } now
+      const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
+      setItineraryData(itinerary);
+      setItineraryId(id || null);
       setView('results');
     } catch (err: any) {
       console.error(err);
@@ -115,11 +123,8 @@ function HomePage() {
                 <div className="container mx-auto px-4 sm:px-6">
                   <button
                     onClick={() => {
-                      if (id) {
-                        navigate('/');
-                      } else {
-                        setView('home');
-                      }
+                      navigate('/');
+                      setView('home');
                     }}
                     className="mb-6 sm:mb-8 text-ai-muted hover:text-white transition-colors flex items-center gap-2 text-sm sm:text-base"
                   >
@@ -148,17 +153,18 @@ function HomePage() {
 
 function App() {
   const location = useLocation();
-  const isSharedView = location.pathname === '/' && (location.search.includes('itinerary') || location.search.includes('plan'));
+  const isSharedView = location.pathname === '/' && (location.search.includes('itinerary') || location.search.includes('plan')) || location.pathname.startsWith('/share/');
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
   const isTermsPage = location.pathname === '/terms';
 
   return (
     <>
       <SEO />
-      {!isSharedView && <NavigationHeader />}
+      {!isSharedView && !location.pathname.startsWith('/share/') && <NavigationHeader />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/itinerary/:id" element={<HomePage />} />
+        <Route path="/share/:shareId" element={<HomePage />} />
         <Route path="/history" element={<ItineraryHistory />} />
         <Route path="/reach_us" element={<ReachUs />} />
         <Route path="/login" element={<Login />} />

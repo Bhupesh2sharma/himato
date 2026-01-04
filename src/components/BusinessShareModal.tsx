@@ -7,9 +7,10 @@ interface BusinessShareModalProps {
     isOpen: boolean;
     onClose: () => void;
     data: any;
+    itineraryId?: string | null;
 }
 
-export const BusinessShareModal = ({ isOpen, onClose, data }: BusinessShareModalProps) => {
+export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: BusinessShareModalProps) => {
     const [formData, setFormData] = useState({
         businessName: '',
         agentName: '',
@@ -71,13 +72,35 @@ export const BusinessShareModal = ({ isOpen, onClose, data }: BusinessShareModal
             notes: formData.notes
         };
 
-        const url = encodeItineraryToUrl(shareData);
-        await navigator.clipboard.writeText(url);
-        setCopied(true);
-        setTimeout(() => {
-            setCopied(false);
-            onClose();
-        }, 2000);
+        try {
+            let url = '';
+
+            // If we have an ID, update the backend record and use short URL
+            if (itineraryId) {
+                // Dynamic import to avoid top-level changes
+                const { apiClient } = await import('../services/api');
+
+                await apiClient.updateItinerary(itineraryId, {
+                    itineraryData: shareData
+                });
+
+                url = `${window.location.origin}/share/${itineraryId}`;
+            } else {
+                // Fallback to legacy long URL
+                url = encodeItineraryToUrl(shareData);
+            }
+
+            await navigator.clipboard.writeText(url);
+            setCopied(true);
+            setTimeout(() => {
+                setCopied(false);
+                onClose();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Share failed:', error);
+            alert('Failed to generate link. Please try again.');
+        }
     };
 
     return (

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, MapPin, Phone, MessageCircle, User, Star, Quote, ShieldCheck, Calendar, Wallet, Navigation2, Info, ChevronRight, Share2 } from 'lucide-react';
+import { MapPin, MessageCircle, Star, Quote, ShieldCheck, Calendar, Wallet, Navigation as NavigationIcon, Info, ChevronRight, Share2 } from 'lucide-react';
 import { useState } from 'react';
 
 // --- Types ---
@@ -115,7 +115,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
             <div className="grid grid-cols-2 gap-4">
                 <div onClick={() => setActiveTab(1)} className="bg-[#111] p-6 rounded-3xl border border-white/5 hover:border-white/20 transition-colors cursor-pointer group">
                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Navigation2 className="w-5 h-5 text-gray-300" />
+                        <NavigationIcon className="w-5 h-5 text-gray-300" />
                     </div>
                     <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">Start Journey</p>
                     <p className="text-white font-bold text-lg">Day 1 Plan</p>
@@ -127,6 +127,14 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                     <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">Have Questions?</p>
                     <p className="text-white font-bold text-lg">Contact Agent</p>
                 </div>
+            </div>
+
+            {/* Himato Badge */}
+            <div className="flex justify-center pt-8 opacity-40 hover:opacity-100 transition-opacity">
+                <a href="https://himato.in" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                    <span className="text-[10px] font-medium tracking-widest uppercase text-gray-500 hover:text-gray-300">Powered by Himato</span>
+                </a>
             </div>
         </motion.div>
     );
@@ -151,7 +159,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         </span>
                         <h2 className="text-xl text-gray-400 mt-2 max-w-md leading-snug">{day.title}</h2>
                     </div>
-                    {/* Navigation Arrows (Desktop mostly) */}
+                    {/* Navigation Arrows */}
                     <div className="flex gap-2">
                         <button
                             disabled={dayNum === 1}
