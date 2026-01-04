@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Link as LinkIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
 
 interface BusinessShareModalProps {
@@ -12,16 +12,41 @@ interface BusinessShareModalProps {
 export const BusinessShareModal = ({ isOpen, onClose, data }: BusinessShareModalProps) => {
     const [formData, setFormData] = useState({
         businessName: '',
+        agentName: '',
+        contactNumber: '',
         totalPrice: '',
         pricePerGuest: '',
         notes: ''
     });
     const [copied, setCopied] = useState(false);
 
+    // Load saved agent details from localStorage
+    useEffect(() => {
+        const savedProfile = localStorage.getItem('himato_agent_profile');
+        if (savedProfile) {
+            const { businessName, agentName, contactNumber } = JSON.parse(savedProfile);
+            setFormData(prev => ({
+                ...prev,
+                businessName: businessName || '',
+                agentName: agentName || '',
+                contactNumber: contactNumber || ''
+            }));
+        }
+    }, []);
+
     const handleShare = async () => {
+        // Save agent details for next time
+        localStorage.setItem('himato_agent_profile', JSON.stringify({
+            businessName: formData.businessName,
+            agentName: formData.agentName,
+            contactNumber: formData.contactNumber
+        }));
+
         const shareData = {
             ...data,
             businessName: formData.businessName,
+            agentName: formData.agentName,
+            contactNumber: formData.contactNumber,
             pricing: {
                 total: formData.totalPrice,
                 perGuest: formData.pricePerGuest
@@ -65,6 +90,29 @@ export const BusinessShareModal = ({ isOpen, onClose, data }: BusinessShareModal
                                     className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ai-accent/50 focus:outline-none"
                                     placeholder="e.g. Dream Travels"
                                 />
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-400 mb-1">Your Name</label>
+                                    <input
+                                        type="text"
+                                        value={formData.agentName}
+                                        onChange={e => setFormData({ ...formData, agentName: e.target.value })}
+                                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ai-accent/50 focus:outline-none"
+                                        placeholder="Rahul Sharma"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-400 mb-1">WhatsApp Number</label>
+                                    <input
+                                        type="text"
+                                        value={formData.contactNumber}
+                                        onChange={e => setFormData({ ...formData, contactNumber: e.target.value })}
+                                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:border-ai-accent/50 focus:outline-none"
+                                        placeholder="9876543210"
+                                    />
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">

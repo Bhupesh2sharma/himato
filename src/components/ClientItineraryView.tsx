@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Clock, MapPin, Globe, Phone, Mail } from 'lucide-react';
+import { Clock, MapPin, Globe, Phone, Mail, MessageCircle, User } from 'lucide-react';
 
 interface Activity {
     time: string;
@@ -18,6 +18,8 @@ interface ClientItineraryViewProps {
     data: {
         days: DayPlan[];
         businessName?: string;
+        agentName?: string;
+        contactNumber?: string;
         pricing?: {
             total: string;
             perGuest?: string;
@@ -29,13 +31,59 @@ interface ClientItineraryViewProps {
 export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
     if (!data) return null;
 
+    const hasAgentBranding = data.businessName || data.agentName;
+
     return (
-        <div className="w-full min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30">
-            {/* Header Section */}
-            <div className="relative py-16 px-6 sm:px-12 overflow-hidden border-b border-white/10">
+        <div className="w-full min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30 relative">
+
+            {/* AGENT BRANDING HEADER - Floating/Sticky */}
+            {hasAgentBranding && (
+                <div className="sticky top-0 z-50 glass border-b border-white/10 backdrop-blur-md">
+                    <div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                            {/* Simple Avatar/Logo Placeholder */}
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-ai-accent to-blue-600 flex items-center justify-center font-bold text-white text-xs">
+                                {data.businessName ? data.businessName[0] : (data.agentName ? data.agentName[0] : 'A')}
+                            </div>
+                            <span className="font-bold text-lg tracking-tight text-white">
+                                {data.businessName || data.agentName}
+                            </span>
+                        </div>
+                        {data.contactNumber && (
+                            <a
+                                href={`https://wa.me/${data.contactNumber}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-sm font-medium text-ai-accent hover:text-white transition-colors"
+                            >
+                                <Phone className="w-4 h-4" />
+                                <span className="hidden sm:inline">Call Me</span>
+                            </a>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {/* Main Hero Header */}
+            <div className={`relative py-16 px-6 sm:px-12 overflow-hidden border-b border-white/10 ${hasAgentBranding ? 'pt-8' : ''}`}>
                 <div className="absolute top-0 right-0 w-96 h-96 bg-ai-accent/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none"></div>
                 <div className="relative z-10 max-w-5xl mx-auto text-center">
-                    {data.businessName && (
+
+                    {/* Agent Introduction Badge */}
+                    {hasAgentBranding && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+                        >
+                            {data.agentName && <User className="w-4 h-4 text-ai-accent" />}
+                            <span className="text-ai-muted text-sm">
+                                Curated by <span className="text-white font-semibold">{data.agentName || "Your Travel Expert"}</span>
+                            </span>
+                        </motion.div>
+                    )}
+
+                    {!hasAgentBranding && data.businessName && (
                         <motion.div
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -46,11 +94,12 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                             </span>
                         </motion.div>
                     )}
+
                     <h1 className="text-4xl sm:text-6xl font-bold mb-4 tracking-tight">
                         Your <span className="text-ai-accent">Sikkim</span> Itinerary
                     </h1>
                     <p className="text-ai-muted text-lg sm:text-xl max-w-2xl mx-auto">
-                        A personalized journey curated exclusively for you.
+                        A personalized journey designed just for you.
                     </p>
 
                     {/* Pricing Card */}
@@ -140,39 +189,80 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
             {/* Himato Branding / Footer */}
             <div className="border-t border-white/10 bg-ai-card/30 py-16 px-6 sm:px-12 text-center mt-12">
                 <div className="max-w-2xl mx-auto">
-                    <h3 className="text-2xl font-bold text-white mb-4">Planned with <span className="text-ai-accent">Himato</span></h3>
-                    <p className="text-ai-muted mb-8">
-                        Experience seamless travel planning with Himato. We turn your dream destinations into perfectly organized journeys.
-                    </p>
+                    {hasAgentBranding ? (
+                        <>
+                            <h3 className="text-2xl font-bold text-white mb-4">Ready to start this journey?</h3>
+                            <p className="text-ai-muted mb-8">Contact dedicated travel expert below to finalize your booking.</p>
 
-                    <div className="flex flex-wrap justify-center gap-6 text-gray-400 mb-8">
-                        <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
-                            <Globe className="w-5 h-5" />
-                            <span>www.himato.in</span>
-                        </div>
-                        <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
-                            <Phone className="w-5 h-5" />
-                            <span>+91 9733814168</span>
-                        </div>
-                        <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
-                            <Mail className="w-5 h-5" />
-                            <span>hello@himato.in</span>
-                        </div>
-                    </div>
+                            {data.contactNumber && (
+                                <a
+                                    href={`https://wa.me/${data.contactNumber}`}
+                                    className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-[#25D366]/20 mb-12"
+                                >
+                                    <MessageCircle className="w-5 h-5" />
+                                    Chat on WhatsApp
+                                </a>
+                            )}
 
-                    <button
-                        onClick={() => window.location.href = '/'}
-                        className="bg-ai-accent hover:bg-ai-secondary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-ai-accent/20 mb-12"
-                    >
-                        Plan Your Next Trip
-                    </button>
+                            <div className="text-ai-muted text-sm space-y-2 border-t border-white/5 pt-8">
+                                <p>Powered by <span className="text-ai-accent font-semibold">Himato</span></p>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h3 className="text-2xl font-bold text-white mb-4">Planned with <span className="text-ai-accent">Himato</span></h3>
+                            <p className="text-ai-muted mb-8">
+                                Experience seamless travel planning with Himato. We turn your dream destinations into perfectly organized journeys.
+                            </p>
 
-                    <div className="text-ai-muted text-sm space-y-2 border-t border-white/5 pt-8">
-                        <p>© {new Date().getFullYear()} Waglogy. All rights reserved.</p>
-                        <p className="opacity-75">Himato by Waglogy</p>
-                    </div>
+                            <div className="flex flex-wrap justify-center gap-6 text-gray-400 mb-8">
+                                <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
+                                    <Globe className="w-5 h-5" />
+                                    <span>www.himato.in</span>
+                                </div>
+                                <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
+                                    <Phone className="w-5 h-5" />
+                                    <span>+91 9733814168</span>
+                                </div>
+                                <div className="flex items-center gap-2 hover:text-ai-accent transition-colors cursor-pointer">
+                                    <Mail className="w-5 h-5" />
+                                    <span>hello@himato.in</span>
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={() => window.location.href = '/'}
+                                className="bg-ai-accent hover:bg-ai-secondary text-white px-8 py-3 rounded-full font-bold transition-all hover:scale-105 shadow-lg shadow-ai-accent/20 mb-12"
+                            >
+                                Plan Your Next Trip
+                            </button>
+                            <div className="text-ai-muted text-sm space-y-2 border-t border-white/5 pt-8">
+                                <p>© {new Date().getFullYear()} Waglogy. All rights reserved.</p>
+                                <p className="opacity-75">Himato by Waglogy</p>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
+
+            {/* FLOATING CTA for Agent */}
+            {hasAgentBranding && data.contactNumber && (
+                <motion.a
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    whileHover={{ scale: 1.1 }}
+                    href={`https://wa.me/${data.contactNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-xl shadow-[#25D366]/30 flex items-center gap-0 overflow-hidden group hover:px-6 transition-all duration-300"
+                >
+                    <MessageCircle className="w-6 h-6" />
+                    <span className="w-0 overflow-hidden group-hover:w-auto group-hover:ml-2 whitespace-nowrap transition-all duration-300 font-bold">
+                        Chat with {data.agentName ? data.agentName.split(' ')[0] : 'Agent'}
+                    </span>
+                </motion.a>
+            )}
+
         </div>
     );
 };
