@@ -15,6 +15,7 @@ import { Register } from './components/Register';
 import { TermsAndConditions } from './pages/TermsAndConditions';
 import { ItineraryHistory } from './pages/ItineraryHistory';
 import { NavigationHeader } from './components/NavigationHeader';
+import { GuidePage } from './pages/GuidePage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from './services/ai';
 import { decodeItineraryFromUrl } from './utils/sharing';
@@ -60,7 +61,7 @@ function HomePage() {
       if (response.status === 'success') {
         setItineraryData(response.data.itinerary.itineraryData);
         setItineraryId(response.data.itinerary._id);
-        setView(isSharedView ? 'shared' : 'results'); // KEY CHANGE: 'shared' for shareId
+        setView(isSharedView ? 'shared' : 'results');
         setShowSplash(false);
       }
     } catch (error: any) {
@@ -76,7 +77,6 @@ function HomePage() {
     setError('');
     setItineraryId(null);
     try {
-      // Expecting { itinerary, id } now
       const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
       setItineraryData(itinerary);
       setItineraryId(id || null);
@@ -89,7 +89,7 @@ function HomePage() {
     }
   };
 
-  // If viewing a shared link, render the client view directly (bypassing the main app layout)
+  // If viewing a shared link, render the client view directly
   if (view === 'shared' && itineraryData) {
     return <ClientItineraryView data={itineraryData} />;
   }
@@ -170,6 +170,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/guide/:slug" element={<GuidePage />} />
       </Routes>
       {!isSharedView && !isAuthPage && !isTermsPage && <Footer />}
     </>
