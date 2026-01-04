@@ -5,7 +5,7 @@ export interface SeoTopic {
     shortDescription: string;
     description: string;
     category: 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
-    image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+    image: string;
     content: string; // Markdown content for the guide
 }
 
