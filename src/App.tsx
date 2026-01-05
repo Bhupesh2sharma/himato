@@ -12,7 +12,9 @@ import { NavigationHeader } from './components/NavigationHeader';
 import { GuidePage } from './pages/GuidePage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
+import { B2BDashboard } from './pages/B2BDashboard';
 import { apiClient } from './services/api';
+
 
 // Shared Itinerary View Component (for /share/:id routes)
 function SharedItineraryPage() {
@@ -87,7 +89,9 @@ function App() {
         <Route path="/reach_us" element={<ReachUs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<B2BDashboard />} />
         <Route path="/terms" element={<TermsAndConditions />} />
+
         <Route path="/guide/:slug" element={<GuidePage />} />
       </Routes>
       {!isSharedView && !isAuthPage && !isTermsPage && <Footer />}
