@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Link as LinkIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
+import { useAuth } from '../contexts/AuthContext';
 
 interface BusinessShareModalProps {
     isOpen: boolean;
@@ -11,6 +12,7 @@ interface BusinessShareModalProps {
 }
 
 export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: BusinessShareModalProps) => {
+    const { isAuthenticated } = useAuth();
     const [formData, setFormData] = useState({
         businessName: '',
         agentName: '',
@@ -48,6 +50,13 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
         }
     }, []);
 
+    const generateSlug = (name: string) => {
+        return name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)+/g, '') + '-' + Math.random().toString(36).substr(2, 5);
+    };
+
     const handleShare = async () => {
         // Save agent details for next time
         localStorage.setItem('himato_agent_profile', JSON.stringify({
@@ -80,11 +89,17 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
                 // Dynamic import to avoid top-level changes
                 const { apiClient } = await import('../services/api');
 
+                const slug = generateSlug(formData.businessName || 'itinerary');
+                const isOneTime = !isAuthenticated;
+
                 await apiClient.updateItinerary(itineraryId, {
-                    itineraryData: shareData
+                    itineraryData: shareData,
+                    shared: true,
+                    slug: slug,
+                    isOneTime: isOneTime
                 });
 
-                url = `${window.location.origin}/share/${itineraryId}`;
+                url = `${window.location.origin}/${slug}`;
             } else {
                 // Fallback to legacy long URL
                 url = encodeItineraryToUrl(shareData);

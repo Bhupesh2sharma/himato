@@ -158,13 +158,19 @@ class ApiClient {
     });
   }
 
+  async getItineraryBySlug(slug: string): Promise<any> {
+    return this.request(`/api/itinerary/slug/${slug}`, {
+      method: 'GET',
+    });
+  }
+
   async deleteItinerary(id: string): Promise<void> {
     return this.request(`/api/itinerary/${id}`, {
       method: 'DELETE',
     });
   }
 
-  async updateItinerary(id: string, data: { itineraryData?: any; prompt?: string }): Promise<any> {
+  async updateItinerary(id: string, data: { itineraryData?: any; prompt?: string; shared?: boolean; slug?: string; isOneTime?: boolean }): Promise<any> {
     return this.request(`/api/itinerary/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
