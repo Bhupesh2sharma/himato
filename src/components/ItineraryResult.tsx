@@ -40,10 +40,18 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
 
     const [isSaving, setIsSaving] = useState(false);
     const [activeDay, setActiveDay] = useState<number>(1);
+    const [isLargeScreen, setIsLargeScreen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Add structured data for itinerary
     useEffect(() => {
-        if (!data) return;
+        if (!data || !data.days) return;
 
         const structuredData = {
             "@context": "https://schema.org",
@@ -402,9 +410,11 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 </div>
 
                 {/* Right Column: Interactive Map */}
-                <div className="hidden lg:block lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24">
-                    <ItineraryMap days={displayData.days} selectedDay={activeDay} />
-                </div>
+                {isLargeScreen && (
+                    <div className="hidden lg:block lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24">
+                        <ItineraryMap days={displayData.days} selectedDay={activeDay} />
+                    </div>
+                )}
             </div>
 
             <div className="mt-6 sm:mt-8 flex justify-center px-4">

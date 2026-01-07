@@ -64,11 +64,19 @@ interface ItineraryMapProps {
 const MapController = ({ center }: { center: [number, number] }) => {
     const map = useMap();
     useEffect(() => {
-        if (center) {
-            map.flyTo(center, 13, {
-                duration: 2,
-                easeLinearity: 0.25
-            });
+        if (center && map) {
+            try {
+                // Check if map is valid and has dimensions
+                const size = map.getSize();
+                if (size.x > 0 && size.y > 0) {
+                    map.flyTo(center, 13, {
+                        duration: 2,
+                        easeLinearity: 0.25
+                    });
+                }
+            } catch (err) {
+                console.warn('Map animation failed:', err);
+            }
         }
     }, [center, map]);
     return null;
