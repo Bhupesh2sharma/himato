@@ -11,9 +11,9 @@ export const NavigationHeader = () => {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   // Don't show header on auth pages or terms page
-  const hideHeader = location.pathname === '/login' || 
-                     location.pathname === '/register' || 
-                     location.pathname === '/terms';
+  const hideHeader = location.pathname === '/login' ||
+    location.pathname === '/register' ||
+    location.pathname === '/terms';
 
   if (hideHeader) return null;
 
@@ -79,6 +79,16 @@ export const NavigationHeader = () => {
                             </div>
                           )}
                         </div>
+                        {user?.business && (
+                          <Link
+                            to="/dashboard"
+                            onClick={() => setShowUserMenu(false)}
+                            className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
+                          >
+                            <Building2 className="w-4 h-4" />
+                            B2B Dashboard
+                          </Link>
+                        )}
                         <Link
                           to="/history"
                           onClick={() => setShowUserMenu(false)}

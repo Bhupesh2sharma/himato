@@ -301,7 +301,7 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
 
             <div className="grid lg:grid-cols-2 gap-8 relative">
                 {/* Left Column: Itinerary Details */}
-                <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
+                <div className="space-y-6 sm:space-y-8 order-1 lg:order-1">
                     {displayData.days.map((day, dayIndex) => (
                         <section
                             key={day.day}
@@ -402,7 +402,7 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 </div>
 
                 {/* Right Column: Interactive Map */}
-                <div className="order-1 lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24">
+                <div className="hidden lg:block lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24">
                     <ItineraryMap days={displayData.days} selectedDay={activeDay} />
                 </div>
             </div>

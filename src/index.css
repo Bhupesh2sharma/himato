@@ -23,4 +23,22 @@
   .text-glow {
     text-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
   }
+
+  .glass-card {
+    @apply bg-ai-card/40 backdrop-blur-xl border border-white/10 shadow-xl relative overflow-hidden;
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-white/5 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-ai-accent/30 hover:bg-ai-accent/50 rounded-full;
+    transition: background-color 0.2s;
+  }
 }
