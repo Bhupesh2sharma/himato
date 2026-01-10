@@ -33,6 +33,7 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     });
     return {
       itinerary: response.data.itinerary,
+      routeData: response.data.routeData || null,
       id: response.data.itineraryId
     };
   } catch (error: any) {

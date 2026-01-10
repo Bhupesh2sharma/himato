@@ -19,6 +19,7 @@ export function PlannerPage() {
     const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
     const [isSearching, setIsSearching] = useState(false);
     const [itineraryData, setItineraryData] = useState(null);
+    const [routeData, setRouteData] = useState(null);
     const [itineraryId, setItineraryId] = useState<string | null>(null);
     const [error, setError] = useState('');
 
@@ -45,6 +46,7 @@ export function PlannerPage() {
             const response = await apiClient.getItineraryById(id);
             if (response.status === 'success') {
                 setItineraryData(response.data.itinerary.itineraryData);
+                setRouteData(response.data.itinerary.routeData || null);
                 setItineraryId(response.data.itinerary._id);
                 setView('results');
                 setShowSplash(false);
@@ -62,9 +64,10 @@ export function PlannerPage() {
         setError('');
         setItineraryId(null);
         try {
-            // generateItinerary now returns { itinerary, id }
-            const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
+            // generateItinerary now returns { itinerary, routeData, id }
+            const { itinerary, routeData: route, id } = await generateItinerary(prompt, isBusiness, businessName);
             setItineraryData(itinerary);
+            setRouteData(route);
             setItineraryId(id || null);
             setView('results');
         } catch (err: any) {
@@ -119,7 +122,7 @@ export function PlannerPage() {
                                             {error}
                                         </div>
                                     )}
-                                    <ItineraryResult data={itineraryData} itineraryId={itineraryId} />
+                                    <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} />
                                     {itineraryData && <BookingOptions />}
                                     <div className="mt-12 sm:mt-20">
                                         {/* <SikkimShowcase /> */}

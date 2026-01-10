@@ -21,16 +21,27 @@ interface DayPlan {
     activities: Activity[];
 }
 
+interface RouteData {
+    days: Array<{
+        day: number;
+        polyline: string | null;
+        stops: Array<{ lat: number; lng: number; label: string; place_id?: string }>;
+        eta_minutes: number | null;
+        total_distance_km: number | null;
+    }>;
+}
+
 interface ItineraryResultProps {
     data: {
         days: DayPlan[];
     } | null;
+    routeData?: RouteData | null;
     itineraryId?: string | null;
 }
 
 
 
-export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => {
+export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResultProps) => {
     const { isAuthenticated } = useAuth();
     const [copied, setCopied] = useState(false);
     const [shared, setShared] = useState(false);
@@ -40,14 +51,6 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
 
     const [isSaving, setIsSaving] = useState(false);
     const [activeDay, setActiveDay] = useState<number>(1);
-    const [isLargeScreen, setIsLargeScreen] = useState(typeof window !== 'undefined' ? window.innerWidth >= 1024 : true);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const handleResize = () => setIsLargeScreen(window.innerWidth >= 1024);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     // Add structured data for itinerary
     useEffect(() => {
@@ -410,11 +413,9 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 </div>
 
                 {/* Right Column: Interactive Map */}
-                {isLargeScreen && (
-                    <div className="hidden lg:block lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24">
-                        <ItineraryMap days={displayData.days} selectedDay={activeDay} />
-                    </div>
-                )}
+                <div className="lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24 h-[400px] sm:h-[500px]">
+                    <ItineraryMap routeData={routeData || undefined} days={displayData.days} selectedDay={activeDay} />
+                </div>
             </div>
 
             <div className="mt-6 sm:mt-8 flex justify-center px-4">
