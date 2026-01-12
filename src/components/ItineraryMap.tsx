@@ -1,23 +1,10 @@
-import { useEffect, useState, useMemo } from 'react';
-import { GoogleMap, LoadScript, Polyline, Marker, InfoWindow } from '@react-google-maps/api';
+import { useEffect, useState, useMemo, useRef, Fragment } from 'react';
+import { GoogleMap, LoadScript, Polyline, Marker, InfoWindow, DirectionsRenderer } from '@react-google-maps/api';
 
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || '';
 
 // Libraries array must be defined outside component to prevent recreation
 const MAP_LIBRARIES: ('geometry' | 'drawing' | 'places' | 'visualization')[] = ['geometry'];
-
-interface Activity {
-    time: string;
-    title: string;
-    description: string;
-    location: string;
-}
-
-interface DayPlan {
-    day: number;
-    title: string;
-    activities: Activity[];
-}
 
 interface RouteStop {
     lat: number;
@@ -40,7 +27,6 @@ interface RouteData {
 
 interface ItineraryMapProps {
     routeData?: RouteData;
-    days: DayPlan[];
     selectedDay?: number;
 }
 
@@ -175,47 +161,46 @@ function createMarkerIcon(index: number): google.maps.Icon {
     };
 }
 
-export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps) => {
+export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
     const [selectedMarker, setSelectedMarker] = useState<{ day: number; index: number } | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [isScriptLoaded, setIsScriptLoaded] = useState(false);
     const [loadError, setLoadError] = useState<string | null>(null);
+    const previousSelectedDayRef = useRef<number | undefined>(undefined);
+    const isInitialLoadRef = useRef<boolean>(true);
+    const [directionsResults, setDirectionsResults] = useState<{ [key: string]: google.maps.DirectionsResult | null }>({});
+    const directionsServiceRef = useRef<google.maps.DirectionsService | null>(null);
 
-    // Calculate map center and bounds
-    const { center, bounds } = useMemo(() => {
+    // Debug: Log routeData
+    useEffect(() => {
+        console.log('[ItineraryMap] routeData:', routeData);
+        console.log('[ItineraryMap] routeData?.days:', routeData?.days);
+        console.log('[ItineraryMap] selectedDay:', selectedDay);
+    }, [routeData, selectedDay]);
+
+    // Calculate initial map center and bounds for all routes
+    const { initialCenter, initialBounds } = useMemo(() => {
         if (!routeData || !routeData.days || routeData.days.length === 0) {
             return {
-                center: { lat: 27.3314, lng: 88.6138 }, // Default to Gangtok
-                bounds: null
+                initialCenter: { lat: 27.3314, lng: 88.6138 }, // Default to Gangtok
+                initialBounds: null
             };
         }
 
-        // Filter by selected day if provided
-        const daysToShow = selectedDay
-            ? routeData.days.filter(d => d.day === selectedDay)
-            : routeData.days;
-
-        if (daysToShow.length === 0) {
-            return {
-                center: { lat: 27.3314, lng: 88.6138 },
-                bounds: null
-            };
-        }
-
-        // Collect all stops from visible days
+        // Collect all stops from all days
         const allStops: RouteStop[] = [];
-        daysToShow.forEach(day => {
+        routeData.days.forEach(day => {
             allStops.push(...day.stops);
         });
 
         if (allStops.length === 0) {
             return {
-                center: { lat: 27.3314, lng: 88.6138 },
-                bounds: null
+                initialCenter: { lat: 27.3314, lng: 88.6138 },
+                initialBounds: null
             };
         }
 
-        // Calculate bounds
+        // Calculate bounds for all routes
         const lats = allStops.map(s => s.lat);
         const lngs = allStops.map(s => s.lng);
         const minLat = Math.min(...lats);
@@ -236,26 +221,89 @@ export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps
             );
         }
 
-        return { center, bounds };
-    }, [routeData, selectedDay]);
+        return { initialCenter: center, initialBounds: bounds };
+    }, [routeData]);
 
-    // Fit bounds when map or bounds change
-    useEffect(() => {
-        if (map && bounds) {
-            map.fitBounds(bounds, 50);
-        } else if (map && center) {
-            map.setCenter(center);
-            map.setZoom(10);
+    // Calculate bounds for selected day (for smooth panning)
+    const selectedDayBounds = useMemo(() => {
+        if (!routeData || !routeData.days || !selectedDay) return null;
+
+        const selectedRouteDay = routeData.days.find(d => d.day === selectedDay);
+        if (!selectedRouteDay || selectedRouteDay.stops.length === 0) return null;
+
+        const lats = selectedRouteDay.stops.map(s => s.lat);
+        const lngs = selectedRouteDay.stops.map(s => s.lng);
+        const minLat = Math.min(...lats);
+        const maxLat = Math.max(...lats);
+        const minLng = Math.min(...lngs);
+        const maxLng = Math.max(...lngs);
+
+        if (typeof google !== 'undefined' && google.maps && google.maps.LatLngBounds) {
+            return new google.maps.LatLngBounds(
+                { lat: minLat, lng: minLng },
+                { lat: maxLat, lng: maxLng }
+            );
         }
-    }, [map, bounds, center]);
 
-    // Get visible days
-    const visibleDays = useMemo(() => {
-        if (!routeData || !routeData.days) return [];
-        return selectedDay
-            ? routeData.days.filter(d => d.day === selectedDay)
-            : routeData.days;
+        return null;
     }, [routeData, selectedDay]);
+
+    // Initial map setup
+    useEffect(() => {
+        if (map && initialBounds && isInitialLoadRef.current) {
+            map.fitBounds(initialBounds, 50);
+            isInitialLoadRef.current = false;
+        } else if (map && initialCenter && isInitialLoadRef.current && !initialBounds) {
+            map.setCenter(initialCenter);
+            map.setZoom(10);
+            isInitialLoadRef.current = false;
+        }
+    }, [map, initialBounds, initialCenter]);
+
+    // Smooth pan/zoom to selected day route (without re-rendering)
+    useEffect(() => {
+        if (!map || !selectedDayBounds || isInitialLoadRef.current) return;
+        if (previousSelectedDayRef.current === selectedDay) return;
+
+        previousSelectedDayRef.current = selectedDay;
+
+        // Calculate center of selected day route
+        const center = selectedDayBounds.getCenter();
+        const currentZoom = map.getZoom() || 10;
+
+        // Pan to the selected day's center, maintaining a reasonable zoom level
+        // Use a zoom that's not too close (to keep other routes visible) but focused
+        const targetZoom = Math.min(currentZoom, 12); // Cap at zoom level 12 to keep other routes visible
+
+        if (center) {
+            map.panTo({ lat: center.lat(), lng: center.lng() });
+            if (currentZoom > targetZoom) {
+                map.setZoom(targetZoom);
+            }
+        } else {
+            // Fallback to fitBounds if center is not available
+            map.fitBounds(selectedDayBounds, 80); // Larger padding to keep other routes visible
+        }
+    }, [map, selectedDayBounds, selectedDay]);
+
+    // Show all days' routes (not filtered by selectedDay)
+    const visibleDays = useMemo(() => {
+        console.log('[ItineraryMap] Computing visibleDays, routeData:', routeData);
+        if (!routeData || !routeData.days || !Array.isArray(routeData.days)) {
+            console.warn('[ItineraryMap] No routeData or invalid days array');
+            return [];
+        }
+        // Filter out days with no stops
+        const filtered = routeData.days.filter(day => {
+            const hasStops = day.stops && Array.isArray(day.stops) && day.stops.length > 0;
+            if (!hasStops) {
+                console.warn(`[ItineraryMap] Day ${day.day} has no stops`);
+            }
+            return hasStops;
+        });
+        console.log(`[ItineraryMap] visibleDays: ${filtered.length} days with stops out of ${routeData.days.length} total days`);
+        return filtered;
+    }, [routeData]);
 
     // Monitor console.error calls for ApiTargetBlockedMapError - MUST be before early returns
     useEffect(() => {
@@ -277,6 +325,72 @@ export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps
             console.error = originalConsoleError;
         };
     }, []);
+
+    // Initialize Directions Service when map loads
+    useEffect(() => {
+        if (map && typeof google !== 'undefined' && google.maps && !directionsServiceRef.current) {
+            directionsServiceRef.current = new google.maps.DirectionsService();
+        }
+    }, [map]);
+
+    // Fetch routes using Directions Service for days without polylines
+    useEffect(() => {
+        if (!map || !directionsServiceRef.current || !routeData?.days) return;
+
+        const fetchMissingRoutes = async () => {
+            const newResults: { [key: string]: google.maps.DirectionsResult | null } = {};
+
+            for (const routeDay of routeData.days) {
+                const dayKey = `day-${routeDay.day}`;
+
+                // Skip if we already have a result or if polyline exists
+                if (directionsResults[dayKey] || routeDay.polyline) continue;
+
+                // Skip if we don't have enough stops
+                if (!routeDay.stops || routeDay.stops.length < 2) continue;
+
+                try {
+                    const origin = routeDay.stops[0];
+                    const destination = routeDay.stops[routeDay.stops.length - 1];
+                    const waypoints = routeDay.stops.slice(1, -1).map(stop => ({
+                        location: new google.maps.LatLng(stop.lat, stop.lng),
+                        stopover: true
+                    }));
+
+                    await new Promise<void>((resolve) => {
+                        directionsServiceRef.current!.route(
+                            {
+                                origin: new google.maps.LatLng(origin.lat, origin.lng),
+                                destination: new google.maps.LatLng(destination.lat, destination.lng),
+                                waypoints: waypoints.length > 0 ? waypoints : undefined,
+                                travelMode: google.maps.TravelMode.DRIVING,
+                                optimizeWaypoints: false,
+                            },
+                            (result, status) => {
+                                if (status === google.maps.DirectionsStatus.OK && result) {
+                                    newResults[dayKey] = result;
+                                } else {
+                                    console.warn(`Directions request failed for day ${routeDay.day}:`, status);
+                                    newResults[dayKey] = null;
+                                }
+                                resolve();
+                            }
+                        );
+                    });
+                } catch (error) {
+                    console.error(`Error fetching directions for day ${routeDay.day}:`, error);
+                    newResults[dayKey] = null;
+                }
+            }
+
+            if (Object.keys(newResults).length > 0) {
+                setDirectionsResults(prev => ({ ...prev, ...newResults }));
+            }
+        };
+
+        fetchMissingRoutes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [map, routeData]); // directionsResults is intentionally excluded to avoid infinite loops
 
     // Handle script load success
     const handleScriptLoad = () => {
@@ -352,7 +466,7 @@ export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps
                 {isScriptLoaded && !loadError ? (
                     <GoogleMap
                         mapContainerStyle={{ width: '100%', height: '100%' }}
-                        center={center}
+                        center={initialCenter}
                         zoom={10}
                         options={{
                             styles: darkMapStyles,
@@ -366,46 +480,116 @@ export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps
                             setMap(mapInstance);
                         }}
                     >
-                        {visibleDays.map((routeDay) => {
+                        {visibleDays && visibleDays.length > 0 && visibleDays.map((routeDay) => {
+                            console.log(`[ItineraryMap] Rendering day ${routeDay.day}:`, {
+                                hasPolyline: !!routeDay.polyline,
+                                stopsCount: routeDay.stops?.length,
+                                stops: routeDay.stops
+                            });
+
                             // Decode polyline if available
                             let path: google.maps.LatLngLiteral[] = [];
+                            let hasValidPolyline = false;
+
                             if (routeDay.polyline) {
                                 try {
                                     path = decodePolyline(routeDay.polyline);
+                                    hasValidPolyline = path.length >= 2;
+                                    console.log(`[ItineraryMap] Day ${routeDay.day} decoded polyline:`, path.length, 'points');
                                 } catch (error) {
-                                    console.error('Error decoding polyline:', error);
+                                    console.error(`Error decoding polyline for day ${routeDay.day}:`, error);
+                                    hasValidPolyline = false;
                                 }
                             }
 
+                            // Check if we have a directions result for this day (fallback when polyline is missing)
+                            const dayKey = `day-${routeDay.day}`;
+                            const directionsResult = directionsResults[dayKey];
+                            const hasDirectionsResult = !!directionsResult;
+
+                            // Highlight active day route with different styling
+                            const isActiveDay = selectedDay === routeDay.day;
+                            const strokeColor = isActiveDay ? '#00f2ff' : '#00a0b0';
+                            const strokeWeight = isActiveDay ? 6 : 3;
+                            const strokeOpacity = isActiveDay ? 1.0 : 0.6;
+
                             return (
-                                <div key={routeDay.day}>
-                                    {/* Render route polyline */}
-                                    {path.length > 0 && (
+                                <Fragment key={`route-day-${routeDay.day}`}>
+                                    {/* Render route using Polyline if we have a decoded polyline */}
+                                    {hasValidPolyline && (
                                         <Polyline
                                             path={path}
                                             options={{
-                                                strokeColor: '#00f2ff',
-                                                strokeWeight: 4,
-                                                strokeOpacity: 0.8,
+                                                strokeColor: strokeColor,
+                                                strokeWeight: strokeWeight,
+                                                strokeOpacity: strokeOpacity,
+                                                zIndex: isActiveDay ? 10 : 5,
+                                                geodesic: false, // Use actual route path, not geodesic
                                                 icons: [{
                                                     icon: {
                                                         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                                        scale: isActiveDay ? 5 : 4,
+                                                        fillColor: strokeColor,
+                                                        fillOpacity: strokeOpacity,
+                                                        strokeColor: '#000',
+                                                        strokeWeight: 1,
                                                     },
                                                     offset: '100%',
                                                     repeat: '100px',
                                                 }],
                                             }}
+                                            onLoad={(polyline) => {
+                                                console.log(`[ItineraryMap] Polyline loaded for day ${routeDay.day}`, polyline);
+                                            }}
                                         />
                                     )}
 
+                                    {/* Render route using DirectionsRenderer if we don't have polyline but have directions result */}
+                                    {!hasValidPolyline && hasDirectionsResult && (
+                                        <DirectionsRenderer
+                                            directions={directionsResult}
+                                            options={{
+                                                polylineOptions: {
+                                                    strokeColor: strokeColor,
+                                                    strokeWeight: strokeWeight,
+                                                    strokeOpacity: strokeOpacity,
+                                                    zIndex: isActiveDay ? 10 : 5,
+                                                    icons: [{
+                                                        icon: {
+                                                            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                                                            scale: isActiveDay ? 5 : 4,
+                                                            fillColor: strokeColor,
+                                                            fillOpacity: strokeOpacity,
+                                                            strokeColor: '#000',
+                                                            strokeWeight: 1,
+                                                        },
+                                                        offset: '100%',
+                                                        repeat: '100px',
+                                                    }],
+                                                },
+                                                suppressMarkers: true, // We render our own markers
+                                                preserveViewport: false,
+                                            }}
+                                        />
+                                    )}
+
+                                    {/* Log warning if we have no route data */}
+                                    {(() => {
+                                        if (!hasValidPolyline && !hasDirectionsResult && routeDay.stops && routeDay.stops.length >= 2) {
+                                            console.warn(`[ItineraryMap] Day ${routeDay.day} has no polyline and no directions result - route will not be displayed`);
+                                        }
+                                        return null;
+                                    })()}
+
                                     {/* Render markers for stops */}
-                                    {routeDay.stops.map((stop, index) => (
+                                    {routeDay.stops && routeDay.stops.length > 0 && routeDay.stops.map((stop, index) => (
                                         <Marker
-                                            key={`${routeDay.day}-${index}`}
+                                            key={`marker-${routeDay.day}-${index}`}
                                             position={{ lat: stop.lat, lng: stop.lng }}
                                             icon={createMarkerIcon(index)}
                                             onClick={() => setSelectedMarker({ day: routeDay.day, index })}
                                             title={stop.label}
+                                            zIndex={isActiveDay ? 100 : 50}
                                         >
                                             {selectedMarker?.day === routeDay.day && selectedMarker?.index === index && (
                                                 <InfoWindow
@@ -435,7 +619,7 @@ export const ItineraryMap = ({ routeData, days, selectedDay }: ItineraryMapProps
                                             )}
                                         </Marker>
                                     ))}
-                                </div>
+                                </Fragment>
                             );
                         })}
                     </GoogleMap>

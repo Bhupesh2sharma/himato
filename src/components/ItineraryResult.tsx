@@ -1,7 +1,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar, Clock, MapPin, Navigation, Copy, Check, Link as LinkIcon, Briefcase, Edit2, Save, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
 import { BusinessShareModal } from './BusinessShareModal';
 import { ItineraryMap } from './ItineraryMap';
@@ -51,6 +51,87 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
     const [isSaving, setIsSaving] = useState(false);
     const [activeDay, setActiveDay] = useState<number>(1);
+    const dayRefs = useRef<Map<number, HTMLElement>>(new Map());
+
+    // Scroll-based active day detection using IntersectionObserver
+    useEffect(() => {
+        if (!data || !data.days || isEditing) return;
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -60% 0px', // Trigger when section is in the top 20-40% of viewport
+            threshold: [0, 0.25, 0.5, 0.75, 1],
+        };
+
+        const observers: IntersectionObserver[] = [];
+        let activeSection: number | null = null;
+        let updateTimer: ReturnType<typeof setTimeout> | null = null;
+
+        const updateActiveDay = (dayNumber: number) => {
+            if (activeSection !== dayNumber) {
+                activeSection = dayNumber;
+                setActiveDay((prevDay) => {
+                    return prevDay !== dayNumber ? dayNumber : prevDay;
+                });
+            }
+        };
+
+        // Wait for refs to be populated before creating observers
+        const timeoutId = setTimeout(() => {
+            data.days.forEach((day) => {
+                const element = dayRefs.current.get(day.day);
+                if (!element) return;
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0.2) {
+                            if (updateTimer) {
+                                clearTimeout(updateTimer);
+                            }
+
+                            // Debounce updates to avoid rapid changes
+                            updateTimer = setTimeout(() => {
+                                let maxRatio = 0;
+                                let maxDay = day.day;
+
+                                data.days.forEach((checkDay) => {
+                                    const checkElement = dayRefs.current.get(checkDay.day);
+                                    if (checkElement) {
+                                        const checkRect = checkElement.getBoundingClientRect();
+                                        const viewportHeight = window.innerHeight;
+                                        const checkTop = checkRect.top;
+
+                                        const visibleTop = Math.max(0, -checkTop);
+                                        const visibleBottom = Math.min(checkRect.height, viewportHeight - checkTop);
+                                        const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+                                        const ratio = visibleHeight / checkRect.height;
+
+                                        if (ratio > maxRatio && checkTop < viewportHeight * 0.5) {
+                                            maxRatio = ratio;
+                                            maxDay = checkDay.day;
+                                        }
+                                    }
+                                });
+
+                                updateActiveDay(maxDay);
+                            }, 100);
+                        }
+                    });
+                }, observerOptions);
+
+                observer.observe(element);
+                observers.push(observer);
+            });
+        }, 100);
+
+        return () => {
+            clearTimeout(timeoutId);
+            if (updateTimer) {
+                clearTimeout(updateTimer);
+            }
+            observers.forEach((observer) => observer.disconnect());
+        };
+    }, [data, isEditing]);
 
     // Add structured data for itinerary
     useEffect(() => {
@@ -316,11 +397,18 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                     {displayData.days.map((day, dayIndex) => (
                         <section
                             key={day.day}
+                            ref={(el) => {
+                                if (el) {
+                                    dayRefs.current.set(day.day, el);
+                                } else {
+                                    dayRefs.current.delete(day.day);
+                                }
+                            }}
                             itemScope
                             itemType="https://schema.org/TouristDestination"
                             className={`relative pl-4 sm:pl-6 md:pl-8 border-l-2 transition-colors duration-300 ${activeDay === day.day ? 'border-ai-accent' : 'border-ai-muted/20'}`}
-                            onMouseEnter={() => setActiveDay(day.day)}
-                            onClick={() => setActiveDay(day.day)}
+                            onMouseEnter={() => !isEditing && setActiveDay(day.day)}
+                            onClick={() => !isEditing && setActiveDay(day.day)}
                         >
                             <motion.div
                                 initial={{ opacity: 0, x: -20 }}
@@ -414,7 +502,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
                 {/* Right Column: Interactive Map */}
                 <div className="lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24 h-[400px] sm:h-[500px]">
-                    <ItineraryMap routeData={routeData || undefined} days={displayData.days} selectedDay={activeDay} />
+                    <ItineraryMap routeData={routeData || { days: [] }} selectedDay={activeDay} />
                 </div>
             </div>
 

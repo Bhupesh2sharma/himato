@@ -19,7 +19,7 @@ export function PlannerPage() {
     const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
     const [isSearching, setIsSearching] = useState(false);
     const [itineraryData, setItineraryData] = useState(null);
-    const [routeData, setRouteData] = useState(null);
+    const [routeData, setRouteData] = useState<{ days: Array<any> } | null>(null);
     const [itineraryId, setItineraryId] = useState<string | null>(null);
     const [error, setError] = useState('');
 
@@ -46,7 +46,7 @@ export function PlannerPage() {
             const response = await apiClient.getItineraryById(id);
             if (response.status === 'success') {
                 setItineraryData(response.data.itinerary.itineraryData);
-                setRouteData(response.data.itinerary.routeData || null);
+                setRouteData(response.data.itinerary.routeData || { days: [] });
                 setItineraryId(response.data.itinerary._id);
                 setView('results');
                 setShowSplash(false);

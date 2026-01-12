@@ -33,7 +33,7 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     });
     return {
       itinerary: response.data.itinerary,
-      routeData: response.data.routeData || null,
+      routeData: response.data.routeData || { days: [] }, // Backend always returns routeData now
       id: response.data.itineraryId
     };
   } catch (error: any) {
