@@ -14,6 +14,18 @@ interface UpcomingBookingsProps {
     data?: Booking[];
 }
 
+const formatDateReadable = (dateStr: string) => {
+    try {
+        return new Date(dateStr).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    } catch (e) {
+        return dateStr;
+    }
+};
+
 export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
     const displayBookings = data.length > 0 ? data.slice(0, 4) : [];
 
@@ -80,10 +92,10 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                             </div>
 
                             <div className={`px-2.5 py-1 rounded-lg text-xs font-medium capitalize ${booking.status === 'confirmed'
-                                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                                    : booking.status === 'pending'
-                                        ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                                        : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                                : booking.status === 'pending'
+                                    ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                                    : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                                 }`}>
                                 {booking.status}
                             </div>
@@ -92,7 +104,7 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                         <div className="flex items-center justify-between text-sm">
                             <div className="flex items-center gap-1 text-ai-muted">
                                 <Clock className="w-3.5 h-3.5" />
-                                <span>{booking.date}</span>
+                                <span>{formatDateReadable(booking.date)}</span>
                             </div>
 
                             <div className="flex items-center gap-1 text-ai-muted">
@@ -115,7 +127,7 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                 </div>
                 <div className="text-center">
                     <p className="text-2xl font-bold text-white mb-1">
-                        {data.filter(b => b.status === 'confirmed').length}
+                        {data.filter((b: Booking) => b.status === 'confirmed').length}
                     </p>
                     <p className="text-xs text-ai-muted">Confirmed</p>
                 </div>

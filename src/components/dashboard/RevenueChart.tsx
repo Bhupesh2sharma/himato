@@ -9,30 +9,29 @@ interface DataPoint {
     value: number;
 }
 
-const mockData: DataPoint[] = [
-    { month: 'Jan', value: 45000 },
-    { month: 'Feb', value: 52000 },
-    { month: 'Mar', value: 48000 },
-    { month: 'Apr', value: 61000 },
-    { month: 'May', value: 72000 },
-    { month: 'Jun', value: 85000 },
-    { month: 'Jul', value: 95000 },
-];
+interface RevenueChartProps {
+    data?: DataPoint[];
+}
 
-export const RevenueChart = () => {
-    const [animatedData, setAnimatedData] = useState<DataPoint[]>(
-        mockData.map(d => ({ ...d, value: 0 }))
-    );
+export const RevenueChart = ({ data = [] }: RevenueChartProps) => {
+    const [animatedData, setAnimatedData] = useState<DataPoint[]>([]);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setAnimatedData(mockData);
-        }, 500);
+        if (data && data.length > 0) {
+            // Initially set to 0 for animation transition if needed, 
+            // but for simplicity setting directly now
+            setAnimatedData(data);
+        }
+    }, [data]);
 
-        return () => clearTimeout(timer);
-    }, []);
+    const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 0;
+    const avgMonthly = data.length > 0 ? data.reduce((sum, d) => sum + d.value, 0) / data.length : 0;
+    const peakMonth = data.length > 0 ? [...data].sort((a, b) => b.value - a.value)[0] : null;
 
-    const maxValue = Math.max(...mockData.map(d => d.value));
+    // Growth rate between first and last month shown
+    const growthRate = (data.length > 1 && data[0].value > 0)
+        ? ((data[data.length - 1].value - data[0].value) / data[0].value) * 100
+        : 0;
 
     return (
         <motion.div
@@ -52,51 +51,61 @@ export const RevenueChart = () => {
                     </div>
                 </div>
 
-                <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                    <span className="text-emerald-400 text-sm font-medium">+23.5%</span>
-                </div>
+                {growthRate !== 0 && (
+                    <div className={`px-3 py-1.5 rounded-lg ${growthRate >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+                        <span className={`${growthRate >= 0 ? 'text-emerald-400' : 'text-red-400'} text-sm font-medium`}>
+                            {growthRate >= 0 ? '+' : ''}{growthRate.toFixed(1)}%
+                        </span>
+                    </div>
+                )}
             </div>
 
             {/* Chart */}
             <div className="relative h-64">
-                <div className="absolute inset-0 flex items-end justify-between gap-2">
-                    {animatedData.map((data, index) => {
-                        const heightPercent = (data.value / maxValue) * 100;
+                {animatedData.length > 0 ? (
+                    <div className="absolute inset-0 flex items-end justify-between gap-2">
+                        {animatedData.map((dataPoint, index) => {
+                            const heightPercent = maxValue > 0 ? (dataPoint.value / maxValue) * 100 : 0;
 
-                        return (
-                            <div key={data.month} className="flex-1 flex flex-col items-center gap-2">
-                                {/* Bar */}
-                                <motion.div
-                                    initial={{ height: 0 }}
-                                    animate={{ height: `${heightPercent}%` }}
-                                    transition={{ duration: 1, delay: 0.7 + index * 0.1, ease: 'easeOut' }}
-                                    className="w-full relative group cursor-pointer"
-                                >
-                                    {/* Gradient bar */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-ai-accent/80 to-ai-accent/40 rounded-t-lg group-hover:from-ai-accent group-hover:to-ai-accent/60 transition-all duration-300">
-                                        {/* Glow effect */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-ai-accent/0 to-ai-accent/20 opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
-                                    </div>
+                            return (
+                                <div key={dataPoint.month} className="flex-1 flex flex-col items-center gap-2">
+                                    {/* Bar */}
+                                    <motion.div
+                                        initial={{ height: 0 }}
+                                        animate={{ height: `${heightPercent}%` }}
+                                        transition={{ duration: 1, delay: 0.7 + index * 0.1, ease: 'easeOut' }}
+                                        className="w-full relative group cursor-pointer"
+                                    >
+                                        {/* Gradient bar */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-ai-accent/80 to-ai-accent/40 rounded-t-lg group-hover:from-ai-accent group-hover:to-ai-accent/60 transition-all duration-300">
+                                            {/* Glow effect */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-ai-accent/0 to-ai-accent/20 opacity-0 group-hover:opacity-100 transition-opacity blur-xl"></div>
+                                        </div>
 
-                                    {/* Value tooltip on hover */}
-                                    <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-ai-dark/90 border border-ai-accent/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                        <span className="text-white text-xs font-semibold">₹{(data.value / 1000).toFixed(0)}K</span>
-                                    </div>
-                                </motion.div>
+                                        {/* Value tooltip on hover */}
+                                        <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-ai-dark/90 border border-ai-accent/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                                            <span className="text-white text-xs font-semibold">₹{(dataPoint.value / 1000).toFixed(1)}K</span>
+                                        </div>
+                                    </motion.div>
 
-                                {/* Month label */}
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                                    className="text-ai-muted text-xs font-medium"
-                                >
-                                    {data.month}
-                                </motion.span>
-                            </div>
-                        );
-                    })}
-                </div>
+                                    {/* Month label */}
+                                    <motion.span
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                                        className="text-ai-muted text-xs font-medium"
+                                    >
+                                        {dataPoint.month}
+                                    </motion.span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <p className="text-ai-muted text-sm">No revenue data for the selected period.</p>
+                    </div>
+                )}
 
                 {/* Grid lines */}
                 <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
@@ -110,15 +119,19 @@ export const RevenueChart = () => {
             <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-3 gap-4">
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Avg. Monthly</p>
-                    <p className="text-white font-semibold">₹65.4K</p>
+                    <p className="text-white font-semibold">₹{(avgMonthly / 1000).toFixed(1)}K</p>
                 </div>
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Peak Month</p>
-                    <p className="text-white font-semibold">Jul (₹95K)</p>
+                    <p className="text-white font-semibold">
+                        {peakMonth ? `${peakMonth.month} (₹${(peakMonth.value / 1000).toFixed(1)}K)` : 'N/A'}
+                    </p>
                 </div>
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Growth Rate</p>
-                    <p className="text-emerald-400 font-semibold">+23.5%</p>
+                    <p className={`${growthRate >= 0 ? 'text-emerald-400' : 'text-red-400'} font-semibold`}>
+                        {growthRate >= 0 ? '+' : ''}{growthRate.toFixed(1)}%
+                    </p>
                 </div>
             </div>
         </motion.div>

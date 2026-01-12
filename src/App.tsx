@@ -13,6 +13,7 @@ import { GuidePage } from './pages/GuidePage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
 import { B2BDashboard } from './pages/B2BDashboard';
+import { AdminDashboard } from './pages/AdminDashboard';
 import { apiClient } from './services/api';
 
 
@@ -84,7 +85,7 @@ function SharedItineraryPage() {
 
 function App() {
   const location = useLocation();
-  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide'];
+  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/admin'];
   const isKnownPath = knownPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
 
   const isSharedView = location.pathname.startsWith('/share/') || (!isKnownPath && location.pathname !== '/');
@@ -105,6 +106,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<B2BDashboard />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route path="/guide/:slug" element={<GuidePage />} />
