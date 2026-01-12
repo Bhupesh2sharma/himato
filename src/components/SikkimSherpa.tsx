@@ -12,6 +12,15 @@ interface Message {
     parts: string;
 }
 
+const isLoadingMessages = [
+    "Himato is thinking...",
+    "Consulting the mountains...",
+    "Mapping your request...",
+    "Gathering local insights...",
+    "Whispering to the winds...",
+    "Finding hidden gems..."
+];
+
 export const SikkimSherpa = () => {
     const { isAuthenticated } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +39,7 @@ export const SikkimSherpa = () => {
         const loadChatHistory = async () => {
             try {
                 let history;
-                
+
                 if (isAuthenticated) {
                     // For authenticated users, no sessionId needed
                     history = await apiClient.getChatHistory(undefined, true);
@@ -49,7 +58,7 @@ export const SikkimSherpa = () => {
                         parts: msg.content
                     }));
                     setMessages(formattedMessages);
-                    
+
                     // Update sessionId for guest users if returned from backend
                     if (!isAuthenticated && history.data.sessionId) {
                         setChatSessionId(history.data.sessionId);
@@ -104,7 +113,7 @@ export const SikkimSherpa = () => {
                 }
                 clearChatSession();
             }
-            
+
             // Reset to welcome message
             setMessages([
                 { role: 'model', parts: "Namaste! I am Himato, your personal Sikkim tourism guide. From hidden monasteries to snow-capped peaks, I'm here to help you plan the perfect Sikkim tourism journey. What Sikkim tourism destination would you like to explore today?" }
@@ -117,6 +126,18 @@ export const SikkimSherpa = () => {
             setIsClearing(false);
         }
     };
+
+    const [messageIndex, setMessageIndex] = useState(0);
+
+    useEffect(() => {
+        let interval: any;
+        if (isLoading) {
+            interval = setInterval(() => {
+                setMessageIndex((prev) => (prev + 1) % isLoadingMessages.length);
+            }, 3000);
+        }
+        return () => clearInterval(interval);
+    }, [isLoading]);
 
     return (
         <div className={`fixed z-50 flex flex-col items-end transition-all duration-300 ${isFullScreen ? 'inset-0 bg-ai-dark/95 backdrop-blur-md' : 'bottom-6 right-6'}`}>
@@ -174,42 +195,54 @@ export const SikkimSherpa = () => {
 
                         {/* Messages */}
                         <div className={`flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent ${isFullScreen ? 'max-w-4xl mx-auto w-full' : ''}`}>
-                            {messages.map((msg, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
-                                >
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-white/10' : 'bg-ai-accent/20'}`}>
-                                        {msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Sparkles className="w-4 h-4 text-ai-accent" />}
-                                    </div>
-                                    <div className={`max-w-[85%] p-5 rounded-2xl text-base leading-loose ${msg.role === 'user'
-                                        ? 'bg-ai-accent text-white rounded-tr-none'
-                                        : 'bg-white/5 text-gray-200 border border-white/10 rounded-tl-none shadow-lg backdrop-blur-sm'
-                                        }`}>
-                                        {msg.role === 'user' ? (
-                                            msg.parts
-                                        ) : (
-                                            <div className="prose prose-invert prose-lg max-w-none prose-p:leading-loose prose-p:mb-6 prose-strong:text-ai-accent prose-ul:my-4 prose-li:mb-2">
-                                                <ReactMarkdown>{msg.parts}</ReactMarkdown>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                            {isLoading && (
-                                <div className="flex gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-ai-accent/20 flex items-center justify-center flex-shrink-0">
-                                        <Sparkles className="w-4 h-4 text-ai-accent" />
-                                    </div>
-                                    <div className="bg-white/5 p-3 rounded-2xl rounded-tl-none border border-white/10">
-                                        <div className="flex gap-1">
-                                            <span className="w-2 h-2 bg-ai-muted rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                            <span className="w-2 h-2 bg-ai-muted rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                            <span className="w-2 h-2 bg-ai-muted rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            <AnimatePresence>
+                                {messages.map((msg, idx) => (
+                                    <motion.div
+                                        key={idx}
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}
+                                    >
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${msg.role === 'user' ? 'bg-white/10' : 'bg-ai-accent/20'}`}>
+                                            {msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Sparkles className="w-4 h-4 text-ai-accent" />}
                                         </div>
-                                    </div>
-                                </div>
-                            )}
+                                        <div className={`max-w-[85%] p-5 rounded-2xl text-base leading-loose ${msg.role === 'user'
+                                            ? 'bg-ai-accent text-white rounded-tr-none'
+                                            : 'bg-white/5 text-gray-200 border border-white/10 rounded-tl-none shadow-lg backdrop-blur-sm'
+                                            }`}>
+                                            {msg.role === 'user' ? (
+                                                msg.parts
+                                            ) : (
+                                                <div className="prose prose-invert prose-lg max-w-none prose-p:leading-loose prose-p:mb-6 prose-strong:text-ai-accent prose-ul:my-4 prose-li:mb-2">
+                                                    <ReactMarkdown>{msg.parts}</ReactMarkdown>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                                {isLoading && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0 }}
+                                        className="flex gap-3"
+                                    >
+                                        <div className="w-8 h-8 rounded-full bg-ai-accent/20 flex items-center justify-center flex-shrink-0">
+                                            <Sparkles className="w-4 h-4 text-ai-accent" />
+                                        </div>
+                                        <div className="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/10 flex flex-col gap-2">
+                                            <div className="flex gap-1.5 mb-1">
+                                                <span className="w-2 h-2 bg-ai-accent rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                                <span className="w-2 h-2 bg-ai-accent rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                                <span className="w-2 h-2 bg-ai-accent rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                            </div>
+                                            <p className="text-xs text-ai-muted italic animate-pulse">
+                                                {isLoadingMessages[messageIndex]}
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                             <div ref={messagesEndRef} />
                         </div>
 
