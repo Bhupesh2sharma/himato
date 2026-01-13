@@ -299,10 +299,16 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                 itineraryId={itineraryId}
             />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
-                <div className="flex items-center gap-2 sm:gap-3">
-                    <div className="w-1.5 sm:w-2 h-6 sm:h-8 bg-ai-accent rounded-full animate-pulse" />
-                    <h2 className="text-xl sm:text-2xl font-bold text-white">AI Generated Plan</h2>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 sm:mb-16">
+                <div className="flex items-center gap-4">
+                    <div className="relative">
+                        <div className="w-2 h-10 bg-ai-accent rounded-full" />
+                        <div className="absolute inset-0 w-2 h-10 bg-ai-accent rounded-full blur-md opacity-50" />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">AI Generated Plan</h2>
+                        <p className="text-xs text-ai-muted uppercase tracking-[0.3em] mt-1">Curated Himalayan Experience</p>
+                    </div>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -393,9 +399,21 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
             <div className="grid lg:grid-cols-2 gap-8 relative">
                 {/* Left Column: Itinerary Details */}
-                <div className="space-y-6 sm:space-y-8 order-1 lg:order-1">
+                {/* Left Column: Itinerary Details */}
+                <motion.div
+                    className="space-y-6 sm:space-y-12 order-1 lg:order-1 pb-20"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.15
+                            }
+                        }
+                    }}
+                >
                     {displayData.days.map((day, dayIndex) => (
-                        <section
+                        <motion.section
                             key={day.day}
                             ref={(el) => {
                                 if (el) {
@@ -404,101 +422,143 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                     dayRefs.current.delete(day.day);
                                 }
                             }}
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                visible: { opacity: 1, y: 0 }
+                            }}
                             itemScope
                             itemType="https://schema.org/TouristDestination"
-                            className={`relative pl-4 sm:pl-6 md:pl-8 border-l-2 transition-colors duration-300 ${activeDay === day.day ? 'border-ai-accent' : 'border-ai-muted/20'}`}
+                            className={`relative pl-8 sm:pl-12 md:pl-16 border-l transition-all duration-700 ${activeDay === day.day ? 'border-ai-accent' : 'border-white/10'}`}
                             onMouseEnter={() => !isEditing && setActiveDay(day.day)}
                             onClick={() => !isEditing && setActiveDay(day.day)}
                         >
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: dayIndex * 0.2 }}
-                            >
-                                <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-4 transition-colors duration-300 ${activeDay === day.day ? 'bg-ai-accent border-ai-accent shadow-[0_0_10px_#00f2ff]' : 'bg-ai-secondary border-ai-dark'}`} />
+                            {/* Animated Timeline Point */}
+                            <div className="absolute -left-[1px] top-0 h-full w-[2px] overflow-hidden">
+                                <motion.div
+                                    className="w-full h-full bg-ai-accent"
+                                    initial={{ y: "-100%" }}
+                                    animate={{ y: activeDay === day.day ? "0%" : "-100%" }}
+                                    transition={{ duration: 0.8, ease: "circOut" }}
+                                />
+                            </div>
 
-                                <h3 className="text-lg sm:text-xl font-bold text-ai-accent mb-3 sm:mb-4 flex items-center gap-2 flex-wrap" itemProp="name">
-                                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" aria-hidden="true" />
-                                    {isEditing ? (
-                                        <input
-                                            type="text"
-                                            value={day.title}
-                                            onChange={(e) => updateDay(dayIndex, { ...day, title: e.target.value })}
-                                            className="flex-1 bg-white/5 border border-ai-accent/30 rounded px-2 py-1 text-ai-accent focus:outline-none focus:border-ai-accent"
-                                        />
-                                    ) : (
-                                        <span className="break-words">Day {day.day}: {day.title}</span>
-                                    )}
+                            <div className={`absolute -left-[6px] top-0 w-3 h-3 rounded-full transition-all duration-500 z-10 ${activeDay === day.day ? 'bg-ai-accent scale-150 shadow-[0_0_20px_#00f2ff]' : 'bg-white/20'}`} />
+
+                            <div className="mb-8">
+                                <h3 className="text-2xl sm:text-4xl font-black text-white mb-3 flex items-center gap-6" itemProp="name">
+                                    <div className={`flex items-center gap-2 px-5 py-2 rounded-xl transition-all duration-500 ${activeDay === day.day ? 'bg-ai-accent text-ai-dark shadow-[0_10px_30px_rgba(0,242,255,0.2)]' : 'bg-white/5 text-ai-muted grayscale'}`}>
+                                        <Calendar className="w-4 h-4" />
+                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Day {day.day}</span>
+                                    </div>
+                                    <span className={`transition-all duration-500 flex-1 ${activeDay === day.day ? 'opacity-100 translate-x-0' : 'opacity-40 -translate-x-4'}`}>
+                                        {isEditing ? (
+                                            <input
+                                                type="text"
+                                                value={day.title}
+                                                onChange={(e) => updateDay(dayIndex, { ...day, title: e.target.value })}
+                                                className="w-full bg-white/5 border-b border-white/20 rounded-none px-0 py-2 text-white focus:outline-none focus:border-ai-accent"
+                                            />
+                                        ) : (
+                                            day.title
+                                        )}
+                                    </span>
                                 </h3>
+                            </div>
 
-                                <div className="space-y-3 sm:space-y-4">
-                                    {day.activities.map((activity, activityIndex) => (
-                                        <div key={activityIndex} itemScope itemType="https://schema.org/TouristAttraction" className="glass p-3 sm:p-4 rounded-xl hover:bg-ai-card/60 transition-colors group">
-                                            {isEditing ? (
-                                                <div className="space-y-3">
-                                                    <input
-                                                        type="text"
-                                                        value={activity.title}
-                                                        onChange={(e) => updateActivity(dayIndex, activityIndex, 'title', e.target.value)}
-                                                        className="w-full bg-white/5 border border-ai-accent/30 rounded px-3 py-2 text-white font-bold focus:outline-none focus:border-ai-accent"
-                                                        placeholder="Activity title"
-                                                    />
-                                                    <div className="flex flex-col sm:flex-row gap-2">
-                                                        <div className="flex items-center gap-2 flex-1">
-                                                            <Clock className="w-4 h-4 text-ai-muted" />
-                                                            <input
-                                                                type="text"
-                                                                value={activity.time}
-                                                                onChange={(e) => updateActivity(dayIndex, activityIndex, 'time', e.target.value)}
-                                                                className="flex-1 bg-white/5 border border-ai-accent/30 rounded px-3 py-2 text-sm text-ai-muted focus:outline-none focus:border-ai-accent"
-                                                                placeholder="Time (e.g., 09:00 AM)"
-                                                            />
-                                                        </div>
-                                                        <div className="flex items-center gap-2 flex-1">
-                                                            <MapPin className="w-4 h-4 text-ai-muted" />
-                                                            <input
-                                                                type="text"
-                                                                value={activity.location}
-                                                                onChange={(e) => updateActivity(dayIndex, activityIndex, 'location', e.target.value)}
-                                                                className="flex-1 bg-white/5 border border-ai-accent/30 rounded px-3 py-2 text-sm text-ai-muted focus:outline-none focus:border-ai-accent"
-                                                                placeholder="Location"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <textarea
-                                                        value={activity.description}
-                                                        onChange={(e) => updateActivity(dayIndex, activityIndex, 'description', e.target.value)}
-                                                        className="w-full bg-white/5 border border-ai-accent/30 rounded px-3 py-2 text-sm text-gray-400 focus:outline-none focus:border-ai-accent resize-y min-h-[100px]"
-                                                        placeholder="Activity description"
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <div className="flex flex-col gap-2 mb-2">
-                                                        <h4 className="font-bold text-base sm:text-lg text-white group-hover:text-ai-accent transition-colors break-words" itemProp="name">
-                                                            {activity.title}
-                                                        </h4>
-                                                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-ai-muted">
-                                                            <time className="flex items-center gap-1" itemProp="openingHoursSpecification">
-                                                                <Clock className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" aria-hidden="true" />
-                                                                <span className="break-words">{activity.time}</span>
-                                                            </time>
-                                                            <address className="flex items-center gap-1 not-italic" itemProp="address">
-                                                                <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" aria-hidden="true" />
-                                                                <span className="break-words">{activity.location}</span>
-                                                            </address>
-                                                        </div>
-                                                    </div>
-                                                    <p className="text-gray-400 text-xs sm:text-sm leading-relaxed break-words" itemProp="description">{activity.description}</p>
-                                                </>
-                                            )}
+                            <motion.div
+                                className="space-y-4"
+                                variants={{
+                                    visible: {
+                                        transition: {
+                                            staggerChildren: 0.1
+                                        }
+                                    }
+                                }}
+                            >
+                                {day.activities.map((activity, activityIndex) => (
+                                    <motion.div
+                                        key={activityIndex}
+                                        itemScope
+                                        itemType="https://schema.org/TouristAttraction"
+                                        className={`group relative p-6 sm:p-10 rounded-[2.5rem] transition-all duration-700 overflow-hidden ${activeDay === day.day ? 'bg-white/[0.03] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]' : 'bg-transparent border border-transparent opacity-30 scale-[0.98]'}`}
+                                        variants={{
+                                            hidden: { opacity: 0, scale: 0.95 },
+                                            visible: { opacity: 1, scale: 1 }
+                                        }}
+                                        whileHover={activeDay === day.day ? { y: -8, backgroundColor: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.2)' } : {}}
+                                    >
+                                        {/* Stylized Badge for Activity Index */}
+                                        <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
+                                            <span className="text-[6rem] font-black leading-none select-none italic text-white">{activityIndex + 1}</span>
                                         </div>
-                                    ))}
-                                </div>
+
+                                        {isEditing ? (
+                                            <div className="space-y-6 relative z-10">
+                                                <input
+                                                    type="text"
+                                                    value={activity.title}
+                                                    onChange={(e) => updateActivity(dayIndex, activityIndex, 'title', e.target.value)}
+                                                    className="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-2xl text-white font-black focus:outline-none focus:border-ai-accent"
+                                                    placeholder="Activity title"
+                                                />
+                                                <div className="grid sm:grid-cols-2 gap-4">
+                                                    <div className="flex items-center gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                                                        <Clock className="w-5 h-5 text-ai-accent" />
+                                                        <input
+                                                            type="text"
+                                                            value={activity.time}
+                                                            onChange={(e) => updateActivity(dayIndex, activityIndex, 'time', e.target.value)}
+                                                            className="flex-1 bg-transparent text-sm text-gray-200 focus:outline-none"
+                                                            placeholder="09:00 AM"
+                                                        />
+                                                    </div>
+                                                    <div className="flex items-center gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                                                        <MapPin className="w-5 h-5 text-ai-accent" />
+                                                        <input
+                                                            type="text"
+                                                            value={activity.location}
+                                                            onChange={(e) => updateActivity(dayIndex, activityIndex, 'location', e.target.value)}
+                                                            className="flex-1 bg-transparent text-sm text-gray-200 focus:outline-none"
+                                                            placeholder="Location"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <textarea
+                                                    value={activity.description}
+                                                    onChange={(e) => updateActivity(dayIndex, activityIndex, 'description', e.target.value)}
+                                                    className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-6 text-base text-gray-400 focus:outline-none focus:border-ai-accent resize-y min-h-[160px]"
+                                                    placeholder="Describe the magical experience..."
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="relative z-10">
+                                                <div className="flex flex-col gap-6 mb-8">
+                                                    <h4 className="font-black text-2xl sm:text-4xl text-white group-hover:text-ai-accent transition-all duration-500 leading-[1.1]" itemProp="name">
+                                                        {activity.title}
+                                                    </h4>
+
+                                                    <div className="flex flex-wrap items-center gap-4">
+                                                        <div className="flex items-center gap-3 bg-ai-accent/10 px-4 py-2 rounded-full border border-ai-accent/20 backdrop-blur-md">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-ai-accent animate-pulse" />
+                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-ai-accent">{activity.time}</span>
+                                                        </div>
+                                                        <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+                                                            <MapPin className="w-3.5 h-3.5 text-white/40" aria-hidden="true" />
+                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/60">{activity.location}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p className="text-gray-400 text-lg sm:text-xl leading-relaxed font-medium max-w-2xl" itemProp="description">
+                                                    {activity.description}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </motion.div>
+                                ))}
                             </motion.div>
-                        </section>
+                        </motion.section>
                     ))}
-                </div>
+                </motion.div>
 
                 {/* Right Column: Interactive Map */}
                 <div className="lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24 h-[400px] sm:h-[500px]">

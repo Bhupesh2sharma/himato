@@ -30,42 +30,52 @@ const bookingSites = [
 
 export const BookingOptions = () => {
     return (
-        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-8 sm:mt-12">
-            <div className="flex items-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-                <div className="w-1.5 sm:w-2 h-6 sm:h-8 bg-ai-accent rounded-full animate-pulse" />
-                <h2 className="text-xl sm:text-2xl font-bold text-white">Book Your Trip</h2>
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20 mt-12 sm:mt-20 border-t border-white/10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 sm:mb-16">
+                <div className="flex items-center gap-4">
+                    <div className="relative">
+                        <div className="w-2 h-10 bg-[#FF5733] rounded-full" />
+                        <div className="absolute inset-0 w-2 h-10 bg-[#FF5733] rounded-full blur-md opacity-50" />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">Book Your Trip</h2>
+                        <p className="text-xs text-ai-muted uppercase tracking-[0.3em] mt-1">Ready for your Adventure?</p>
+                    </div>
+                </div>
             </div>
 
-            <p className="text-ai-muted mb-6 sm:mb-8 text-sm sm:text-base">
-                Ready to go? Explore packages from these travel platforms.
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 {bookingSites.map((site, index) => (
                     <motion.a
                         key={site.name}
                         href={site.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.1, duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="group relative overflow-hidden rounded-xl bg-ai-card border border-white/5 hover:border-white/20 transition-all duration-300"
+                        whileHover={{ y: -10 }}
+                        className="group relative overflow-hidden rounded-[2.5rem] bg-white/[0.03] border border-white/10 p-8 sm:p-10 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.2)] hover:bg-white/[0.05] hover:border-white/20"
                     >
-                        <div className={`absolute inset-0 bg-gradient-to-r ${site.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+                        <div className={`absolute -right-10 -bottom-10 w-40 h-40 bg-gradient-to-br ${site.color} opacity-10 blur-3xl group-hover:opacity-20 transition-opacity duration-500`} />
 
-                        <div className="p-4 sm:p-6 relative z-10 flex items-start justify-between gap-3">
-                            <div className="flex-1 min-w-0">
-                                <h3 className="text-base sm:text-xl font-bold text-white mb-1 sm:mb-2 group-hover:text-ai-accent transition-colors flex items-center gap-2 flex-wrap">
-                                    <span className="break-words">{site.name}</span>
-                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                                </h3>
-                                <p className="text-xs sm:text-sm text-gray-400 break-words">{site.description}</p>
+                        <div className="relative z-10">
+                            <div className="flex items-start justify-between mb-6">
+                                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-all duration-500">
+                                    <Globe className="w-8 h-8 text-white/40 group-hover:text-white transition-colors" />
+                                </div>
+                                <div className="bg-white/5 px-4 py-2 rounded-full border border-white/10 group-hover:border-white/20 transition-all duration-500">
+                                    <ExternalLink className="w-4 h-4 text-white/20 group-hover:text-white" />
+                                </div>
                             </div>
-                            <div className="p-2 sm:p-3 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors flex-shrink-0">
-                                <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-ai-muted group-hover:text-white transition-colors" />
-                            </div>
+
+                            <h3 className="text-2xl sm:text-3xl font-black text-white mb-4 tracking-tight group-hover:text-ai-accent transition-colors">
+                                {site.name}
+                            </h3>
+                            <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-medium">
+                                {site.description}
+                            </p>
                         </div>
                     </motion.a>
                 ))}

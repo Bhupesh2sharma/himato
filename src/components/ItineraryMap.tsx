@@ -149,15 +149,31 @@ function decodePolyline(encoded: string): google.maps.LatLngLiteral[] {
 
 // Create custom marker icon
 function createMarkerIcon(index: number): google.maps.Icon {
+    const color = "#00f2ff";
+    const svg = `
+        <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <!-- Outer Glow -->
+            <circle cx="20" cy="20" r="14" fill="${color}" fill-opacity="0.2" filter="url(#glow)"/>
+            <!-- Main Circle -->
+            <circle cx="20" cy="20" r="10" fill="${color}" stroke="white" stroke-width="2"/>
+            <!-- Inner Number -->
+            <text x="20" y="24" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="900" fill="black" text-anchor="middle">${index + 1}</text>
+        </svg>
+    `;
+
     return {
-        url: `data:image/svg+xml;base64,${btoa(`
-            <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="14" fill="#00f2ff" stroke="#000" stroke-width="2"/>
-                <text x="16" y="20" font-family="Arial" font-size="12" font-weight="bold" fill="#000" text-anchor="middle">${index + 1}</text>
-            </svg>
-        `)}`,
-        scaledSize: new google.maps.Size(32, 32),
-        anchor: new google.maps.Point(16, 16),
+        url: `data:image/svg+xml;base64,${btoa(svg)}`,
+        scaledSize: new google.maps.Size(40, 40),
+        anchor: new google.maps.Point(20, 20),
     };
 }
 
@@ -595,20 +611,20 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
                                                 <InfoWindow
                                                     onCloseClick={() => setSelectedMarker(null)}
                                                 >
-                                                    <div className="p-2 min-w-[200px]">
+                                                    <div className="p-2 min-w-[200px] text-black">
                                                         <div className="flex items-center gap-2 mb-2">
-                                                            <span className="bg-ai-accent text-black text-xs font-bold px-2 py-0.5 rounded-full">
+                                                            <span className="bg-[#00f2ff] text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-tighter">
                                                                 Day {routeDay.day}
                                                             </span>
-                                                            <h3 className="font-bold text-sm">{stop.label}</h3>
+                                                            <h3 className="font-bold text-sm text-black">{stop.label}</h3>
                                                         </div>
                                                         {routeDay.eta_minutes && index === routeDay.stops.length - 1 && (
-                                                            <div className="mt-2 pt-2 border-t border-gray-200">
-                                                                <div className="flex items-center gap-1.5 text-xs font-semibold text-blue-600">
+                                                            <div className="mt-2 pt-2 border-t border-gray-100">
+                                                                <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600">
                                                                     <span>🚗 ETA: {routeDay.eta_minutes} min</span>
                                                                 </div>
                                                                 {routeDay.total_distance_km && (
-                                                                    <p className="text-[10px] text-gray-500 mt-1">
+                                                                    <p className="text-[10px] text-gray-400 mt-1">
                                                                         Distance: {routeDay.total_distance_km} km
                                                                     </p>
                                                                 )}
