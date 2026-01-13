@@ -6,7 +6,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://himato.waglogy.com/</loc>
+    <loc>https://www.himato.in/</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -14,35 +14,35 @@
   
   <!-- Main destinations pages (if you add routes later) -->
   <url>
-    <loc>https://himato.waglogy.com/#gangtok</loc>
+    <loc>https://www.himato.in/#gangtok</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://himato.waglogy.com/#pelling</loc>
+    <loc>https://www.himato.in/#pelling</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://himato.waglogy.com/#gurudongmar-lake</loc>
+    <loc>https://www.himato.in/#gurudongmar-lake</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://himato.waglogy.com/#yumthang-valley</loc>
+    <loc>https://www.himato.in/#yumthang-valley</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://himato.waglogy.com/#ravangla</loc>
+    <loc>https://www.himato.in/#ravangla</loc>
     <lastmod>2024-12-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
