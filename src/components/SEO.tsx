@@ -9,12 +9,12 @@ interface SEOProps {
   type?: string;
 }
 
-export const SEO = ({ 
+export const SEO = ({
   title = 'Sikkim Tourism - AI-Powered Travel Planner | Himato | Custom Sikkim Itineraries',
   description = 'Sikkim tourism made easy! Plan your perfect Sikkim trip with our AI-powered travel planner. Discover Sikkim tourism destinations: Gangtok, Pelling, Gurudongmar Lake, Yumthang Valley, and 30+ Sikkim tourism attractions. Free Sikkim tourism itineraries.',
   keywords = 'Sikkim tourism, Sikkim tourism guide, Sikkim tourism places, Sikkim tourism packages, Sikkim tourism itinerary, Sikkim tourism destinations, Sikkim travel planner, Sikkim tourism attractions, Gangtok Sikkim tourism, Pelling Sikkim tourism, North Sikkim tourism, South Sikkim tourism, Sikkim tourism plan, Sikkim tourism trip',
   image = '/gurudungmar.jpg',
-  url = 'https://himato.waglogy.com',
+  url = 'https://www.himato.in',
   type = 'website'
 }: SEOProps) => {
   useEffect(() => {
@@ -25,7 +25,7 @@ export const SEO = ({
     const updateMetaTag = (name: string, content: string, isProperty = false) => {
       const attribute = isProperty ? 'property' : 'name';
       let element = document.querySelector(`meta[${attribute}="${name}"]`) as HTMLMetaElement;
-      
+
       if (!element) {
         element = document.createElement('meta');
         element.setAttribute(attribute, name);
