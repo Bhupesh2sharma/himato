@@ -204,10 +204,104 @@ class ApiClient {
     // For authenticated users, send empty body (backend uses userId from token)
     // For guest users, send sessionId in body
     const body = isAuthenticated ? {} : { sessionId: sessionId || undefined };
-    return this.request('/api/chat/history', {
+    return this.request(`/api/chat/history`, {
       method: 'DELETE',
       body: JSON.stringify(body),
     });
+  }
+
+  // B2B specific endpoints
+  async requestSubscription(): Promise<any> {
+    return this.request('/api/users/subscribe', {
+      method: 'POST',
+    }, true);
+  }
+
+  async generateSocialContent(data: { platform: string; topic: string; targetAudience?: string }): Promise<any> {
+    return this.request('/api/users/b2b/generate-content', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async getSocialContentHistory(): Promise<any> {
+    return this.request('/api/users/b2b/content-history', { method: 'GET' }, true);
+  }
+
+  // Dashboard Data
+  async getBusinessDashboard(): Promise<any> {
+    return this.request('/api/users/business/dashboard', {
+      method: 'GET',
+    }, true);
+  }
+
+  async addBooking(data: any): Promise<any> {
+    return this.request('/api/users/business/booking', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async addPayment(data: any): Promise<any> {
+    return this.request('/api/users/business/payment', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async addClient(data: any): Promise<any> {
+    return this.request('/api/users/business/client', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async updateBooking(id: string, data: any): Promise<any> {
+    return this.request(`/api/users/business/booking/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async updatePayment(id: string, data: any): Promise<any> {
+    return this.request(`/api/users/business/payment/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async deleteBusinessItem(type: 'booking' | 'payment' | 'client', id: string): Promise<any> {
+    return this.request(`/api/users/business/item/${type}/${id}`, {
+      method: 'DELETE',
+    }, true);
+  }
+
+  // --- Admin Methods ---
+  async getAdminStats(): Promise<any> {
+    return this.request('/api/admin/stats', { method: 'GET' }, true);
+  }
+
+  async getAllUsers(): Promise<any> {
+    return this.request('/api/admin/users', { method: 'GET' }, true);
+  }
+
+  async getAllItineraries(): Promise<any> {
+    return this.request('/api/admin/itineraries', { method: 'GET' }, true);
+  }
+
+  async getAllActivities(): Promise<any> {
+    return this.request('/api/admin/activities', { method: 'GET' }, true);
+  }
+
+  async getAdminSubscriptions(): Promise<any> {
+    return this.request('/api/admin/subscriptions', { method: 'GET' }, true);
+  }
+
+  async processSubscriptionRequest(data: { requestId: string; status: 'approved' | 'rejected'; type?: string }): Promise<any> {
+    return this.request('/api/admin/subscriptions/process', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
   }
 }
 
