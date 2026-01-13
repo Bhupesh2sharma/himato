@@ -147,7 +147,7 @@ export function PlannerPage() {
                                                 {error}
                                             </div>
                                         )}
-                                        <ItineraryResult data={itineraryData} itineraryId={itineraryId} />
+                                        <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} />
                                         {itineraryData && <BookingOptions />}
 
                                         {/* Login Reminder at the end for guests */}
@@ -191,11 +191,6 @@ export function PlannerPage() {
                                         <div className="mt-12 sm:mt-20">
                                             {/* <SikkimShowcase /> */}
                                         </div>
-                                    )}
-                                    <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} />
-                                    {itineraryData && <BookingOptions />}
-                                    <div className="mt-12 sm:mt-20">
-                                        {/* <SikkimShowcase /> */}
                                     </div>
                                 </motion.div>
                             )}
