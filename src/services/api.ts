@@ -139,7 +139,7 @@ class ApiClient {
   }
 
   // Itinerary endpoints
-  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string } }> {
+  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; routeData?: any; itineraryId?: string } }> {
     return this.request('/api/itinerary/generate', {
       method: 'POST',
       body: JSON.stringify(data),
