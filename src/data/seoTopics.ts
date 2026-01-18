@@ -17,7 +17,7 @@ export const SEO_TOPICS: SeoTopic[] = [
         shortDescription: "Exclusive guide to entering the Lepcha Reserve.",
         description: "Dzongu is a restricted area. Here is the step-by-step process to get your permit through your homestay host.",
         category: 'Offbeat',
-        image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&q=80',
+        image: '/Dongu.jpg',
         content: `
 # Getting a Permit for Dzongu: The Inside Track
 
@@ -42,7 +42,7 @@ Technically, the permit fee is nominal, but hosts might charge a service fee for
         shortDescription: "High altitude safety guide for toddlers.",
         description: "Thangu is at 13,000 ft. Honest medical advice on bringing young children to this height.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80',
+        image: '/tangu.jpeg',
         content: `
 # Thangu Valley with Toddlers: Is it Safe?
 
@@ -69,7 +69,7 @@ Thangu Valley is the last stop before Gurudongmar Lake. It sits at a breathless 
         shortDescription: "Beat the rush to the icy spectacle.",
         description: "Timing your visit to see the crystal blue ice before the summer melt, minus the peak season rush.",
         category: 'Offbeat',
-        image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80',
+        image: '/gurudongmar.jpeg',
         content: `
 # Chasing the Frozen Gurudongmar
 
@@ -89,7 +89,7 @@ Leave Lachen by **4:00 AM**. Most tourists leave at 5:00 AM. That one hour makes
         shortDescription: "Exploring the Silk Route in a day.",
         description: "A long but rewarding itinerary: Gangtok -> Tsomgo -> Baba Mandir -> Kupup -> Gangtok.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80',
+        image: '/pic_kupup_lake.jpg',
         content: `
 # Elephant Lake in a Day? Yes, but Start Early.
 
@@ -113,7 +113,7 @@ Ask for a permit that includes "Nathula and Beyond" or specifically mentions Kup
         shortDescription: "Driving the Zig-Zag road in snow.",
         description: "A survival guide to driving the most dizzying road in East Sikkim during snowfall.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80',
+        image: '/zuluk.jpg',
         content: `
 # The White Zig-Zag: Zuluk in Winter
 
@@ -153,7 +153,7 @@ Cross the old hanging bridge. Just 200m upstream, a hidden chute falls directly 
         shortDescription: "Cold desert vibes in Sikkim.",
         description: "At 13,500ft, Gnathang Valley is a high-altitude plateau. How to stay here comfortably.",
         category: 'Offbeat',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gathangvally.jpg',
         content: `
 # Gnathang Valley: The Roof of the Silk Route
 
@@ -172,7 +172,7 @@ Spending a night here is tough due to low oxygen. Acclimatize in Zuluk or Padamc
         shortDescription: "End of the road guide.",
         description: "What to do when snow blocks the route to Zero Point.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80',
+        image: '/yumgthang.jpeg',
         content: `
 # Stuck on the way to Zero Point?
 
@@ -193,7 +193,7 @@ Drivers charge extra (₹3000-4000) for the permit extension to Zero Point from 
         shortDescription: "A self-guided spiritual trek.",
         description: "The trail to the holiest monastery in Sikkim is well-marked but steep. Here's your DIY map.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1544634076-a90160ccd682?auto=format&fit=crop&q=80',
+        image: '/tashiding.jpeg',
         content: `
 # Hiking to Tashiding: The Center of Universse
 
@@ -215,7 +215,7 @@ Legend says a mere glimpse of Tashiding washes away sins. The hike adds penance 
         shortDescription: "Accessibility review of the Skywalk.",
         description: "Can you take a wheelchair to the glass bridge? We checked the ramps and lifts.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Pelling Skywalk on Wheels
 
@@ -276,7 +276,7 @@ The complex is huge. Follow this anti-clockwise route to save energy.
         shortDescription: "Digital Nomad's survival guide.",
         description: "Where to zoom call without fear. Tested speeds at The Local Cafe, Rachna, and more.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Best Cafes in Gangtok for Digital Nomads
 
@@ -309,7 +309,7 @@ Come here for the view, stay for the pastries. Good for checking emails and ligh
         shortDescription: "Coffee with a view.",
         description: "The most photogenic spots on MG Marg to sip hazelnut lattes while watching the mountains.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Sunset & Sips: Gangtok's Best Rooftops
 
@@ -345,7 +345,7 @@ We tested Airtel 4G carrying 20Mbps+ speeds. Jio is faster (30Mbps+).
         shortDescription: "Budget-friendly work spots.",
         description: "Where to meet other nomads: Zostel, Tagalong, and hidden backpacker gems.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Coworking & Community
 
@@ -410,7 +410,7 @@ Ask your driver to stop at **Seven Sisters Waterfall** and **Naga Waterfalls**. 
         shortDescription: "Choosing the right hill station.",
         description: "A comparison based on terrain, hotel accessibility, and medical facilities.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Pelling or Ravangla?
 
@@ -627,7 +627,7 @@ Stronger currents in monsoon, but often calmer in winter. Better for birdwatchin
         shortDescription: "Slurping down comfort bowls.",
         description: "Skip the tourist traps. Here is where the locals eat hot noodle soup.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1625167359766-1514a586b614?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # The Hunt for Authentic Thukpa
 
@@ -767,7 +767,7 @@ Temi is Sikkim's only tea garden, renowned worldwide for its organic orthodox te
         shortDescription: "Sunset spirituality.",
         description: "The park transforms at dusk. The lights, the chanting, and the view of Narsing peak.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1605649487215-285f33880695?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Twilight at Tathagata Tsal (Buddha Park)
 
