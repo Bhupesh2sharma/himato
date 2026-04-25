@@ -10,6 +10,7 @@ interface User {
   phoneNo: string;
   business: boolean;
   businessName?: string;
+  isAdmin?: boolean;
 }
 
 interface AuthContextType {

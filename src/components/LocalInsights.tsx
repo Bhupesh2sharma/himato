@@ -1,13 +1,37 @@
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SEO_TOPICS } from '../data/seoTopics';
+import { apiClient } from '../services/api';
+import type { GuidePost } from '../services/api';
+
+type GuideItem = { id: string; title: string; shortDescription: string; category: string; image: string };
+
+function toItem(g: GuidePost): GuideItem {
+    return { id: g.slug, title: g.title, shortDescription: g.shortDescription, category: g.category, image: g.image };
+}
+
+const STATIC_ITEMS: GuideItem[] = SEO_TOPICS.map(t => ({ id: t.id, title: t.title, shortDescription: t.shortDescription, category: t.category, image: t.image }));
 
 export const LocalInsights = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const [guides, setGuides] = useState<GuideItem[]>(STATIC_ITEMS);
+
+    useEffect(() => {
+        apiClient.getPublishedGuides()
+            .then(res => {
+                if (res.data.guides.length > 0) {
+                    const apiItems = res.data.guides.map(toItem);
+                    const apiSlugs = new Set(apiItems.map(g => g.id));
+                    // Backend guides first, then static ones not already covered
+                    setGuides([...apiItems, ...STATIC_ITEMS.filter(s => !apiSlugs.has(s.id))]);
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
@@ -84,7 +108,7 @@ export const LocalInsights = () => {
                         }
                     `}</style>
 
-                    {SEO_TOPICS.map((topic, index) => (
+                    {guides.map((topic, index) => (
                         <motion.div
                             key={topic.id}
                             initial={{ opacity: 0, x: 20 }}

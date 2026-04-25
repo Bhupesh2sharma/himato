@@ -1,16 +1,51 @@
 
 import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, MapPin, Calendar, Share2, Sparkles } from 'lucide-react';
-import ReactMarkdown from 'react-markdown'; // Ensure this is installed or use simple formatting
+import ReactMarkdown from 'react-markdown';
 import { SEO_TOPICS } from '../data/seoTopics';
+import { apiClient } from '../services/api';
 
+interface GuideTopic {
+    id: string;
+    title: string;
+    shortDescription: string;
+    description?: string;
+    category: string;
+    image: string;
+    content: string;
+}
 
 export const GuidePage = () => {
     const { slug } = useParams<{ slug: string }>();
     const navigate = useNavigate();
+    const [topic, setTopic] = useState<GuideTopic | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    const topic = SEO_TOPICS.find(t => t.id === slug);
+    useEffect(() => {
+        if (!slug) return;
+
+        // Try API first, fall back to static data
+        apiClient.getGuideBySlug(slug)
+            .then(res => {
+                const g = res.data.guide;
+                setTopic({ id: g.slug, title: g.title, shortDescription: g.shortDescription, description: g.description, category: g.category, image: g.image, content: g.content });
+            })
+            .catch(() => {
+                const staticTopic = SEO_TOPICS.find(t => t.id === slug);
+                if (staticTopic) setTopic(staticTopic);
+            })
+            .finally(() => setLoading(false));
+    }, [slug]);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-ai-dark flex items-center justify-center">
+                <div className="w-8 h-8 border-2 border-black/10 border-t-ai-accent rounded-full animate-spin" />
+            </div>
+        );
+    }
 
     if (!topic) {
         return (
@@ -37,7 +72,7 @@ export const GuidePage = () => {
                 {/* Navigation Overlay */}
                 <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-10">
                     <button
-                        onClick={() => navigate('/')}
+                        onClick={() => window.history.length > 1 ? navigate(-1) : navigate('/')}
                         className="p-2 rounded-full bg-black/40 backdrop-blur hover:bg-black/60 text-white transition-colors border border-black/10"
                     >
                         <ArrowLeft className="w-6 h-6" />

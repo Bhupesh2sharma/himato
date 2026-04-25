@@ -138,9 +138,12 @@ export function PlannerPage() {
                                     <div className="container mx-auto px-4 sm:px-6">
                                         <button
                                             onClick={handleBackClick}
-                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-ai-text transition-colors flex items-center gap-2 text-sm sm:text-base group"
+                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-ai-text transition-colors flex items-center gap-2.5 text-sm sm:text-base group"
                                         >
-                                            <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Search
+                                            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-black/10 bg-white group-hover:border-ai-accent group-hover:bg-ai-accent/5 transition-all">
+                                                <span className="group-hover:-translate-x-0.5 transition-transform text-sm leading-none">←</span>
+                                            </span>
+                                            Back to Search
                                         </button>
                                         {error && (
                                             <div className="p-4 mb-6 bg-red-500/20 border border-red-500/50 rounded-xl text-red-600">

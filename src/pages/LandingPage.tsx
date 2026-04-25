@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { LocalInsights } from '../components/LocalInsights';
+import { useAuth } from '../contexts/AuthContext';
 
 
 export function LandingPage() {
     const navigate = useNavigate();
+    const { isAuthenticated } = useAuth();
 
     return (
         <div className="min-h-screen text-white selection:bg-ai-accent/30 overflow-x-hidden" style={{ background: '#0e1116' }}>
@@ -45,7 +47,7 @@ export function LandingPage() {
                             >
                                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                                 <span className="relative flex items-center justify-center gap-2">
-                                    Start Planning Free
+                                    {isAuthenticated ? 'Start Planning' : 'Start Planning Free'}
                                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </span>
                             </button>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, ChevronDown, Building2, Sparkles, Clock } from 'lucide-react';
+import { User, LogOut, ChevronDown, Building2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export const NavigationHeader = () => {
@@ -98,6 +98,27 @@ export const NavigationHeader = () => {
                           <Clock className="w-4 h-4" />
                           My Itineraries
                         </Link>
+                        {user?.isAdmin && (
+                          <>
+                            <div className="my-1 border-t border-black/8" />
+                            <Link
+                              to="/admin"
+                              onClick={() => setShowUserMenu(false)}
+                              className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
+                            >
+                              <ShieldCheck className="w-4 h-4" />
+                              Admin Dashboard
+                            </Link>
+                            <Link
+                              to="/admin/guides"
+                              onClick={() => setShowUserMenu(false)}
+                              className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
+                            >
+                              <ShieldCheck className="w-4 h-4 opacity-60" />
+                              Admin: Guides
+                            </Link>
+                          </>
+                        )}
                         <button
                           onClick={handleLogout}
                           className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-600 hover:bg-red-500/10 rounded-lg transition-colors text-sm"

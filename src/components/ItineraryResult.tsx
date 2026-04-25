@@ -290,8 +290,10 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
         }
     };
 
+    const totalActivities = displayData.days.reduce((sum, d) => sum + d.activities.length, 0);
+
     return (
-        <article className="w-full max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6" itemScope itemType="https://schema.org/TouristTrip">
+        <article className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6" itemScope itemType="https://schema.org/TouristTrip">
             <BusinessShareModal
                 isOpen={showBusinessModal}
                 onClose={() => setShowBusinessModal(false)}
@@ -299,284 +301,199 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                 itineraryId={itineraryId}
             />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-12 sm:mb-16">
-                <div className="flex items-center gap-4">
-                    <div className="relative">
-                        <div className="w-2 h-10 bg-ai-accent rounded-full" />
-                        <div className="absolute inset-0 w-2 h-10 bg-ai-accent rounded-full blur-md opacity-50" />
-                    </div>
-                    <div>
-                        <h2 className="text-2xl sm:text-4xl font-black text-ai-text tracking-tight">AI Generated Plan</h2>
-                        <p className="text-xs text-ai-muted uppercase tracking-[0.3em] mt-1">Curated Himalayan Experience</p>
+            {/* ── Header ── */}
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 mb-10">
+                <div>
+                    <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-ai-muted mb-2">Your Sikkim Itinerary</p>
+                    <h2 className="text-3xl sm:text-5xl text-ai-text leading-tight" style={{ fontWeight: 600 }}>
+                        {data.days.length}-Day<br />
+                        <em className="not-italic" style={{ color: '#2f4a3a' }}>Himalayan Journey</em>
+                    </h2>
+                    {/* Trip stats */}
+                    <div className="flex items-center gap-5 mt-4">
+                        <div className="flex items-center gap-2 text-ai-muted text-sm">
+                            <Calendar className="w-4 h-4" />
+                            <span>{data.days.length} days</span>
+                        </div>
+                        <div className="w-px h-4 bg-black/10" />
+                        <div className="flex items-center gap-2 text-ai-muted text-sm">
+                            <MapPin className="w-4 h-4" />
+                            <span>{totalActivities} activities</span>
+                        </div>
+                        <div className="w-px h-4 bg-black/10" />
+                        <div className="flex items-center gap-2 text-ai-muted text-sm">
+                            <Navigation className="w-4 h-4" />
+                            <span>Sikkim, India</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
-                    {canEdit && (
+                {/* Actions */}
+                <div className="flex flex-wrap gap-2 shrink-0">
+                    {canEdit && !isEditing && (
+                        <button onClick={() => setIsEditing(true)}
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-ai-text text-sm font-medium hover:border-ai-accent hover:text-ai-accent transition-all bg-white">
+                            <Edit2 className="w-4 h-4" /><span>Edit</span>
+                        </button>
+                    )}
+                    {isEditing && (
                         <>
-                            {isEditing ? (
-                                <>
-                                    <button
-                                        onClick={handleCancel}
-                                        disabled={isSaving}
-                                        className="flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/5 border border-black/10 rounded-lg text-ai-text text-sm font-medium transition-all disabled:opacity-50"
-                                    >
-                                        <X className="w-4 h-4" />
-                                        <span>Cancel</span>
-                                    </button>
-                                    <button
-                                        onClick={handleSave}
-                                        disabled={isSaving}
-                                        className="flex items-center gap-2 px-4 py-2 bg-ai-accent hover:bg-ai-secondary border border-ai-accent rounded-lg text-white text-sm font-medium transition-all disabled:opacity-50"
-                                    >
-                                        {isSaving ? (
-                                            <>
-                                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                                <span>Saving...</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <Save className="w-4 h-4" />
-                                                <span>Save Changes</span>
-                                            </>
-                                        )}
-                                    </button>
-                                </>
-                            ) : (
-                                <button
-                                    onClick={() => setIsEditing(true)}
-                                    className="flex items-center gap-2 px-4 py-2 bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-accent text-sm font-medium transition-all"
-                                >
-                                    <Edit2 className="w-4 h-4" />
-                                    <span>Edit</span>
-                                </button>
-                            )}
+                            <button onClick={handleCancel} disabled={isSaving}
+                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-ai-text text-sm font-medium bg-white transition-all disabled:opacity-50">
+                                <X className="w-4 h-4" /><span>Cancel</span>
+                            </button>
+                            <button onClick={handleSave} disabled={isSaving}
+                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-sm font-medium transition-all disabled:opacity-50"
+                                style={{ background: '#2f4a3a' }}>
+                                {isSaving ? <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <Save className="w-4 h-4" />}
+                                <span>{isSaving ? 'Saving…' : 'Save'}</span>
+                            </button>
                         </>
                     )}
-                    <button
-                        onClick={() => setShowBusinessModal(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-accent text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
-                    >
-                        <Briefcase className="w-4 h-4" />
-                        <span>Share as Business</span>
+                    <button onClick={() => setShowBusinessModal(true)}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-ai-text text-sm font-medium hover:border-ai-accent hover:text-ai-accent transition-all bg-white whitespace-nowrap">
+                        <Briefcase className="w-4 h-4" /><span>Share as Business</span>
                     </button>
-
-                    <button
-                        onClick={shareLink}
-                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-text text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
-                    >
-                        {shared ? (
-                            <>
-                                <Check className="w-4 h-4 text-ai-accent" />
-                                <span className="text-ai-accent">Copied!</span>
-                            </>
-                        ) : (
-                            <>
-                                <LinkIcon className="w-4 h-4 group-hover:text-ai-accent transition-colors" />
-                                <span>Share</span>
-                            </>
-                        )}
+                    <button onClick={shareLink}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap"
+                        style={shared ? { color: '#2f4a3a', borderColor: '#2f4a3a' } : { color: '#0e1116' }}>
+                        {shared ? <Check className="w-4 h-4" /> : <LinkIcon className="w-4 h-4" />}
+                        <span>{shared ? 'Copied!' : 'Share'}</span>
                     </button>
-
-                    <button
-                        onClick={copyToClipboard}
-                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-text text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
-                    >
-                        {copied ? (
-                            <>
-                                <Check className="w-4 h-4 text-ai-accent" />
-                                <span className="text-ai-accent">Copied!</span>
-                            </>
-                        ) : (
-                            <>
-                                <Copy className="w-4 h-4 group-hover:text-ai-accent transition-colors" />
-                                <span>Copy Text</span>
-                            </>
-                        )}
+                    <button onClick={copyToClipboard}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap"
+                        style={copied ? { color: '#2f4a3a', borderColor: '#2f4a3a' } : { color: '#0e1116' }}>
+                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                        <span>{copied ? 'Copied!' : 'Copy Text'}</span>
                     </button>
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-8 relative">
-                {/* Left Column: Itinerary Details */}
-                {/* Left Column: Itinerary Details */}
-                <motion.div
-                    className="space-y-6 sm:space-y-12 order-1 lg:order-1 pb-20"
-                    initial="hidden"
-                    animate="visible"
-                    variants={{
-                        visible: {
-                            transition: {
-                                staggerChildren: 0.15
+            {/* ── Sticky Day Tabs ── */}
+            <div className="sticky top-0 z-30 bg-ai-dark/90 backdrop-blur-md border-b border-black/8 -mx-4 px-4 mb-8" style={{ backdropFilter: 'blur(12px)' }}>
+                <div className="flex gap-1 overflow-x-auto no-scrollbar py-3">
+                    {displayData.days.map((day) => (
+                        <button
+                            key={day.day}
+                            onClick={() => {
+                                setActiveDay(day.day);
+                                dayRefs.current.get(day.day)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }}
+                            className="flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition-all"
+                            style={activeDay === day.day
+                                ? { background: '#2f4a3a', color: '#f6f1e7' }
+                                : { background: 'transparent', color: '#6b7280', border: '1px solid rgba(0,0,0,0.1)' }
                             }
-                        }
-                    }}
-                >
+                        >
+                            Day {day.day}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="grid lg:grid-cols-[1fr_420px] gap-8 relative">
+                {/* ── Left: Days ── */}
+                <motion.div className="space-y-16 pb-24" initial="hidden" animate="visible"
+                    variants={{ visible: { transition: { staggerChildren: 0.12 } } }}>
                     {displayData.days.map((day, dayIndex) => (
                         <motion.section
                             key={day.day}
-                            ref={(el) => {
-                                if (el) {
-                                    dayRefs.current.set(day.day, el);
-                                } else {
-                                    dayRefs.current.delete(day.day);
-                                }
-                            }}
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                visible: { opacity: 1, y: 0 }
-                            }}
-                            itemScope
-                            itemType="https://schema.org/TouristDestination"
-                            className={`relative pl-8 sm:pl-12 md:pl-16 border-l transition-all duration-700 ${activeDay === day.day ? 'border-ai-accent' : 'border-black/10'}`}
+                            ref={(el) => { if (el) dayRefs.current.set(day.day, el); else dayRefs.current.delete(day.day); }}
+                            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+                            itemScope itemType="https://schema.org/TouristDestination"
                             onMouseEnter={() => !isEditing && setActiveDay(day.day)}
-                            onClick={() => !isEditing && setActiveDay(day.day)}
                         >
-                            {/* Animated Timeline Point */}
-                            <div className="absolute -left-[1px] top-0 h-full w-[2px] overflow-hidden">
-                                <motion.div
-                                    className="w-full h-full bg-ai-accent"
-                                    initial={{ y: "-100%" }}
-                                    animate={{ y: activeDay === day.day ? "0%" : "-100%" }}
-                                    transition={{ duration: 0.8, ease: "circOut" }}
-                                />
+                            {/* Day header */}
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="flex items-center justify-center w-12 h-12 rounded-2xl text-white text-sm font-bold shrink-0"
+                                    style={{ background: activeDay === day.day ? '#2f4a3a' : '#e8e3da' }}>
+                                    <span style={{ color: activeDay === day.day ? '#f6f1e7' : '#6b7280' }}>{day.day}</span>
+                                </div>
+                                <div className="flex-1">
+                                    {isEditing ? (
+                                        <input type="text" value={day.title}
+                                            onChange={(e) => updateDay(dayIndex, { ...day, title: e.target.value })}
+                                            className="w-full bg-white border border-black/10 rounded-xl px-4 py-2 text-xl text-ai-text font-semibold focus:outline-none focus:border-ai-accent" />
+                                    ) : (
+                                        <h3 className="text-xl sm:text-2xl text-ai-text font-semibold leading-snug" itemProp="name">{day.title}</h3>
+                                    )}
+                                    <p className="text-xs text-ai-muted mt-0.5">{day.activities.length} activities</p>
+                                </div>
                             </div>
 
-                            <div className={`absolute -left-[6px] top-0 w-3 h-3 rounded-full transition-all duration-500 z-10 ${activeDay === day.day ? 'bg-ai-accent scale-150 shadow-[0_0_20px_#00f2ff]' : 'bg-black/20'}`} />
-
-                            <div className="mb-8">
-                                <h3 className="text-2xl sm:text-4xl font-black text-ai-text mb-3 flex items-center gap-6" itemProp="name">
-                                    <div className={`flex items-center gap-2 px-5 py-2 rounded-xl transition-all duration-500 ${activeDay === day.day ? 'bg-ai-accent text-ai-dark shadow-[0_10px_30px_rgba(0,242,255,0.2)]' : 'bg-white/5 text-ai-muted grayscale'}`}>
-                                        <Calendar className="w-4 h-4" />
-                                        <span className="text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Day {day.day}</span>
-                                    </div>
-                                    <span className={`transition-all duration-500 flex-1 ${activeDay === day.day ? 'opacity-100 translate-x-0' : 'opacity-40 -translate-x-4'}`}>
-                                        {isEditing ? (
-                                            <input
-                                                type="text"
-                                                value={day.title}
-                                                onChange={(e) => updateDay(dayIndex, { ...day, title: e.target.value })}
-                                                className="w-full bg-black/5 border-b border-black/10 rounded-none px-0 py-2 text-ai-text focus:outline-none focus:border-ai-accent"
-                                            />
-                                        ) : (
-                                            day.title
-                                        )}
-                                    </span>
-                                </h3>
-                            </div>
-
-                            <motion.div
-                                className="space-y-4"
-                                variants={{
-                                    visible: {
-                                        transition: {
-                                            staggerChildren: 0.1
-                                        }
-                                    }
-                                }}
-                            >
+                            {/* Activities */}
+                            <div className="space-y-4 pl-4 border-l-2 ml-6" style={{ borderColor: activeDay === day.day ? '#2f4a3a' : '#e8e3da' }}>
                                 {day.activities.map((activity, activityIndex) => (
                                     <motion.div
                                         key={activityIndex}
-                                        itemScope
-                                        itemType="https://schema.org/TouristAttraction"
-                                        className={`group relative p-6 sm:p-10 rounded-[2.5rem] transition-all duration-700 overflow-hidden ${activeDay === day.day ? 'bg-black/[0.03] border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)]' : 'bg-transparent border border-transparent opacity-30 scale-[0.98]'}`}
-                                        variants={{
-                                            hidden: { opacity: 0, scale: 0.95 },
-                                            visible: { opacity: 1, scale: 1 }
-                                        }}
-                                        whileHover={activeDay === day.day ? { y: -8, backgroundColor: 'rgba(0, 0, 0, 0.03)', borderColor: 'rgba(0, 0, 0, 0.15)' } : {}}
+                                        itemScope itemType="https://schema.org/TouristAttraction"
+                                        className="group relative bg-white rounded-2xl border border-black/8 p-5 transition-all duration-300 hover:shadow-md hover:border-black/15 overflow-hidden"
+                                        variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
                                     >
-                                        {/* Stylized Badge for Activity Index */}
-                                        <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
-                                            <span className="text-[6rem] font-black leading-none select-none italic text-ai-text">{activityIndex + 1}</span>
-                                        </div>
+                                        {/* Activity number watermark */}
+                                        <span className="absolute top-3 right-4 text-5xl font-black text-black/[0.04] select-none leading-none italic">
+                                            {activityIndex + 1}
+                                        </span>
 
                                         {isEditing ? (
-                                            <div className="space-y-6 relative z-10">
-                                                <input
-                                                    type="text"
-                                                    value={activity.title}
+                                            <div className="space-y-4">
+                                                <input type="text" value={activity.title}
                                                     onChange={(e) => updateActivity(dayIndex, activityIndex, 'title', e.target.value)}
-                                                    className="w-full bg-black/5 border border-black/10 rounded-2xl px-5 py-4 text-2xl text-ai-text font-black focus:outline-none focus:border-ai-accent"
-                                                    placeholder="Activity title"
-                                                />
-                                                <div className="grid sm:grid-cols-2 gap-4">
-                                                    <div className="flex items-center gap-3 bg-black/10 p-4 rounded-2xl border border-black/10">
-                                                        <Clock className="w-5 h-5 text-ai-accent" />
-                                                        <input
-                                                            type="text"
-                                                            value={activity.time}
+                                                    className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-lg text-ai-text font-semibold focus:outline-none focus:border-ai-accent" />
+                                                <div className="grid sm:grid-cols-2 gap-3">
+                                                    <div className="flex items-center gap-2 bg-black/5 px-4 py-2.5 rounded-xl border border-black/10">
+                                                        <Clock className="w-4 h-4 text-ai-accent shrink-0" />
+                                                        <input type="text" value={activity.time}
                                                             onChange={(e) => updateActivity(dayIndex, activityIndex, 'time', e.target.value)}
-                                                            className="flex-1 bg-transparent text-sm text-gray-200 focus:outline-none"
-                                                            placeholder="09:00 AM"
-                                                        />
+                                                            className="flex-1 bg-transparent text-sm text-ai-text focus:outline-none" placeholder="09:00 AM" />
                                                     </div>
-                                                    <div className="flex items-center gap-3 bg-black/10 p-4 rounded-2xl border border-black/10">
-                                                        <MapPin className="w-5 h-5 text-ai-accent" />
-                                                        <input
-                                                            type="text"
-                                                            value={activity.location}
+                                                    <div className="flex items-center gap-2 bg-black/5 px-4 py-2.5 rounded-xl border border-black/10">
+                                                        <MapPin className="w-4 h-4 text-ai-accent shrink-0" />
+                                                        <input type="text" value={activity.location}
                                                             onChange={(e) => updateActivity(dayIndex, activityIndex, 'location', e.target.value)}
-                                                            className="flex-1 bg-transparent text-sm text-gray-200 focus:outline-none"
-                                                            placeholder="Location"
-                                                        />
+                                                            className="flex-1 bg-transparent text-sm text-ai-text focus:outline-none" placeholder="Location" />
                                                     </div>
                                                 </div>
-                                                <textarea
-                                                    value={activity.description}
+                                                <textarea value={activity.description}
                                                     onChange={(e) => updateActivity(dayIndex, activityIndex, 'description', e.target.value)}
-                                                    className="w-full bg-black/5 border border-black/10 rounded-[2rem] px-6 py-6 text-base text-gray-600 focus:outline-none focus:border-ai-accent resize-y min-h-[160px]"
-                                                    placeholder="Describe the magical experience..."
-                                                />
+                                                    className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-sm text-ai-text focus:outline-none focus:border-ai-accent resize-y min-h-[100px]" />
                                             </div>
                                         ) : (
-                                            <div className="relative z-10">
-                                                <div className="flex flex-col gap-6 mb-8">
-                                                    <h4 className="font-black text-2xl sm:text-4xl text-ai-text group-hover:text-ai-accent transition-all duration-500 leading-[1.1]" itemProp="name">
-                                                        {activity.title}
-                                                    </h4>
-
-                                                    <div className="flex flex-wrap items-center gap-4">
-                                                        <div className="flex items-center gap-3 bg-ai-accent/10 px-4 py-2 rounded-full border border-ai-accent/20 backdrop-blur-md">
-                                                            <div className="w-1.5 h-1.5 rounded-full bg-ai-accent animate-pulse" />
-                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-ai-accent">{activity.time}</span>
-                                                        </div>
-                                                        <div className="flex items-center gap-3 bg-black/5 px-4 py-2 rounded-full border border-black/10 backdrop-blur-md">
-                                                            <MapPin className="w-3.5 h-3.5 text-black/40" aria-hidden="true" />
-                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-black/60">{activity.location}</span>
-                                                        </div>
-                                                    </div>
+                                            <div>
+                                                <h4 className="text-lg font-semibold text-ai-text mb-3 leading-snug pr-8" itemProp="name">
+                                                    {activity.title}
+                                                </h4>
+                                                <div className="flex flex-wrap gap-2 mb-3">
+                                                    <span className="flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full" style={{ background: 'rgba(47,74,58,0.1)', color: '#2f4a3a' }}>
+                                                        <Clock className="w-3 h-3" />{activity.time}
+                                                    </span>
+                                                    <span className="flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full bg-black/5 text-ai-muted">
+                                                        <MapPin className="w-3 h-3" />{activity.location}
+                                                    </span>
                                                 </div>
-                                                <p className="text-gray-400 text-lg sm:text-xl leading-relaxed font-medium max-w-2xl" itemProp="description">
-                                                    {activity.description}
-                                                </p>
+                                                <p className="text-sm text-ai-muted leading-relaxed" itemProp="description">{activity.description}</p>
                                             </div>
                                         )}
                                     </motion.div>
                                 ))}
-                            </motion.div>
+                            </div>
                         </motion.section>
                     ))}
+
+                    {/* Book flights CTA */}
+                    <a href="https://www.google.com/travel/flights?q=flights+to+Bagdogra" target="_blank" rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-sm font-semibold text-white transition-all hover:opacity-90"
+                        style={{ background: '#2f4a3a' }}>
+                        <Navigation className="w-4 h-4" />
+                        Book Flights to Bagdogra (NJP)
+                    </a>
                 </motion.div>
 
-                {/* Right Column: Interactive Map */}
-                <div className="lg:order-2 lg:h-[calc(100vh-120px)] lg:sticky lg:top-24 h-[400px] sm:h-[500px]">
+                {/* ── Right: Map ── */}
+                <div className="lg:sticky lg:top-24 h-[420px] lg:h-[calc(100vh-130px)] rounded-2xl overflow-hidden border border-black/10">
                     <ItineraryMap routeData={routeData || { days: [] }} selectedDay={activeDay} />
                 </div>
             </div>
-
-            <div className="mt-6 sm:mt-8 flex justify-center px-4">
-                <a
-                    href="https://www.google.com/travel/flights?q=flights+to+Bagdogra"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-ai-secondary hover:bg-ai-secondary/80 rounded-full text-white text-sm sm:text-base font-bold transition-all hover:scale-105 w-full sm:w-auto justify-center"
-                >
-                    <Navigation className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-                    <span className="whitespace-nowrap">Book Flights to Bagdogra</span>
-                </a>
-            </div>
-        </article >
+        </article>
     );
 };

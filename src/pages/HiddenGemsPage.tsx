@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, X } from 'lucide-react';
 import { SEO_TOPICS, type SeoTopic } from '../data/seoTopics';
+import { apiClient } from '../services/api';
+import type { GuidePost } from '../services/api';
 
 const CATEGORY_COLOR: Record<string, string> = {
     Offbeat:      '#d97a2c',
@@ -17,10 +19,30 @@ const CATEGORY_COLOR: Record<string, string> = {
     Logistics:    '#6b7280',
 };
 
+// Normalise both source shapes into one unified type
+type SlideItem = { id: string; title: string; shortDescription: string; category: string; image: string };
+
+function toSlide(item: SeoTopic | GuidePost): SlideItem {
+    if ('_id' in item) {
+        return { id: item.slug, title: item.title, shortDescription: item.shortDescription, category: item.category, image: item.image };
+    }
+    return { id: item.id, title: item.title, shortDescription: item.shortDescription, category: item.category, image: item.image };
+}
+
 export function HiddenGemsPage() {
     const navigate = useNavigate();
     const scrollRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [slides, setSlides] = useState<SlideItem[]>(SEO_TOPICS.map(toSlide));
+
+    // Fetch from backend; use static data as instant fallback
+    useEffect(() => {
+        apiClient.getPublishedGuides()
+            .then(res => {
+                if (res.data.guides.length > 0) setSlides(res.data.guides.map(toSlide));
+            })
+            .catch(() => {}); // keep static fallback silently
+    }, []);
 
     useEffect(() => {
         const el = scrollRef.current;
@@ -38,7 +60,7 @@ export function HiddenGemsPage() {
         <div className="fixed inset-0 bg-[#0e1116]">
             {/* Close button */}
             <button
-                onClick={() => navigate('/')}
+                onClick={() => navigate(-1 as any)}
                 className="fixed top-6 left-6 z-50 p-2.5 rounded-full transition-all"
                 style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)' }}
             >
@@ -47,7 +69,7 @@ export function HiddenGemsPage() {
 
             {/* Slide counter */}
             <div className="fixed top-6 right-6 z-50 text-white/30 text-xs font-mono tracking-widest">
-                {String(activeIndex + 1).padStart(2, '0')} / {String(SEO_TOPICS.length).padStart(2, '0')}
+                {String(activeIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
             </div>
 
             {/* Scroll reel */}
@@ -56,19 +78,19 @@ export function HiddenGemsPage() {
                 className="h-full overflow-y-scroll no-scrollbar"
                 style={{ scrollSnapType: 'y mandatory' }}
             >
-                {SEO_TOPICS.map((topic, i) => (
+                {slides.map((slide, i) => (
                     <Slide
-                        key={topic.id}
-                        topic={topic}
+                        key={slide.id}
+                        topic={slide}
                         isActive={activeIndex === i}
-                        onReadGuide={() => navigate(`/guide/${topic.id}`)}
+                        onReadGuide={() => navigate(`/guide/${slide.id}`)}
                     />
                 ))}
             </div>
 
             {/* Right-side progress dots */}
             <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2.5">
-                {SEO_TOPICS.map((_, i) => (
+                {slides.map((_, i) => (
                     <button
                         key={i}
                         onClick={() => goTo(i)}
@@ -89,7 +111,7 @@ export function HiddenGemsPage() {
     );
 }
 
-function Slide({ topic, isActive, onReadGuide }: { topic: SeoTopic; isActive: boolean; onReadGuide: () => void }) {
+function Slide({ topic, isActive, onReadGuide }: { topic: SlideItem; isActive: boolean; onReadGuide: () => void }) {
     const catColor = CATEGORY_COLOR[topic.category] || '#2f4a3a';
 
     return (

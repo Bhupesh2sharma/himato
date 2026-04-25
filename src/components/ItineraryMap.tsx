@@ -149,7 +149,7 @@ function decodePolyline(encoded: string): google.maps.LatLngLiteral[] {
 
 // Create custom marker icon
 function createMarkerIcon(index: number): google.maps.Icon {
-    const color = "#00f2ff";
+    const color = "#2f4a3a";
     const svg = `
         <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -166,7 +166,7 @@ function createMarkerIcon(index: number): google.maps.Icon {
             <!-- Main Circle -->
             <circle cx="20" cy="20" r="10" fill="${color}" stroke="white" stroke-width="2"/>
             <!-- Inner Number -->
-            <text x="20" y="24" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="900" fill="black" text-anchor="middle">${index + 1}</text>
+            <text x="20" y="24" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="900" fill="white" text-anchor="middle">${index + 1}</text>
         </svg>
     `;
 
@@ -430,8 +430,8 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
 
     if (!GOOGLE_MAPS_API_KEY) {
         return (
-            <div className="h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-ai-accent/30 shadow-2xl flex items-center justify-center bg-ai-card">
-                <p className="text-ai-muted">Google Maps API key not configured</p>
+            <div className="h-full w-full rounded-2xl overflow-hidden border border-black/10 flex items-center justify-center bg-white">
+                <p className="text-ai-muted text-sm">Google Maps API key not configured</p>
             </div>
         );
     }
@@ -439,7 +439,7 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
     if (loadError) {
         const isApiKeyRestricted = loadError === 'API_KEY_RESTRICTED';
         return (
-            <div className="h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-ai-accent/30 shadow-2xl flex items-center justify-center bg-ai-card">
+            <div className="h-full w-full rounded-2xl overflow-hidden border border-black/10 flex items-center justify-center bg-white">
                 <div className="text-center max-w-md px-4">
                     <p className="text-red-400 mb-2 font-bold">Google Maps API Key Restricted</p>
                     {isApiKeyRestricted ? (
@@ -464,17 +464,17 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
     }
 
     return (
-        <div className="h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-ai-accent/30 shadow-2xl relative group">
+        <div className="h-full w-full rounded-2xl overflow-hidden relative">
             <LoadScript
                 googleMapsApiKey={GOOGLE_MAPS_API_KEY}
                 libraries={MAP_LIBRARIES}
                 onLoad={handleScriptLoad}
                 onError={handleScriptError}
                 loadingElement={
-                    <div className="h-full w-full flex items-center justify-center bg-ai-card">
+                    <div className="h-full w-full flex items-center justify-center" style={{ background: '#1a2535' }}>
                         <div className="text-center">
-                            <div className="w-12 h-12 border-4 border-ai-accent/20 border-t-ai-accent rounded-full animate-spin mx-auto mb-4"></div>
-                            <p className="text-ai-muted">Loading map...</p>
+                            <div className="w-10 h-10 border-4 border-white/10 border-t-white/60 rounded-full animate-spin mx-auto mb-3" />
+                            <p className="text-white/50 text-sm">Loading map…</p>
                         </div>
                     </div>
                 }
@@ -525,9 +525,9 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
 
                             // Highlight active day route with different styling
                             const isActiveDay = selectedDay === routeDay.day;
-                            const strokeColor = isActiveDay ? '#00f2ff' : '#00a0b0';
+                            const strokeColor = isActiveDay ? '#4a7a5e' : '#2f4a3a';
                             const strokeWeight = isActiveDay ? 6 : 3;
-                            const strokeOpacity = isActiveDay ? 1.0 : 0.6;
+                            const strokeOpacity = isActiveDay ? 1.0 : 0.5;
 
                             return (
                                 <Fragment key={`route-day-${routeDay.day}`}>
@@ -611,22 +611,18 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
                                                 <InfoWindow
                                                     onCloseClick={() => setSelectedMarker(null)}
                                                 >
-                                                    <div className="p-2 min-w-[200px] text-black">
-                                                        <div className="flex items-center gap-2 mb-2">
-                                                            <span className="bg-[#00f2ff] text-black text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-tighter">
+                                                    <div style={{ padding: '8px 4px 4px', minWidth: 180 }}>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                                                            <span style={{ background: '#2f4a3a', color: '#fff', fontSize: 9, fontWeight: 800, padding: '2px 8px', borderRadius: 20, textTransform: 'uppercase', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}>
                                                                 Day {routeDay.day}
                                                             </span>
-                                                            <h3 className="font-bold text-sm text-black">{stop.label}</h3>
                                                         </div>
+                                                        <p style={{ fontWeight: 700, fontSize: 13, color: '#0e1116', lineHeight: 1.3, margin: 0 }}>{stop.label}</p>
                                                         {routeDay.eta_minutes && index === routeDay.stops.length - 1 && (
-                                                            <div className="mt-2 pt-2 border-t border-gray-100">
-                                                                <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600">
-                                                                    <span>🚗 ETA: {routeDay.eta_minutes} min</span>
-                                                                </div>
+                                                            <div style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid #f0ede8' }}>
+                                                                <span style={{ fontSize: 11, color: '#2f4a3a', fontWeight: 600 }}>🚗 {routeDay.eta_minutes} min</span>
                                                                 {routeDay.total_distance_km && (
-                                                                    <p className="text-[10px] text-gray-400 mt-1">
-                                                                        Distance: {routeDay.total_distance_km} km
-                                                                    </p>
+                                                                    <span style={{ fontSize: 10, color: '#9ca3af', marginLeft: 8 }}>{routeDay.total_distance_km} km</span>
                                                                 )}
                                                             </div>
                                                         )}
@@ -649,15 +645,10 @@ export const ItineraryMap = ({ routeData, selectedDay }: ItineraryMapProps) => {
                 ) : null}
             </LoadScript>
 
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] z-[400]" />
-
             {/* Floating Label */}
-            <div className="absolute top-4 left-4 z-[400] bg-black/80 backdrop-blur border border-white/10 px-4 py-2 rounded-full flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-ai-accent animate-pulse" />
-                <span className="text-xs text-ai-accent font-medium tracking-wider uppercase">
-                    Interactive Route Map
-                </span>
+            <div className="absolute top-4 left-4 z-[400] backdrop-blur px-4 py-2 rounded-full flex items-center gap-2" style={{ background: 'rgba(14,17,22,0.75)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#4a7a5e' }} />
+                <span className="text-xs text-white/80 font-medium tracking-wider uppercase">Route Map</span>
             </div>
         </div>
     );

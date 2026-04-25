@@ -4,6 +4,19 @@ import { Sparkles, Send, MapPin, Check, Minus } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { ItineraryHistoryPreview } from './ItineraryHistoryPreview';
 
+const PLACEHOLDERS = [
+    "Where do the clouds touch the earth in Sikkim?",
+    "7 days. North Sikkim. Just mountains and me.",
+    "Find me a monastery lost in the morning mist…",
+    "I want to wake up above the clouds in Pelling.",
+    "Plan a family trip — kids, grandparents, no stress.",
+    "Take me somewhere that doesn't have WiFi.",
+    "Solo trek through Zuluk before the monsoon hits.",
+    "Help me find butter tea and a sunrise view.",
+    "Show me Sikkim the way locals see it.",
+    "Honeymoon in the Himalayas — surprise me.",
+];
+
 const SUGGESTIONS = [
     "Gangtok Nightlife", "Pelling Skywalk", "Lachung Valley", "Lachen Monastery",
     "Yumthang Valley of Flowers", "Gurudongmar Lake", "Nathula Pass Adventure",
@@ -31,6 +44,8 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const [isBusiness, setIsBusiness] = useState(false);
     const [suggestions, setSuggestions] = useState<string[]>([]);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [placeholderIndex, setPlaceholderIndex] = useState(0);
+    const [placeholderVisible, setPlaceholderVisible] = useState(true);
 
     const [localIsSubmitting, setLocalIsSubmitting] = useState(false);
 
@@ -42,6 +57,17 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
 
     useEffect(() => {
         setSuggestions([...SUGGESTIONS].sort(() => 0.5 - Math.random()).slice(0, 3));
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setPlaceholderVisible(false);
+            setTimeout(() => {
+                setPlaceholderIndex(i => (i + 1) % PLACEHOLDERS.length);
+                setPlaceholderVisible(true);
+            }, 350);
+        }, 3200);
+        return () => clearInterval(interval);
     }, []);
 
     const handleSearch = () => {
@@ -84,20 +110,21 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                     className="relative max-w-2xl mx-auto"
                 >
                     <div className={`glass p-2 rounded-2xl flex items-center gap-2 transition-all duration-300 mb-6 ${error ? 'border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.2)]' : 'focus-within:border-ai-accent/50'}`}>
-                        <MapPin className={`w-6 h-6 ml-3 ${error ? 'text-amber-400' : 'text-ai-muted'}`} />
+                        <MapPin className={`w-6 h-6 ml-3 shrink-0 ${error ? 'text-amber-400' : 'text-ai-muted'}`} />
                         <input
                             type="text"
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                            placeholder="Plan your Sikkim tourism trip (e.g., '7 days Sikkim tourism package in North Sikkim with monastery visits')..."
-                            className="flex-1 bg-transparent border-none outline-none text-ai-text placeholder-ai-muted p-2"
+                            placeholder={PLACEHOLDERS[placeholderIndex]}
+                            className="flex-1 bg-transparent border-none outline-none text-ai-text p-2 transition-opacity duration-300 min-w-0"
+                            style={{ opacity: placeholderVisible ? 1 : 0 }}
                             disabled={isSearching || localIsSubmitting}
                         />
                         <button
                             onClick={handleSearch}
                             disabled={isSearching || localIsSubmitting}
-                            className={`p-3 rounded-xl transition-colors disabled:opacity-50 ${error ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400' : 'bg-ai-accent/10 hover:bg-ai-accent/20 text-ai-accent'}`}
+                            className={`p-3 rounded-xl transition-colors disabled:opacity-50 shrink-0 ${error ? 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-400' : 'bg-ai-accent/10 hover:bg-ai-accent/20 text-ai-accent'}`}
                         >
                             {isSearching ? <div className={`w-5 h-5 border-2 border-t-transparent rounded-full animate-spin ${error ? 'border-amber-400' : 'border-ai-accent'}`} /> : <Send className="w-5 h-5" />}
                         </button>
@@ -168,6 +195,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             >
                                 {isExpanded ? "Show Less" : "+30 Locations"}
                             </button>
+
                         </motion.div>
                     </div>
                     
