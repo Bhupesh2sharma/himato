@@ -2,23 +2,42 @@ import { motion } from 'framer-motion';
 import { MapPin, TrendingUp } from 'lucide-react';
 
 interface Destination {
-    id: number;
     name: string;
     bookings: number;
     growth: string;
     color: string;
 }
 
-const destinations: Destination[] = [
-    { id: 1, name: 'Gangtok', bookings: 45, growth: '+15%', color: 'from-blue-500 to-cyan-500' },
-    { id: 2, name: 'Pelling', bookings: 32, growth: '+22%', color: 'from-purple-500 to-pink-500' },
-    { id: 3, name: 'Lachung', bookings: 28, growth: '+8%', color: 'from-emerald-500 to-teal-500' },
-    { id: 4, name: 'Yuksom', bookings: 21, growth: '+12%', color: 'from-orange-500 to-amber-500' },
-    { id: 5, name: 'Ravangla', bookings: 18, growth: '+18%', color: 'from-indigo-500 to-blue-500' },
+interface PopularDestinationsProps {
+    data?: any[]; // Usually bookings
+}
+
+const COLORS = [
+    'from-blue-500 to-cyan-500',
+    'from-purple-500 to-pink-500',
+    'from-emerald-500 to-teal-500',
+    'from-orange-500 to-amber-500',
+    'from-indigo-500 to-blue-500'
 ];
 
-export const PopularDestinations = () => {
-    const maxBookings = Math.max(...destinations.map(d => d.bookings));
+export const PopularDestinations = ({ data = [] }: PopularDestinationsProps) => {
+    // Aggregate bookings by destination
+    const aggregated = data.reduce((acc: any, curr: any) => {
+        acc[curr.destination] = (acc[curr.destination] || 0) + 1;
+        return acc;
+    }, {});
+
+    const destinations: Destination[] = Object.entries(aggregated)
+        .map(([name, count], index) => ({
+            name,
+            bookings: count as number,
+            growth: '+100%', // Calculated growth could be added later
+            color: COLORS[index % COLORS.length]
+        }))
+        .sort((a, b) => b.bookings - a.bookings)
+        .slice(0, 5);
+
+    const maxBookings = destinations.length > 0 ? Math.max(...destinations.map(d => d.bookings)) : 0;
 
     return (
         <motion.div
@@ -38,12 +57,12 @@ export const PopularDestinations = () => {
             </div>
 
             <div className="space-y-4">
-                {destinations.map((destination, index) => {
+                {destinations.length > 0 ? destinations.map((destination, index) => {
                     const widthPercent = (destination.bookings / maxBookings) * 100;
 
                     return (
                         <motion.div
-                            key={destination.id}
+                            key={destination.name}
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
@@ -78,7 +97,11 @@ export const PopularDestinations = () => {
                             </div>
                         </motion.div>
                     );
-                })}
+                }) : (
+                    <div className="py-12 text-center">
+                        <p className="text-ai-muted text-sm">No destination data yet.</p>
+                    </div>
+                )}
             </div>
 
             {/* View all link */}

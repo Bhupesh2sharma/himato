@@ -9,30 +9,29 @@ interface DataPoint {
     value: number;
 }
 
-const mockData: DataPoint[] = [
-    { month: 'Jan', value: 45000 },
-    { month: 'Feb', value: 52000 },
-    { month: 'Mar', value: 48000 },
-    { month: 'Apr', value: 61000 },
-    { month: 'May', value: 72000 },
-    { month: 'Jun', value: 85000 },
-    { month: 'Jul', value: 95000 },
-];
+interface RevenueChartProps {
+    data?: DataPoint[];
+}
 
-export const RevenueChart = () => {
-    const [animatedData, setAnimatedData] = useState<DataPoint[]>(
-        mockData.map(d => ({ ...d, value: 0 }))
-    );
+export const RevenueChart = ({ data = [] }: RevenueChartProps) => {
+    const [animatedData, setAnimatedData] = useState<DataPoint[]>([]);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setAnimatedData(mockData);
-        }, 500);
+        if (data && data.length > 0) {
+            // Initially set to 0 for animation transition if needed, 
+            // but for simplicity setting directly now
+            setAnimatedData(data);
+        }
+    }, [data]);
 
-        return () => clearTimeout(timer);
-    }, []);
+    const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 0;
+    const avgMonthly = data.length > 0 ? data.reduce((sum, d) => sum + d.value, 0) / data.length : 0;
+    const peakMonth = data.length > 0 ? [...data].sort((a, b) => b.value - a.value)[0] : null;
 
-    const maxValue = Math.max(...mockData.map(d => d.value));
+    // Growth rate between first and last month shown
+    const growthRate = (data.length > 1 && data[0].value > 0)
+        ? ((data[data.length - 1].value - data[0].value) / data[0].value) * 100
+        : 0;
 
     return (
         <motion.div
@@ -52,9 +51,13 @@ export const RevenueChart = () => {
                     </div>
                 </div>
 
-                <div className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                    <span className="text-emerald-400 text-sm font-medium">+23.5%</span>
-                </div>
+                {growthRate !== 0 && (
+                    <div className={`px-3 py-1.5 rounded-lg ${growthRate >= 0 ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-red-500/10 border-red-500/20'}`}>
+                        <span className={`${growthRate >= 0 ? 'text-emerald-400' : 'text-red-400'} text-sm font-medium`}>
+                            {growthRate >= 0 ? '+' : ''}{growthRate.toFixed(1)}%
+                        </span>
+                    </div>
+                )}
             </div>
 
             {/* Chart */}
@@ -118,7 +121,9 @@ export const RevenueChart = () => {
                 </div>
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Growth Rate</p>
-                    <p className="text-emerald-400 font-semibold">+23.5%</p>
+                    <p className={`${growthRate >= 0 ? 'text-emerald-400' : 'text-red-400'} font-semibold`}>
+                        {growthRate >= 0 ? '+' : ''}{growthRate.toFixed(1)}%
+                    </p>
                 </div>
             </div>
         </motion.div>

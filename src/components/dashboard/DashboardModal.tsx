@@ -12,19 +12,19 @@ export const DashboardModal = ({ isOpen, onClose, title, children }: ModalProps)
     return (
         <AnimatePresence>
             {isOpen && (
-                <>
+                <div className="fixed inset-0 z-[60] overflow-y-auto px-4 py-12 flex items-center justify-center">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+                        className="fixed inset-0 bg-black/80 backdrop-blur-md"
                     />
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[70] px-4"
+                        className="relative w-full max-w-lg z-[70]"
                     >
                         <div className="glass-card rounded-2xl overflow-hidden">
                             <div className="p-6 border-b border-black/10 flex items-center justify-between">
@@ -36,12 +36,12 @@ export const DashboardModal = ({ isOpen, onClose, title, children }: ModalProps)
                                     <X className="w-5 h-5" />
                                 </button>
                             </div>
-                            <div className="p-6">
+                            <div className="p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
                                 {children}
                             </div>
                         </div>
                     </motion.div>
-                </>
+                </div>
             )}
         </AnimatePresence>
     );
