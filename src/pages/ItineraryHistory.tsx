@@ -88,18 +88,18 @@ export const ItineraryHistory = () => {
   }
 
   return (
-    <div className="min-h-screen bg-ai-dark text-white pt-24 pb-12">
+    <div className="min-h-screen bg-ai-dark text-ai-text pt-24 pb-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-ai-muted hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-ai-muted hover:text-ai-text mb-8 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Home
         </Link>
 
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-accent">
+          <h1 className="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-accent">
             My Itineraries
           </h1>
           <p className="text-ai-muted">Manage and view all your saved travel plans</p>
@@ -113,10 +113,10 @@ export const ItineraryHistory = () => {
                 className="glass rounded-xl p-5 animate-pulse"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/10 rounded-lg" />
+                  <div className="w-10 h-10 bg-black/5 rounded-lg" />
                   <div className="flex-1">
-                    <div className="h-4 bg-white/10 rounded mb-2 w-3/4" />
-                    <div className="h-3 bg-white/5 rounded w-1/2" />
+                    <div className="h-4 bg-black/5 rounded mb-2 w-3/4" />
+                    <div className="h-3 bg-black/5 rounded w-1/2" />
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export const ItineraryHistory = () => {
         ) : itineraries.length === 0 ? (
           <div className="text-center py-20">
             <Clock className="w-16 h-16 text-ai-muted mx-auto mb-4 opacity-50" />
-            <h2 className="text-2xl font-semibold text-white mb-2">No Itineraries Yet</h2>
+            <h2 className="text-2xl font-semibold text-ai-text mb-2">No Itineraries Yet</h2>
             <p className="text-ai-muted mb-6">Start planning your Sikkim adventure!</p>
             <Link
               to="/"
@@ -176,7 +176,7 @@ export const ItineraryHistory = () => {
                               <Calendar className="w-3.5 h-3.5" />
                               <span>{formatDate(itinerary.createdAt)}</span>
                             </div>
-                            <span className="text-white/20">•</span>
+                            <span className="text-black/20">•</span>
                             <div className="flex items-center gap-1.5">
                               <Clock className="w-3.5 h-3.5" />
                               <span>{itinerary.itineraryData.days.length} {itinerary.itineraryData.days.length === 1 ? 'Day' : 'Days'}</span>

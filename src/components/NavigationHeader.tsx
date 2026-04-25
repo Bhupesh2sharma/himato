@@ -9,6 +9,7 @@ export const NavigationHeader = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const onDark = location.pathname === '/';
 
   // Don't show header on auth pages or terms page
   const hideHeader = location.pathname === '/login' ||
@@ -30,10 +31,10 @@ export const NavigationHeader = () => {
           {/* Logo/Home Link */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-accent hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 text-xl font-bold hover:opacity-80 transition-opacity"
           >
-            <Sparkles className="w-5 h-5 text-ai-accent" />
-            <span className="text-ai-accent">Himato</span>
+            <Sparkles className={`w-5 h-5 ${onDark ? 'text-white/80' : 'text-ai-accent'}`} />
+            <span className={onDark ? 'text-white' : 'text-ai-accent'}>Himato</span>
           </Link>
 
           {/* Auth Section */}
@@ -42,18 +43,18 @@ export const NavigationHeader = () => {
               <div className="relative">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl glass hover:bg-ai-card/50 transition-all"
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all ${onDark ? 'hover:bg-white/10' : 'glass hover:bg-white/90'}`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-ai-accent/20 flex items-center justify-center">
-                    <User className="w-4 h-4 text-ai-accent" />
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${onDark ? 'bg-white/20' : 'bg-ai-accent/20'}`}>
+                    <User className={`w-4 h-4 ${onDark ? 'text-white' : 'text-ai-accent'}`} />
                   </div>
-                  <span className="text-sm text-white hidden sm:block">
+                  <span className={`text-sm hidden sm:block ${onDark ? 'text-white/90' : 'text-ai-text'}`}>
                     {user?.name.split(' ')[0] || 'User'}
                   </span>
                   {user?.business && (
-                    <Building2 className="w-4 h-4 text-ai-accent hidden sm:block" />
+                    <Building2 className={`w-4 h-4 hidden sm:block ${onDark ? 'text-white/70' : 'text-ai-accent'}`} />
                   )}
-                  <ChevronDown className={`w-4 h-4 text-ai-muted transition-transform ${showUserMenu ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-4 h-4 transition-transform ${onDark ? 'text-white/60' : 'text-ai-muted'} ${showUserMenu ? 'rotate-180' : ''}`} />
                 </button>
 
                 <AnimatePresence>
@@ -67,10 +68,10 @@ export const NavigationHeader = () => {
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="absolute right-0 mt-2 w-64 glass rounded-xl border border-white/10 p-2 z-20"
+                        className="absolute right-0 mt-2 w-64 glass rounded-xl border border-black/10 p-2 z-20"
                       >
-                        <div className="px-4 py-3 border-b border-white/10">
-                          <p className="text-white font-medium text-sm">{user?.name}</p>
+                        <div className="px-4 py-3 border-b border-black/10">
+                          <p className="text-ai-text font-medium text-sm">{user?.name}</p>
                           <p className="text-ai-muted text-xs mt-1">{user?.email}</p>
                           {user?.business && user?.businessName && (
                             <div className="flex items-center gap-2 mt-2">
@@ -92,14 +93,14 @@ export const NavigationHeader = () => {
                         <Link
                           to="/history"
                           onClick={() => setShowUserMenu(false)}
-                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-white hover:bg-white/5 rounded-lg transition-colors text-sm"
+                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-text hover:bg-black/5 rounded-lg transition-colors text-sm"
                         >
                           <Clock className="w-4 h-4" />
                           My Itineraries
                         </Link>
                         <button
                           onClick={handleLogout}
-                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-200 hover:bg-red-500/10 rounded-lg transition-colors text-sm"
+                          className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-600 hover:bg-red-500/10 rounded-lg transition-colors text-sm"
                         >
                           <LogOut className="w-4 h-4" />
                           Sign Out
@@ -113,13 +114,13 @@ export const NavigationHeader = () => {
               <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-sm text-ai-muted hover:text-white transition-colors"
+                  className={`px-4 py-2 text-sm transition-colors ${onDark ? 'text-white/70 hover:text-white' : 'text-ai-muted hover:text-ai-text'}`}
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 text-sm bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent/50 text-ai-accent rounded-xl transition-all"
+                  className={`px-4 py-2 text-sm rounded-xl transition-all ${onDark ? 'bg-white/15 hover:bg-white/25 border border-white/30 text-white' : 'bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 text-ai-accent'}`}
                 >
                   Sign Up
                 </Link>

@@ -89,7 +89,7 @@ export const RecentActivity = () => {
                         <Activity className="w-5 h-5 text-ai-accent" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-white">Recent Activity</h2>
+                        <h2 className="text-xl font-bold text-ai-text">Recent Activity</h2>
                         <p className="text-sm text-ai-muted">Latest updates</p>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export const RecentActivity = () => {
 
                         {/* Content */}
                         <div className="flex-1 min-w-0">
-                            <h3 className="text-white font-medium text-sm mb-0.5 group-hover:text-ai-accent transition-colors">
+                            <h3 className="text-ai-text font-medium text-sm mb-0.5 group-hover:text-ai-accent transition-colors">
                                 {activity.title}
                             </h3>
                             <p className="text-ai-muted text-sm truncate">
@@ -133,7 +133,7 @@ export const RecentActivity = () => {
             </div>
 
             {/* Activity indicator */}
-            <div className="mt-6 pt-6 border-t border-white/10">
+            <div className="mt-6 pt-6 border-t border-black/10">
                 <div className="flex items-center justify-center gap-2 text-sm">
                     <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>

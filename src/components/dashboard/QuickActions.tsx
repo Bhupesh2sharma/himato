@@ -71,7 +71,7 @@ export const QuickActions = () => {
                 <div className="p-2 rounded-lg bg-ai-accent/10 border border-ai-accent/20">
                     <Sparkles className="w-5 h-5 text-ai-accent" />
                 </div>
-                <h2 className="text-xl font-bold text-white">Quick Actions</h2>
+                <h2 className="text-xl font-bold text-ai-text">Quick Actions</h2>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -83,7 +83,7 @@ export const QuickActions = () => {
                         transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
-                        className="group relative overflow-hidden bg-ai-card/50 hover:bg-ai-card/80 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all duration-300"
+                        className="group relative overflow-hidden bg-ai-card/50 hover:bg-ai-card/80 border border-black/10 hover:border-black/10 rounded-xl p-4 transition-all duration-300"
                     >
                         {/* Gradient background on hover */}
                         <div className={`absolute inset-0 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
@@ -93,7 +93,7 @@ export const QuickActions = () => {
                                 <action.icon className="w-6 h-6 text-white" />
                             </div>
 
-                            <h3 className="text-white font-semibold text-sm mb-1 group-hover:text-ai-accent transition-colors">
+                            <h3 className="text-ai-text font-semibold text-sm mb-1 group-hover:text-ai-accent transition-colors">
                                 {action.title}
                             </h3>
                             <p className="text-ai-muted text-xs">

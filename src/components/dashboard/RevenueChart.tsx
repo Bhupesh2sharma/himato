@@ -47,7 +47,7 @@ export const RevenueChart = () => {
                         <TrendingUp className="w-5 h-5 text-emerald-400" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-white">Revenue Overview</h2>
+                        <h2 className="text-xl font-bold text-ai-text">Revenue Overview</h2>
                         <p className="text-sm text-ai-muted">Last 7 months performance</p>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ export const RevenueChart = () => {
 
                                     {/* Value tooltip on hover */}
                                     <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-ai-dark/90 border border-ai-accent/30 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                                        <span className="text-white text-xs font-semibold">₹{(data.value / 1000).toFixed(0)}K</span>
+                                        <span className="text-ai-text text-xs font-semibold">₹{(data.value / 1000).toFixed(0)}K</span>
                                     </div>
                                 </motion.div>
 
@@ -101,20 +101,20 @@ export const RevenueChart = () => {
                 {/* Grid lines */}
                 <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
                     {[0, 1, 2, 3, 4].map((i) => (
-                        <div key={i} className="h-px bg-white/5"></div>
+                        <div key={i} className="h-px bg-black/5"></div>
                     ))}
                 </div>
             </div>
 
             {/* Summary */}
-            <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-3 gap-4">
+            <div className="mt-6 pt-6 border-t border-black/10 grid grid-cols-3 gap-4">
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Avg. Monthly</p>
-                    <p className="text-white font-semibold">₹65.4K</p>
+                    <p className="text-ai-text font-semibold">₹65.4K</p>
                 </div>
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Peak Month</p>
-                    <p className="text-white font-semibold">Jul (₹95K)</p>
+                    <p className="text-ai-text font-semibold">Jul (₹95K)</p>
                 </div>
                 <div>
                     <p className="text-ai-muted text-xs mb-1">Growth Rate</p>

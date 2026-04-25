@@ -67,13 +67,8 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass text-ai-accent text-sm font-mono">
-                        <Sparkles className="w-4 h-4" />
-                        <span>AI-POWERED SIKKIM TOURISM PLANNER</span>
-                    </div>
-
                     <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                        <span className="text-white">AI-Powered</span> <br />
+                        <span className="text-ai-text">AI-Powered</span> <br />
                         <span className="text-ai-accent text-glow">Travel Planner</span>
                     </h1>
 
@@ -96,7 +91,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             onChange={(e) => setPrompt(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                             placeholder="Plan your Sikkim tourism trip (e.g., '7 days Sikkim tourism package in North Sikkim with monastery visits')..."
-                            className="flex-1 bg-transparent border-none outline-none text-white placeholder-ai-muted p-2"
+                            className="flex-1 bg-transparent border-none outline-none text-ai-text placeholder-ai-muted p-2"
                             disabled={isSearching || localIsSubmitting}
                         />
                         <button
@@ -137,7 +132,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                     onChange={(e) => setIsBusiness(e.target.checked)}
                                     className="hidden"
                                 />
-                                <span className={`text-sm ${isBusiness ? 'text-ai-accent' : 'text-ai-muted group-hover:text-white'} transition-colors`}>
+                                <span className={`text-sm ${isBusiness ? 'text-ai-accent' : 'text-ai-muted group-hover:text-ai-text'} transition-colors`}>
                                     I am a Travel Agent / Business
                                 </span>
                             </label>
@@ -150,7 +145,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                             {isExpanded && (
                                 <button
                                     onClick={() => setIsExpanded(false)}
-                                    className="absolute top-2 right-2 p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-ai-muted hover:text-white transition-colors"
+                                    className="absolute top-2 right-2 p-1.5 rounded-full bg-black/5 hover:bg-black/5 text-ai-muted hover:text-ai-text transition-colors"
                                     title="Collapse"
                                 >
                                     <Minus className="w-4 h-4" />
@@ -161,7 +156,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                 <button
                                     key={i}
                                     onClick={() => setPrompt(tag)}
-                                    className="px-4 py-1.5 rounded-full glass glass-hover text-xs text-ai-muted hover:text-white cursor-pointer transition-all hover:scale-105 whitespace-nowrap"
+                                    className="px-4 py-1.5 rounded-full glass glass-hover text-xs text-ai-muted hover:text-ai-text cursor-pointer transition-all hover:scale-105 whitespace-nowrap"
                                 >
                                     {tag}
                                 </button>

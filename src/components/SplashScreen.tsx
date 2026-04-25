@@ -15,26 +15,29 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
         >
-            {/* Background Effects */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-ai-accent/10 rounded-full blur-[120px] animate-pulse-slow" />
+            {/* Background radial glow */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(47,74,58,0.12) 0%, transparent 70%)' }} />
             </div>
 
             <div className="relative z-10 text-center">
                 <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
+                    initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    transition={{ duration: 0.9, ease: "easeOut" }}
                     className="flex flex-col items-center"
                 >
                     <motion.div
-                        className="flex items-center gap-3 mb-4"
-                        initial={{ y: 20, opacity: 0 }}
+                        className="flex items-center gap-3 mb-5"
+                        initial={{ y: 24, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
                     >
                         <Sparkles className="w-8 h-8 text-ai-accent" />
-                        <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white">
+                        <h1
+                            className="text-6xl md:text-8xl font-bold tracking-tighter text-ai-text"
+                            style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 500 }}
+                        >
                             Himato
                         </h1>
                     </motion.div>
@@ -42,8 +45,8 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 1, duration: 0.8 }}
-                        className="text-xl text-ai-muted font-light tracking-widest uppercase"
+                        transition={{ delay: 0.9, duration: 0.8 }}
+                        className="text-sm text-ai-muted font-medium tracking-[0.3em] uppercase"
                     >
                         by waglogy
                     </motion.p>

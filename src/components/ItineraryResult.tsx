@@ -306,7 +306,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                         <div className="absolute inset-0 w-2 h-10 bg-ai-accent rounded-full blur-md opacity-50" />
                     </div>
                     <div>
-                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">AI Generated Plan</h2>
+                        <h2 className="text-2xl sm:text-4xl font-black text-ai-text tracking-tight">AI Generated Plan</h2>
                         <p className="text-xs text-ai-muted uppercase tracking-[0.3em] mt-1">Curated Himalayan Experience</p>
                     </div>
                 </div>
@@ -319,7 +319,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                     <button
                                         onClick={handleCancel}
                                         disabled={isSaving}
-                                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium transition-all disabled:opacity-50"
+                                        className="flex items-center gap-2 px-4 py-2 bg-black/5 hover:bg-black/5 border border-black/10 rounded-lg text-ai-text text-sm font-medium transition-all disabled:opacity-50"
                                     >
                                         <X className="w-4 h-4" />
                                         <span>Cancel</span>
@@ -363,7 +363,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
                     <button
                         onClick={shareLink}
-                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-white text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
+                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-text text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
                     >
                         {shared ? (
                             <>
@@ -380,7 +380,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
                     <button
                         onClick={copyToClipboard}
-                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-white text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
+                        className="flex items-center gap-2 px-4 py-2 bg-ai-card hover:bg-ai-card/80 border border-ai-accent/30 hover:border-ai-accent rounded-lg text-ai-text text-sm font-medium transition-all hover:scale-105 group whitespace-nowrap"
                     >
                         {copied ? (
                             <>
@@ -428,7 +428,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                             }}
                             itemScope
                             itemType="https://schema.org/TouristDestination"
-                            className={`relative pl-8 sm:pl-12 md:pl-16 border-l transition-all duration-700 ${activeDay === day.day ? 'border-ai-accent' : 'border-white/10'}`}
+                            className={`relative pl-8 sm:pl-12 md:pl-16 border-l transition-all duration-700 ${activeDay === day.day ? 'border-ai-accent' : 'border-black/10'}`}
                             onMouseEnter={() => !isEditing && setActiveDay(day.day)}
                             onClick={() => !isEditing && setActiveDay(day.day)}
                         >
@@ -442,10 +442,10 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                 />
                             </div>
 
-                            <div className={`absolute -left-[6px] top-0 w-3 h-3 rounded-full transition-all duration-500 z-10 ${activeDay === day.day ? 'bg-ai-accent scale-150 shadow-[0_0_20px_#00f2ff]' : 'bg-white/20'}`} />
+                            <div className={`absolute -left-[6px] top-0 w-3 h-3 rounded-full transition-all duration-500 z-10 ${activeDay === day.day ? 'bg-ai-accent scale-150 shadow-[0_0_20px_#00f2ff]' : 'bg-black/20'}`} />
 
                             <div className="mb-8">
-                                <h3 className="text-2xl sm:text-4xl font-black text-white mb-3 flex items-center gap-6" itemProp="name">
+                                <h3 className="text-2xl sm:text-4xl font-black text-ai-text mb-3 flex items-center gap-6" itemProp="name">
                                     <div className={`flex items-center gap-2 px-5 py-2 rounded-xl transition-all duration-500 ${activeDay === day.day ? 'bg-ai-accent text-ai-dark shadow-[0_10px_30px_rgba(0,242,255,0.2)]' : 'bg-white/5 text-ai-muted grayscale'}`}>
                                         <Calendar className="w-4 h-4" />
                                         <span className="text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Day {day.day}</span>
@@ -456,7 +456,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                                 type="text"
                                                 value={day.title}
                                                 onChange={(e) => updateDay(dayIndex, { ...day, title: e.target.value })}
-                                                className="w-full bg-white/5 border-b border-white/20 rounded-none px-0 py-2 text-white focus:outline-none focus:border-ai-accent"
+                                                className="w-full bg-black/5 border-b border-black/10 rounded-none px-0 py-2 text-ai-text focus:outline-none focus:border-ai-accent"
                                             />
                                         ) : (
                                             day.title
@@ -480,16 +480,16 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                         key={activityIndex}
                                         itemScope
                                         itemType="https://schema.org/TouristAttraction"
-                                        className={`group relative p-6 sm:p-10 rounded-[2.5rem] transition-all duration-700 overflow-hidden ${activeDay === day.day ? 'bg-white/[0.03] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]' : 'bg-transparent border border-transparent opacity-30 scale-[0.98]'}`}
+                                        className={`group relative p-6 sm:p-10 rounded-[2.5rem] transition-all duration-700 overflow-hidden ${activeDay === day.day ? 'bg-black/[0.03] border border-black/10 shadow-[0_20px_50px_rgba(0,0,0,0.1)]' : 'bg-transparent border border-transparent opacity-30 scale-[0.98]'}`}
                                         variants={{
                                             hidden: { opacity: 0, scale: 0.95 },
                                             visible: { opacity: 1, scale: 1 }
                                         }}
-                                        whileHover={activeDay === day.day ? { y: -8, backgroundColor: 'rgba(255, 255, 255, 0.05)', borderColor: 'rgba(255, 255, 255, 0.2)' } : {}}
+                                        whileHover={activeDay === day.day ? { y: -8, backgroundColor: 'rgba(0, 0, 0, 0.03)', borderColor: 'rgba(0, 0, 0, 0.15)' } : {}}
                                     >
                                         {/* Stylized Badge for Activity Index */}
                                         <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
-                                            <span className="text-[6rem] font-black leading-none select-none italic text-white">{activityIndex + 1}</span>
+                                            <span className="text-[6rem] font-black leading-none select-none italic text-ai-text">{activityIndex + 1}</span>
                                         </div>
 
                                         {isEditing ? (
@@ -498,11 +498,11 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                                     type="text"
                                                     value={activity.title}
                                                     onChange={(e) => updateActivity(dayIndex, activityIndex, 'title', e.target.value)}
-                                                    className="w-full bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-2xl text-white font-black focus:outline-none focus:border-ai-accent"
+                                                    className="w-full bg-black/5 border border-black/10 rounded-2xl px-5 py-4 text-2xl text-ai-text font-black focus:outline-none focus:border-ai-accent"
                                                     placeholder="Activity title"
                                                 />
                                                 <div className="grid sm:grid-cols-2 gap-4">
-                                                    <div className="flex items-center gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                                                    <div className="flex items-center gap-3 bg-black/10 p-4 rounded-2xl border border-black/10">
                                                         <Clock className="w-5 h-5 text-ai-accent" />
                                                         <input
                                                             type="text"
@@ -512,7 +512,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                                             placeholder="09:00 AM"
                                                         />
                                                     </div>
-                                                    <div className="flex items-center gap-3 bg-black/40 p-4 rounded-2xl border border-white/5">
+                                                    <div className="flex items-center gap-3 bg-black/10 p-4 rounded-2xl border border-black/10">
                                                         <MapPin className="w-5 h-5 text-ai-accent" />
                                                         <input
                                                             type="text"
@@ -526,14 +526,14 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                                 <textarea
                                                     value={activity.description}
                                                     onChange={(e) => updateActivity(dayIndex, activityIndex, 'description', e.target.value)}
-                                                    className="w-full bg-white/5 border border-white/10 rounded-[2rem] px-6 py-6 text-base text-gray-400 focus:outline-none focus:border-ai-accent resize-y min-h-[160px]"
+                                                    className="w-full bg-black/5 border border-black/10 rounded-[2rem] px-6 py-6 text-base text-gray-600 focus:outline-none focus:border-ai-accent resize-y min-h-[160px]"
                                                     placeholder="Describe the magical experience..."
                                                 />
                                             </div>
                                         ) : (
                                             <div className="relative z-10">
                                                 <div className="flex flex-col gap-6 mb-8">
-                                                    <h4 className="font-black text-2xl sm:text-4xl text-white group-hover:text-ai-accent transition-all duration-500 leading-[1.1]" itemProp="name">
+                                                    <h4 className="font-black text-2xl sm:text-4xl text-ai-text group-hover:text-ai-accent transition-all duration-500 leading-[1.1]" itemProp="name">
                                                         {activity.title}
                                                     </h4>
 
@@ -542,9 +542,9 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                                             <div className="w-1.5 h-1.5 rounded-full bg-ai-accent animate-pulse" />
                                                             <span className="text-[11px] font-black uppercase tracking-[0.2em] text-ai-accent">{activity.time}</span>
                                                         </div>
-                                                        <div className="flex items-center gap-3 bg-white/5 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
-                                                            <MapPin className="w-3.5 h-3.5 text-white/40" aria-hidden="true" />
-                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white/60">{activity.location}</span>
+                                                        <div className="flex items-center gap-3 bg-black/5 px-4 py-2 rounded-full border border-black/10 backdrop-blur-md">
+                                                            <MapPin className="w-3.5 h-3.5 text-black/40" aria-hidden="true" />
+                                                            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-black/60">{activity.location}</span>
                                                         </div>
                                                     </div>
                                                 </div>

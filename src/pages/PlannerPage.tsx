@@ -109,7 +109,7 @@ export function PlannerPage() {
     }
 
     return (
-        <main className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30" role="main">
+        <main className="min-h-screen bg-ai-dark text-ai-text selection:bg-ai-accent/30" role="main">
             <AnimatePresence mode="wait">
                 {showSplash ? (
                     <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
@@ -138,12 +138,12 @@ export function PlannerPage() {
                                     <div className="container mx-auto px-4 sm:px-6">
                                         <button
                                             onClick={handleBackClick}
-                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-white transition-colors flex items-center gap-2 text-sm sm:text-base group"
+                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-ai-text transition-colors flex items-center gap-2 text-sm sm:text-base group"
                                         >
                                             <span className="group-hover:-translate-x-1 transition-transform">←</span> Back to Search
                                         </button>
                                         {error && (
-                                            <div className="p-4 mb-6 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200">
+                                            <div className="p-4 mb-6 bg-red-500/20 border border-red-500/50 rounded-xl text-red-600">
                                                 {error}
                                             </div>
                                         )}
@@ -162,7 +162,7 @@ export function PlannerPage() {
                                                     <Sparkles className="w-32 h-32 text-ai-accent" />
                                                 </div>
                                                 <div className="relative z-10 max-w-2xl mx-auto">
-                                                    <h3 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                                                    <h3 className="text-2xl sm:text-3xl font-bold text-ai-text mb-4">
                                                         Don't Lose Your Adventure! 🏔️
                                                     </h3>
                                                     <p className="text-ai-muted mb-8 text-sm sm:text-base">
@@ -179,7 +179,7 @@ export function PlannerPage() {
                                                         </button>
                                                         <button
                                                             onClick={() => navigate('/register')}
-                                                            className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/20 text-white rounded-full font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
+                                                            className="px-8 py-3 bg-black/5 hover:bg-black/5 border border-black/10 text-ai-text rounded-full font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
                                                         >
                                                             <UserPlus className="w-4 h-4" />
                                                             Create Free Account
@@ -215,7 +215,7 @@ export function PlannerPage() {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative w-full max-w-md bg-ai-card border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl"
+                            className="relative w-full max-w-md bg-ai-card border border-black/10 rounded-3xl p-6 sm:p-8 shadow-2xl"
                         >
                             <div className="flex items-center gap-4 text-amber-500 mb-6 font-bold">
                                 <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20">
@@ -223,7 +223,7 @@ export function PlannerPage() {
                                 </div>
                                 <span>Unsaved Changes</span>
                             </div>
-                            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+                            <h3 className="text-xl sm:text-2xl font-bold text-ai-text mb-4">
                                 Wait, don't leave yet!
                             </h3>
                             <p className="text-ai-muted mb-8 text-sm sm:text-base">
@@ -243,7 +243,7 @@ export function PlannerPage() {
                                         navigate('/');
                                         setView('home');
                                     }}
-                                    className="w-full py-4 bg-white/5 hover:bg-white/10 text-white/40 hover:text-white rounded-2xl font-medium transition-all"
+                                    className="w-full py-4 bg-black/5 hover:bg-black/5 text-ai-text/40 hover:text-ai-text rounded-2xl font-medium transition-all"
                                 >
                                     I'm okay with losing it
                                 </button>

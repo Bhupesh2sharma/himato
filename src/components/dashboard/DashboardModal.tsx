@@ -27,11 +27,11 @@ export const DashboardModal = ({ isOpen, onClose, title, children }: ModalProps)
                         className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg z-[70] px-4"
                     >
                         <div className="glass-card rounded-2xl overflow-hidden">
-                            <div className="p-6 border-b border-white/10 flex items-center justify-between">
-                                <h3 className="text-xl font-bold text-white">{title}</h3>
+                            <div className="p-6 border-b border-black/10 flex items-center justify-between">
+                                <h3 className="text-xl font-bold text-ai-text">{title}</h3>
                                 <button
                                     onClick={onClose}
-                                    className="p-2 hover:bg-white/5 rounded-lg transition-colors text-ai-muted hover:text-white"
+                                    className="p-2 hover:bg-black/5 rounded-lg transition-colors text-ai-muted hover:text-ai-text"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>

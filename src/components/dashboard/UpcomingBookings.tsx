@@ -29,7 +29,7 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                     <div className="p-2 rounded-lg bg-ai-accent/10 border border-ai-accent/20">
                         <Calendar className="w-5 h-5 text-ai-accent" />
                     </div>
-                    <h2 className="text-xl font-bold text-white">Upcoming Bookings</h2>
+                    <h2 className="text-xl font-bold text-ai-text">Upcoming Bookings</h2>
                 </div>
                 <p className="text-ai-muted text-center py-8">No upcoming bookings. Add one using the button above!</p>
             </motion.div>
@@ -49,7 +49,7 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                         <Calendar className="w-5 h-5 text-ai-accent" />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold text-white">Upcoming Bookings</h2>
+                        <h2 className="text-xl font-bold text-ai-text">Upcoming Bookings</h2>
                         <p className="text-sm text-ai-muted">Next 7 days</p>
                     </div>
                 </div>
@@ -66,11 +66,11 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                        className="group p-4 bg-ai-card/30 hover:bg-ai-card/50 border border-white/5 hover:border-white/10 rounded-xl transition-all duration-300 cursor-pointer"
+                        className="group p-4 bg-ai-card/30 hover:bg-ai-card/50 border border-black/5 hover:border-black/10 rounded-xl transition-all duration-300 cursor-pointer"
                     >
                         <div className="flex items-start justify-between mb-3">
                             <div className="flex-1">
-                                <h3 className="text-white font-semibold mb-1 group-hover:text-ai-accent transition-colors">
+                                <h3 className="text-ai-text font-semibold mb-1 group-hover:text-ai-accent transition-colors">
                                     {booking.clientName}
                                 </h3>
                                 <div className="flex items-center gap-2 text-sm text-ai-muted">
@@ -108,13 +108,13 @@ export const UpcomingBookings = ({ data = [] }: UpcomingBookingsProps) => {
                 ))}
             </div>
 
-            <div className="mt-6 pt-6 border-t border-white/10 grid grid-cols-2 gap-4">
+            <div className="mt-6 pt-6 border-t border-black/10 grid grid-cols-2 gap-4">
                 <div className="text-center">
-                    <p className="text-2xl font-bold text-white mb-1">{data.length}</p>
+                    <p className="text-2xl font-bold text-ai-text mb-1">{data.length}</p>
                     <p className="text-xs text-ai-muted">Total Active</p>
                 </div>
                 <div className="text-center">
-                    <p className="text-2xl font-bold text-white mb-1">
+                    <p className="text-2xl font-bold text-ai-text mb-1">
                         {data.filter(b => b.status === 'confirmed').length}
                     </p>
                     <p className="text-xs text-ai-muted">Confirmed</p>

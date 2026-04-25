@@ -8,17 +8,21 @@ export default {
         extend: {
             colors: {
                 ai: {
-                    dark: "#020604", // Almost black, very subtle green
-                    card: "#0A1610", // Darker, more neutral card
-                    accent: "#22C55E", // Green 500 - slightly darker/richer than 400 for text readability
-                    secondary: "#15803D", // Green 700
-                    text: "#FFFFFF", // Pure white for max contrast
-                    muted: "#94A3B8", // Slate 400 - Neutral gray for readability (stopped using green for text)
+                    dark:      "#f6f1e7", // Parchment — main app background
+                    card:      "#ffffff", // White card surfaces
+                    accent:    "#2f4a3a", // Forest Moss — primary brand (readable on light)
+                    secondary: "#1a2e23", // Moss Deep — hover/active
+                    text:      "#0e1116", // Ink — dark body text
+                    muted:     "#6b7280", // Neutral gray — meta/placeholder
+                    warm:      "#b73f25", // Vermilion — CTA variant
+                    saffron:   "#d97a2c", // Saffron — decorative
+                    gold:      "#c9a961", // Gold — accent on dark surfaces
                 }
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                mono: ['JetBrains Mono', 'monospace'],
+                sans:    ['Inter', 'sans-serif'],
+                display: ['Fraunces', 'Georgia', 'serif'],
+                mono:    ['JetBrains Mono', 'monospace'],
             },
             animation: {
                 'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -31,8 +35,8 @@ export default {
                     '50%': { transform: 'translateY(-10px)' },
                 },
                 glow: {
-                    'from': { boxShadow: '0 0 10px -10px #4ADE80' },
-                    'to': { boxShadow: '0 0 20px 5px #4ADE8033' },
+                    'from': { textShadow: '0 0 10px rgba(47,74,58,0)' },
+                    'to':   { textShadow: '0 0 24px rgba(47,74,58,0.35)' },
                 }
             }
         },

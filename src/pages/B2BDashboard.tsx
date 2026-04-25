@@ -179,7 +179,7 @@ export const B2BDashboard = () => {
                 >
                     <div className="flex items-center justify-between flex-wrap gap-4">
                         <div>
-                            <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-accent">
+                            <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-accent">
                                 {user?.businessName || user?.name} Admin Panel
                             </h1>
                             <p className="text-ai-muted mt-2">Manage your bookings, payments, and generated itineraries.</p>
@@ -195,7 +195,7 @@ export const B2BDashboard = () => {
                             </button>
                             <button
                                 onClick={() => navigate('/history')}
-                                className="px-4 py-2 glass hover:bg-white/5 border border-white/10 text-white rounded-xl transition-all flex items-center gap-2 text-sm"
+                                className="px-4 py-2 glass hover:bg-black/5 border border-black/10 text-ai-text rounded-xl transition-all flex items-center gap-2 text-sm"
                             >
                                 <History className="w-4 h-4" />
                                 History
@@ -251,7 +251,7 @@ export const B2BDashboard = () => {
                                 <FileText className="w-6 h-6" />
                             </div>
                             <div className="text-left">
-                                <p className="text-white font-bold">Add Booking</p>
+                                <p className="text-ai-text font-bold">Add Booking</p>
                                 <p className="text-ai-muted text-xs">Record a new manual booking</p>
                             </div>
                         </div>
@@ -267,7 +267,7 @@ export const B2BDashboard = () => {
                                 <CreditCard className="w-6 h-6" />
                             </div>
                             <div className="text-left">
-                                <p className="text-white font-bold">Record Payment</p>
+                                <p className="text-ai-text font-bold">Record Payment</p>
                                 <p className="text-ai-muted text-xs">Log client payments manually</p>
                             </div>
                         </div>
@@ -283,7 +283,7 @@ export const B2BDashboard = () => {
                                 <UserPlus className="w-6 h-6" />
                             </div>
                             <div className="text-left">
-                                <p className="text-white font-bold">New Client</p>
+                                <p className="text-ai-text font-bold">New Client</p>
                                 <p className="text-ai-muted text-xs">Store client preferences and details</p>
                             </div>
                         </div>
@@ -321,7 +321,7 @@ export const B2BDashboard = () => {
                                 <div className="p-2 rounded-lg bg-ai-accent/10">
                                     <Plus className="w-6 h-6 text-ai-accent" />
                                 </div>
-                                <h2 className="text-2xl font-bold text-white">AI Itinerary Generator</h2>
+                                <h2 className="text-2xl font-bold text-ai-text">AI Itinerary Generator</h2>
                             </div>
                             <p className="text-ai-muted text-lg mb-6 max-w-2xl">
                                 Ready to create a custom trip for a client? Use our AI travel planner to generate professional itineraries in seconds.
@@ -336,7 +336,7 @@ export const B2BDashboard = () => {
                                 </button>
                                 <button
                                     onClick={() => navigate('/history')}
-                                    className="px-8 py-3 glass text-white font-medium rounded-xl hover:bg-white/5 transition-all"
+                                    className="px-8 py-3 glass text-ai-text font-medium rounded-xl hover:bg-black/5 transition-all"
                                 >
                                     Saved History
                                 </button>
@@ -361,25 +361,25 @@ export const B2BDashboard = () => {
                 <form onSubmit={handleAddBooking} className="space-y-4">
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Client Name</label>
-                        <input name="clientName" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="e.g. Rahul Sharma" />
+                        <input name="clientName" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="e.g. Rahul Sharma" />
                     </div>
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Destination</label>
-                        <input name="destination" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="e.g. North Sikkim Tour" />
+                        <input name="destination" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="e.g. North Sikkim Tour" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm text-ai-muted mb-2">Travel Date</label>
-                            <input name="date" type="date" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" />
+                            <input name="date" type="date" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" />
                         </div>
                         <div>
                             <label className="block text-sm text-ai-muted mb-2">Guests</label>
-                            <input name="guests" type="number" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="0" />
+                            <input name="guests" type="number" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="0" />
                         </div>
                     </div>
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Total Package Amount (₹)</label>
-                        <input name="amount" type="number" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="0" />
+                        <input name="amount" type="number" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="0" />
                     </div>
                     <button type="submit" className="w-full py-3 bg-ai-accent text-ai-dark font-bold rounded-xl mt-4">Save Booking</button>
                 </form>
@@ -394,21 +394,21 @@ export const B2BDashboard = () => {
                 <form onSubmit={handleAddPayment} className="space-y-4">
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Client Name</label>
-                        <input name="clientName" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="e.g. Rahul Sharma" />
+                        <input name="clientName" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="e.g. Rahul Sharma" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm text-ai-muted mb-2">Amount Paid (₹)</label>
-                            <input name="amount" type="number" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="0" />
+                            <input name="amount" type="number" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="0" />
                         </div>
                         <div>
                             <label className="block text-sm text-ai-muted mb-2">Date</label>
-                            <input name="date" type="date" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" />
+                            <input name="date" type="date" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" />
                         </div>
                     </div>
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Payment Method</label>
-                        <select name="method" className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30 appearance-none">
+                        <select name="method" className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30 appearance-none">
                             <option value="UPI">UPI / Google Pay</option>
                             <option value="Bank Transfer">Bank Transfer</option>
                             <option value="Cash">Cash</option>
@@ -428,15 +428,15 @@ export const B2BDashboard = () => {
                 <form onSubmit={handleAddClient} className="space-y-4">
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Full Name</label>
-                        <input name="name" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="e.g. Sneha Reddy" />
+                        <input name="name" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="e.g. Sneha Reddy" />
                     </div>
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Email Address</label>
-                        <input name="email" type="email" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="sneha@example.com" />
+                        <input name="email" type="email" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="sneha@example.com" />
                     </div>
                     <div>
                         <label className="block text-sm text-ai-muted mb-2">Phone Number</label>
-                        <input name="phone" required className="w-full p-3 bg-white/5 border border-white/10 rounded-xl text-white outline-none focus:border-ai-accent/30" placeholder="+91 9876543210" />
+                        <input name="phone" required className="w-full p-3 bg-black/5 border border-black/10 rounded-xl text-ai-text outline-none focus:border-ai-accent/30" placeholder="+91 9876543210" />
                     </div>
                     <button type="submit" className="w-full py-3 bg-purple-500 text-white font-bold rounded-xl mt-4">Add to Database</button>
                 </form>

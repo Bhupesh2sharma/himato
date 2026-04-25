@@ -163,7 +163,7 @@ export const AILoadingState = () => {
                                     <motion.div
                                         key={i}
                                         animate={{ scale: i === step ? 1.5 : 1 }}
-                                        className={`h-2 w-2 rounded-full ${i === step ? 'bg-ai-accent' : 'bg-white/10'}`}
+                                        className={`h-2 w-2 rounded-full ${i === step ? 'bg-ai-accent' : 'bg-black/10'}`}
                                     />
                                 ))}
                             </div>

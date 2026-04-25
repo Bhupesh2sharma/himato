@@ -45,7 +45,7 @@ export const ConfirmationModal = ({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="glass border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-xl"
+            className="glass border border-black/10 rounded-2xl p-6 w-full max-w-md shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-start mb-6">
@@ -53,12 +53,12 @@ export const ConfirmationModal = ({
                 <div className={`p-2 rounded-lg ${isDestructive ? 'bg-red-500/10 border border-red-500/30' : 'bg-ai-accent/10 border border-ai-accent/30'}`}>
                   <AlertTriangle className={`w-5 h-5 ${isDestructive ? 'text-red-400' : 'text-ai-accent'}`} />
                 </div>
-                <h3 className="text-xl font-bold text-white">{title}</h3>
+                <h3 className="text-xl font-bold text-ai-text">{title}</h3>
               </div>
               {!isLoading && (
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-ai-text transition-colors"
                   disabled={isLoading}
                 >
                   <X className="w-5 h-5" />
@@ -72,7 +72,7 @@ export const ConfirmationModal = ({
               <button
                 onClick={onClose}
                 disabled={isLoading}
-                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 text-sm font-medium text-ai-text/70 hover:text-ai-text bg-black/5 hover:bg-black/5 border border-black/10 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {cancelText}
               </button>
