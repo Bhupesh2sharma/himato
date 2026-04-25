@@ -11,10 +11,7 @@ interface User {
   role: 'user' | 'admin';
   business: boolean;
   businessName?: string;
-  isB2BVerified?: boolean;
-  subscriptionStatus?: 'none' | 'pending' | 'active' | 'expired';
-  subscriptionType?: 'none' | 'basic' | 'premium';
-  subscriptionEndDate?: string;
+  isAdmin?: boolean;
 }
 
 interface AuthContextType {

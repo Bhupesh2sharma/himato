@@ -26,12 +26,12 @@ export const DashboardModal = ({ isOpen, onClose, title, children }: ModalProps)
                         exit={{ opacity: 0, scale: 0.95, y: 20 }}
                         className="relative w-full max-w-lg z-[70]"
                     >
-                        <div className="glass-card rounded-3xl overflow-hidden shadow-2xl border-white/10">
-                            <div className="p-6 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
-                                <h3 className="text-xl font-black text-white uppercase tracking-tight">{title}</h3>
+                        <div className="glass-card rounded-2xl overflow-hidden">
+                            <div className="p-6 border-b border-black/10 flex items-center justify-between">
+                                <h3 className="text-xl font-bold text-ai-text">{title}</h3>
                                 <button
                                     onClick={onClose}
-                                    className="p-2 hover:bg-white/10 rounded-xl transition-all text-ai-muted hover:text-white"
+                                    className="p-2 hover:bg-black/5 rounded-lg transition-colors text-ai-muted hover:text-ai-text"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>

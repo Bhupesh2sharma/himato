@@ -10,9 +10,11 @@ import { TermsAndConditions } from './pages/TermsAndConditions';
 import { ItineraryHistory } from './pages/ItineraryHistory';
 import { NavigationHeader } from './components/NavigationHeader';
 import { GuidePage } from './pages/GuidePage';
+import { HiddenGemsPage } from './pages/HiddenGemsPage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
 import { B2BDashboard } from './pages/B2BDashboard';
+import { AdminGuidesPage } from './pages/AdminGuidesPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { apiClient } from './services/api';
 
@@ -106,10 +108,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<B2BDashboard />} />
+        <Route path="/admin/guides" element={<AdminGuidesPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route path="/guide/:slug" element={<GuidePage />} />
+        <Route path="/hidden-gems" element={<HiddenGemsPage />} />
 
         {/* Custom Slug Route - Should be near the end to avoid clashing with static paths */}
         <Route path="/:slug" element={<SharedItineraryPage />} />

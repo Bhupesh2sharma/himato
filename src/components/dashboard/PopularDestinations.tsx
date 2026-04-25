@@ -51,7 +51,7 @@ export const PopularDestinations = ({ data = [] }: PopularDestinationsProps) => 
                     <MapPin className="w-5 h-5 text-ai-accent" />
                 </div>
                 <div>
-                    <h2 className="text-xl font-bold text-white">Top Destinations</h2>
+                    <h2 className="text-xl font-bold text-ai-text">Top Destinations</h2>
                     <p className="text-sm text-ai-muted">Most booked locations</p>
                 </div>
             </div>
@@ -71,7 +71,7 @@ export const PopularDestinations = ({ data = [] }: PopularDestinationsProps) => 
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
                                     <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${destination.color}`}></div>
-                                    <span className="text-white font-medium text-sm">{destination.name}</span>
+                                    <span className="text-ai-text font-medium text-sm">{destination.name}</span>
                                 </div>
 
                                 <div className="flex items-center gap-3">
@@ -79,12 +79,12 @@ export const PopularDestinations = ({ data = [] }: PopularDestinationsProps) => 
                                         <TrendingUp className="w-3 h-3" />
                                         {destination.growth}
                                     </span>
-                                    <span className="text-white font-semibold text-sm">{destination.bookings}</span>
+                                    <span className="text-ai-text font-semibold text-sm">{destination.bookings}</span>
                                 </div>
                             </div>
 
                             {/* Progress bar */}
-                            <div className="relative h-2 bg-white/5 rounded-full overflow-hidden">
+                            <div className="relative h-2 bg-black/5 rounded-full overflow-hidden">
                                 <motion.div
                                     initial={{ width: 0 }}
                                     animate={{ width: `${widthPercent}%` }}

@@ -48,14 +48,14 @@ export const ReachUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-ai-dark text-white selection:bg-ai-accent/30">
+    <div className="min-h-screen bg-ai-dark text-ai-text selection:bg-ai-accent/30">
       {/* Header Section */}
-      <div className="relative py-16 px-6 sm:px-12 overflow-hidden border-b border-white/10">
+      <div className="relative py-16 px-6 sm:px-12 overflow-hidden border-b border-black/10">
         <div className="absolute top-0 right-0 w-96 h-96 bg-ai-accent/10 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none"></div>
         <div className="relative z-10 max-w-5xl mx-auto">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-ai-muted hover:text-white transition-colors mb-8 text-sm sm:text-base"
+            className="inline-flex items-center gap-2 text-ai-muted hover:text-ai-text transition-colors mb-8 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home
@@ -85,8 +85,8 @@ export const ReachUs = () => {
             transition={{ delay: 0.2 }}
             className="space-y-6"
           >
-            <div className="glass p-6 rounded-2xl border border-white/10">
-              <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+            <div className="glass p-6 rounded-2xl border border-black/10">
+              <h2 className="text-2xl font-bold text-ai-text mb-6">Get in Touch</h2>
               <p className="text-ai-muted mb-8 leading-relaxed">
                 We're always looking to partner with travel agents and tour operators who share our passion for showcasing the beauty of Sikkim. Fill out the form and we'll get back to you soon.
               </p>
@@ -130,15 +130,15 @@ export const ReachUs = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="glass p-6 sm:p-8 rounded-2xl border border-white/10"
+            className="glass p-6 sm:p-8 rounded-2xl border border-black/10"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+            <h2 className="text-2xl font-bold text-ai-text mb-6">Send us a Message</h2>
 
             {submitStatus === 'success' && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-xl text-green-200"
+                className="mb-6 p-4 bg-green-500/10 border border-green-500/50 rounded-xl text-green-700"
               >
                 Thank you! We've received your message and will get back to you soon.
               </motion.div>
@@ -148,7 +148,7 @@ export const ReachUs = () => {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200"
+                className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-xl text-red-600"
               >
                 Something went wrong. Please try again or contact us directly.
               </motion.div>
@@ -167,7 +167,7 @@ export const ReachUs = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
+                  className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
                   placeholder="Your Name"
                 />
               </div>
@@ -184,7 +184,7 @@ export const ReachUs = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
+                  className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
                   placeholder="yourname@example.com"
                 />
               </div>
@@ -201,7 +201,7 @@ export const ReachUs = () => {
                   required
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
+                  className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
                   placeholder="+91 9876543210"
                 />
               </div>
@@ -217,7 +217,7 @@ export const ReachUs = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
+                  className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all"
                   placeholder="Your Travel Agency"
                 />
               </div>
@@ -234,7 +234,7 @@ export const ReachUs = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all resize-none"
+                  className="w-full bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 transition-all resize-none"
                   placeholder="Tell us about your travel agency and how we can work together..."
                 />
               </div>

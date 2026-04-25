@@ -41,7 +41,7 @@ export const StatsCard = ({ title, value, change, trend, icon: Icon, delay = 0 }
 
             <div>
                 <p className="text-ai-muted text-sm mb-1">{title}</p>
-                <p className="text-3xl font-bold text-white">{value}</p>
+                <p className="text-3xl font-bold text-ai-text">{value}</p>
             </div>
 
             {/* Animated gradient border on hover */}

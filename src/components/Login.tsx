@@ -53,7 +53,7 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
       >
         <div className="glass rounded-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
+            <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
               Welcome Back
             </h1>
             <p className="text-ai-muted">Sign in to continue your journey</p>
@@ -66,7 +66,7 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
               className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3"
             >
               <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="text-red-200 text-sm">{error}</p>
+              <p className="text-red-600 text-sm">{error}</p>
             </motion.div>
           )}
 
@@ -83,7 +83,7 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="your.email@example.com"
                   disabled={isLoading}
                 />
@@ -102,14 +102,14 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full pl-10 pr-12 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-12 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="Enter your password"
                   disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ai-muted hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ai-muted hover:text-ai-text transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? (
@@ -164,7 +164,7 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
           <div className="mt-4 text-center">
             <Link
               to="/"
-              className="text-ai-muted hover:text-white text-sm transition-colors"
+              className="text-ai-muted hover:text-ai-text text-sm transition-colors"
             >
               ← Continue as Guest
             </Link>

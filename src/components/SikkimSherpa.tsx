@@ -147,19 +147,19 @@ export const SikkimSherpa = () => {
                         initial={isFullScreen ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
                         animate={isFullScreen ? { opacity: 1, scale: 1, y: 0 } : { opacity: 1, scale: 1, y: 0 }}
                         exit={isFullScreen ? { opacity: 0 } : { opacity: 0, scale: 0.9, y: 20 }}
-                        className={`bg-ai-card border border-white/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl ${isFullScreen
+                        className={`bg-ai-card border border-black/10 shadow-2xl flex flex-col overflow-hidden backdrop-blur-xl ${isFullScreen
                             ? 'w-full h-full rounded-none'
                             : 'mb-4 w-[90vw] sm:w-96 h-[500px] rounded-2xl'
                             }`}
                     >
                         {/* Header */}
-                        <div className="p-4 bg-ai-accent/10 border-b border-white/10 flex justify-between items-center">
+                        <div className="p-4 bg-ai-accent/10 border-b border-black/10 flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <div className="p-2 bg-ai-accent/20 rounded-full">
                                     <Mountain className="w-5 h-5 text-ai-accent" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-white">Himato AI</h3>
+                                    <h3 className="font-bold text-ai-text">Himato AI</h3>
                                     <p className="text-xs text-ai-muted flex items-center gap-1">
                                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                                         Online Guide
@@ -179,14 +179,14 @@ export const SikkimSherpa = () => {
                                 )}
                                 <button
                                     onClick={() => setIsFullScreen(!isFullScreen)}
-                                    className="p-2 hover:bg-white/5 rounded-full text-ai-muted hover:text-white transition-colors"
+                                    className="p-2 hover:bg-black/5 rounded-full text-ai-muted hover:text-ai-text transition-colors"
                                     title={isFullScreen ? "Exit Full Screen" : "Full Screen"}
                                 >
                                     {isFullScreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
                                 </button>
                                 <button
                                     onClick={() => { setIsOpen(false); setIsFullScreen(false); }}
-                                    className="p-2 hover:bg-white/5 rounded-full text-ai-muted hover:text-white transition-colors"
+                                    className="p-2 hover:bg-black/5 rounded-full text-ai-muted hover:text-ai-text transition-colors"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -208,7 +208,7 @@ export const SikkimSherpa = () => {
                                         </div>
                                         <div className={`max-w-[85%] p-5 rounded-2xl text-base leading-loose ${msg.role === 'user'
                                             ? 'bg-ai-accent text-white rounded-tr-none'
-                                            : 'bg-white/5 text-gray-200 border border-white/10 rounded-tl-none shadow-lg backdrop-blur-sm'
+                                            : 'bg-black/5 text-ai-text border border-black/10 rounded-tl-none shadow-lg backdrop-blur-sm'
                                             }`}>
                                             {msg.role === 'user' ? (
                                                 msg.parts
@@ -230,7 +230,7 @@ export const SikkimSherpa = () => {
                                         <div className="w-8 h-8 rounded-full bg-ai-accent/20 flex items-center justify-center flex-shrink-0">
                                             <Sparkles className="w-4 h-4 text-ai-accent" />
                                         </div>
-                                        <div className="bg-white/5 p-4 rounded-2xl rounded-tl-none border border-white/10 flex flex-col gap-2">
+                                        <div className="bg-black/5 p-4 rounded-2xl rounded-tl-none border border-black/10 flex flex-col gap-2">
                                             <div className="flex gap-1.5 mb-1">
                                                 <span className="w-2 h-2 bg-ai-accent rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                                                 <span className="w-2 h-2 bg-ai-accent rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
@@ -247,7 +247,7 @@ export const SikkimSherpa = () => {
                         </div>
 
                         {/* Input */}
-                        <div className={`p-4 border-t border-white/10 bg-black/20 ${isFullScreen ? 'pb-8' : ''}`}>
+                        <div className={`p-4 border-t border-black/10 bg-black/5 ${isFullScreen ? 'pb-8' : ''}`}>
                             <div className={`flex gap-2 ${isFullScreen ? 'max-w-4xl mx-auto w-full' : ''}`}>
                                 <input
                                     type="text"
@@ -255,7 +255,7 @@ export const SikkimSherpa = () => {
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                                     placeholder="Ask about Sikkim tourism destinations..."
-                                    className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-ai-accent/50 placeholder-ai-muted transition-all"
+                                    className="flex-1 bg-black/5 border border-black/10 rounded-xl px-4 py-3 text-sm text-ai-text focus:outline-none focus:border-ai-accent/50 placeholder-ai-muted transition-all"
                                 />
                                 <button
                                     onClick={handleSend}
@@ -275,7 +275,7 @@ export const SikkimSherpa = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`p-4 rounded-full shadow-lg shadow-ai-accent/20 transition-all ${isOpen ? 'bg-ai-card border border-white/10 text-white' : 'bg-ai-accent text-white'
+                    className={`p-4 rounded-full shadow-lg shadow-ai-accent/20 transition-all ${isOpen ? 'bg-ai-card border border-black/10 text-ai-text' : 'bg-ai-accent text-white'
                         }`}
                 >
                     {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}

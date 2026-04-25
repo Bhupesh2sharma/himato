@@ -1,13 +1,37 @@
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SEO_TOPICS } from '../data/seoTopics';
+import { apiClient } from '../services/api';
+import type { GuidePost } from '../services/api';
+
+type GuideItem = { id: string; title: string; shortDescription: string; category: string; image: string };
+
+function toItem(g: GuidePost): GuideItem {
+    return { id: g.slug, title: g.title, shortDescription: g.shortDescription, category: g.category, image: g.image };
+}
+
+const STATIC_ITEMS: GuideItem[] = SEO_TOPICS.map(t => ({ id: t.id, title: t.title, shortDescription: t.shortDescription, category: t.category, image: t.image }));
 
 export const LocalInsights = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const [guides, setGuides] = useState<GuideItem[]>(STATIC_ITEMS);
+
+    useEffect(() => {
+        apiClient.getPublishedGuides()
+            .then(res => {
+                if (res.data.guides.length > 0) {
+                    const apiItems = res.data.guides.map(toItem);
+                    const apiSlugs = new Set(apiItems.map(g => g.id));
+                    // Backend guides first, then static ones not already covered
+                    setGuides([...apiItems, ...STATIC_ITEMS.filter(s => !apiSlugs.has(s.id))]);
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     const scroll = (direction: 'left' | 'right') => {
         if (scrollContainerRef.current) {
@@ -67,8 +91,8 @@ export const LocalInsights = () => {
             {/* Scrolling Cards Container */}
             <div className="relative w-full">
                 {/* Fade Masks */}
-                <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-ai-dark to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-ai-dark to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0e1116, transparent)' }} />
+                <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0e1116, transparent)' }} />
 
                 <div
                     ref={scrollContainerRef}
@@ -84,7 +108,7 @@ export const LocalInsights = () => {
                         }
                     `}</style>
 
-                    {SEO_TOPICS.map((topic, index) => (
+                    {guides.map((topic, index) => (
                         <motion.div
                             key={topic.id}
                             initial={{ opacity: 0, x: 20 }}
@@ -92,26 +116,26 @@ export const LocalInsights = () => {
                             transition={{ delay: index * 0.1 }}
                             viewport={{ once: true }}
                             onClick={() => navigate(`/guide/${topic.id}`)}
-                            className="snap-center group relative w-[300px] md:w-[400px] h-[400px] md:h-[500px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 border border-white/10 hover:border-ai-accent/50 transition-all hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+                            className="snap-center group relative w-[300px] md:w-[400px] h-[400px] md:h-[500px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 transition-all hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]" style={{ border: '1px solid rgba(255,255,255,0.12)' }}
                         >
                             <img
                                 src={topic.image}
                                 alt={topic.title}
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-ai-dark via-ai-dark/60 to-transparent opacity-90" />
+                            <div className="absolute inset-0 opacity-90" style={{ background: 'linear-gradient(to top, #0e1116 0%, rgba(14,17,22,0.55) 50%, transparent 100%)' }} />
 
                             <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
-                                <span className="inline-block px-3 py-1 rounded-full bg-ai-secondary/80 backdrop-blur-md text-white text-xs font-bold w-fit mb-3 border border-white/10">
+                                <span className="inline-block px-3 py-1 rounded-full backdrop-blur-md text-white text-xs font-bold w-fit mb-3" style={{ background: 'rgba(47,74,58,0.85)', border: '1px solid rgba(255,255,255,0.15)' }}>
                                     {topic.category}
                                 </span>
-                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight group-hover:text-ai-accent transition-colors">
+                                <h3 className="text-xl md:text-2xl font-bold text-white mb-3 leading-tight group-hover:text-[#c9a961] transition-colors">
                                     {topic.title}
                                 </h3>
-                                <p className="text-sm text-gray-300 line-clamp-2 mb-6">
+                                <p className="text-sm text-white/60 line-clamp-2 mb-6">
                                     {topic.shortDescription}
                                 </p>
-                                <div className="flex items-center gap-2 text-ai-accent text-sm font-bold opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                <div className="flex items-center gap-2 text-[#c9a961] text-sm font-bold opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                                     Read Guide <ArrowRight className="w-4 h-4" />
                                 </div>
                             </div>

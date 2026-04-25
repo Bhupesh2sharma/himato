@@ -103,7 +103,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                     <CheckCircle2 className="w-10 h-10 text-green-400" />
                   </div>
                 </div>
-                <h2 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
+                <h2 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
                   Registration Successful!
                 </h2>
                 <p className="text-ai-muted mb-6">
@@ -134,7 +134,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
       >
         <div className="glass rounded-2xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white via-ai-text to-ai-muted">
+            <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
               Create Account
             </h1>
             <p className="text-ai-muted">Join us and start planning your journey</p>
@@ -147,7 +147,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
               className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3"
             >
               <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-              <p className="text-red-200 text-sm">{error}</p>
+              <p className="text-red-600 text-sm">{error}</p>
             </motion.div>
           )}
 
@@ -165,7 +165,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="John Doe"
                   disabled={isLoading}
                 />
@@ -185,7 +185,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="your.email@example.com"
                   disabled={isLoading}
                 />
@@ -205,7 +205,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   value={formData.phoneNo}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="+91 9876543210"
                   disabled={isLoading}
                 />
@@ -226,14 +226,14 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   onChange={handleChange}
                   required
                   minLength={6}
-                  className="w-full pl-10 pr-12 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                  className="w-full pl-10 pr-12 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                   placeholder="Create a password (min. 6 characters)"
                   disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ai-muted hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-ai-muted hover:text-ai-text transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? (
@@ -258,7 +258,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   className="hidden"
                   disabled={isLoading}
                 />
-                <span className={`text-sm ${formData.business ? 'text-ai-accent' : 'text-ai-muted group-hover:text-white'} transition-colors`}>
+                <span className={`text-sm ${formData.business ? 'text-ai-accent' : 'text-ai-muted group-hover:text-ai-text'} transition-colors`}>
                   I am a Business / Travel Agent
                 </span>
               </label>
@@ -282,7 +282,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                     type="text"
                     value={formData.businessName}
                     onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-white/10 rounded-xl text-white placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
+                    className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
                     placeholder="Your Business Name"
                     disabled={isLoading}
                   />
@@ -304,7 +304,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
                   className="hidden"
                   disabled={isLoading}
                 />
-                <span className={`text-sm ${formData.acceptTermsAndConditions ? 'text-ai-accent' : 'text-ai-muted group-hover:text-white'} transition-colors`}>
+                <span className={`text-sm ${formData.acceptTermsAndConditions ? 'text-ai-accent' : 'text-ai-muted group-hover:text-ai-text'} transition-colors`}>
                   I accept the{' '}
                   <Link
                     to="/terms"
@@ -360,7 +360,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
           <div className="mt-4 text-center">
             <Link
               to="/"
-              className="text-ai-muted hover:text-white text-sm transition-colors"
+              className="text-ai-muted hover:text-ai-text text-sm transition-colors"
             >
               ← Continue as Guest
             </Link>

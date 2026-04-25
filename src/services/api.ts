@@ -42,6 +42,22 @@ export interface AuthResponse {
   };
 }
 
+export interface GuidePost {
+  _id: string;
+  title: string;
+  slug: string;
+  shortDescription: string;
+  description?: string;
+  category: string;
+  image: string;
+  imagePublicId?: string;
+  content: string;
+  published: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {
@@ -175,6 +191,67 @@ class ApiClient {
       method: 'PUT',
       body: JSON.stringify(data),
     });
+  }
+
+  // Admin analytics
+  async getAdminAnalytics(): Promise<any> {
+    return this.request('/api/admin/analytics', {}, true);
+  }
+
+  async getAdminUsers(page = 1, search = ''): Promise<any> {
+    return this.request(`/api/admin/users?page=${page}&search=${encodeURIComponent(search)}`, {}, true);
+  }
+
+  async toggleAdminUser(id: string): Promise<any> {
+    return this.request(`/api/admin/users/${id}/toggle-admin`, { method: 'PATCH' }, true);
+  }
+
+  // Guide endpoints (public)
+  async getPublishedGuides(): Promise<{ status: string; data: { guides: GuidePost[] } }> {
+    return this.request('/api/guides');
+  }
+
+  async getGuideBySlug(slug: string): Promise<{ status: string; data: { guide: GuidePost } }> {
+    return this.request(`/api/guides/${slug}`);
+  }
+
+  // Guide endpoints (admin)
+  async adminGetAllGuides(): Promise<{ status: string; data: { guides: GuidePost[] } }> {
+    return this.request('/api/guides/admin/all', {}, true);
+  }
+
+  async adminCreateGuide(data: Partial<GuidePost>): Promise<{ status: string; data: { guide: GuidePost } }> {
+    return this.request('/api/guides/admin', { method: 'POST', body: JSON.stringify(data) }, true);
+  }
+
+  async adminUpdateGuide(id: string, data: Partial<GuidePost>): Promise<{ status: string; data: { guide: GuidePost } }> {
+    return this.request(`/api/guides/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
+  }
+
+  async adminDeleteGuide(id: string): Promise<void> {
+    return this.request(`/api/guides/admin/${id}`, { method: 'DELETE' }, true);
+  }
+
+  async adminTogglePublished(id: string): Promise<{ status: string; data: { guide: GuidePost } }> {
+    return this.request(`/api/guides/admin/${id}/toggle`, { method: 'PATCH' }, true);
+  }
+
+  async adminUploadGuideImage(file: File, guideId?: string, oldPublicId?: string): Promise<{ status: string; data: { url: string; publicId: string } }> {
+    if (!this.baseURL) throw new Error('API base URL not configured');
+    const token = this.getAuthToken();
+    const formData = new FormData();
+    formData.append('image', file);
+    if (guideId) formData.append('guideId', guideId);
+    if (oldPublicId) formData.append('oldPublicId', oldPublicId);
+
+    const response = await fetch(`${this.baseURL}/api/guides/admin/upload-image`, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body: formData,
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message || 'Upload failed');
+    return data;
   }
 
   // Chat endpoints

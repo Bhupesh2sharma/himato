@@ -96,7 +96,7 @@ export const QuickActions = ({
                 <div className="p-2 rounded-lg bg-ai-accent/10 border border-ai-accent/20">
                     <Sparkles className="w-5 h-5 text-ai-accent" />
                 </div>
-                <h2 className="text-xl font-bold text-white">Quick Actions</h2>
+                <h2 className="text-xl font-bold text-ai-text">Quick Actions</h2>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -108,11 +108,22 @@ export const QuickActions = ({
                         transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => action.onClick ? action.onClick() : (action.action !== '#' && navigate(action.action))}
-                        className="group relative overflow-hidden bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 rounded-xl p-4 transition-all duration-300 text-left"
+                        className="group relative overflow-hidden bg-ai-card/50 hover:bg-ai-card/80 border border-black/10 hover:border-black/10 rounded-xl p-4 transition-all duration-300"
                     >
-                        <div className={`p-2 rounded-lg bg-gradient-to-br ${action.color} mb-3 w-fit group-hover:scale-110 transition-transform`}>
-                            <action.icon className="w-5 h-5 text-white" />
+                        {/* Gradient background on hover */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+
+                        <div className="relative z-10 flex flex-col items-center text-center">
+                            <div className={`p-3 rounded-xl bg-gradient-to-br ${action.color} mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                                <action.icon className="w-6 h-6 text-white" />
+                            </div>
+
+                            <h3 className="text-ai-text font-semibold text-sm mb-1 group-hover:text-ai-accent transition-colors">
+                                {action.title}
+                            </h3>
+                            <p className="text-ai-muted text-xs">
+                                {action.description}
+                            </p>
                         </div>
                         <h3 className="text-white font-bold text-xs mb-1">{action.title}</h3>
                         <p className="text-ai-muted text-[10px] leading-tight">{action.description}</p>

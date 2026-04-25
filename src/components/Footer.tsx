@@ -3,12 +3,12 @@ import { Globe, Phone, Mail, Building2 } from 'lucide-react';
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-ai-card/30 py-12 px-6 sm:px-12">
+    <footer className="border-t border-black/10 bg-ai-card/30 py-12 px-6 sm:px-12">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-ai-text mb-4">
               <span className="text-ai-accent">Himato</span>
             </h3>
             <p className="text-ai-muted mb-4 leading-relaxed">
@@ -18,7 +18,7 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-ai-text mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -49,7 +49,7 @@ export const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
+            <h4 className="text-lg font-semibold text-ai-text mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-ai-muted">
                 <Globe className="w-5 h-5 text-ai-accent flex-shrink-0" />
@@ -72,7 +72,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-8 text-center">
+        <div className="border-t border-black/10 pt-8 text-center">
           <p className="text-ai-muted text-sm">
             © {new Date().getFullYear()} Waglogy. All rights reserved.
           </p>
