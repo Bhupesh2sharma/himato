@@ -12,6 +12,7 @@ interface User {
   business: boolean;
   businessName?: string;
   isAdmin?: boolean;
+  subscriptionStatus?: 'active' | 'inactive' | 'cancelled' | string;
 }
 
 interface AuthContextType {

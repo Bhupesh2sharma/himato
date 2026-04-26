@@ -13,7 +13,9 @@ import {
     Trash2,
     Check,
     DollarSign,
-    Sparkles
+    FileText,
+    CreditCard,
+    UserPlus
 } from 'lucide-react';
 import { StatsCard } from '../components/dashboard/StatsCard';
 import { RecentActivity } from '../components/dashboard/RecentActivity';

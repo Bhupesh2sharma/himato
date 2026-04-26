@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
     Users, Map, BookOpen, LogIn, TrendingUp, TrendingDown,
-    ShieldCheck, Building2, UserCheck, Globe, Lock, Search, ChevronLeft, ChevronRight, RefreshCw
+    ShieldCheck, Building2, UserCheck, Search, ChevronLeft, ChevronRight, RefreshCw
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { apiClient } from '../services/api';

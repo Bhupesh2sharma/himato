@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import {
     Plus,
     Users,
@@ -82,8 +81,6 @@ export const QuickActions = ({
             onClick: () => alert('Advanced Analytics is coming soon!')
         }
     ];
-
-    const navigate = useNavigate();
 
     return (
         <motion.div

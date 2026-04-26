@@ -25,9 +25,6 @@ export const RevenueChart = ({ data = [] }: RevenueChartProps) => {
     }, [data]);
 
     const maxValue = data.length > 0 ? Math.max(...data.map(d => d.value)) : 0;
-    const avgMonthly = data.length > 0 ? data.reduce((sum, d) => sum + d.value, 0) / data.length : 0;
-    const peakMonth = data.length > 0 ? [...data].sort((a, b) => b.value - a.value)[0] : null;
-
     // Growth rate between first and last month shown
     const growthRate = (data.length > 1 && data[0].value > 0)
         ? ((data[data.length - 1].value - data[0].value) / data[0].value) * 100

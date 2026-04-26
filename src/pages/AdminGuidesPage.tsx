@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Edit2, Trash2, Eye, EyeOff, Upload, X, Save, ImageIcon, Globe, Lock } from 'lucide-react';
+import { Plus, Edit2, Trash2, Upload, X, Save, ImageIcon, Globe, Lock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { apiClient } from '../services/api';
 import type { GuidePost } from '../services/api';
