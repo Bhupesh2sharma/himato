@@ -134,7 +134,7 @@ If the sky clears, the contrast of the black tarmac loops against white snow is 
         shortDescription: "Chasing waterfalls in East Sikkim.",
         description: "The Rangpo Khola river trails lead to hidden cascades. Here's how to find them.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&q=80',
+        image: '/rolepwaterfalls.jpg',
         content: `
 # Rolep: The Waterfall Village
 
@@ -234,7 +234,7 @@ good news: The Pelling Skywalk (Chenrezig Statue) is one of the most accessible 
         shortDescription: "Golden hour at the ancient capital.",
         description: "Why sunset is the magical time to visit the 2nd capital of Sikkim.",
         category: 'History',
-        image: 'https://images.unsplash.com/photo-1599309927653-b0a8bb36ffec?auto=format&fit=crop&q=80',
+        image: '/riverrafting.jpg',
         content: `
 # Golden Ruins: Rabdentse at Dusk
 
@@ -253,7 +253,7 @@ It's a 20-minute jungle walk from the main gate (near Pemayangtse Monastery). Br
         shortDescription: "Optimizing your pilgrimage.",
         description: "Don't just wander aimlessly. Here is the perfect route to cover all 4 Dhams and the Shiva statue.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/chardham.jpg',
         content: `
 # The Chardham Circuit Guide
 
@@ -326,7 +326,7 @@ Famous for its pizzas and the open terrace that faces the Kanchenjunga range dir
         shortDescription: "Remote work with a view.",
         description: "Kaluk offers 180-degree mountain views and surprisingly good Jio/Airtel 4G connectivity.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Kaluk: The Quiet Workstation
 
@@ -367,7 +367,7 @@ Great for budget travelers. It's a bit of a climb from the main road, but the vi
         shortDescription: "Comfortable travel for the elderly.",
         description: "Gangtok staying, Nathula by luxury car, and Pelling skywalk (elevator access). No treks.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # The Senior-Friendly Guide: Relaxation over Exertion
 
@@ -389,7 +389,7 @@ Traveling with seniors requires careful planning. Steep stairs, long walks, and 
         shortDescription: "Surviving the winding roads.",
         description: "Tips for the nausea-prone: Seat selection, medication, and stop-planning for the 6-hour twisted drive.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/tangu.jpeg',
         content: `
 # Beating the Bends: The Lachen Drive
 
@@ -433,7 +433,7 @@ Ask your driver to stop at **Seven Sisters Waterfall** and **Naga Waterfalls**. 
         shortDescription: "Healing waters in the wild.",
         description: "Unlike the commercialized Reshi hot springs, Borong is wild and raw. Here's how to hike there.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/borong.jpg',
         content: `
 # Borong Tsa-Chu: The Hidden Hot Spring
 
@@ -452,7 +452,7 @@ Temporary huts are built by locals in winter (Dec-Feb). You carry your own beddi
         shortDescription: "Closer than Pelling?",
         description: "Why photographers prefer Biksthang (Mangalbarey) over Pelling for mountain shots.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Biksthang: The Mountbatten View
 
@@ -471,7 +471,7 @@ Unlike the bustling Pelling, you might be the only tourist here.
         shortDescription: "Farm life near Rumtek.",
         description: "A slow-travel guide to the terraced paddy fields of Martam.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Martam: The Rice Bowl
 
@@ -489,7 +489,7 @@ Located just below Rumtek Monastery, Martam is lush, green, and quiet.
         shortDescription: "Walking through red forests.",
         description: "Yes! It's the easiest trek in Sikkim. A 4km flat walk through blooming rhododendrons.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',
+        image: '/Dongu.jpg',
         content: `
 # The Red Forest Walk: Barsey
 
@@ -510,7 +510,7 @@ Start from Hilley (reachable by car). Walk 4km on a flat, well-paved path to Gur
         shortDescription: "The Expat/Foreigner Guide.",
         description: "Can foreigners visit Nathula? No. Can they visit North Sikkim? Yes, with rules. The complete breakdown.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&q=80',
+        image: '/gathangvally.jpg',
         content: `
 # Foreigners in Sikkim: What's Allowed?
 
@@ -532,7 +532,7 @@ Free. Get it at the Rangpo border checkpost or online. Allows entry to Gangtok, 
         shortDescription: "Is the upgrade worth it?",
         description: "Standard means shared Sumo and basic wooden cottages. Luxury means Innova and heated hotels. A cost-benefit analysis.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gurudungmar.jpg',
         content: `
 # North Sikkim: Standard vs. Luxury
 
@@ -557,7 +557,7 @@ The price difference is huge (₹3,500 vs ₹15,000 per person). Why?
         shortDescription: "Self-drive rules explained.",
         description: "Driving your own car to Gurudongmar? It's complicated. You need a specific permit from Gangtok.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80',
+        image: '/zuluk.jpg',
         content: `
 # Self-Drive in North Sikkim
 
@@ -581,7 +581,7 @@ Sometimes, local taxi syndicates can be hostile to private cars doing "sightseei
         shortDescription: "Flying over the capital.",
         description: "Understanding the difference between the 10-minute 'Medium' fly and the 30-minute 'High' fly.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&q=80',
+        image: '/fly-sikkim-adventure.jpg',
         content: `
 # Taking Flight: Paragliding in Baliman Dara
 
@@ -606,7 +606,7 @@ Sometimes, local taxi syndicates can be hostile to private cars doing "sightseei
         shortDescription: "White water thrills.",
         description: "Where to find Grade 3+ rapids vs. where to take the family for a gentle float.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1530866495561-eb8fbd97e3ab?auto=format&fit=crop&q=80',
+        image: '/riverrafting.jpg',
         content: `
 # Taming the Teesta: Rafting Guide
 
@@ -647,7 +647,7 @@ If you want the cheap, spicy, greasy version that warms you instantly, head to t
         shortDescription: "Gangtok after dark.",
         description: "Sikkim has a huge rock/blues culture. This is the Mecca for live music.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Live Music Capital: Cafe Live & Loud
 
@@ -669,7 +669,7 @@ Red walls, dim lights, great pork ribs, and the best sound system in town.
         shortDescription: "The wet wilderness guide.",
         description: "Monsoon Sikkim is devastatingly green but filled with bloodsuckers. How to dress and prep.",
         category: 'Seasonal',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Dongu.jpg',
         content: `
 # Monsoon in Sikkim: Mist & Leeches
 
@@ -690,7 +690,7 @@ The waterfalls are roaring monsters. The clouds play tag with the mountains. It'
         shortDescription: "Pink winter is coming.",
         description: "Forget Japan. November in Temi Tea Garden and Ravangla paints the town pink.",
         category: 'Seasonal',
-        image: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Sikkim's Sakura Season
 
@@ -710,7 +710,7 @@ Every November, the Cherry Blossom Festival (usually in Ravangla or Temi) kicks 
         shortDescription: "The wish-fulfilling lake.",
         description: "Why is this lake sacred to both Buddhists and Hindus? And why you shouldn't wish for material things here.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80',
+        image: '/pic_kupup_lake.jpg',
         content: `
 # Khecheopalri: The Lake That Wishes Back
 
@@ -730,7 +730,7 @@ They say birds pick up every leaf that falls onto the lake surface, keeping it p
         shortDescription: "Finding inner peace in Ravangla.",
         description: "A guide to the guest houses and retreat centers around the magnificent Ralong Monastery.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1544634076-a90160ccd682?auto=format&fit=crop&q=80',
+        image: '/tashiding.jpeg',
         content: `
 # Ralong: The Abode of Silence
 
@@ -749,7 +749,7 @@ The monastery guest house allows visitors to stay for meditation retreats.
         shortDescription: "Sip organic tea in the clouds.",
         description: "How to book a tea tasting session at the factory and what brings out the 'muscatel' flavor.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1565120130276-dfbd9a7a3ad7?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Tea Tasting at Temi: The Champagne of Teas
 
@@ -787,7 +787,7 @@ At 5:30 PM, the massive 130ft Buddha statue is illuminated with golden lights. T
         shortDescription: "Sipping creative mixes.",
         description: "Gangtok's nightlife isn't just beer. Discover speakeasy-style bars serving Rhododendron gin cocktails.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Gangtok After Hours: Cocktails & Indie Vibes
 
@@ -806,7 +806,7 @@ Old school charm. The wood-paneled bar feels like a British pub. Great for a qui
         shortDescription: "Living like a local.",
         description: "Where to buy fresh organic veggies, yak cheese, and staples if you are renting an Airbnb.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # The Gangtok Pantry Guide
 
@@ -826,7 +826,7 @@ For your bread, butter, pasta, and toiletries. It's the most stocked supermarket
         shortDescription: "Two-wheeled freedom.",
         description: "Rental agencies, documents needed, and the best roads for a joyride.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Renting Rides in the Hills
 
@@ -847,7 +847,7 @@ Driving a scooter in Gangtok gives you freedom from taxi haggling.
         shortDescription: "Working from West Sikkim.",
         description: "Which networks work in Pelling? Airtel vs Jio speed tests.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Pelling Connectivity Report
 
@@ -867,7 +867,7 @@ Pelling is no longer off the grid.
         shortDescription: "Reliable wheels for families.",
         description: "How to book 'Wagon-R' vs 'Innova' taxis and ensuring you get a sober, safe driver.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Family Transport: Safety First
 
@@ -884,7 +884,7 @@ For a family of 6, you need an **Innova** or **Xylo**. A small car won't fit you
         shortDescription: "Medical advisory for 14,000ft.",
         description: "The risks of HAPE/HACE. Why you should consult a doctor before visiting the border.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gathangvally.jpg',
         content: `
 # Nathula Pass & Hypertension
 
@@ -904,7 +904,7 @@ High altitude constricts blood vessels, naturally raising blood pressure. If you
         shortDescription: "Where to let the kids run.",
         description: "White Hall, Ridge Park, and flower shows. Safe, fenced areas for children.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Gangtok for Little Ones
 
@@ -923,7 +923,7 @@ The entire road is pedestrian-only. Early mornings (before 10 AM) are perfect fo
         shortDescription: "Surviving without meat.",
         description: "North Sikkim food is heavy on pork/chicken. What should vegetarians pack and order?",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/tangu.jpeg',
         content: `
 # Being Veg in the North
 
@@ -944,7 +944,7 @@ Instant noodles (Veg), dry fruits, and biscuits. Remote homestays might only hav
         shortDescription: "No-hike stunning views.",
         description: "Tashi View Point requires climbing. Here are the ones you can drive right up to.",
         category: 'Family',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gurudungmar.jpg',
         content: `
 # Views on Wheels: Accessible Spots
 
@@ -966,7 +966,7 @@ There is a ramp that leads almost all the way to the waterfall base.
         shortDescription: "End of the line in West Sikkim.",
         description: "The gateway to the Singalila trek. Using Uttarey as a quiet base for nature walks.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Uttarey: The Silent Border
 
@@ -986,7 +986,7 @@ It's the starting point for the Chewabhanjyang pass trek to Nepal.
         shortDescription: "The spiritual circle.",
         description: "Kewzing is a birdwatcher's paradise and holds spiritual significance for the Bhutias.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/tashiding.jpeg',
         content: `
 # Kewzing: The Land of Wheat Fields
 
@@ -1005,7 +1005,7 @@ The **Kewzing Home Stay Association** is very organized. You stay with local fam
         shortDescription: "Travel like a local for cheap.",
         description: "How to navigate the synapses of Sikkim's transport network. Where are the stands? How to book a seat?",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80',
+        image: '/zuluk.jpg',
         content: `
 # The Budget Backpacker's Lifeline: Shared Jeeps
 
@@ -1027,7 +1027,7 @@ Sikkim runs on Boleros and Sumos.
         shortDescription: "Cost-sharing hacks.",
         description: "Solo travelers can join 'package groups' to split the cost of the vehicle and permit.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gurudungmar.jpg',
         content: `
 # North Sikkim on a Budget
 
@@ -1050,7 +1050,7 @@ Walk down MG Marg or Tibet Road. Look for boards saying **"North Sikkim Sharing 
         shortDescription: "Freezing survival gear.",
         description: "Thermals aren't enough. You need windbreakers and proper shoes.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gurudungmar.jpg',
         content: `
 # December Packing List
 
@@ -1073,7 +1073,7 @@ Temperatures will range from 10°C (Gangtok day) to -10°C (Gurudongmar morning)
         shortDescription: "Cash is King.",
         description: "There are NO reliable ATMs in North Sikkim. You must withdraw in Gangtok.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/tangu.jpeg',
         content: `
 # The Cash Crisis: North Sikkim
 
@@ -1094,7 +1094,7 @@ UPI (GPay/PhonePe) works in some hotels/shops in Lachen/Lachung if the internet 
         shortDescription: "Finding the state animal.",
         description: "Pangolakha and Kyongnosla are the hotspots. Why you need a naturalist guide.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1543158023-40e947117e3f?auto=format&fit=crop&q=80',
+        image: '/Dongu.jpg',
         content: `
 # Spotting the Fire Cat: Red Panda
 
@@ -1119,7 +1119,7 @@ You cannot spot them from a loud jeep. You need to hike silently with a local na
         shortDescription: "Walking to the Wish Fulfilling Hill.",
         description: "A scenic 2km uphill walk through forests to reach the massive Guru Rinpoche statue.",
         category: 'Spiritual',
-        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Samdruptse: The Copper Colored Mountain
 
@@ -1138,7 +1138,7 @@ Starts from Namchi Helipad. The path cuts through a dense forest of oak and ches
         shortDescription: "The Hermit's Cell.",
         description: "A walk through history (literally) to the first monastery built in 1701.",
         category: 'History',
-        image: 'https://images.unsplash.com/photo-1544634076-a90160ccd682?auto=format&fit=crop&q=80',
+        image: '/tashiding.jpeg',
         content: `
 # Dubdi: The First Gompa
 
@@ -1157,7 +1157,7 @@ Look for the original statues of the three lamas who consecrated the first king 
         shortDescription: "Drinking from bamboo.",
         description: "Tongba or Chang is a warm fermented millet drink. Here is where to try it hygienically.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Chang: The Winter Warmer
 
@@ -1177,7 +1177,7 @@ It's warm water poured over fermented grains. Keep refilling hot water; the tast
         shortDescription: "Staying fit on the road.",
         description: "Don't break your workout streak. Gyms with day passes.",
         category: 'Workation',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Fitness in the Mountains
 
@@ -1194,7 +1194,7 @@ Several studios on the Bypass Road offer drop-in morning classes. The view of Ka
         shortDescription: "Better than Tiger Hill?",
         description: "A community-run viewpoint that offers 360-degree views without the Darjeeling crowds.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Mangalbarey: The Sunrise Spot
 
@@ -1212,7 +1212,7 @@ Locals have built a small watchtower.
         shortDescription: "The hill that saved the Lepchas.",
         description: "Legend says this hill rose like a horn to save people from a great flood. A nature trek through history.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Tendong Lho Rum Fa
 
@@ -1230,7 +1230,7 @@ Locals have built a small watchtower.
         shortDescription: "History of resistance.",
         description: "How the Lepchas poisoned a lake to stop the British invasion. Exploring the historical Poison Lake.",
         category: 'History',
-        image: 'https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # The Poison Lake (Bukhung)
 
@@ -1249,7 +1249,7 @@ Visit the **Rinchenpong Bungalow**, where Rabindranath Tagore once stayed.
         shortDescription: "Archeology in the jungle.",
         description: "An offbeat hike near Singtam to discover ancient ruins and rare butterflies.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&q=80',
+        image: '/Dongu.jpg',
         content: `
 # Sumin & The Gadi Fort
 
@@ -1268,7 +1268,7 @@ The forest is a hotspot for butterflies like the Blue Duke and Kaiser-i-Hind.
         shortDescription: "Sherpa hospitality.",
         description: "Why you should stay in Okhrey village before trekking to Barsey.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/Pelling_Sky_walk.jpg',
         content: `
 # Okhrey: The Rhododendron Base Camp
 
@@ -1286,7 +1286,7 @@ Inhabited by the Sherpa community. You will find "Haryali" (local potato) dishes
         shortDescription: "The spice capital.",
         description: "Walk through miles of large cardamom plantations and learn how the 'black gold' is harvested.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Soreng: The Aroma of Sikkim
 
@@ -1304,7 +1304,7 @@ September-October is harvest season.
         shortDescription: "Below the Mainam Hill.",
         description: "A quiet town known for the Bhaley Dunga cliff and its upcoming ropeway.",
         category: 'Hidden Gem',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/ravangla.jpg',
         content: `
 # Yangang: The future tourism hub?
 
@@ -1322,7 +1322,7 @@ Currently quiet, but famous for the **Bhaley Dunga** rock that protrudes like a 
         shortDescription: "Planning your border run.",
         description: "Nathula is closed Mon/Tue. Why Wednesday is the best day to go.",
         category: 'Logistics',
-        image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&q=80',
+        image: '/gathangvally.jpg',
         content: `
 # Nathula Timing Hacks
 
@@ -1342,7 +1342,7 @@ Sunday is packed with domestic tourists (weekend rush). Wednesday is the first d
         shortDescription: "Climbing natural rocks.",
         description: "Did you know Gangtok has natural climbing faces? Local clubs offer gear and guidance.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/fly-sikkim-adventure.jpg',
         content: `
 # Rock Climbing at Bulbulay
 
@@ -1360,7 +1360,7 @@ Contact the **Sikkim Mountaineering Association** or local adventure outfits.
         shortDescription: "Downhill thrill.",
         description: "A 50km route that takes you from the capital to the tea gardens via winding downhill roads.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1565120130276-dfbd9a7a3ad7?auto=format&fit=crop&q=80',
+        image: '/zuluk.jpg',
         content: `
 # Cycling the Silk Route Spurs
 
@@ -1381,7 +1381,7 @@ The route from Gangtok to Temi via Singtam is thrilling.
         shortDescription: "Catch and Release.",
         description: "You need a permit to fish. Where to find Golden Mahseer and Trout.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/riverrafting.jpg',
         content: `
 # Angling in Sikkim
 
@@ -1402,7 +1402,7 @@ Legship (West Sikkim) on the Rangeet river is the angler's favorite camp.
         shortDescription: "Sleeping under the flowers.",
         description: "Can you pitch your own tent in the sanctuary? Yes, in designated zones.",
         category: 'Adventure',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/yumgthang.jpeg',
         content: `
 # Camping in the Valley of Flowers
 
@@ -1421,7 +1421,7 @@ You cannot camp *anywhere*. The Forest Department has designated spots near the 
         shortDescription: "Dietary inclusive spots.",
         description: "Local fermented foods are naturally vegan. Where to find GF momos?",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # Vegan Sikkim
 
@@ -1442,7 +1442,7 @@ Sikkim is surprisingly vegan-friendly if you know what to order.
         shortDescription: "Funk and flavor.",
         description: "Understanding the smell and taste of Sikkim's superfoods.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1625167359766-1514a586b614?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # The Funk of the North: Gundruk & Sinki
 
@@ -1462,7 +1462,7 @@ Order "Gundruk ko Jhol" (Soup) with rice. It is a probiotic bomb, great for gut 
         shortDescription: "Steamed fluffy bread.",
         description: "Where to get the softest Tingmo (Tibetan bread) to dip in your curry.",
         category: 'Food',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/gangtok-bnnr.jpg',
         content: `
 # The Hunt for Tingmo
 
@@ -1482,7 +1482,7 @@ For desserts, **Loafing Around** and **Baker's Cafe** are the gold standard for 
         shortDescription: "Sikkimese New Year.",
         description: "The Black Hat dance is a spectacle. Catch it at Rumtek or Phodong.",
         category: 'Seasonal',
-        image: 'https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&q=80',
+        image: '/tashiding.jpeg',
         content: `
 # Losoong: The Harvest New Year
 

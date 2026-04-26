@@ -2,10 +2,11 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, MapPin, Calendar, Share2, Sparkles } from 'lucide-react';
+import { ArrowLeft, MapPin, Calendar, Share2, Sparkles, Brain, X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { SEO_TOPICS } from '../data/seoTopics';
 import { apiClient } from '../services/api';
+import { chatWithSherpa } from '../services/ai';
 
 interface GuideTopic {
     id: string;
@@ -22,6 +23,25 @@ export const GuidePage = () => {
     const navigate = useNavigate();
     const [topic, setTopic] = useState<GuideTopic | null>(null);
     const [loading, setLoading] = useState(true);
+    const [showKnowMore, setShowKnowMore] = useState(false);
+    const [knowMoreContent, setKnowMoreContent] = useState('');
+    const [knowMoreLoading, setKnowMoreLoading] = useState(false);
+
+    const handleKnowMore = async () => {
+        if (!topic) return;
+        setShowKnowMore(true);
+        if (knowMoreContent) return; // already fetched
+        setKnowMoreLoading(true);
+        try {
+            const prompt = `Tell me everything about "${topic.title}" in Sikkim, India. Include: its history and cultural significance, best time to visit, how to reach there, local food specialties, accommodation options, must-do activities, hidden local tips, and any permits required. Format with clear markdown headings.`;
+            const response = await chatWithSherpa(prompt);
+            setKnowMoreContent(response);
+        } catch {
+            setKnowMoreContent('Sorry, could not fetch information right now. Please try again.');
+        } finally {
+            setKnowMoreLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (!slug) return;
@@ -119,7 +139,26 @@ export const GuidePage = () => {
                         <ReactMarkdown>{topic.content}</ReactMarkdown>
                     </div>
 
-                    <div className="mt-12 pt-8 border-t border-black/10">
+                    <div className="mt-10 pt-8 border-t border-black/10">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-5 rounded-xl bg-gradient-to-r from-ai-dark/5 to-ai-accent/5 border border-ai-accent/20">
+                            <div className="flex-1">
+                                <h3 className="text-base font-semibold text-ai-text mb-1 flex items-center gap-2">
+                                    <Brain className="w-4 h-4 text-ai-accent" />
+                                    Want to know more?
+                                </h3>
+                                <p className="text-sm text-ai-muted">Let our AI dig deeper — history, tips, food, permits and everything in between.</p>
+                            </div>
+                            <button
+                                onClick={handleKnowMore}
+                                className="flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-xl bg-ai-accent text-white text-sm font-semibold hover:bg-ai-accent/90 transition-colors"
+                            >
+                                <Brain className="w-4 h-4" />
+                                Know More About This
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 pt-8 border-t border-black/10">
                         <h3 className="text-xl font-bold text-ai-text mb-4">Was this guide helpful?</h3>
                         <p className="text-ai-muted mb-6">
                             This is just a starting point. Himato AI can generate a fully personalized itinerary based on this guide, customized to your exact dates and budget.
@@ -191,6 +230,41 @@ export const GuidePage = () => {
             </main>
 
 
+            {/* Know More Modal */}
+            {showKnowMore && (
+                <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowKnowMore(false)} />
+                    <motion.div
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 40 }}
+                        className="relative w-full sm:max-w-2xl max-h-[85vh] bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+                    >
+                        <div className="flex items-center justify-between px-6 py-4 border-b border-black/10 flex-shrink-0">
+                            <div className="flex items-center gap-2">
+                                <Brain className="w-5 h-5 text-ai-accent" />
+                                <span className="font-semibold text-ai-text text-sm">AI Deep Dive</span>
+                            </div>
+                            <button onClick={() => setShowKnowMore(false)} className="p-1.5 rounded-full hover:bg-black/5 transition-colors">
+                                <X className="w-5 h-5 text-ai-muted" />
+                            </button>
+                        </div>
+
+                        <div className="overflow-y-auto flex-1 px-6 py-5">
+                            {knowMoreLoading ? (
+                                <div className="flex flex-col items-center justify-center py-16 gap-4">
+                                    <div className="w-8 h-8 border-2 border-black/10 border-t-ai-accent rounded-full animate-spin" />
+                                    <p className="text-ai-muted text-sm">Gathering everything about {topic.title}…</p>
+                                </div>
+                            ) : (
+                                <div className="prose prose-sm max-w-none prose-headings:text-ai-text prose-headings:font-semibold prose-p:text-ai-muted prose-li:text-ai-muted prose-strong:text-ai-text">
+                                    <ReactMarkdown>{knowMoreContent}</ReactMarkdown>
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
+                </div>
+            )}
         </article>
     );
 };
