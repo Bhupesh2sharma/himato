@@ -3,56 +3,85 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage -->
-  <url>
-    <loc>https://www.himato.in/</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- Main destinations pages (if you add routes later) -->
-  <url>
-    <loc>https://www.himato.in/#gangtok</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.himato.in/#pelling</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.himato.in/#gurudongmar-lake</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.himato.in/#yumthang-valley</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.himato.in/#ravangla</loc>
-    <lastmod>2024-12-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
+
+  <!-- Core Pages -->
+  <url><loc>https://www.himato.in/</loc><lastmod>2026-04-26</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://www.himato.in/hidden-gems</loc><lastmod>2026-04-26</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://www.himato.in/reach_us</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://www.himato.in/terms</loc><lastmod>2026-04-26</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+
+  <!-- Guide Pages -->
+  <url><loc>https://www.himato.in/guide/dzongu-permit-homestay</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/thangu-valley-kids-safety</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gurudongmar-frozen-lake-best-time</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/kupup-lake-day-trip</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/zuluk-hairpin-bends-winter</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/rolep-secret-waterfalls</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gnathang-valley-ladakh-of-east</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/yumesamdong-zero-point-access</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/tashiding-monastery-hike</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/pelling-skywalk-wheelchair</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/rabdentse-ruins-sunset</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/namchi-chardham-guide</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gangtok-work-cafes</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gangtok-rooftop-cafes</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/kaluk-workation-homestays</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gangtok-coworking-hostels</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/senior-citizen-itinerary</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gangtok-lachen-motion-sickness</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/pelling-vs-ravangla-elderly</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/borong-hot-springs</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/biksthang-kanchenjunga-view</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/martam-village-tour</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/barsey-rhododendron-trek</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/foreign-nationals-permit</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/luxury-vs-standard-north-sikkim</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/delhi-car-north-sikkim</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/paragliding-gangtok-prices</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/river-rafting-teesta</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/best-thukpa-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/cafe-live-loud</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/sikkim-monsoon-leeches</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/cherry-blossom-sikkim</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/khecheopalri-lake-myth</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/ralong-monastery-retreats</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/temi-tea-tasting</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/buddha-park-evening-prayer</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/cocktail-bars-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/grocery-shopping-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/rent-scooter-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/pelling-internet-speed</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/safest-cabs-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/nathula-blood-pressure</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/parks-for-toddlers</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/vegetarian-north-sikkim</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/accessible-viewpoints-sikkim</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/uttarey-exploration</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/kewzing-monasteries</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/shared-taxis-guide</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/group-travel-savings</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/packing-december</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/atm-lachen-lachung</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/red-panda-sighting</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/samdruptse-hill-hike</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/dubdi-monastery-history</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/authentic-chang-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gyms-yoga-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/mangalbarey-dara-sunrise</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/tendong-hill-trek</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/rinchenpong-poison-lake</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/sumin-reserve-forest</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/okhrey-varsey-gateway</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/soreng-cardamom</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/yangang-hidden-gem</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/nathula-permit-wed-sun</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/rock-climbing-bulbulay</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/mountain-biking-gangtok-temi</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/river-fishing-rangeet</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/camping-yumthang-valley</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/vegan-gluten-free-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/gundruk-sinki-guide</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/best-bakeries-gangtok</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.himato.in/guide/losoong-festival</loc><lastmod>2026-04-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
 </urlset>
-
-
-
-
-
-
-
