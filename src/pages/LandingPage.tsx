@@ -31,12 +31,12 @@ export function LandingPage() {
                         transition={{ duration: 0.8 }}
                     >
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none mb-6">
-                            DISCOVER <br />
-                            <span className="text-shimmer">SIKKIM</span>
+                        PLAN <span className="text-shimmer">SIKKIM</span><br />
+                        IN 60 SECONDS
                         </h1>
 
                         <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-                            Personalised itineraries, hidden valleys, and local insights — powered by AI.
+                        AI-built itineraries with permits, hidden valleys, and the spots blogs miss. Free, no signup.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

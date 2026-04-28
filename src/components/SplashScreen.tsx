@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react';
 
 export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
     useEffect(() => {
-        const timer = setTimeout(onComplete, 3000); // 3 seconds total display time
+        const timer = setTimeout(onComplete, 1000); // 3 seconds total display time
         return () => clearTimeout(timer);
     }, [onComplete]);
 

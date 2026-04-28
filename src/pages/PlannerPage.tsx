@@ -19,8 +19,12 @@ export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
-    const [showSplash, setShowSplash] = useState(true);
-    const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
+    const [showSplash, setShowSplash] = useState(() => {
+        const seen = localStorage.getItem('himato_splash_seen');
+        if (seen) return false;
+        localStorage.setItem('himato_splash_seen', '1');
+        return true;
+      });    const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
     const [isSearching, setIsSearching] = useState(false);
     const [itineraryData, setItineraryData] = useState(null);
     const [routeData, setRouteData] = useState<{ days: Array<any> } | null>(null);
