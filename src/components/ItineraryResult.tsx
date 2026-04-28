@@ -7,7 +7,7 @@ import { BusinessShareModal } from './BusinessShareModal';
 import { ItineraryMap } from './ItineraryMap';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-
+import { track } from "../utils/analytics"
 interface Activity {
     time: string;
     title: string;
@@ -284,6 +284,8 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
             const url = encodeItineraryToUrl(data);
             await navigator.clipboard.writeText(url);
             setShared(true);
+            track('share_link_copied', { itinerary_id: itineraryId ?? 'guest' });
+
             setTimeout(() => setShared(false), 2000);
         } catch (err) {
             console.error('Failed to share:', err);

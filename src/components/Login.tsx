@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { track } from '../utils/analytics';
 
 interface LoginProps {
   onSuccess?: () => void;
@@ -30,10 +31,12 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    track('signup_started');
     setIsLoading(true);
 
     try {
       await login({ email, password });
+      track('signup_completed');
       onSuccess?.();
       navigate('/');
     } catch (err: any) {

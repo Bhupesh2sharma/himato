@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Lock, User, Phone, Building2, Check, AlertCircle, Eye, EyeOff, CheckCircle2, LogIn } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import { track } from '../utils/analytics';
 
 interface RegisterProps {
   onSuccess?: () => void;
@@ -38,6 +39,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    track('signup_started');
 
     if (!formData.acceptTermsAndConditions) {
       setError('Please accept the Terms and Conditions to continue.');
@@ -51,6 +53,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
         ...formData,
         businessName: formData.business ? formData.businessName : '',
       });
+      track('signup_completed');
       // Show success message
       setRegisteredEmail(formData.email);
       setShowSuccess(true);

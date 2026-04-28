@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { ItineraryResult } from '../components/ItineraryResult';
 import { ClientItineraryView } from '../components/ClientItineraryView';
+import { track } from '../utils/analytics';
 
 import { BookingOptions } from '../components/BookingOptions';
 import { SplashScreen } from '../components/SplashScreen';
@@ -99,6 +100,10 @@ export function PlannerPage() {
             setRouteData(route);
             setItineraryId(id || null);
             setView('results');
+            track('itinerary_generated', {
+                is_business: isBusiness,
+                prompt_length: prompt.length,
+              });
         } catch (err: any) {
             console.error(err);
             setError(err.message || 'Failed to generate plan. Please try again.');
