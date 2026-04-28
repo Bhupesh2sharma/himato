@@ -11,10 +11,11 @@ import { AILoadingState } from '../components/AILoadingState';
 import { SikkimSherpa } from '../components/SikkimSherpa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from '../services/ai';
-import { decodeItineraryFromUrl } from '../utils/sharing';
+import { decodeItineraryFromUrl, encodeItineraryToUrl } from '../utils/sharing';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { LogIn, UserPlus, AlertTriangle, Sparkles } from 'lucide-react';
+import { Link as LinkIcon, Mail, Check } from 'lucide-react';
+import { EmailItineraryCapture } from '../components/EmailItineraryCapture';
 
 export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
@@ -32,6 +33,33 @@ export function PlannerPage() {
     const [itineraryId, setItineraryId] = useState<string | null>(null);
     const [error, setError] = useState('');
     const [showExitConfirm, setShowExitConfirm] = useState(false);
+    const [modalShareCopied, setModalShareCopied] = useState(false);
+
+    const copyShareLinkFromModal = async () => {
+        if (!itineraryData) return;
+        try {
+            const url = encodeItineraryToUrl(itineraryData);
+            await navigator.clipboard.writeText(url);
+            track('share_link_copied', {
+                itinerary_id: itineraryId ?? 'guest',
+                location: 'exit_modal',
+            });
+            setModalShareCopied(true);
+            setTimeout(() => setModalShareCopied(false), 2500);
+        } catch (err) {
+            console.error('Failed to copy share link:', err);
+        }
+    };
+
+    const scrollToEmailCapture = () => {
+        setShowExitConfirm(false);
+        // Defer to next paint so the modal can dismiss before we scroll
+        requestAnimationFrame(() => {
+            document
+                .getElementById('email-capture')
+                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    };
 
     useEffect(() => {
         // Check for shared itinerary in URL relative to planner
@@ -162,43 +190,9 @@ export function PlannerPage() {
                                         <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} />
                                         {itineraryData && <BookingOptions />}
 
-                                        {/* Login Reminder at the end for guests */}
-                                        {view === 'results' && !isAuthenticated && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: 20 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                className="mt-16 p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-ai-secondary/20 to-ai-accent/5 border border-ai-accent/20 text-center relative overflow-hidden"
-                                            >
-                                                <div className="absolute top-0 right-0 p-8 opacity-5">
-                                                    <Sparkles className="w-32 h-32 text-ai-accent" />
-                                                </div>
-                                                <div className="relative z-10 max-w-2xl mx-auto">
-                                                    <h3 className="text-2xl sm:text-3xl font-bold text-ai-text mb-4">
-                                                        Don't Lose Your Adventure! 🏔️
-                                                    </h3>
-                                                    <p className="text-ai-muted mb-8 text-sm sm:text-base">
-                                                        You're viewing a guest itinerary. Significant changes or local saves require an account.
-                                                        Join our community to save this plan forever and access exclusive Himalayan guides.
-                                                    </p>
-                                                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                                        <button
-                                                            onClick={() => navigate('/login')}
-                                                            className="px-8 py-3 bg-ai-accent hover:bg-ai-secondary text-white rounded-full font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
-                                                        >
-                                                            <LogIn className="w-4 h-4" />
-                                                            Log In to Save
-                                                        </button>
-                                                        <button
-                                                            onClick={() => navigate('/register')}
-                                                            className="px-8 py-3 bg-black/5 hover:bg-black/5 border border-black/10 text-ai-text rounded-full font-bold transition-all hover:scale-105 flex items-center justify-center gap-2"
-                                                        >
-                                                            <UserPlus className="w-4 h-4" />
-                                                            Create Free Account
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </motion.div>
+                                        {/* Email-PDF capture for guests (replaces the old login wall) */}
+                                        {view === 'results' && !isAuthenticated && itineraryData && (
+                                            <EmailItineraryCapture itineraryData={itineraryData} />
                                         )}
                                         <div className="mt-12 sm:mt-20">
                                             {/* <SikkimShowcase /> */}
@@ -229,25 +223,41 @@ export function PlannerPage() {
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             className="relative w-full max-w-md bg-ai-card border border-black/10 rounded-3xl p-6 sm:p-8 shadow-2xl"
                         >
-                            <div className="flex items-center gap-4 text-amber-500 mb-6 font-bold">
-                                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20">
-                                    <AlertTriangle className="w-6 h-6" />
+                            <div className="flex items-center gap-3 text-ai-accent mb-5 font-semibold text-sm tracking-wide uppercase">
+                                <div className="p-2.5 rounded-xl bg-ai-accent/10 border border-ai-accent/20">
+                                    <Mail className="w-5 h-5" />
                                 </div>
-                                <span>Unsaved Changes</span>
+                                <span>Before you go</span>
                             </div>
-                            <h3 className="text-xl sm:text-2xl font-bold text-ai-text mb-4">
-                                Wait, don't leave yet!
+                            <h3 className="text-xl sm:text-2xl font-bold text-ai-text mb-3">
+                                Don't lose this itinerary
                             </h3>
-                            <p className="text-ai-muted mb-8 text-sm sm:text-base">
-                                You are not logged in. If you go back now, your generated itinerary will be **permanently lost**.
-                                Would you like to log in first?
+                            <p className="text-ai-muted mb-7 text-sm sm:text-base">
+                                Take it with you — copy a share link, or get a printable PDF in your inbox. Both work without an account.
                             </p>
                             <div className="flex flex-col gap-3">
                                 <button
-                                    onClick={() => navigate('/login')}
-                                    className="w-full py-4 bg-ai-accent hover:bg-ai-secondary text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
+                                    onClick={copyShareLinkFromModal}
+                                    className="w-full py-3.5 bg-ai-accent hover:bg-ai-secondary text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
                                 >
-                                    Log In & Save Itinerary
+                                    {modalShareCopied ? (
+                                        <>
+                                            <Check className="w-4 h-4" />
+                                            Link copied to clipboard
+                                        </>
+                                    ) : (
+                                        <>
+                                            <LinkIcon className="w-4 h-4" />
+                                            Copy share link
+                                        </>
+                                    )}
+                                </button>
+                                <button
+                                    onClick={scrollToEmailCapture}
+                                    className="w-full py-3.5 bg-black/5 hover:bg-black/10 border border-black/10 text-ai-text rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
+                                >
+                                    <Mail className="w-4 h-4" />
+                                    Email me the PDF
                                 </button>
                                 <button
                                     onClick={() => {
@@ -255,9 +265,9 @@ export function PlannerPage() {
                                         navigate('/');
                                         setView('home');
                                     }}
-                                    className="w-full py-4 bg-black/5 hover:bg-black/5 text-ai-text/40 hover:text-ai-text rounded-2xl font-medium transition-all"
+                                    className="w-full py-3 text-ai-muted hover:text-ai-text rounded-2xl text-sm font-medium transition-all"
                                 >
-                                    I'm okay with losing it
+                                    Leave anyway
                                 </button>
                             </div>
                         </motion.div>
