@@ -91,7 +91,11 @@ function App() {
   const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/admin'];
   const isKnownPath = knownPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
 
-  const isSharedView = location.pathname.startsWith('/share/') || (!isKnownPath && location.pathname !== '/');
+  // Treat URLs carrying a ?plan= payload (legacy long-form share links) as
+  // shared-view too — the LandingPage renders ClientItineraryView in that
+  // case, so we don't want the marketing nav/footer wrapping it.
+  const hasInlinePlan = new URLSearchParams(location.search).has('plan');
+  const isSharedView = location.pathname.startsWith('/share/') || hasInlinePlan || (!isKnownPath && location.pathname !== '/');
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
   const isTermsPage = location.pathname === '/terms';
 

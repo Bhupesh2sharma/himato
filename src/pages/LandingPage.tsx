@@ -5,11 +5,21 @@ import { ArrowRight } from 'lucide-react';
 import { LocalInsights } from '../components/LocalInsights';
 import { useAuth } from '../contexts/AuthContext';
 import { HiddenGemsLeadMagnet } from '../components/HiddenGemsLeadMagnet';
+import { decodeItineraryFromUrl } from '../utils/sharing';
+import { ClientItineraryView } from '../components/ClientItineraryView';
 
 
 export function LandingPage() {
     const navigate = useNavigate();
     const { isAuthenticated } = useAuth();
+
+    // Backwards-compat: legacy share URLs land at /?plan=... — render the
+    // dedicated client view instead of the marketing hero so the experience
+    // is identical to the new slug-based shares.
+    const sharedPlan = decodeItineraryFromUrl();
+    if (sharedPlan) {
+        return <ClientItineraryView data={sharedPlan} />;
+    }
 
     return (
         <div className="min-h-screen text-white selection:bg-ai-accent/30 overflow-x-hidden" style={{ background: '#0e1116' }}>

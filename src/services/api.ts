@@ -193,6 +193,29 @@ class ApiClient {
     });
   }
 
+  /**
+   * Create a shareable itinerary record without requiring a prior /generate
+   * step. Used by BusinessShareModal so guests (and logged-out agents) can
+   * still produce short slug URLs instead of long ?plan= blobs.
+   *
+   * Backend contract (POST /api/itinerary/share, no auth required):
+   *   request:  { itineraryData, slug, isOneTime?: boolean }
+   *   response: { status: 'success', data: { itinerary: { _id, slug, ... } } }
+   *
+   * If the endpoint isn't implemented yet, this rejects with a 404, which
+   * the caller handles by falling back to the legacy long URL.
+   */
+  async createSharedItinerary(data: {
+    itineraryData: any;
+    slug: string;
+    isOneTime?: boolean;
+  }): Promise<{ status: string; data: { itinerary: { _id: string; slug: string } } }> {
+    return this.request('/api/itinerary/share', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
   // Admin analytics
   async getAdminAnalytics(): Promise<any> {
     return this.request('/api/admin/analytics', {}, true);

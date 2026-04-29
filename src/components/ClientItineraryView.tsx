@@ -15,7 +15,7 @@ import {
     Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
-import { heroImageForItinerary, imageForLocation } from '../utils/locationImages';
+import { heroImageForItinerary } from '../utils/locationImages';
 
 // --- Types ---
 interface Activity {
@@ -39,6 +39,7 @@ interface ClientItineraryViewProps {
         contactNumber?: string;
         brandColor?: string;
         brandLogo?: string; // base64 data URL, optional
+        customHeroImage?: string; // base64 or URL — overrides auto-picked hero
         welcomeNote?: string;
         pricing?: {
             total?: string;
@@ -78,7 +79,7 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
     const hasAgentBranding = Boolean(data.businessName || data.agentName);
     const accentColor = data.brandColor || '#22C55E';
     const rgbAccent = hexToRgb(accentColor);
-    const heroImage = heroImageForItinerary(data);
+    const heroImage = data.customHeroImage || heroImageForItinerary(data);
 
     // Build a clean list of "includes" chips out of pricing.includes (split by commas / pipes / newlines).
     const includesList: string[] = (data.pricing?.includes ?? '')
@@ -350,71 +351,43 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                     </div>
                 </div>
 
-                {/* Timeline with photo cards */}
-                <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-6 py-4">
-                    {day.activities.map((activity, i) => {
-                        const photo = imageForLocation(activity.location || activity.title);
-                        return (
-                            <div key={i} className="relative pl-8 md:pl-12 group">
-                                {/* Dot */}
-                                <div
-                                    className="absolute -left-[5px] top-3 w-2.5 h-2.5 rounded-full border border-[#050505] transition-all duration-300 group-hover:scale-150"
-                                    style={{ backgroundColor: i === 0 ? accentColor : '#333' }}
-                                />
+                {/* Timeline — text-only activity cards */}
+                <div className="relative border-l border-white/10 ml-3 md:ml-6 space-y-5 py-4">
+                    {day.activities.map((activity, i) => (
+                        <div key={i} className="relative pl-8 md:pl-12 group">
+                            {/* Dot */}
+                            <div
+                                className="absolute -left-[5px] top-4 w-2.5 h-2.5 rounded-full border border-[#050505] transition-all duration-300 group-hover:scale-150"
+                                style={{ backgroundColor: i === 0 ? accentColor : '#333' }}
+                            />
 
-                                {/* Card */}
-                                <div className="bg-[#111] hover:bg-[#161616] border border-white/5 hover:border-white/10 rounded-2xl overflow-hidden hover:translate-x-1 transition-all duration-300">
-                                    {/* Photo strip */}
-                                    <div className="relative aspect-[16/8] w-full overflow-hidden">
-                                        <img
-                                            src={photo}
-                                            alt={activity.location || activity.title}
-                                            loading="lazy"
-                                            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
-                                            onError={(e) => {
-                                                (e.currentTarget as HTMLImageElement).style.display = 'none';
-                                            }}
-                                        />
-                                        <div
-                                            className="absolute inset-0"
-                                            style={{
-                                                background:
-                                                    'linear-gradient(to top, rgba(17,17,17,0.95) 0%, rgba(17,17,17,0.45) 45%, transparent 100%)',
-                                            }}
-                                        />
-                                        <div className="absolute top-3 right-3">
-                                            <span
-                                                className="px-2.5 py-1 rounded-full text-[11px] font-mono font-medium backdrop-blur"
-                                                style={{
-                                                    background: `rgba(${rgbAccent}, 0.18)`,
-                                                    color: accentColor,
-                                                    border: `1px solid rgba(${rgbAccent}, 0.4)`,
-                                                }}
-                                            >
-                                                {activity.time}
-                                            </span>
-                                        </div>
-                                        <div className="absolute bottom-3 left-3 right-3">
-                                            <h3 className="font-bold text-lg text-white leading-tight drop-shadow-lg">
-                                                {activity.title}
-                                            </h3>
-                                        </div>
-                                    </div>
-
-                                    {/* Body */}
-                                    <div className="p-5">
-                                        <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                                            {activity.description}
-                                        </p>
-                                        <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
-                                            <MapPin className="w-3 h-3" />
-                                            {activity.location}
-                                        </div>
-                                    </div>
+                            {/* Card — clean text design */}
+                            <div className="bg-[#111] hover:bg-[#161616] border border-white/5 hover:border-white/10 rounded-2xl p-5 hover:translate-x-1 transition-all duration-300">
+                                <div className="flex items-start justify-between gap-3 mb-2">
+                                    <h3 className="font-bold text-lg text-white leading-snug flex-1">
+                                        {activity.title}
+                                    </h3>
+                                    <span
+                                        className="flex-none text-[11px] font-mono font-medium px-2.5 py-1 rounded-full"
+                                        style={{
+                                            background: `rgba(${rgbAccent}, 0.14)`,
+                                            color: accentColor,
+                                            border: `1px solid rgba(${rgbAccent}, 0.35)`,
+                                        }}
+                                    >
+                                        {activity.time}
+                                    </span>
+                                </div>
+                                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                                    {activity.description}
+                                </p>
+                                <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
+                                    <MapPin className="w-3 h-3" />
+                                    {activity.location}
                                 </div>
                             </div>
-                        );
-                    })}
+                        </div>
+                    ))}
                 </div>
             </motion.div>
         );
