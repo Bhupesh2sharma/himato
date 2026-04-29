@@ -355,7 +355,7 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
                                         inputCls={inputCls}
                                         logoInputRef={logoInputRef}
                                         heroInputRef={heroInputRef}
-                                        onLogoUpload={(file) =>
+                                        onLogoUpload={(file: File) =>
                                             readImageAsBase64(
                                                 file,
                                                 MAX_LOGO_BYTES,
@@ -363,7 +363,7 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
                                                 (b64) => setFormData((p) => ({ ...p, brandLogo: b64 }))
                                             )
                                         }
-                                        onHeroUpload={(file) =>
+                                        onHeroUpload={(file: File) =>
                                             readImageAsBase64(
                                                 file,
                                                 MAX_HERO_BYTES,
