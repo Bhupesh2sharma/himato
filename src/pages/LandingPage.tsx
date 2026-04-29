@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { LocalInsights } from '../components/LocalInsights';
 import { useAuth } from '../contexts/AuthContext';
+import { HiddenGemsLeadMagnet } from '../components/HiddenGemsLeadMagnet';
 
 
 export function LandingPage() {
@@ -70,6 +71,9 @@ export function LandingPage() {
             </div>
 
             {/* <SikkimShowcase /> */}
+
+            {/* Floating lead-magnet pill (cold-traffic email capture) */}
+            <HiddenGemsLeadMagnet />
         </div>
     );
 }
