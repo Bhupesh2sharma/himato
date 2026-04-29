@@ -90,23 +90,6 @@ export const AILoadingState = () => {
                 </div>
             </div>
 
-            {/* Bottom trail */}
-            <div className="fixed bottom-0 left-0 right-0 h-20 overflow-hidden pointer-events-none">
-                <motion.div
-                    animate={{ x: ['-100%', '110%'] }}
-                    transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
-                    className="absolute top-1/2 flex items-center gap-8"
-                    style={{ color: 'rgba(47,74,58,0.2)' }}
-                >
-                    {[Mountain, Tent, Camera, Compass, Mountain, Tent, Camera].map((I, i) => (
-                        <I key={i} size={28} />
-                    ))}
-                </motion.div>
-            </div>
-
-            <p className="fixed bottom-8 text-[11px] tracking-[0.2em] uppercase text-ai-muted/60 font-medium">
-                Pro tip: Don't forget to try the Butter Tea!
-            </p>
         </div>
     );
 };
