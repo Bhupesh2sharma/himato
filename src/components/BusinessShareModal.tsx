@@ -577,7 +577,7 @@ function BrandingForm({
                             }
                         >
                             {formData.brandLogo ? (
-                                <img src={formData.brandLogo} alt="logo preview" className="w-full h-full object-cover" />
+                                <img src={formData.brandLogo} alt="logo preview" className="w-full h-full object-contain p-1" />
                             ) : (
                                 <span className="text-xl font-bold text-white">
                                     {(formData.agentName?.[0] || formData.businessName?.[0] || 'A').toUpperCase()}
@@ -892,7 +892,7 @@ function InlineSharePreview({
                         <img
                             src={data.brandLogo}
                             alt="logo"
-                            className="w-7 h-7 rounded-lg object-cover bg-white"
+                            className="w-7 h-7 rounded-lg object-contain bg-white p-0.5"
                         />
                     ) : (
                         <div
@@ -1023,7 +1023,7 @@ function InlineSharePreview({
                                 <img
                                     src={data.brandLogo}
                                     alt="logo"
-                                    className="w-6 h-6 rounded-md object-cover bg-white"
+                                    className="w-6 h-6 rounded-md object-contain bg-white p-0.5"
                                 />
                             ) : (
                                 <div

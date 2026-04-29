@@ -599,7 +599,7 @@ function AgencyAvatar({
             <img
                 src={logo}
                 alt={businessName || 'Agency logo'}
-                className="rounded-lg object-cover bg-white"
+                className="rounded-lg object-contain bg-white p-0.5"
                 style={{ width: size, height: size }}
             />
         );
