@@ -290,21 +290,6 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                 </button>
             </div>
 
-            {/* Himato CTA — converts the recipient client into a future Himato user */}
-            <div className="flex justify-center pt-6">
-                <a
-                    href="https://himato.in/chat"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs"
-                >
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                    <span className="text-gray-400">
-                        Want to plan your own trip?{' '}
-                        <span className="text-white font-medium">Build one free at himato.in →</span>
-                    </span>
-                </a>
-            </div>
         </motion.div>
     );
 
@@ -461,18 +446,41 @@ export const ClientItineraryView = ({ data }: ClientItineraryViewProps) => {
                         <span className="font-bold text-sm tracking-wide text-gray-400">Itinerary</span>
                     )}
                 </div>
-                <button
-                    onClick={() =>
-                        navigator.share?.({
-                            title: data.businessName ? `${data.businessName} — Sikkim Itinerary` : 'My Sikkim Itinerary',
-                            url: window.location.href,
-                        })
-                    }
-                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
-                    aria-label="Share itinerary"
-                >
-                    <Share2 className="w-4 h-4 text-white" />
-                </button>
+                <div className="flex items-center gap-2">
+                    <a
+                        href="https://himato.in/chat"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-[11px] font-medium text-gray-300 hover:text-white"
+                        title="Plan your own Sikkim trip"
+                    >
+                        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                        Plan yours free at <span className="text-white font-bold">himato.in</span>
+                    </a>
+                    <a
+                        href="https://himato.in/chat"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="sm:hidden inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-[10px] font-bold text-white"
+                        title="Plan your own Sikkim trip"
+                    >
+                        himato.in
+                    </a>
+                    <button
+                        onClick={() =>
+                            navigator.share?.({
+                                title: data.businessName
+                                    ? `${data.businessName} — Sikkim Itinerary`
+                                    : 'My Sikkim Itinerary',
+                                url: window.location.href,
+                            })
+                        }
+                        className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
+                        aria-label="Share itinerary"
+                    >
+                        <Share2 className="w-4 h-4 text-white" />
+                    </button>
+                </div>
             </header>
 
             {/* Main Content (Scrollable) */}
