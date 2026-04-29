@@ -13,6 +13,7 @@ import { GuidePage } from './pages/GuidePage';
 import { HiddenGemsPage } from './pages/HiddenGemsPage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
+import { GuidesIndexPage } from './pages/GuidesIndexPage';
 import { B2BDashboard } from './pages/B2BDashboard';
 import { AdminGuidesPage } from './pages/AdminGuidesPage';
 import { AdminDashboard } from './pages/AdminDashboard';
@@ -87,7 +88,7 @@ function SharedItineraryPage() {
 
 function App() {
   const location = useLocation();
-  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/admin'];
+  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/admin'];
   const isKnownPath = knownPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
 
   const isSharedView = location.pathname.startsWith('/share/') || (!isKnownPath && location.pathname !== '/');
@@ -113,6 +114,7 @@ function App() {
         <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route path="/guide/:slug" element={<GuidePage />} />
+        <Route path="/guides" element={<GuidesIndexPage />} />
         <Route path="/hidden-gems" element={<HiddenGemsPage />} />
 
         {/* Custom Slug Route - Should be near the end to avoid clashing with static paths */}
