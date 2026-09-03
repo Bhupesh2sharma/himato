@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 
 export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
     useEffect(() => {
@@ -33,13 +32,11 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.8 }}
                     >
-                        <Sparkles className="w-8 h-8 text-ai-accent" />
-                        <h1
-                            className="text-6xl md:text-8xl font-bold tracking-tighter text-ai-text"
-                            style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 500 }}
-                        >
-                            Himato
-                        </h1>
+                        <img
+                            src="/logo-trimmed.png"
+                            alt="Himato"
+                            className="h-16 md:h-24 w-auto"
+                        />
                     </motion.div>
 
                     <motion.p

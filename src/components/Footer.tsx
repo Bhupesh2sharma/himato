@@ -8,9 +8,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
           <div>
-            <h3 className="text-2xl font-bold text-ai-text mb-4">
-              <span className="text-ai-accent">Himato</span>
-            </h3>
+            <img src="/logo-trimmed.png" alt="Himato" className="h-9 w-auto mb-4" />
             <p className="text-ai-muted mb-4 leading-relaxed">
               Your AI-powered travel planner for Sikkim. Discover hidden gems and plan the perfect Himalayan adventure.
             </p>

@@ -21,7 +21,7 @@ export default {
             },
             fontFamily: {
                 sans:    ['Inter', 'sans-serif'],
-                display: ['Fraunces', 'Georgia', 'serif'],
+                display: ['Poppins', 'Inter', 'sans-serif'],
                 mono:    ['JetBrains Mono', 'monospace'],
             },
             animation: {

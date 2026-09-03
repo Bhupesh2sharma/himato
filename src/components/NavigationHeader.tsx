@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, ChevronDown, Building2, Sparkles, Clock, ShieldCheck } from 'lucide-react';
+import { User, LogOut, ChevronDown, Building2, Clock, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 export const NavigationHeader = () => {
@@ -31,10 +31,14 @@ export const NavigationHeader = () => {
           {/* Logo/Home Link */}
           <Link
             to="/"
-            className="flex items-center gap-2 text-xl font-bold hover:opacity-80 transition-opacity"
+            className="flex items-center hover:opacity-80 transition-opacity"
+            aria-label="Himato home"
           >
-            <Sparkles className={`w-5 h-5 ${onDark ? 'text-white/80' : 'text-ai-accent'}`} />
-            <span className={onDark ? 'text-white' : 'text-ai-accent'}>Himato</span>
+            <img
+              src="/logo-trimmed.png"
+              alt="Himato"
+              className={`h-8 w-auto ${onDark ? 'brightness-0 invert' : ''}`}
+            />
           </Link>
 
           {/* Auth Section */}
