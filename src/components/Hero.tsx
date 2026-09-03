@@ -117,10 +117,18 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
 
     return (
         <header className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16" role="banner">
-            {/* Background Elements */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-ai-secondary/20 rounded-full blur-[100px] animate-pulse-slow" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-ai-accent/20 rounded-full blur-[100px] animate-pulse-slow delay-1000" />
+            {/* Background — Himalayan topographic contour map + soft warmth */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.13]"
+                    style={{
+                        backgroundImage: 'url(/topo.svg)',
+                        maskImage: 'radial-gradient(125% 85% at 50% 38%, transparent 0%, transparent 30%, black 72%)',
+                        WebkitMaskImage: 'radial-gradient(125% 85% at 50% 38%, transparent 0%, transparent 30%, black 72%)',
+                    }}
+                />
+                <div className="absolute -top-32 -left-24 w-[34rem] h-[34rem] rounded-full bg-ai-accent/10 blur-[130px]" />
+                <div className="absolute -bottom-40 -right-24 w-[34rem] h-[34rem] rounded-full bg-ai-saffron/[0.06] blur-[130px]" />
             </div>
 
             <div className="relative z-10 w-full max-w-2xl px-4 text-center">
