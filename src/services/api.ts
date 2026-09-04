@@ -292,6 +292,55 @@ class ApiClient {
     return this.request('/api/leads/read', { method: 'POST' }, true);
   }
 
+  // Generic image upload → R2 (branding logos, hero images). Requires auth.
+  async uploadImage(file: File, folder?: string): Promise<{ status: string; data: { url: string; key: string } }> {
+    if (!this.baseURL) throw new Error('API base URL not configured');
+    const token = this.getAuthToken();
+    const fd = new FormData();
+    fd.append('file', file);
+    if (folder) fd.append('folder', folder);
+    const res = await fetch(`${this.baseURL}/api/uploads/image`, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Upload failed');
+    return data;
+  }
+
+  // ── Drivers roster (agent, auth) ──
+  async getDrivers(): Promise<{ status: string; data: { drivers: any[] } }> {
+    return this.request('/api/drivers', {}, true);
+  }
+  async createDriver(data: any): Promise<{ status: string; data: { driver: any } }> {
+    return this.request('/api/drivers', { method: 'POST', body: JSON.stringify(data) }, true);
+  }
+  async updateDriver(id: string, data: any): Promise<{ status: string; data: { driver: any } }> {
+    return this.request(`/api/drivers/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
+  }
+  async deleteDriver(id: string): Promise<{ status: string }> {
+    return this.request(`/api/drivers/${id}`, { method: 'DELETE' }, true);
+  }
+  async uploadDriverDocument(id: string, file: File, label?: string): Promise<{ status: string; data: { document: any } }> {
+    if (!this.baseURL) throw new Error('API base URL not configured');
+    const token = this.getAuthToken();
+    const fd = new FormData();
+    fd.append('file', file);
+    if (label) fd.append('label', label);
+    const res = await fetch(`${this.baseURL}/api/drivers/${id}/documents`, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Upload failed');
+    return data;
+  }
+  async deleteDriverDocument(id: string, docId: string): Promise<{ status: string }> {
+    return this.request(`/api/drivers/${id}/documents/${docId}`, { method: 'DELETE' }, true);
+  }
+
   // Admin analytics
   async getAdminAnalytics(): Promise<any> {
     return this.request('/api/admin/analytics', {}, true);

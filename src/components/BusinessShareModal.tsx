@@ -18,6 +18,7 @@ import {
 import { useState, useEffect, useRef, useMemo } from 'react';
 import type { KeyboardEvent } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
+import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { heroImageForItinerary } from '../utils/locationImages';
 
@@ -62,6 +63,8 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
     const [copied, setCopied] = useState(false);
     const [logoError, setLogoError] = useState('');
     const [heroError, setHeroError] = useState('');
+    const [logoUploading, setLogoUploading] = useState(false);
+    const [heroUploading, setHeroUploading] = useState(false);
 
     const brandColors = [
         { name: 'Forest Moss', value: '#2f4a3a' },
@@ -169,6 +172,35 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
         const reader = new FileReader();
         reader.onload = () => onOk(String(reader.result || ''));
         reader.readAsDataURL(file);
+    };
+
+    /**
+     * Signed-in agents upload images to R2 (stores a URL, not a base64 blob —
+     * keeps the share payload small). Guests fall back to an inline base64 copy.
+     */
+    const uploadOrEmbed = async (
+        file: File,
+        maxBytes: number,
+        folder: string,
+        onErr: (msg: string) => void,
+        onOk: (src: string) => void,
+        setUploading: (b: boolean) => void
+    ) => {
+        if (!file.type.startsWith('image/')) { onErr('Please pick an image file (PNG / JPG / SVG / WEBP).'); return; }
+        if (file.size > maxBytes) { onErr(`Image too large. Keep it under ${Math.floor(maxBytes / 1024)} KB.`); return; }
+        onErr('');
+        if (!isAuthenticated) { readImageAsBase64(file, maxBytes, onErr, onOk); return; }
+        setUploading(true);
+        try {
+            const res = await apiClient.uploadImage(file, folder);
+            onOk(res.data.url);
+        } catch (err: any) {
+            // R2 not configured / failed — fall back to inline so sharing still works.
+            console.warn('Image upload failed, embedding locally:', err?.message);
+            readImageAsBase64(file, maxBytes, onErr, onOk);
+        } finally {
+            setUploading(false);
+        }
     };
 
     const handleShare = async () => {
@@ -356,23 +388,17 @@ export const BusinessShareModal = ({ isOpen, onClose, data, itineraryId }: Busin
                                         logoInputRef={logoInputRef}
                                         heroInputRef={heroInputRef}
                                         onLogoUpload={(file: File) =>
-                                            readImageAsBase64(
-                                                file,
-                                                MAX_LOGO_BYTES,
-                                                setLogoError,
-                                                (b64) => setFormData((p) => ({ ...p, brandLogo: b64 }))
-                                            )
+                                            uploadOrEmbed(file, MAX_LOGO_BYTES, 'branding', setLogoError,
+                                                (src) => setFormData((p) => ({ ...p, brandLogo: src })), setLogoUploading)
                                         }
                                         onHeroUpload={(file: File) =>
-                                            readImageAsBase64(
-                                                file,
-                                                MAX_HERO_BYTES,
-                                                setHeroError,
-                                                (b64) => setFormData((p) => ({ ...p, customHeroImage: b64 }))
-                                            )
+                                            uploadOrEmbed(file, MAX_HERO_BYTES, 'hero', setHeroError,
+                                                (src) => setFormData((p) => ({ ...p, customHeroImage: src })), setHeroUploading)
                                         }
                                         logoError={logoError}
                                         heroError={heroError}
+                                        logoUploading={logoUploading}
+                                        heroUploading={heroUploading}
                                         autoHeroImage={heroImageForItinerary(data)}
                                         onShare={handleShare}
                                         copied={copied}

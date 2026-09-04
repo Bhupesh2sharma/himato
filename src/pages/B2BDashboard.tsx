@@ -5,10 +5,11 @@ import { useAuth } from '../contexts/AuthContext';
 import { encodeAgentId, decodeAgentId } from '../utils/sharing';
 import { ItinerariesSection } from '../components/dashboard/ItinerariesSection';
 import { LeadsSection } from '../components/dashboard/LeadsSection';
+import { DriversSection } from '../components/dashboard/DriversSection';
 import { apiClient } from '../services/api';
 import {
     LayoutDashboard, Map, Users, CalendarCheck, Wallet, Megaphone,
-    Settings, Menu, X, Plus, LogOut, Inbox,
+    Settings, Menu, X, Plus, LogOut, Inbox, Car,
 } from 'lucide-react';
 
 /**
@@ -22,7 +23,7 @@ import {
 
 type SectionId =
     | 'overview' | 'leads' | 'itineraries' | 'clients'
-    | 'bookings' | 'payments' | 'marketing' | 'settings';
+    | 'bookings' | 'drivers' | 'payments' | 'marketing' | 'settings';
 
 interface NavItem {
     id: SectionId;
@@ -36,6 +37,7 @@ const PRIMARY_NAV: NavItem[] = [
     { id: 'itineraries', label: 'Itineraries', icon: Map },
     { id: 'clients', label: 'Clients', icon: Users },
     { id: 'bookings', label: 'Bookings', icon: CalendarCheck },
+    { id: 'drivers', label: 'Drivers', icon: Car },
     { id: 'payments', label: 'Payments', icon: Wallet },
     { id: 'marketing', label: 'Marketing', icon: Megaphone },
 ];
@@ -48,6 +50,7 @@ const SECTION_BLURB: Record<SectionId, string> = {
     itineraries: 'AI-generated plans and the branded links you share with clients.',
     clients: 'Your client list and their trip preferences.',
     bookings: 'Confirmed and upcoming trips.',
+    drivers: 'Your roster of drivers and vehicles.',
     payments: 'Payments received and pending.',
     marketing: 'Generate social content for your agency.',
     settings: 'Agency name, logo, and brand colour used on shared itineraries.',
@@ -181,6 +184,8 @@ export const B2BDashboard = () => {
                         <LeadsSection onRead={() => setLeadUnread(0)} />
                     ) : active === 'itineraries' ? (
                         <ItinerariesSection />
+                    ) : active === 'drivers' ? (
+                        <DriversSection />
                     ) : (
                         <SectionPlaceholder title={activeItem.label} icon={activeItem.icon} blurb={SECTION_BLURB[active]} />
                     )}
