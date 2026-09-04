@@ -162,8 +162,17 @@ class ApiClient {
     });
   }
 
-  async getItineraryHistory(page: number = 1, limit: number = 10): Promise<any> {
-    return this.request(`/api/itinerary/history?page=${page}&limit=${limit}`, {
+  // Refine an itinerary with a natural-language instruction (returns full updated plan)
+  async editItinerary(data: { itineraryData: any; instruction: string }): Promise<{ status: string; data: { itinerary: any; note: string } }> {
+    return this.request('/api/itinerary/edit', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getItineraryHistory(page: number = 1, limit: number = 10, filter?: string): Promise<any> {
+    const filterParam = filter && filter !== 'all' ? `&filter=${filter}` : '';
+    return this.request(`/api/itinerary/history?page=${page}&limit=${limit}${filterParam}`, {
       method: 'GET',
     });
   }
@@ -214,6 +223,73 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(data),
     });
+  }
+
+  // ── Proposal communication loop ──
+  // Client-facing (by slug, no auth)
+  async getSharedMessages(slug: string): Promise<{ status: string; data: { messages: any[] } }> {
+    return this.request(`/api/itinerary/slug/${slug}/messages`);
+  }
+
+  async postClientMessage(slug: string, data: { body: string; dayRef?: number; clientName?: string }): Promise<{ status: string; data: { message: any } }> {
+    return this.request(`/api/itinerary/slug/${slug}/message`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async acceptSharedItinerary(slug: string, data: { clientName?: string } = {}): Promise<{ status: string; data: { status: string } }> {
+    return this.request(`/api/itinerary/slug/${slug}/accept`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  // Agent-facing (by id, requires auth + ownership)
+  async getItineraryMessages(id: string): Promise<{ status: string; data: { messages: any[] } }> {
+    return this.request(`/api/itinerary/${id}/messages`, {}, true);
+  }
+
+  async postAgentReply(id: string, data: { body: string; dayRef?: number }): Promise<{ status: string; data: { message: any } }> {
+    return this.request(`/api/itinerary/${id}/messages`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async markMessagesRead(id: string): Promise<{ status: string }> {
+    return this.request(`/api/itinerary/${id}/messages/read`, { method: 'POST' }, true);
+  }
+
+  // ── Tourist → agent leads ──
+  // Public: list registered agents a tourist can send an itinerary to.
+  async getRegisteredAgents(): Promise<{ status: string; data: { agents: { _id: string; name: string; businessName: string }[] } }> {
+    return this.request('/api/agents/registered');
+  }
+
+  // Public: tourist sends their itinerary to selected agents.
+  async createLead(data: {
+    agentIds: string[];
+    touristName: string;
+    touristPhone: string;
+    touristEmail?: string;
+    message?: string;
+    itineraryData: any;
+  }): Promise<{ status: string; data: { count: number; slug: string | null } }> {
+    return this.request('/api/leads', { method: 'POST', body: JSON.stringify(data) });
+  }
+
+  // Agent-facing (auth)
+  async getLeads(): Promise<{ status: string; data: { leads: any[]; unreadCount: number } }> {
+    return this.request('/api/leads', {}, true);
+  }
+
+  async updateLead(id: string, data: { status?: 'new' | 'contacted' | 'closed'; read?: boolean }): Promise<{ status: string; data: { lead: any } }> {
+    return this.request(`/api/leads/${id}`, { method: 'PATCH', body: JSON.stringify(data) }, true);
+  }
+
+  async markLeadsRead(): Promise<{ status: string }> {
+    return this.request('/api/leads/read', { method: 'POST' }, true);
   }
 
   // Admin analytics

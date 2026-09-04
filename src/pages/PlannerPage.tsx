@@ -187,8 +187,8 @@ export function PlannerPage() {
                                                 {error}
                                             </div>
                                         )}
-                                        <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} />
-                                        {itineraryData && <BookingOptions />}
+                                        <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} onItineraryChange={setItineraryData} />
+                                        {itineraryData && <BookingOptions data={itineraryData} />}
 
                                         {/* Email-PDF capture for guests (replaces the old login wall) */}
                                         {view === 'results' && !isAuthenticated && itineraryData && (

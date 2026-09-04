@@ -1,9 +1,10 @@
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Navigation, Copy, Check, Link as LinkIcon, Briefcase, Edit2, Save, X } from 'lucide-react';
+import { Calendar, Clock, MapPin, Navigation, Copy, Check, Link as LinkIcon, Briefcase, Edit2, Save, X, Phone, Sun, Backpack, ShieldCheck, Sparkles, Send, Loader2 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
 import { BusinessShareModal } from './BusinessShareModal';
+import { SendToAgentModal } from './SendToAgentModal';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { track } from "../utils/analytics"
@@ -33,18 +34,28 @@ interface RouteData {
 interface ItineraryResultProps {
     data: {
         days: DayPlan[];
+        tripSummary?: string;
+        bestTime?: string;
+        permits?: string[];
+        packingList?: string[];
     } | null;
     routeData?: RouteData | null;
     itineraryId?: string | null;
+    onItineraryChange?: (data: any) => void;
 }
 
 
 
-export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => {
+export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: ItineraryResultProps) => {
     const { isAuthenticated } = useAuth();
+    const [refineText, setRefineText] = useState('');
+    const [refining, setRefining] = useState(false);
+    const [refineNote, setRefineNote] = useState('');
+    const [refineError, setRefineError] = useState('');
     const [copied, setCopied] = useState(false);
     const [shared, setShared] = useState(false);
     const [showBusinessModal, setShowBusinessModal] = useState(false);
+    const [showSendModal, setShowSendModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editedData, setEditedData] = useState<{ days: DayPlan[] } | null>(null);
 
@@ -293,6 +304,26 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
 
     const totalActivities = displayData.days.reduce((sum, d) => sum + d.activities.length, 0);
 
+    const handleRefine = async () => {
+        const instruction = refineText.trim();
+        if (!instruction || refining || !data) return;
+        setRefining(true);
+        setRefineError('');
+        setRefineNote('');
+        try {
+            const res = await apiClient.editItinerary({ itineraryData: data, instruction });
+            if (res.status === 'success') {
+                onItineraryChange?.(res.data.itinerary);
+                setRefineNote(res.data.note || 'Updated your itinerary.');
+                setRefineText('');
+            }
+        } catch (err: any) {
+            setRefineError(err.message || "Couldn't apply that change. Try rephrasing.");
+        } finally {
+            setRefining(false);
+        }
+    };
+
     return (
         <article className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6" itemScope itemType="https://schema.org/TouristTrip">
             <BusinessShareModal
@@ -370,6 +401,47 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                 </div>
             </div>
 
+            {/* ── Trip essentials: best time, permits, packing ── */}
+            {(data.bestTime || (data.permits && data.permits.length > 0) || (data.packingList && data.packingList.length > 0)) && (
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+                    {data.bestTime && (
+                        <div className="bg-white rounded-2xl border border-black/8 p-5">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Sun className="w-4 h-4 text-ai-accent" />
+                                <p className="text-[11px] font-bold uppercase tracking-wider text-ai-muted">Best time</p>
+                            </div>
+                            <p className="text-sm text-ai-text leading-relaxed">{data.bestTime}</p>
+                        </div>
+                    )}
+                    {data.permits && data.permits.length > 0 && (
+                        <div className="bg-white rounded-2xl border p-5" style={{ borderColor: 'rgba(47,74,58,0.3)' }}>
+                            <div className="flex items-center gap-2 mb-2">
+                                <ShieldCheck className="w-4 h-4 text-ai-accent" />
+                                <p className="text-[11px] font-bold uppercase tracking-wider text-ai-muted">Permits</p>
+                            </div>
+                            <ul className="space-y-1.5">
+                                {data.permits.map((p, i) => (
+                                    <li key={i} className="text-sm text-ai-text leading-snug flex gap-2"><span className="text-ai-accent">•</span>{p}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                    {data.packingList && data.packingList.length > 0 && (
+                        <div className="bg-white rounded-2xl border border-black/8 p-5">
+                            <div className="flex items-center gap-2 mb-2">
+                                <Backpack className="w-4 h-4 text-ai-accent" />
+                                <p className="text-[11px] font-bold uppercase tracking-wider text-ai-muted">Pack this</p>
+                            </div>
+                            <div className="flex flex-wrap gap-1.5">
+                                {data.packingList.map((item, i) => (
+                                    <span key={i} className="text-xs font-medium px-2.5 py-1 rounded-full bg-ai-dark border border-black/8 text-ai-text">{item}</span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+
             {/* ── Sticky Day Tabs ── */}
             <div className="sticky top-0 z-30 bg-ai-dark/90 backdrop-blur-md border-b border-black/8 -mx-4 px-4 mb-8" style={{ backdropFilter: 'blur(12px)' }}>
                 <div className="flex gap-1 overflow-x-auto no-scrollbar py-3">
@@ -394,13 +466,14 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
 
             <div className="relative">
                 {/* ── Days ── */}
-                <motion.div className="space-y-16 pb-24" initial="hidden" animate="visible"
-                    variants={{ visible: { transition: { staggerChildren: 0.12 } } }}>
+                <div className="space-y-16 pb-24">
                     {displayData.days.map((day, dayIndex) => (
                         <motion.section
                             key={day.day}
                             ref={(el) => { if (el) dayRefs.current.set(day.day, el); else dayRefs.current.delete(day.day); }}
-                            variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.35 }}
                             itemScope itemType="https://schema.org/TouristDestination"
                             onMouseEnter={() => !isEditing && setActiveDay(day.day)}
                         >
@@ -481,15 +554,47 @@ export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => 
                         </motion.section>
                     ))}
 
-                    {/* Book flights CTA */}
-                    <a href="https://www.google.com/travel/flights?q=flights+to+Bagdogra" target="_blank" rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-12px_rgba(47,74,58,0.55)]"
+                    {/* ── Refine with AI ── */}
+                    <div className="rounded-2xl border border-ai-accent/25 bg-ai-accent/5 p-5">
+                        <div className="flex items-center gap-2 mb-3">
+                            <Sparkles className="w-4 h-4 text-ai-accent" />
+                            <h3 className="text-sm font-bold text-ai-text">Want to tweak this trip?</h3>
+                        </div>
+                        <p className="text-xs text-ai-muted mb-3">Tell the AI what to change — e.g. "make day 2 more relaxed", "add a monastery on day 3", "remove the lunch stop".</p>
+                        <div className="flex items-end gap-2">
+                            <textarea
+                                value={refineText}
+                                onChange={(e) => setRefineText(e.target.value)}
+                                onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); handleRefine(); } }}
+                                rows={1}
+                                placeholder="Tell the AI what to change…"
+                                disabled={refining}
+                                className="flex-1 bg-white border border-black/10 rounded-xl px-4 py-2.5 text-sm text-ai-text placeholder:text-ai-muted/60 focus:outline-none focus:border-ai-accent resize-none disabled:opacity-60"
+                            />
+                            <button
+                                onClick={handleRefine}
+                                disabled={refining || !refineText.trim()}
+                                className="inline-flex items-center justify-center gap-2 px-4 h-[42px] rounded-xl bg-ai-accent text-white text-sm font-semibold hover:bg-ai-secondary transition-colors disabled:opacity-50 whitespace-nowrap"
+                            >
+                                {refining ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                                {refining ? 'Updating…' : 'Update'}
+                            </button>
+                        </div>
+                        {refineNote && <p className="mt-3 text-sm font-medium text-ai-accent flex items-center gap-1.5"><Check className="w-4 h-4" />{refineNote}</p>}
+                        {refineError && <p className="mt-3 text-sm text-red-600">{refineError}</p>}
+                    </div>
+
+                    {/* Send to a travel agent — get a callback with quotes */}
+                    <button onClick={() => setShowSendModal(true)}
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-12px_rgba(47,74,58,0.55)]"
                         style={{ background: '#2f4a3a' }}>
-                        <Navigation className="w-4 h-4" />
-                        Book Flights to Bagdogra (NJP)
-                    </a>
-                </motion.div>
+                        <Phone className="w-4 h-4" />
+                        Send to a travel agent — get a callback
+                    </button>
+                </div>
             </div>
+
+            <SendToAgentModal isOpen={showSendModal} onClose={() => setShowSendModal(false)} data={data} />
         </article>
     );
 };

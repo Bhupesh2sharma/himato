@@ -4,9 +4,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { encodeAgentId, decodeAgentId } from '../utils/sharing';
 import { ItinerariesSection } from '../components/dashboard/ItinerariesSection';
+import { LeadsSection } from '../components/dashboard/LeadsSection';
+import { apiClient } from '../services/api';
 import {
     LayoutDashboard, Map, Users, CalendarCheck, Wallet, Megaphone,
-    Settings, Menu, X, Plus, LogOut,
+    Settings, Menu, X, Plus, LogOut, Inbox,
 } from 'lucide-react';
 
 /**
@@ -19,7 +21,7 @@ import {
  */
 
 type SectionId =
-    | 'overview' | 'itineraries' | 'clients'
+    | 'overview' | 'leads' | 'itineraries' | 'clients'
     | 'bookings' | 'payments' | 'marketing' | 'settings';
 
 interface NavItem {
@@ -30,6 +32,7 @@ interface NavItem {
 
 const PRIMARY_NAV: NavItem[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+    { id: 'leads', label: 'Leads', icon: Inbox },
     { id: 'itineraries', label: 'Itineraries', icon: Map },
     { id: 'clients', label: 'Clients', icon: Users },
     { id: 'bookings', label: 'Bookings', icon: CalendarCheck },
@@ -41,6 +44,7 @@ const SETTINGS_ITEM: NavItem = { id: 'settings', label: 'Settings', icon: Settin
 
 const SECTION_BLURB: Record<SectionId, string> = {
     overview: 'Snapshot of your business at a glance.',
+    leads: 'Travellers who sent you an itinerary and want a callback.',
     itineraries: 'AI-generated plans and the branded links you share with clients.',
     clients: 'Your client list and their trip preferences.',
     bookings: 'Confirmed and upcoming trips.',
@@ -56,6 +60,13 @@ export const B2BDashboard = () => {
 
     const [active, setActive] = useState<SectionId>('overview');
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [leadUnread, setLeadUnread] = useState(0);
+
+    // Unread lead count for the sidebar badge (agents only).
+    useEffect(() => {
+        if (isLoading || !user?.id) return;
+        apiClient.getLeads().then((res) => setLeadUnread(res.data.unreadCount || 0)).catch(() => {});
+    }, [isLoading, user?.id]);
 
     // Bare /dashboard → redirect the signed-in agent to their encoded route.
     useEffect(() => {
@@ -111,7 +122,7 @@ export const B2BDashboard = () => {
                 {/* Nav */}
                 <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
                     {PRIMARY_NAV.map((item) => (
-                        <NavButton key={item.id} item={item} active={active === item.id} onClick={() => go(item.id)} />
+                        <NavButton key={item.id} item={item} active={active === item.id} onClick={() => go(item.id)} badge={item.id === 'leads' ? leadUnread : 0} />
                     ))}
                 </nav>
 
@@ -166,6 +177,8 @@ export const B2BDashboard = () => {
                 <main className="p-4 sm:p-6 max-w-6xl mx-auto">
                     {active === 'overview' ? (
                         <OverviewScaffold />
+                    ) : active === 'leads' ? (
+                        <LeadsSection onRead={() => setLeadUnread(0)} />
                     ) : active === 'itineraries' ? (
                         <ItinerariesSection />
                     ) : (
@@ -184,7 +197,7 @@ export const B2BDashboard = () => {
 };
 
 // ── Sidebar nav button ──
-function NavButton({ item, active, onClick }: { item: NavItem; active: boolean; onClick: () => void }) {
+function NavButton({ item, active, onClick, badge = 0 }: { item: NavItem; active: boolean; onClick: () => void; badge?: number }) {
     const Icon = item.icon;
     return (
         <button
@@ -194,7 +207,12 @@ function NavButton({ item, active, onClick }: { item: NavItem; active: boolean; 
             }`}
         >
             <Icon className="w-4 h-4" />
-            {item.label}
+            <span className="flex-1 text-left">{item.label}</span>
+            {badge > 0 && (
+                <span className="min-w-[18px] h-[18px] px-1 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center">
+                    {badge}
+                </span>
+            )}
         </button>
     );
 }

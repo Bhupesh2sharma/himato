@@ -84,7 +84,7 @@ function SharedItineraryPage() {
     );
   }
 
-  return <ClientItineraryView data={itineraryData} />;
+  return <ClientItineraryView data={itineraryData} slug={slug} />;
 }
 
 function App() {
