@@ -36,7 +36,7 @@ export function AdminGuidesPage() {
 
     useEffect(() => {
         if (!isLoading && (!user || !user.isAdmin)) {
-            navigate('/');
+            navigate('/manage-himato/login', { replace: true });
         }
     }, [user, isLoading, navigate]);
 

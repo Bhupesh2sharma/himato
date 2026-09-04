@@ -19,7 +19,7 @@ interface AuthContextType {
   user: User | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (credentials: LoginCredentials) => Promise<void>;
+  login: (credentials: LoginCredentials) => Promise<User>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -92,12 +92,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
         setUser(response.data.user as User);
+        return response.data.user as User;
       }
       // Handle legacy format
       else if (response.token && response.user) {
         localStorage.setItem('authToken', response.token);
         localStorage.setItem('user', JSON.stringify(response.user));
         setUser(response.user as User);
+        return response.user as User;
       } else {
         throw new Error('Invalid response from server');
       }

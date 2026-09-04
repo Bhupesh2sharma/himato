@@ -106,7 +106,7 @@ export const NavigationHeader = () => {
                           <>
                             <div className="my-1 border-t border-black/8" />
                             <Link
-                              to="/admin"
+                              to="/manage-himato"
                               onClick={() => setShowUserMenu(false)}
                               className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
                             >
@@ -114,7 +114,7 @@ export const NavigationHeader = () => {
                               Admin Dashboard
                             </Link>
                             <Link
-                              to="/admin/guides"
+                              to="/manage-himato/guides"
                               onClick={() => setShowUserMenu(false)}
                               className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
                             >

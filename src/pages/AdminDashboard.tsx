@@ -74,7 +74,7 @@ export function AdminDashboard() {
     const [usersLoading, setUsersLoading] = useState(false);
 
     useEffect(() => {
-        if (!isLoading && (!user || !user.isAdmin)) navigate('/');
+        if (!isLoading && (!user || !user.isAdmin)) navigate('/manage-himato/login', { replace: true });
     }, [user, isLoading, navigate]);
 
     useEffect(() => {
@@ -138,7 +138,7 @@ export function AdminDashboard() {
                         <h1 className="text-3xl text-ai-text" style={{ fontWeight: 600 }}>Platform Analytics</h1>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Link to="/admin/guides"
+                        <Link to="/manage-himato/guides"
                             className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium text-ai-muted hover:border-ai-accent hover:text-ai-accent transition-all bg-white">
                             <BookOpen className="w-4 h-4" />
                             Manage Guides

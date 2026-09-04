@@ -4,7 +4,6 @@ import { Calendar, Clock, MapPin, Navigation, Copy, Check, Link as LinkIcon, Bri
 import { useState, useEffect, useRef } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
 import { BusinessShareModal } from './BusinessShareModal';
-import { ItineraryMap } from './ItineraryMap';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { track } from "../utils/analytics"
@@ -41,7 +40,7 @@ interface ItineraryResultProps {
 
 
 
-export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResultProps) => {
+export const ItineraryResult = ({ data, itineraryId }: ItineraryResultProps) => {
     const { isAuthenticated } = useAuth();
     const [copied, setCopied] = useState(false);
     const [shared, setShared] = useState(false);
@@ -393,8 +392,8 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                 </div>
             </div>
 
-            <div className="grid lg:grid-cols-[1fr_420px] gap-8 relative">
-                {/* ── Left: Days ── */}
+            <div className="relative">
+                {/* ── Days ── */}
                 <motion.div className="space-y-16 pb-24" initial="hidden" animate="visible"
                     variants={{ visible: { transition: { staggerChildren: 0.12 } } }}>
                     {displayData.days.map((day, dayIndex) => (
@@ -490,11 +489,6 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                         Book Flights to Bagdogra (NJP)
                     </a>
                 </motion.div>
-
-                {/* ── Right: Map ── */}
-                <div className="lg:sticky lg:top-24 h-[420px] lg:h-[calc(100vh-130px)] rounded-2xl overflow-hidden border border-black/10">
-                    <ItineraryMap routeData={routeData || { days: [] }} selectedDay={activeDay} />
-                </div>
             </div>
         </article>
     );

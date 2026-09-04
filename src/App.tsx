@@ -17,6 +17,7 @@ import { GuidesIndexPage } from './pages/GuidesIndexPage';
 import { B2BDashboard } from './pages/B2BDashboard';
 import { AdminGuidesPage } from './pages/AdminGuidesPage';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { AdminLogin } from './pages/AdminLogin';
 import { apiClient } from './services/api';
 
 
@@ -88,7 +89,7 @@ function SharedItineraryPage() {
 
 function App() {
   const location = useLocation();
-  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/admin'];
+  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/manage-himato'];
   const isKnownPath = knownPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
 
   // Treat URLs carrying a ?plan= payload (legacy long-form share links) as
@@ -96,13 +97,16 @@ function App() {
   // case, so we don't want the marketing nav/footer wrapping it.
   const hasInlinePlan = new URLSearchParams(location.search).has('plan');
   const isSharedView = location.pathname.startsWith('/share/') || hasInlinePlan || (!isKnownPath && location.pathname !== '/');
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+  const isAdminLogin = location.pathname === '/manage-himato/login';
+  // Agent dashboard has its own sidebar + top bar — hide the marketing nav/footer.
+  const isDashboard = location.pathname === '/dashboard' || location.pathname.startsWith('/dashboard/');
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register' || isAdminLogin;
   const isTermsPage = location.pathname === '/terms';
 
   return (
     <>
       <SEO />
-      {!isSharedView && <NavigationHeader />}
+      {!isSharedView && !isAdminLogin && !isDashboard && <NavigationHeader />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/chat" element={<PlannerPage />} />
@@ -113,8 +117,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<B2BDashboard />} />
-        <Route path="/admin/guides" element={<AdminGuidesPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/dashboard/:agentCode" element={<B2BDashboard />} />
+        <Route path="/manage-himato/login" element={<AdminLogin />} />
+        <Route path="/manage-himato/guides" element={<AdminGuidesPage />} />
+        <Route path="/manage-himato" element={<AdminDashboard />} />
         <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route path="/guide/:slug" element={<GuidePage />} />
@@ -124,7 +130,7 @@ function App() {
         {/* Custom Slug Route - Should be near the end to avoid clashing with static paths */}
         <Route path="/:slug" element={<SharedItineraryPage />} />
       </Routes>
-      {!isSharedView && !isAuthPage && !isTermsPage && <Footer />}
+      {!isSharedView && !isAuthPage && !isTermsPage && !isDashboard && <Footer />}
     </>
   );
 }
