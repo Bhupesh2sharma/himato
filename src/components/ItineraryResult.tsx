@@ -306,7 +306,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
             {/* ── Header ── */}
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 mb-10">
                 <div>
-                    <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-ai-muted mb-2">Your Sikkim Itinerary</p>
+                    <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-ai-accent mb-2">Your Sikkim Itinerary</p>
                     <h2 className="text-3xl sm:text-5xl text-ai-text leading-tight" style={{ fontWeight: 600 }}>
                         {data.days.length}-Day<br />
                         <em className="not-italic" style={{ color: '#2f4a3a' }}>Himalayan Journey</em>
@@ -357,13 +357,13 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                         <Briefcase className="w-4 h-4" /><span>Share as Business</span>
                     </button>
                     <button onClick={shareLink}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap hover:border-ai-accent/50 hover:shadow-sm"
                         style={shared ? { color: '#2f4a3a', borderColor: '#2f4a3a' } : { color: '#0e1116' }}>
                         {shared ? <Check className="w-4 h-4" /> : <LinkIcon className="w-4 h-4" />}
                         <span>{shared ? 'Copied!' : 'Share'}</span>
                     </button>
                     <button onClick={copyToClipboard}
-                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap hover:border-ai-accent/50 hover:shadow-sm"
                         style={copied ? { color: '#2f4a3a', borderColor: '#2f4a3a' } : { color: '#0e1116' }}>
                         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         <span>{copied ? 'Copied!' : 'Copy Text'}</span>
@@ -381,7 +381,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                 setActiveDay(day.day);
                                 dayRefs.current.get(day.day)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                             }}
-                            className="flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition-all"
+                            className="flex-shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold transition-all hover:-translate-y-px"
                             style={activeDay === day.day
                                 ? { background: '#2f4a3a', color: '#f6f1e7' }
                                 : { background: 'transparent', color: '#6b7280', border: '1px solid rgba(0,0,0,0.1)' }
@@ -429,12 +429,12 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
                                     <motion.div
                                         key={activityIndex}
                                         itemScope itemType="https://schema.org/TouristAttraction"
-                                        className="group relative bg-white rounded-2xl border border-black/8 p-5 transition-all duration-300 hover:shadow-md hover:border-black/15 overflow-hidden"
+                                        className="group relative bg-white rounded-2xl border border-black/[0.07] p-5 sm:p-6 transition-all duration-300 hover:border-ai-accent/25 hover:shadow-[0_10px_30px_-14px_rgba(47,74,58,0.3)] overflow-hidden"
                                         variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}
                                     >
-                                        {/* Activity number watermark */}
-                                        <span className="absolute top-3 right-4 text-5xl font-black text-black/[0.04] select-none leading-none italic">
-                                            {activityIndex + 1}
+                                        {/* Subtle step index */}
+                                        <span className="absolute top-5 right-5 text-sm font-semibold text-ai-accent/25 select-none leading-none tabular-nums">
+                                            {String(activityIndex + 1).padStart(2, '0')}
                                         </span>
 
                                         {isEditing ? (
@@ -484,7 +484,7 @@ export const ItineraryResult = ({ data, routeData, itineraryId }: ItineraryResul
 
                     {/* Book flights CTA */}
                     <a href="https://www.google.com/travel/flights?q=flights+to+Bagdogra" target="_blank" rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-sm font-semibold text-white transition-all hover:opacity-90"
+                        className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-12px_rgba(47,74,58,0.55)]"
                         style={{ background: '#2f4a3a' }}>
                         <Navigation className="w-4 h-4" />
                         Book Flights to Bagdogra (NJP)
