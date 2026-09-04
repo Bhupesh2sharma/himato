@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { heroImageForItinerary } from '../utils/locationImages';
 import { ClientProposalActions } from './ClientProposalActions';
+import { DownloadItineraryButton } from './DownloadItineraryButton';
 
 // --- Types ---
 interface Activity {
@@ -149,6 +150,11 @@ export const ClientItineraryView = ({ data, slug }: ClientItineraryViewProps) =>
                             <span className="w-1.5 h-1.5 rounded-full bg-ai-accent animate-pulse" />
                             Plan yours free at <span className="text-ai-text font-bold">himato.in</span>
                         </a>
+                        <DownloadItineraryButton
+                            data={data}
+                            label="PDF"
+                            className="inline-flex items-center gap-1.5 px-3 h-9 rounded-full bg-white border border-black/10 hover:border-ai-accent/40 transition-colors text-[12px] font-medium text-ai-text disabled:opacity-60"
+                        />
                         <button
                             onClick={() =>
                                 navigator.share?.({

@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
 import { BusinessShareModal } from './BusinessShareModal';
 import { SendToAgentModal } from './SendToAgentModal';
+import { DownloadItineraryButton } from './DownloadItineraryButton';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { track } from "../utils/analytics"
@@ -342,19 +343,19 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                         <em className="not-italic" style={{ color: '#2f4a3a' }}>Himalayan Journey</em>
                     </h2>
                     {/* Trip stats */}
-                    <div className="flex items-center gap-5 mt-4">
-                        <div className="flex items-center gap-2 text-ai-muted text-sm">
-                            <Calendar className="w-4 h-4" />
+                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4">
+                        <div className="flex items-center gap-2 text-ai-muted text-sm whitespace-nowrap shrink-0">
+                            <Calendar className="w-4 h-4 shrink-0" />
                             <span>{data.days.length} days</span>
                         </div>
-                        <div className="w-px h-4 bg-black/10" />
-                        <div className="flex items-center gap-2 text-ai-muted text-sm">
-                            <MapPin className="w-4 h-4" />
+                        <div className="w-px h-4 bg-black/10 shrink-0" />
+                        <div className="flex items-center gap-2 text-ai-muted text-sm whitespace-nowrap shrink-0">
+                            <MapPin className="w-4 h-4 shrink-0" />
                             <span>{totalActivities} activities</span>
                         </div>
-                        <div className="w-px h-4 bg-black/10" />
-                        <div className="flex items-center gap-2 text-ai-muted text-sm">
-                            <Navigation className="w-4 h-4" />
+                        <div className="w-px h-4 bg-black/10 shrink-0" />
+                        <div className="flex items-center gap-2 text-ai-muted text-sm whitespace-nowrap shrink-0">
+                            <Navigation className="w-4 h-4 shrink-0" />
                             <span>Sikkim, India</span>
                         </div>
                     </div>
@@ -398,6 +399,11 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                         <span>{copied ? 'Copied!' : 'Copy Text'}</span>
                     </button>
+                    <DownloadItineraryButton
+                        data={data}
+                        label="PDF"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium transition-all bg-white whitespace-nowrap hover:border-ai-accent/50 hover:shadow-sm text-ai-text disabled:opacity-60"
+                    />
                 </div>
             </div>
 
