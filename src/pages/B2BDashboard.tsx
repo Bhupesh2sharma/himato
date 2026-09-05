@@ -6,10 +6,12 @@ import { encodeAgentId, decodeAgentId } from '../utils/sharing';
 import { ItinerariesSection } from '../components/dashboard/ItinerariesSection';
 import { LeadsSection } from '../components/dashboard/LeadsSection';
 import { DriversSection } from '../components/dashboard/DriversSection';
+import { ClientsSection } from '../components/dashboard/ClientsSection';
+import { FinancesSection } from '../components/dashboard/FinancesSection';
 import { apiClient } from '../services/api';
 import {
-    LayoutDashboard, Map, Users, CalendarCheck, Wallet, Megaphone,
-    Settings, Menu, X, Plus, LogOut, Inbox, Car,
+    LayoutDashboard, Map, Users, Wallet, Megaphone,
+    Settings, Menu, X, Plus, LogOut, Inbox, Car, Loader2, Sparkles, CreditCard,
 } from 'lucide-react';
 
 /**
@@ -23,7 +25,7 @@ import {
 
 type SectionId =
     | 'overview' | 'leads' | 'itineraries' | 'clients'
-    | 'bookings' | 'drivers' | 'payments' | 'marketing' | 'settings';
+    | 'drivers' | 'finances' | 'marketing' | 'settings';
 
 interface NavItem {
     id: SectionId;
@@ -36,9 +38,8 @@ const PRIMARY_NAV: NavItem[] = [
     { id: 'leads', label: 'Leads', icon: Inbox },
     { id: 'itineraries', label: 'Itineraries', icon: Map },
     { id: 'clients', label: 'Clients', icon: Users },
-    { id: 'bookings', label: 'Bookings', icon: CalendarCheck },
     { id: 'drivers', label: 'Drivers', icon: Car },
-    { id: 'payments', label: 'Payments', icon: Wallet },
+    { id: 'finances', label: 'Finances', icon: Wallet },
     { id: 'marketing', label: 'Marketing', icon: Megaphone },
 ];
 
@@ -49,9 +50,8 @@ const SECTION_BLURB: Record<SectionId, string> = {
     leads: 'Travellers who sent you an itinerary and want a callback.',
     itineraries: 'AI-generated plans and the branded links you share with clients.',
     clients: 'Your client list and their trip preferences.',
-    bookings: 'Confirmed and upcoming trips.',
     drivers: 'Your roster of drivers and vehicles.',
-    payments: 'Payments received and pending.',
+    finances: 'Keep your books clean — money in, money out, and real profit.',
     marketing: 'Generate social content for your agency.',
     settings: 'Agency name, logo, and brand colour used on shared itineraries.',
 };
@@ -61,6 +61,7 @@ export const B2BDashboard = () => {
     const { user, isLoading, logout } = useAuth();
     const navigate = useNavigate();
 
+    
     const [active, setActive] = useState<SectionId>('overview');
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [leadUnread, setLeadUnread] = useState(0);
@@ -184,8 +185,12 @@ export const B2BDashboard = () => {
                         <LeadsSection onRead={() => setLeadUnread(0)} />
                     ) : active === 'itineraries' ? (
                         <ItinerariesSection />
+                    ) : active === 'clients' ? (
+                        <ClientsSection />
                     ) : active === 'drivers' ? (
                         <DriversSection />
+                    ) : active === 'finances' ? (
+                        <FinancesSection />
                     ) : (
                         <SectionPlaceholder title={activeItem.label} icon={activeItem.icon} blurb={SECTION_BLURB[active]} />
                     )}
@@ -222,33 +227,119 @@ function NavButton({ item, active, onClick, badge = 0 }: { item: NavItem; active
     );
 }
 
-// ── Overview scaffold: layout intent, no real data yet ──
+// ── Overview: live snapshot pulled from the business dashboard endpoint ──
+interface Activity {
+    id: string;
+    type: 'booking' | 'payment' | 'client' | 'itinerary';
+    title: string;
+    description: string;
+    time: string;
+}
+interface DashboardData {
+    counts: { clients: number; itineraries: number; leads: number; unreadLeads: number };
+    activities: Activity[];
+}
+
+const ACTIVITY_ICON: Record<Activity['type'], { Icon: ComponentType<{ className?: string }>; cls: string }> = {
+    itinerary: { Icon: Sparkles, cls: 'bg-ai-accent/12 text-ai-accent' },
+    client:    { Icon: Users, cls: 'bg-sky-500/12 text-sky-700' },
+    payment:   { Icon: CreditCard, cls: 'bg-emerald-500/12 text-emerald-700' },
+    booking:   { Icon: Map, cls: 'bg-amber-500/12 text-amber-700' },
+};
+
+function timeAgo(iso: string): string {
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}h ago`;
+    const days = Math.floor(hrs / 24);
+    if (days < 30) return `${days}d ago`;
+    return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+}
+
 function OverviewScaffold() {
+    const [data, setData] = useState<DashboardData | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        let cancelled = false;
+        (async () => {
+            try {
+                const res = await apiClient.getBusinessDashboard();
+                if (!cancelled) setData(res.data);
+            } catch (err: any) {
+                if (!cancelled) setError(err.message || 'Could not load your dashboard.');
+            } finally {
+                if (!cancelled) setLoading(false);
+            }
+        })();
+        return () => { cancelled = true; };
+    }, []);
+
+    const counts = data?.counts;
+    const activities = data?.activities ?? [];
+
     return (
         <div className="space-y-5">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {['Bookings', 'Clients', 'Revenue', 'Itineraries'].map((label) => (
-                    <div key={label} className="bg-ai-card rounded-2xl border border-black/8 p-5">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-ai-muted">{label}</p>
-                        <p className="text-3xl font-bold text-ai-text mt-1">—</p>
-                    </div>
-                ))}
+            {/* Stat cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                <StatCard label="Leads" icon={Inbox} value={counts?.leads} loading={loading}
+                    hint={counts?.unreadLeads ? `${counts.unreadLeads} unread` : undefined} />
+                <StatCard label="Clients" icon={Users} value={counts?.clients} loading={loading} />
+                <StatCard label="Itineraries" icon={Map} value={counts?.itineraries} loading={loading} />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
-                <PanelStub title="Revenue overview" hint="Chart goes here" className="h-64" />
-                <PanelStub title="Recent activity" hint="Latest bookings & shares" className="h-64" />
+
+            {/* Recent activity */}
+            <div className="bg-ai-card rounded-2xl border border-black/8 p-5">
+                <p className="text-sm font-bold text-ai-text">Recent activity</p>
+                {loading ? (
+                    <div className="flex items-center justify-center py-12 text-ai-muted"><Loader2 className="w-5 h-5 animate-spin" /></div>
+                ) : error ? (
+                    <p className="py-8 text-center text-sm text-red-600">{error}</p>
+                ) : activities.length === 0 ? (
+                    <div className="mt-3 rounded-xl border border-dashed border-black/10 py-10 text-center">
+                        <p className="text-xs text-ai-muted">No activity yet. Generate an itinerary or add a client to get started.</p>
+                    </div>
+                ) : (
+                    <ul className="mt-3 divide-y divide-black/6">
+                        {activities.map((a) => {
+                            const { Icon, cls } = ACTIVITY_ICON[a.type] ?? ACTIVITY_ICON.itinerary;
+                            return (
+                                <li key={a.id} className="flex items-center gap-3 py-2.5">
+                                    <span className={`w-8 h-8 shrink-0 rounded-lg flex items-center justify-center ${cls}`}><Icon className="w-4 h-4" /></span>
+                                    <div className="min-w-0 flex-1">
+                                        <p className="text-sm font-medium text-ai-text truncate">{a.title}</p>
+                                        <p className="text-[11px] text-ai-muted truncate">{a.description}</p>
+                                    </div>
+                                    <span className="text-[11px] text-ai-muted shrink-0">{timeAgo(a.time)}</span>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
             </div>
         </div>
     );
 }
 
-function PanelStub({ title, hint, className = '' }: { title: string; hint: string; className?: string }) {
+function StatCard({ label, icon: Icon, value, loading, hint }: {
+    label: string; icon: ComponentType<{ className?: string }>; value?: number; loading: boolean; hint?: string;
+}) {
     return (
-        <div className={`bg-ai-card rounded-2xl border border-black/8 p-5 ${className}`}>
-            <p className="text-sm font-bold text-ai-text">{title}</p>
-            <div className="mt-3 h-[calc(100%-2rem)] rounded-xl border border-dashed border-black/10 flex items-center justify-center">
-                <p className="text-xs text-ai-muted">{hint}</p>
+        <div className="bg-ai-card rounded-2xl border border-black/8 p-5">
+            <div className="flex items-center justify-between">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-ai-muted">{label}</p>
+                <Icon className="w-4 h-4 text-ai-muted" />
             </div>
+            {loading ? (
+                <div className="mt-2 h-8 w-12 rounded-lg bg-black/5 animate-pulse" />
+            ) : (
+                <p className="text-3xl font-bold text-ai-text mt-1">{value ?? 0}</p>
+            )}
+            {hint && !loading && <p className="text-[11px] text-ai-accent font-semibold mt-0.5">{hint}</p>}
         </div>
     );
 }

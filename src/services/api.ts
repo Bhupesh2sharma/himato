@@ -341,6 +341,38 @@ class ApiClient {
     return this.request(`/api/drivers/${id}/documents/${docId}`, { method: 'DELETE' }, true);
   }
 
+  // ── Clients (agent, auth) ──
+  async getClients(): Promise<{ status: string; data: { clients: any[] } }> {
+    return this.request('/api/clients', {}, true);
+  }
+  async createClient(data: any): Promise<{ status: string; data: { client: any } }> {
+    return this.request('/api/clients', { method: 'POST', body: JSON.stringify(data) }, true);
+  }
+  async updateClient(id: string, data: any): Promise<{ status: string; data: { client: any } }> {
+    return this.request(`/api/clients/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
+  }
+  async deleteClient(id: string): Promise<{ status: string }> {
+    return this.request(`/api/clients/${id}`, { method: 'DELETE' }, true);
+  }
+  async uploadClientDocument(id: string, file: File, label?: string): Promise<{ status: string; data: { document: any } }> {
+    if (!this.baseURL) throw new Error('API base URL not configured');
+    const token = this.getAuthToken();
+    const fd = new FormData();
+    fd.append('file', file);
+    if (label) fd.append('label', label);
+    const res = await fetch(`${this.baseURL}/api/clients/${id}/documents`, {
+      method: 'POST',
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+      body: fd,
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || 'Upload failed');
+    return data;
+  }
+  async deleteClientDocument(id: string, docId: string): Promise<{ status: string }> {
+    return this.request(`/api/clients/${id}/documents/${docId}`, { method: 'DELETE' }, true);
+  }
+
   // Admin analytics
   async getAdminAnalytics(): Promise<any> {
     return this.request('/api/admin/analytics', {}, true);
@@ -460,6 +492,27 @@ class ApiClient {
     }, true);
   }
 
+  // Finances — double-entry ledger
+  async getLedger(): Promise<any> {
+    return this.request('/api/users/business/ledger', {
+      method: 'GET',
+    }, true);
+  }
+
+  async addLedgerEntry(data: any): Promise<any> {
+    return this.request('/api/users/business/ledger', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
+  async updateLedgerEntry(id: string, data: any): Promise<any> {
+    return this.request(`/api/users/business/ledger/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }, true);
+  }
+
   async addBooking(data: any): Promise<any> {
     return this.request('/api/users/business/booking', {
       method: 'POST',
@@ -495,7 +548,7 @@ class ApiClient {
     }, true);
   }
 
-  async deleteBusinessItem(type: 'booking' | 'payment' | 'client', id: string): Promise<any> {
+  async deleteBusinessItem(type: 'booking' | 'payment' | 'ledger' | 'client', id: string): Promise<any> {
     return this.request(`/api/users/business/item/${type}/${id}`, {
       method: 'DELETE',
     }, true);

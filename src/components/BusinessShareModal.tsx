@@ -487,6 +487,8 @@ function BrandingForm({
     onHeroUpload,
     logoError,
     heroError,
+    logoUploading,
+    heroUploading,
     autoHeroImage,
     onShare,
     copied,
@@ -556,7 +558,7 @@ function BrandingForm({
                         className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 bg-ai-accent hover:bg-ai-secondary text-white rounded-lg text-xs font-bold transition-colors"
                     >
                         <ImageIcon className="w-3.5 h-3.5" />
-                        {formData.customHeroImage ? 'Replace hero' : 'Upload your own hero'}
+                        {heroUploading ? 'Uploading…' : formData.customHeroImage ? 'Replace hero' : 'Upload your own hero'}
                     </button>
                     {formData.customHeroImage && (
                         <button
@@ -617,7 +619,7 @@ function BrandingForm({
                                 className="inline-flex items-center justify-center gap-2 px-3 py-2 bg-ai-accent hover:bg-ai-secondary text-white rounded-lg text-xs font-bold transition-colors"
                             >
                                 <Upload className="w-3.5 h-3.5" />
-                                {formData.brandLogo ? 'Replace logo' : 'Upload logo'}
+                                {logoUploading ? 'Uploading…' : formData.brandLogo ? 'Replace logo' : 'Upload logo'}
                             </button>
                             {formData.brandLogo && (
                                 <button
