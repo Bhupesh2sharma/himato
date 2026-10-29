@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
     Users, Map, BookOpen, LogIn, TrendingUp, TrendingDown,
-    ShieldCheck, Building2, UserCheck, Search, ChevronLeft, ChevronRight, RefreshCw
+    ShieldCheck, Building2, UserCheck, Search, ChevronLeft, ChevronRight, RefreshCw, MapPin
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { apiClient } from '../services/api';
@@ -142,6 +142,11 @@ export function AdminDashboard() {
                             className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium text-ai-muted hover:border-ai-accent hover:text-ai-accent transition-all bg-white">
                             <BookOpen className="w-4 h-4" />
                             Manage Guides
+                        </Link>
+                        <Link to="/manage-himato/places"
+                            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium text-ai-muted hover:border-ai-accent hover:text-ai-accent transition-all bg-white">
+                            <MapPin className="w-4 h-4" />
+                            Popular Places
                         </Link>
                         <button onClick={fetchAnalytics}
                             className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-black/10 text-sm font-medium text-ai-muted hover:bg-black/5 transition-all bg-white">

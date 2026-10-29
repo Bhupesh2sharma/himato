@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Send, Minus, User, Briefcase, MapPin, Search, X } from 'lucide-react';
+import { Sparkles, Send, Minus, User, Briefcase, MapPin, Search, X, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { ItineraryHistoryPreview } from './ItineraryHistoryPreview';
-import { getSeasonalPicks, ALL_PLACE_NAMES, PLACE_CATEGORIES } from '../data/seasonalPlaces';
+import { getSeason } from '../data/season';
+import { PLACE_CATEGORY_META, PLACE_CATEGORY_KEYS } from '../data/placeCategories';
+import { usePopularPlaces } from '../hooks/usePopularPlaces';
 
 const PLACEHOLDERS = [
     "Where do the clouds touch the earth in Sikkim?",
@@ -27,11 +29,11 @@ const INTENTS = [
     { label: 'Honeymoon', seed: 'Honeymoon in the Sikkim Himalayas — ' },
 ];
 
-// How many seasonal chips show in the collapsed "Popular right now" row.
+// How many seasonal places show in the collapsed "Popular right now" list.
 const VISIBLE_PICKS = 6;
 
 interface HeroProps {
-    onSearch: (prompt: string, isBusiness: boolean, businessName?: string) => void;
+    onSearch: (prompt: string, isBusiness: boolean, businessName?: string) => void | Promise<void>;
     isSearching: boolean;
     error?: string;
 }
@@ -46,18 +48,11 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const [placeholderVisible, setPlaceholderVisible] = useState(true);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    // Season-aware "Popular right now" picks, resolved once for today's date.
-    // Deliberately static — the row never re-shuffles on its own, so a user
-    // reading the chips is never surprised by them changing under them.
-    const [{ season, picks }] = useState(() => getSeasonalPicks());
+    // Admin-managed "Popular right now" places, sorted by priority.
+    const { places } = usePopularPlaces();
+    const [season] = useState(() => getSeason(new Date().getMonth() + 1));
 
     const [localIsSubmitting, setLocalIsSubmitting] = useState(false);
-
-    useEffect(() => {
-        if (!isSearching) {
-            setLocalIsSubmitting(false);
-        }
-    }, [isSearching]);
 
 
     useEffect(() => {
@@ -76,7 +71,10 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
             setLocalIsSubmitting(true);
             // If user is a business user, use their businessName, otherwise use undefined
             const businessName = (isBusiness && user?.business && user?.businessName) ? user.businessName : undefined;
-            onSearch(prompt, isBusiness, businessName);
+            // Unlock once the parent is done with the request — including when it
+            // never starts a search (e.g. the login popup intercepts it).
+            Promise.resolve(onSearch(prompt, isBusiness, businessName))
+                .finally(() => setLocalIsSubmitting(false));
         }
     };
 
@@ -94,20 +92,24 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
 
     const disabled = isSearching || localIsSubmitting;
 
-    // Fixed, non-shuffling set of season-appropriate places for the collapsed row.
-    const visiblePicks = picks.slice(0, VISIBLE_PICKS);
+    // Highest-priority places for the collapsed list.
+    const visiblePicks = places.slice(0, VISIBLE_PICKS);
 
-    // Live search over the categorised full list for the "explore all" panel.
+    // Live search over every place, grouped by category, for the "explore all" panel.
     const q = query.trim().toLowerCase();
-    const filteredCategories = PLACE_CATEGORIES
-        .map((cat) => ({ ...cat, matches: cat.places.filter((n) => n.toLowerCase().includes(q)) }))
+    const filteredCategories = PLACE_CATEGORY_KEYS
+        .map((key) => ({
+            key,
+            ...PLACE_CATEGORY_META[key],
+            matches: places.filter((p) => p.category === key && p.name.toLowerCase().includes(q)),
+        }))
         .filter((cat) => cat.matches.length > 0);
     const totalMatches = filteredCategories.reduce((n, c) => n + c.matches.length, 0);
 
-    const selectPlace = (name: string) => {
-        setPrompt(name);
+    const selectPlace = (prompt: string) => {
         setIsExpanded(false);
         setQuery('');
+        applyIntent(prompt);
     };
 
     const closeExplorer = () => {
@@ -265,7 +267,7 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                             autoFocus
                                             value={query}
                                             onChange={(e) => setQuery(e.target.value)}
-                                            placeholder={`Search ${ALL_PLACE_NAMES.length} places…`}
+                                            placeholder={`Search ${places.length} places…`}
                                             className="flex-1 bg-transparent outline-none text-sm text-ai-text placeholder:text-ai-muted min-w-0"
                                         />
                                         {query && (
@@ -298,13 +300,14 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                                 <span className="text-ai-muted font-normal">({cat.matches.length})</span>
                                             </div>
                                             <div className="flex flex-wrap gap-2">
-                                                {cat.matches.map((name) => (
+                                                {cat.matches.map((place) => (
                                                     <button
-                                                        key={name}
-                                                        onClick={() => selectPlace(name)}
+                                                        key={place._id}
+                                                        onClick={() => selectPlace(place.prompt)}
+                                                        title={place.prompt}
                                                         className="px-3.5 py-1.5 rounded-full glass glass-hover text-xs text-ai-muted hover:text-ai-text cursor-pointer transition-all hover:scale-105 whitespace-nowrap"
                                                     >
-                                                        {name}
+                                                        {place.name}
                                                     </button>
                                                 ))}
                                             </div>
@@ -319,8 +322,8 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                 </div>
                               </div>
                             </motion.div>
-                        ) : (
-                            /* Season-aware "Popular right now" row */
+                        ) : visiblePicks.length > 0 ? (
+                            /* Admin-managed "Popular right now" list (hidden until places load) */
                             <motion.div
                                 key="popular"
                                 initial={{ height: 0, opacity: 0 }}
@@ -338,29 +341,39 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                                     </span>
                                 </div>
 
-                                <div className="relative w-full flex flex-wrap justify-center gap-2">
+                                {/* Stacked list — each place carries a ready-made prompt */}
+                                <div className="glass rounded-2xl text-left overflow-hidden divide-y divide-black/5">
                                     {visiblePicks.map((place) => (
                                         <button
-                                            key={place.name}
-                                            onClick={() => setPrompt(place.name)}
-                                            title={place.note}
-                                            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full glass glass-hover text-xs text-ai-muted hover:text-ai-text cursor-pointer transition-all hover:scale-105 whitespace-nowrap"
+                                            key={place._id}
+                                            onClick={() => applyIntent(place.prompt)}
+                                            disabled={disabled}
+                                            className="group w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-ai-accent/5 transition-colors disabled:opacity-50"
                                         >
-                                            <MapPin className="w-3 h-3 text-ai-accent shrink-0" />
-                                            {place.name}
+                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-ai-accent/10 shrink-0">
+                                                <MapPin className="w-4 h-4 text-ai-accent" />
+                                            </span>
+                                            <span className="flex-1 min-w-0">
+                                                <span className="block text-sm font-semibold text-ai-text truncate">{place.name}</span>
+                                                <span className="block text-xs text-ai-muted line-clamp-2">“{place.prompt}”</span>
+                                            </span>
+                                            <ArrowUpRight className="w-4 h-4 text-ai-muted group-hover:text-ai-accent transition-colors shrink-0" />
                                         </button>
                                     ))}
 
-                                    <button
-                                        onClick={() => setIsExpanded(true)}
-                                        className="px-3.5 py-1.5 rounded-full bg-ai-accent/10 border border-ai-accent/20 text-xs text-ai-accent hover:bg-ai-accent/20 cursor-pointer transition-all hover:scale-105 whitespace-nowrap font-medium"
-                                    >
-                                        +{ALL_PLACE_NAMES.length} locations
-                                    </button>
+                                    {places.length > VISIBLE_PICKS && (
+                                        <button
+                                            onClick={() => setIsExpanded(true)}
+                                            className="w-full flex items-center justify-center gap-1 px-4 py-2.5 text-xs font-medium text-ai-accent hover:bg-ai-accent/10 transition-colors"
+                                        >
+                                            Explore all {places.length} locations
+                                            <ChevronRight className="w-3.5 h-3.5" />
+                                        </button>
+                                    )}
                                 </div>
                               </div>
                             </motion.div>
-                        )}
+                        ) : null}
                     </AnimatePresence>
 
                     {/* Itinerary History Preview */}

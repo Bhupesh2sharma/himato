@@ -33,10 +33,11 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     });
     return {
       itinerary: response.data.itinerary,
-      routeData: response.data.routeData || { days: [] }, // Backend always returns routeData now
       id: response.data.itineraryId
     };
   } catch (error: any) {
+    // Keep the 401 status so the planner can re-prompt for login
+    if (error?.status === 401) throw error;
     throw new Error(error.message || 'Failed to generate itinerary');
   }
 };

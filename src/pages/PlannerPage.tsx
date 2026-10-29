@@ -11,16 +11,17 @@ import { AILoadingState } from '../components/AILoadingState';
 import { SikkimSherpa } from '../components/SikkimSherpa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { generateItinerary } from '../services/ai';
-import { decodeItineraryFromUrl, encodeItineraryToUrl } from '../utils/sharing';
+import { decodeItineraryFromUrl } from '../utils/sharing';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { Link as LinkIcon, Mail, Check } from 'lucide-react';
-import { EmailItineraryCapture } from '../components/EmailItineraryCapture';
+import { AuthModal } from '../components/AuthModal';
+
+type SearchRequest = { prompt: string; isBusiness: boolean; businessName?: string };
 
 export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
     const navigate = useNavigate();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
     const [showSplash, setShowSplash] = useState(() => {
         const seen = localStorage.getItem('himato_splash_seen');
         if (seen) return false;
@@ -29,37 +30,11 @@ export function PlannerPage() {
       });    const [view, setView] = useState<'home' | 'results' | 'shared'>('home');
     const [isSearching, setIsSearching] = useState(false);
     const [itineraryData, setItineraryData] = useState(null);
-    const [routeData, setRouteData] = useState<{ days: Array<any> } | null>(null);
     const [itineraryId, setItineraryId] = useState<string | null>(null);
     const [error, setError] = useState('');
-    const [showExitConfirm, setShowExitConfirm] = useState(false);
-    const [modalShareCopied, setModalShareCopied] = useState(false);
-
-    const copyShareLinkFromModal = async () => {
-        if (!itineraryData) return;
-        try {
-            const url = encodeItineraryToUrl(itineraryData);
-            await navigator.clipboard.writeText(url);
-            track('share_link_copied', {
-                itinerary_id: itineraryId ?? 'guest',
-                location: 'exit_modal',
-            });
-            setModalShareCopied(true);
-            setTimeout(() => setModalShareCopied(false), 2500);
-        } catch (err) {
-            console.error('Failed to copy share link:', err);
-        }
-    };
-
-    const scrollToEmailCapture = () => {
-        setShowExitConfirm(false);
-        // Defer to next paint so the modal can dismiss before we scroll
-        requestAnimationFrame(() => {
-            document
-                .getElementById('email-capture')
-                ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-    };
+    // Search the user tried to run while logged out — replayed after login
+    const [pendingSearch, setPendingSearch] = useState<SearchRequest | null>(null);
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
     useEffect(() => {
         // Check for shared itinerary in URL relative to planner
@@ -75,18 +50,7 @@ export function PlannerPage() {
         if (id) {
             loadSavedItinerary(id);
         }
-
-        // Add beforeunload listener to prevent accidental data loss for guests
-        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-            if (view === 'results' && !isAuthenticated) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-    }, [id, view, isAuthenticated]);
+    }, [id]);
 
     const loadSavedItinerary = async (id: string) => {
         setIsSearching(true);
@@ -95,7 +59,6 @@ export function PlannerPage() {
             const response = await apiClient.getItineraryById(id);
             if (response.status === 'success') {
                 setItineraryData(response.data.itinerary.itineraryData);
-                setRouteData(response.data.itinerary.routeData || { days: [] });
                 setItineraryId(response.data.itinerary._id);
                 setView('results');
                 setShowSplash(false);
@@ -109,23 +72,26 @@ export function PlannerPage() {
     };
 
     const handleBackClick = () => {
-        if (view === 'results' && !isAuthenticated) {
-            setShowExitConfirm(true);
-        } else {
-            navigate('/');
-            setView('home');
-        }
+        navigate('/');
+        setView('home');
+    };
+
+    const requireLoginFor = (request: SearchRequest) => {
+        setPendingSearch(request);
+        setShowAuthModal(true);
     };
 
     const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
+        if (!isAuthenticated) {
+            requireLoginFor({ prompt, isBusiness, businessName });
+            return;
+        }
         setIsSearching(true);
         setError('');
         setItineraryId(null);
         try {
-            // generateItinerary now returns { itinerary, routeData, id }
-            const { itinerary, routeData: route, id } = await generateItinerary(prompt, isBusiness, businessName);
+            const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
             setItineraryData(itinerary);
-            setRouteData(route);
             setItineraryId(id || null);
             setView('results');
             track('itinerary_generated', {
@@ -134,11 +100,27 @@ export function PlannerPage() {
               });
         } catch (err: any) {
             console.error(err);
+            // Session expired / invalid token — log out and ask to sign in again
+            if (err?.status === 401) {
+                await logout();
+                requireLoginFor({ prompt, isBusiness, businessName });
+                return;
+            }
             setError(err.message || 'Failed to generate plan. Please try again.');
         } finally {
             setIsSearching(false);
         }
     };
+
+    // Once the user signs in from the popup, run the search they asked for
+    useEffect(() => {
+        if (isAuthenticated && pendingSearch) {
+            const { prompt, isBusiness, businessName } = pendingSearch;
+            setPendingSearch(null);
+            setShowAuthModal(false);
+            handleSearch(prompt, isBusiness, businessName);
+        }
+    }, [isAuthenticated, pendingSearch]);
 
     // If viewing a shared link, render the client view directly (bypassing the main app layout)
     if (view === 'shared' && itineraryData) {
@@ -187,13 +169,9 @@ export function PlannerPage() {
                                                 {error}
                                             </div>
                                         )}
-                                        <ItineraryResult data={itineraryData} routeData={routeData} itineraryId={itineraryId} onItineraryChange={setItineraryData} />
+                                        <ItineraryResult data={itineraryData} itineraryId={itineraryId} onItineraryChange={setItineraryData} />
                                         {itineraryData && <BookingOptions data={itineraryData} />}
 
-                                        {/* Email-PDF capture for guests (replaces the old login wall) */}
-                                        {view === 'results' && !isAuthenticated && itineraryData && (
-                                            <EmailItineraryCapture itineraryData={itineraryData} />
-                                        )}
                                         <div className="mt-12 sm:mt-20">
                                             {/* <SikkimShowcase /> */}
                                         </div>
@@ -206,74 +184,15 @@ export function PlannerPage() {
             </AnimatePresence>
             <SikkimSherpa />
 
-            {/* Exit Confirmation Modal */}
-            <AnimatePresence>
-                {showExitConfirm && (
-                    <div className="fixed inset-0 z-[1000] flex items-center justify-center p-4 sm:p-6">
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-                            onClick={() => setShowExitConfirm(false)}
-                        />
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative w-full max-w-md bg-ai-card border border-black/10 rounded-3xl p-6 sm:p-8 shadow-2xl"
-                        >
-                            <div className="flex items-center gap-3 text-ai-accent mb-5 font-semibold text-sm tracking-wide uppercase">
-                                <div className="p-2.5 rounded-xl bg-ai-accent/10 border border-ai-accent/20">
-                                    <Mail className="w-5 h-5" />
-                                </div>
-                                <span>Before you go</span>
-                            </div>
-                            <h3 className="text-xl sm:text-2xl font-bold text-ai-text mb-3">
-                                Don't lose this itinerary
-                            </h3>
-                            <p className="text-ai-muted mb-7 text-sm sm:text-base">
-                                Take it with you — copy a share link, or get a printable PDF in your inbox. Both work without an account.
-                            </p>
-                            <div className="flex flex-col gap-3">
-                                <button
-                                    onClick={copyShareLinkFromModal}
-                                    className="w-full py-3.5 bg-ai-accent hover:bg-ai-secondary text-white rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
-                                >
-                                    {modalShareCopied ? (
-                                        <>
-                                            <Check className="w-4 h-4" />
-                                            Link copied to clipboard
-                                        </>
-                                    ) : (
-                                        <>
-                                            <LinkIcon className="w-4 h-4" />
-                                            Copy share link
-                                        </>
-                                    )}
-                                </button>
-                                <button
-                                    onClick={scrollToEmailCapture}
-                                    className="w-full py-3.5 bg-black/5 hover:bg-black/10 border border-black/10 text-ai-text rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
-                                >
-                                    <Mail className="w-4 h-4" />
-                                    Email me the PDF
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        setShowExitConfirm(false);
-                                        navigate('/');
-                                        setView('home');
-                                    }}
-                                    className="w-full py-3 text-ai-muted hover:text-ai-text rounded-2xl text-sm font-medium transition-all"
-                                >
-                                    Leave anyway
-                                </button>
-                            </div>
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
+            <AuthModal
+                isOpen={showAuthModal}
+                message="Sign in to generate your Sikkim itinerary"
+                onClose={() => {
+                    setShowAuthModal(false);
+                    setPendingSearch(null);
+                }}
+                onSuccess={() => setShowAuthModal(false)}
+            />
         </main>
     );
 }

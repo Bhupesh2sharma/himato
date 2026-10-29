@@ -58,6 +58,19 @@ export interface GuidePost {
   updatedAt: string;
 }
 
+export type PlaceCategory = 'monasteries' | 'lakes' | 'valleys' | 'treks';
+
+export interface PopularPlace {
+  _id: string;
+  name: string;
+  prompt: string;
+  category: PlaceCategory;
+  priority: number; // lower = shown first
+  active: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 class ApiError extends Error {
   status: number;
   constructor(status: number, message: string) {
@@ -155,11 +168,11 @@ class ApiClient {
   }
 
   // Itinerary endpoints
-  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; routeData?: any; itineraryId?: string } }> {
+  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string } }> {
     return this.request('/api/itinerary/generate', {
       method: 'POST',
       body: JSON.stringify(data),
-    });
+    }, true);
   }
 
   // Refine an itinerary with a natural-language instruction (returns full updated plan)
@@ -167,7 +180,7 @@ class ApiClient {
     return this.request('/api/itinerary/edit', {
       method: 'POST',
       body: JSON.stringify(data),
-    });
+    }, true);
   }
 
   async getItineraryHistory(page: number = 1, limit: number = 10, filter?: string): Promise<any> {
@@ -384,6 +397,32 @@ class ApiClient {
 
   async toggleAdminUser(id: string): Promise<any> {
     return this.request(`/api/admin/users/${id}/toggle-admin`, { method: 'PATCH' }, true);
+  }
+
+  // Popular place endpoints (public) — active places sorted by priority
+  async getPopularPlaces(): Promise<{ status: string; data: { places: PopularPlace[] } }> {
+    return this.request('/api/places');
+  }
+
+  // Popular place endpoints (admin)
+  async adminGetAllPlaces(): Promise<{ status: string; data: { places: PopularPlace[] } }> {
+    return this.request('/api/places/admin/all', {}, true);
+  }
+
+  async adminCreatePlace(data: Partial<PopularPlace>): Promise<{ status: string; data: { place: PopularPlace } }> {
+    return this.request('/api/places/admin', { method: 'POST', body: JSON.stringify(data) }, true);
+  }
+
+  async adminUpdatePlace(id: string, data: Partial<PopularPlace>): Promise<{ status: string; data: { place: PopularPlace } }> {
+    return this.request(`/api/places/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
+  }
+
+  async adminDeletePlace(id: string): Promise<void> {
+    return this.request(`/api/places/admin/${id}`, { method: 'DELETE' }, true);
+  }
+
+  async adminTogglePlace(id: string): Promise<{ status: string; data: { place: PopularPlace } }> {
+    return this.request(`/api/places/admin/${id}/toggle`, { method: 'PATCH' }, true);
   }
 
   // Guide endpoints (public)

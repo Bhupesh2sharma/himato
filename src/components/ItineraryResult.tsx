@@ -22,16 +22,6 @@ interface DayPlan {
     activities: Activity[];
 }
 
-interface RouteData {
-    days: Array<{
-        day: number;
-        polyline: string | null;
-        stops: Array<{ lat: number; lng: number; label: string; place_id?: string }>;
-        eta_minutes: number | null;
-        total_distance_km: number | null;
-    }>;
-}
-
 interface ItineraryResultProps {
     data: {
         days: DayPlan[];
@@ -40,7 +30,6 @@ interface ItineraryResultProps {
         permits?: string[];
         packingList?: string[];
     } | null;
-    routeData?: RouteData | null;
     itineraryId?: string | null;
     onItineraryChange?: (data: any) => void;
 }

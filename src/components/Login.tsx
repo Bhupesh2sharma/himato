@@ -8,13 +8,17 @@ import { track } from '../utils/analytics';
 interface LoginProps {
   onSuccess?: () => void;
   onSwitchToRegister?: () => void;
+  // Render as a card only (no full-page wrapper) — used inside AuthModal
+  embedded?: boolean;
+  initialEmail?: string;
+  subtitle?: string;
 }
 
-export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
+export const Login = ({ onSuccess, onSwitchToRegister, embedded = false, initialEmail = '', subtitle = 'Sign in to continue your journey' }: LoginProps) => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -37,8 +41,11 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
     try {
       await login({ email, password });
       track('signup_completed');
-      onSuccess?.();
-      navigate('/');
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        navigate('/');
+      }
     } catch (err: any) {
       setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
@@ -47,19 +54,19 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark">
+    <div className={embedded ? '' : 'min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark'}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="glass rounded-2xl p-8">
+        <div className={embedded ? 'p-8' : 'glass rounded-2xl p-8'}>
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
               Welcome Back
             </h1>
-            <p className="text-ai-muted">Sign in to continue your journey</p>
+            <p className="text-ai-muted">{subtitle}</p>
           </div>
 
           {error && (
@@ -164,14 +171,16 @@ export const Login = ({ onSuccess, onSwitchToRegister }: LoginProps) => {
             </p>
           </div>
 
-          <div className="mt-4 text-center">
-            <Link
-              to="/"
-              className="text-ai-muted hover:text-ai-text text-sm transition-colors"
-            >
-              ← Continue as Guest
-            </Link>
-          </div>
+          {!embedded && (
+            <div className="mt-4 text-center">
+              <Link
+                to="/"
+                className="text-ai-muted hover:text-ai-text text-sm transition-colors"
+              >
+                ← Continue as Guest
+              </Link>
+            </div>
+          )}
         </div>
       </motion.div>
     </div>

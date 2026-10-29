@@ -10,14 +10,15 @@ import { useAuth } from '../contexts/AuthContext';
 import { HiddenGemsLeadMagnet } from '../components/HiddenGemsLeadMagnet';
 import { decodeItineraryFromUrl } from '../utils/sharing';
 import { ClientItineraryView } from '../components/ClientItineraryView';
-import { getSeasonalPicks } from '../data/seasonalPlaces';
+import { getSeason } from '../data/season';
+import { usePopularPlaces } from '../hooks/usePopularPlaces';
 
 const GOLD = '#c9a961';
 
 const STEPS = [
     { icon: PenLine, title: 'Describe your trip', body: 'Tell Himato your vibe in one sentence — days, pace, and who’s coming along.' },
     { icon: Wand2, title: 'AI builds your plan', body: 'Get a day-by-day itinerary with permits, routes, and hidden valleys — in seconds.' },
-    { icon: Compass, title: 'Go explore', body: 'Tweak it, share it, or grab a PDF. No signup needed to start.' },
+    { icon: Compass, title: 'Go explore', body: 'Tweak it, share it, or grab a PDF.' },
 ];
 
 // Hero cell of the bento — grounded in a real Sikkim photo.
@@ -33,7 +34,7 @@ const FEATURES = [
     { icon: Gem, title: 'Hidden valleys', body: 'The monasteries, lakes, and villages the travel blogs always miss.' },
     { icon: Briefcase, title: 'Travel-agent mode', body: 'Agents build branded, client-ready itineraries in a fraction of the time.' },
     { icon: MessageCircle, title: 'AI guide, always on', body: 'Answers questions and refines your plan as you chat.' },
-    { icon: Gift, title: 'Free, no signup', body: 'Full itineraries instantly. Sign up only to save them.' },
+    { icon: Gift, title: 'Free', body: 'Full itineraries instantly, saved to your account.' },
 ];
 
 function HowItWorks() {
@@ -147,8 +148,9 @@ function Features() {
 
 function SeasonTeaser() {
     const navigate = useNavigate();
-    const { season, picks } = getSeasonalPicks();
-    const top = picks.slice(0, 5);
+    const season = getSeason(new Date().getMonth() + 1);
+    const { places } = usePopularPlaces();
+    const top = places.slice(0, 5);
     const monthName = new Date().toLocaleDateString('en-US', { month: 'long' });
 
     return (
@@ -165,7 +167,7 @@ function SeasonTeaser() {
                         </h2>
                         <p className="text-white/55 leading-relaxed mb-8 max-w-sm">
                             Himato reads the calendar so you don't have to — {season.tagline}. These
-                            are the spots that pay off this month, with the risky and snowed-in ones held back.
+                            are the spots that pay off this month.
                         </p>
                         <button
                             onClick={() => navigate('/chat')}
@@ -176,10 +178,11 @@ function SeasonTeaser() {
                     </div>
 
                     {/* Right: ranked in-season list with the reason for each */}
+                    {top.length > 0 && (
                     <div className="rounded-2xl border border-white/10 bg-white/[0.02] divide-y divide-white/10 overflow-hidden">
                         {top.map((p, i) => (
                             <motion.button
-                                key={p.name}
+                                key={p._id}
                                 initial={{ opacity: 0, x: 12 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
@@ -192,12 +195,13 @@ function SeasonTeaser() {
                                 </span>
                                 <div className="flex-1 min-w-0">
                                     <h3 className="font-semibold text-white">{p.name}</h3>
-                                    <p className="text-sm text-white/45 truncate">{p.note}</p>
+                                    <p className="text-sm text-white/45 truncate">{p.prompt}</p>
                                 </div>
                                 <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
                             </motion.button>
                         ))}
                     </div>
+                    )}
                 </div>
             </div>
         </section>
@@ -215,7 +219,7 @@ function ClosingCTA() {
                     Ready to plan your <span className="text-shimmer">Sikkim</span> trip?
                 </h2>
                 <p className="text-lg text-white/60 mb-10">
-                    A complete, permit-aware itinerary in 60 seconds. Free, and no signup to start.
+                    A complete, permit-aware itinerary in 60 seconds. Free.
                 </p>
                 <button
                     onClick={() => navigate('/chat')}
@@ -268,7 +272,7 @@ export function LandingPage() {
                         </h1>
 
                         <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-                            AI-built itineraries with permits, hidden valleys, and the spots blogs miss. Free, no signup.
+                            AI-built itineraries with permits, hidden valleys, and the spots blogs miss. Free.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -299,7 +303,7 @@ export function LandingPage() {
                             <span className="text-white/25">•</span>
                             <span><strong className="text-white font-semibold">60-second</strong> plans</span>
                             <span className="text-white/25">•</span>
-                            <span>Free, no signup</span>
+                            <span>Free</span>
                             <span className="text-white/25">•</span>
                             <span>Permits included</span>
                         </div>

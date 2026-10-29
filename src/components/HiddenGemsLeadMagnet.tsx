@@ -12,7 +12,7 @@ import { track } from '../utils/analytics';
  * them something useful now in exchange for an email — turning otherwise-
  * lost visitors into a list we can re-engage with.
  *
- * Pipeline: same Web3Forms account as EmailItineraryCapture. Optional second
+ * Pipeline: the main Web3Forms account (VITE_WEB3FORMS_ACCESS_KEY). Optional second
  * form key (VITE_WEB3FORMS_LEAD_MAGNET_KEY) keeps lead-magnet leads in their
  * own inbox; falls back to the main key if not set.
  *

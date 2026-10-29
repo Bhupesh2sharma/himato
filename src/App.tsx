@@ -16,6 +16,7 @@ import { PlannerPage } from './pages/PlannerPage';
 import { GuidesIndexPage } from './pages/GuidesIndexPage';
 import { B2BDashboard } from './pages/B2BDashboard';
 import { AdminGuidesPage } from './pages/AdminGuidesPage';
+import { AdminPlacesPage } from './pages/AdminPlacesPage';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { AdminLogin } from './pages/AdminLogin';
 import { apiClient } from './services/api';
@@ -120,6 +121,7 @@ function App() {
         <Route path="/dashboard/:agentCode" element={<B2BDashboard />} />
         <Route path="/manage-himato/login" element={<AdminLogin />} />
         <Route path="/manage-himato/guides" element={<AdminGuidesPage />} />
+        <Route path="/manage-himato/places" element={<AdminPlacesPage />} />
         <Route path="/manage-himato" element={<AdminDashboard />} />
         <Route path="/terms" element={<TermsAndConditions />} />
 

@@ -5,7 +5,7 @@ import { chatWithSherpa, getChatSessionId, setChatSessionId, clearChatSession } 
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { ConfirmationModal } from './ConfirmationModal';
-import { getSeason } from '../data/seasonalPlaces';
+import { getSeason } from '../data/season';
 import ReactMarkdown from 'react-markdown';
 
 interface Message {

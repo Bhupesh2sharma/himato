@@ -7,10 +7,12 @@ import { track } from '../utils/analytics';
 
 interface RegisterProps {
   onSuccess?: () => void;
-  onSwitchToLogin?: () => void;
+  onSwitchToLogin?: (email?: string) => void;
+  // Render as a card only (no full-page wrapper) — used inside AuthModal
+  embedded?: boolean;
 }
 
-export const Register = ({ onSwitchToLogin }: RegisterProps) => {
+export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) => {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -76,7 +78,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
 
   const handleGoToLogin = () => {
     if (onSwitchToLogin) {
-      onSwitchToLogin();
+      onSwitchToLogin(registeredEmail);
     } else {
       // Navigate to login page with email pre-filled if possible
       navigate('/login', { state: { email: registeredEmail } });
@@ -86,14 +88,14 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
   // Show success message and login form
   if (showSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark">
+      <div className={embedded ? '' : 'min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark'}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="w-full max-w-md"
         >
-          <div className="glass rounded-2xl p-8">
+          <div className={embedded ? 'p-8' : 'glass rounded-2xl p-8'}>
             <AnimatePresence>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -128,14 +130,14 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark">
+    <div className={embedded ? '' : 'min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark'}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="glass rounded-2xl p-8">
+        <div className={embedded ? 'p-8' : 'glass rounded-2xl p-8'}>
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
               Create Account
@@ -344,7 +346,7 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
               Already have an account?{' '}
               {onSwitchToLogin ? (
                 <button
-                  onClick={onSwitchToLogin}
+                  onClick={() => onSwitchToLogin()}
                   className="text-ai-accent hover:text-ai-accent/80 font-medium transition-colors"
                 >
                   Sign in
@@ -360,14 +362,16 @@ export const Register = ({ onSwitchToLogin }: RegisterProps) => {
             </p>
           </div>
 
-          <div className="mt-4 text-center">
-            <Link
-              to="/"
-              className="text-ai-muted hover:text-ai-text text-sm transition-colors"
-            >
-              ← Continue as Guest
-            </Link>
-          </div>
+          {!embedded && (
+            <div className="mt-4 text-center">
+              <Link
+                to="/"
+                className="text-ai-muted hover:text-ai-text text-sm transition-colors"
+              >
+                ← Continue as Guest
+              </Link>
+            </div>
+          )}
         </div>
       </motion.div>
     </div>
