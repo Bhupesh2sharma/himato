@@ -113,7 +113,7 @@ function layout(main: string): string {
   return `<div class="seo-static"><style>${STATIC_CSS}</style>${NOSCRIPT}
 <header><nav aria-label="Main"><a href="/">Himato</a><a href="/chat">Plan a trip</a><a href="/guides">Sikkim guides</a><a href="/hidden-gems">Hidden gems</a><a href="/reach_us">Contact</a></nav></header>
 <main>${main}</main>
-<footer><p>Himato is a free AI trip planner for Sikkim, India, by Waglogy. Contact: hello@himato.in · +91 9733814168</p>
+<footer><p>Himato is a free AI trip planner for Sikkim, India, by Waglogy. Contact: hello@himato.in · +91 9733814168 · <a href="https://www.instagram.com/himato_ai/" rel="me">Instagram @himato_ai</a></p>
 <p><a href="/chat">Plan a Sikkim trip</a> · <a href="/guides">Sikkim travel guides</a> · <a href="/hidden-gems">Hidden gems of Sikkim</a> · <a href="/terms">Terms</a></p></footer>
 </div>`;
 }
@@ -368,6 +368,38 @@ async function checkRedirects(root: string, guides: GuideInput[]) {
   if (problems.length) throw new Error(`[seo] Guide redirects out of sync:\n  ${problems.join('\n  ')}`);
 }
 
+// ── IndexNow (Bing, and through it ChatGPT search / Copilot; also Yandex…) ──
+// On production builds, tell IndexNow which URLs are new, changed (lastmod)
+// or gone since the live sitemap, instead of waiting for a crawl. Best-effort:
+// never fails the build. The key is public by design (served at /<key>.txt).
+const INDEXNOW_KEY = '090c2764af28ce259f9ec5f73baa4e92';
+
+const sitemapEntries = (xml: string) =>
+  new Map([...xml.matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]));
+
+async function pingIndexNow(newSitemap: string, log: (m: string) => void) {
+  if (process.env.VERCEL_ENV !== 'production' || process.env.INDEXNOW === 'false') return;
+  try {
+    const live = await fetch(`${SITE_URL}/sitemap.xml`, { signal: AbortSignal.timeout(8000) }).then((r) => (r.ok ? r.text() : ''));
+    const before = sitemapEntries(live);
+    const after = sitemapEntries(newSitemap);
+    const changed = [...after].filter(([url, mod]) => before.get(url) !== mod).map(([url]) => url);
+    const removed = [...before.keys()].filter((url) => !after.has(url));
+    const urlList = [...changed, ...removed].slice(0, 10000);
+    if (!urlList.length) return log('[seo] IndexNow: no changed URLs');
+    if (process.env.INDEXNOW_DRY_RUN) return log(`[seo] IndexNow dry run, would submit ${urlList.length}:\n  ${urlList.join('\n  ')}`);
+    const res = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({ host: new URL(SITE_URL).host, key: INDEXNOW_KEY, keyLocation: `${SITE_URL}/${INDEXNOW_KEY}.txt`, urlList }),
+      signal: AbortSignal.timeout(8000),
+    });
+    log(`[seo] IndexNow: submitted ${urlList.length} URL(s) (${changed.length} new/changed, ${removed.length} removed) → HTTP ${res.status}`);
+  } catch (err) {
+    log(`[seo] IndexNow skipped: ${(err as Error).message}`);
+  }
+}
+
 // ── Plugin ───────────────────────────────────────────────────────────────────
 
 export function seoPrerender(options: { apiBaseUrl?: string } = {}): Plugin {
@@ -424,11 +456,13 @@ export function seoPrerender(options: { apiBaseUrl?: string } = {}): Plugin {
       );
       await write('/app-shell', page(renderHead(privatePageMeta('/'), { canonical: false })));
 
-      await fs.writeFile(path.join(outDir, 'sitemap.xml'), renderSitemap(guides));
+      const sitemap = renderSitemap(guides);
+      await fs.writeFile(path.join(outDir, 'sitemap.xml'), sitemap);
       await fs.writeFile(path.join(outDir, 'robots.txt'), renderRobots());
       await fs.writeFile(path.join(outDir, 'llms.txt'), renderLlmsTxt(guides));
       await fs.writeFile(path.join(outDir, 'llms-full.txt'), renderLlmsFull(guides));
 
+      await pingIndexNow(sitemap, log);
       log(`[seo] Prerendered ${INDEXABLE_STATIC_PATHS.length} pages + ${guides.length} guides; wrote sitemap.xml, robots.txt, llms.txt, llms-full.txt`);
     },
   };

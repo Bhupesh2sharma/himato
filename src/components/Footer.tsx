@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Globe, Phone, Mail, Building2 } from 'lucide-react';
+import { Globe, Phone, Mail, Building2, AtSign } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -84,6 +84,12 @@ export const Footer = () => {
               <li className="flex items-center gap-3 text-ai-muted">
                 <Mail className="w-5 h-5 text-ai-accent flex-shrink-0" />
                 <span>hello@himato.in</span>
+              </li>
+              <li className="flex items-center gap-3 text-ai-muted">
+                <AtSign className="w-5 h-5 text-ai-accent flex-shrink-0" />
+                <a href="https://www.instagram.com/himato_ai/" target="_blank" rel="noopener noreferrer me" className="hover:text-ai-accent transition-colors">
+                  Instagram: @himato_ai
+                </a>
               </li>
               <li className="flex items-center gap-3 text-ai-muted">
                 <Building2 className="w-5 h-5 text-ai-accent flex-shrink-0" />
