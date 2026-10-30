@@ -16,7 +16,7 @@ import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { AuthModal } from '../components/AuthModal';
 
-type SearchRequest = { prompt: string; isBusiness: boolean; businessName?: string };
+type SearchRequest = { prompt: string };
 
 export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
@@ -81,21 +81,20 @@ export function PlannerPage() {
         setShowAuthModal(true);
     };
 
-    const handleSearch = async (prompt: string, isBusiness: boolean, businessName?: string) => {
+    const handleSearch = async (prompt: string) => {
         if (!isAuthenticated) {
-            requireLoginFor({ prompt, isBusiness, businessName });
+            requireLoginFor({ prompt });
             return;
         }
         setIsSearching(true);
         setError('');
         setItineraryId(null);
         try {
-            const { itinerary, id } = await generateItinerary(prompt, isBusiness, businessName);
+            const { itinerary, id } = await generateItinerary(prompt);
             setItineraryData(itinerary);
             setItineraryId(id || null);
             setView('results');
             track('itinerary_generated', {
-                is_business: isBusiness,
                 prompt_length: prompt.length,
               });
         } catch (err: any) {
@@ -103,7 +102,7 @@ export function PlannerPage() {
             // Session expired / invalid token — log out and ask to sign in again
             if (err?.status === 401) {
                 await logout();
-                requireLoginFor({ prompt, isBusiness, businessName });
+                requireLoginFor({ prompt });
                 return;
             }
             setError(err.message || 'Failed to generate plan. Please try again.');
@@ -115,10 +114,10 @@ export function PlannerPage() {
     // Once the user signs in from the popup, run the search they asked for
     useEffect(() => {
         if (isAuthenticated && pendingSearch) {
-            const { prompt, isBusiness, businessName } = pendingSearch;
+            const { prompt } = pendingSearch;
             setPendingSearch(null);
             setShowAuthModal(false);
-            handleSearch(prompt, isBusiness, businessName);
+            handleSearch(prompt);
         }
     }, [isAuthenticated, pendingSearch]);
 
@@ -154,10 +153,10 @@ export function PlannerPage() {
                                     exit={{ opacity: 0 }}
                                     className="min-h-screen pt-24 pb-6 sm:pt-28 sm:pb-12"
                                 >
-                                    <div className="container mx-auto px-4 sm:px-6">
+                                    <div className="max-w-6xl mx-auto px-4 sm:px-6">
                                         <button
                                             onClick={handleBackClick}
-                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-ai-text transition-colors flex items-center gap-2.5 text-sm sm:text-base group"
+                                            className="mb-6 sm:mb-8 text-ai-muted hover:text-ai-text transition-colors flex items-center gap-2.5 text-sm group"
                                         >
                                             <span className="flex items-center justify-center w-8 h-8 rounded-full border border-black/10 bg-white group-hover:border-ai-accent group-hover:bg-ai-accent/5 transition-all">
                                                 <span className="group-hover:-translate-x-0.5 transition-transform text-sm leading-none">←</span>

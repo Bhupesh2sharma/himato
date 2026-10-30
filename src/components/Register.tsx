@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, User, Phone, Building2, Check, AlertCircle, Eye, EyeOff, CheckCircle2, LogIn } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Lock, User, Phone, Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { track } from '../utils/analytics';
+import { AGENT_APP_URL } from '../utils/externalApps';
+import { EmailCodeStep } from './auth/EmailCodeStep';
 
 interface RegisterProps {
   onSuccess?: () => void;
@@ -12,7 +14,12 @@ interface RegisterProps {
   embedded?: boolean;
 }
 
-export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) => {
+const labelCls = 'block text-sm font-medium text-ai-text mb-1.5';
+const inputCls = 'w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder:text-ai-muted/70 focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all disabled:opacity-60';
+const iconCls = 'absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ai-muted';
+const hintCls = 'mt-1.5 text-xs text-ai-muted';
+
+export const Register = ({ onSuccess, onSwitchToLogin, embedded = false }: RegisterProps) => {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -27,8 +34,9 @@ export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) =
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [registeredEmail, setRegisteredEmail] = useState('');
+  // Set once the code has been emailed → shows the code step
+  const [pendingEmail, setPendingEmail] = useState('');
+  const [resendIn, setResendIn] = useState(30);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -51,24 +59,13 @@ export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) =
     setIsLoading(true);
 
     try {
-      await register({
+      const { email, resendIn: wait } = await register({
         ...formData,
-        businessName: formData.business ? formData.businessName : '',
-      });
-      track('signup_completed');
-      // Show success message
-      setRegisteredEmail(formData.email);
-      setShowSuccess(true);
-      // Clear form
-      setFormData({
-        name: '',
-        email: '',
-        phoneNo: '',
-        password: '',
-        acceptTermsAndConditions: false,
-        business: false,
         businessName: '',
       });
+      // Keep the form filled in, so "Change details" can go back to it
+      setResendIn(wait || 30);
+      setPendingEmail(email);
     } catch (err: any) {
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
@@ -76,53 +73,29 @@ export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) =
     }
   };
 
-  const handleGoToLogin = () => {
-    if (onSwitchToLogin) {
-      onSwitchToLogin(registeredEmail);
-    } else {
-      // Navigate to login page with email pre-filled if possible
-      navigate('/login', { state: { email: registeredEmail } });
-    }
+  // Code confirmed → account created and signed in
+  const handleVerified = () => {
+    track('signup_completed');
+    if (onSuccess) onSuccess();
+    else navigate('/');
   };
 
-  // Show success message and login form
-  if (showSuccess) {
+  if (pendingEmail) {
     return (
       <div className={embedded ? '' : 'min-h-screen flex items-center justify-center px-4 py-12 bg-ai-dark'}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="w-full max-w-md"
         >
           <div className={embedded ? 'p-8' : 'glass rounded-2xl p-8'}>
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="text-center"
-              >
-                <div className="mb-6 flex justify-center">
-                  <div className="w-20 h-20 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center">
-                    <CheckCircle2 className="w-10 h-10 text-green-400" />
-                  </div>
-                </div>
-                <h2 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
-                  Registration Successful!
-                </h2>
-                <p className="text-ai-muted mb-6">
-                  Your account has been created successfully. Please sign in to continue.
-                </p>
-                <button
-                  onClick={handleGoToLogin}
-                  className="w-full py-3 bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent/50 text-ai-accent font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <LogIn className="w-5 h-5" />
-                  Go to Sign In
-                </button>
-              </motion.div>
-            </AnimatePresence>
+            <EmailCodeStep
+              email={pendingEmail}
+              resendIn={resendIn}
+              onVerified={handleVerified}
+              onBack={() => setPendingEmail('')}
+            />
           </div>
         </motion.div>
       </div>
@@ -138,206 +111,149 @@ export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) =
         className="w-full max-w-md"
       >
         <div className={embedded ? 'p-8' : 'glass rounded-2xl p-8'}>
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-ai-text to-ai-muted">
-              Create Account
-            </h1>
-            <p className="text-ai-muted">Join us and start planning your journey</p>
+          <div className="text-center mb-7">
+            <Link to="/" aria-label="Himato home" className="inline-block mb-1">
+              <img src="/logo-mark.webp" alt="Himato" className="h-20 w-auto mx-auto" />
+            </Link>
+            <h1 className="text-2xl font-bold text-ai-text">Create your account</h1>
+            <p className="text-ai-muted text-sm mt-1.5">Plan your Sikkim trips and keep them in one place.</p>
           </div>
 
           {error && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3"
+              className="mb-5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start gap-3"
             >
-              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
               <p className="text-red-600 text-sm">{error}</p>
             </motion.div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-ai-muted mb-2">
-                Full Name
+              <label htmlFor="name" className={labelCls}>
+                Name <span className="text-ai-warm">*</span>
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ai-muted" />
+                <User className={iconCls} />
                 <input
                   id="name"
+                  placeholder="Enter your full name"
                   name="name"
                   type="text"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
-                  placeholder="John Doe"
+                  className={inputCls}
                   disabled={isLoading}
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-ai-muted mb-2">
-                Email
+              <label htmlFor="email" className={labelCls}>
+                Email <span className="text-ai-warm">*</span>
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ai-muted" />
+                <Mail className={iconCls} />
                 <input
                   id="email"
+                  placeholder="Enter your email"
                   name="email"
                   type="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
-                  placeholder="your.email@example.com"
+                  className={inputCls}
                   disabled={isLoading}
                 />
               </div>
+              <p className={hintCls}>We'll email you a code to confirm it.</p>
             </div>
 
             <div>
-              <label htmlFor="phoneNo" className="block text-sm font-medium text-ai-muted mb-2">
-                Phone Number
+              <label htmlFor="password" className={labelCls}>
+                Password <span className="text-ai-warm">*</span>
               </label>
               <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ai-muted" />
-                <input
-                  id="phoneNo"
-                  name="phoneNo"
-                  type="tel"
-                  value={formData.phoneNo}
-                  onChange={handleChange}
-                  required
-                  className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
-                  placeholder="+91 9876543210"
-                  disabled={isLoading}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-ai-muted mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ai-muted" />
+                <Lock className={iconCls} />
                 <input
                   id="password"
+                  placeholder="Create a password"
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="new-password"
                   value={formData.password}
                   onChange={handleChange}
                   required
                   minLength={6}
-                  className="w-full pl-10 pr-12 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
-                  placeholder="Create a password (min. 6 characters)"
+                  className={`${inputCls} pr-11`}
                   disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-ai-muted hover:text-ai-text transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                   tabIndex={-1}
                 >
-                  {showPassword ? (
-                    <EyeOff className="w-5 h-5" />
-                  ) : (
-                    <Eye className="w-5 h-5" />
-                  )}
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
+              </div>
+              <p className={hintCls}>At least 6 characters.</p>
+            </div>
+
+            <div>
+              <label htmlFor="phoneNo" className={labelCls}>
+                Phone <span className="font-normal text-ai-muted">(optional)</span>
+              </label>
+              <div className="relative">
+                <Phone className={iconCls} />
+                <input
+                  id="phoneNo"
+                  placeholder="10-digit mobile number"
+                  name="phoneNo"
+                  type="tel"
+                  autoComplete="tel"
+                  value={formData.phoneNo}
+                  onChange={handleChange}
+                  className={inputCls}
+                  disabled={isLoading}
+                />
               </div>
             </div>
 
-            <div className="pt-2">
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors mt-0.5 flex-shrink-0 ${formData.business ? 'bg-ai-accent border-ai-accent' : 'border-ai-muted group-hover:border-ai-accent'}`}>
-                  {formData.business && <Check className="w-3 h-3 text-ai-dark" />}
-                </div>
-                <input
-                  name="business"
-                  type="checkbox"
-                  checked={formData.business}
-                  onChange={handleChange}
-                  className="hidden"
-                  disabled={isLoading}
-                />
-                <span className={`text-sm ${formData.business ? 'text-ai-accent' : 'text-ai-muted group-hover:text-ai-text'} transition-colors`}>
-                  I am a Business / Travel Agent
-                </span>
-              </label>
-            </div>
-
-            {formData.business && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <label htmlFor="businessName" className="block text-sm font-medium text-ai-muted mb-2">
-                  Business Name
-                </label>
-                <div className="relative">
-                  <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-ai-muted" />
-                  <input
-                    id="businessName"
-                    name="businessName"
-                    type="text"
-                    value={formData.businessName}
-                    onChange={handleChange}
-                    className="w-full pl-10 pr-4 py-3 bg-ai-card/50 border border-black/10 rounded-xl text-ai-text placeholder-ai-muted focus:outline-none focus:border-ai-accent/50 focus:ring-2 focus:ring-ai-accent/20 transition-all"
-                    placeholder="Your Business Name"
-                    disabled={isLoading}
-                  />
-                </div>
-              </motion.div>
-            )}
-
-            <div className="pt-2">
-              <label className="flex items-start gap-3 cursor-pointer group">
-                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors mt-0.5 flex-shrink-0 ${formData.acceptTermsAndConditions ? 'bg-ai-accent border-ai-accent' : 'border-ai-muted group-hover:border-ai-accent'}`}>
-                  {formData.acceptTermsAndConditions && <Check className="w-3 h-3 text-ai-dark" />}
-                </div>
-                <input
-                  name="acceptTermsAndConditions"
-                  type="checkbox"
-                  checked={formData.acceptTermsAndConditions}
-                  onChange={handleChange}
-                  required
-                  className="hidden"
-                  disabled={isLoading}
-                />
-                <span className={`text-sm ${formData.acceptTermsAndConditions ? 'text-ai-accent' : 'text-ai-muted group-hover:text-ai-text'} transition-colors`}>
-                  I accept the{' '}
-                  <Link
-                    to="/terms"
-                    target="_blank"
-                    className="text-ai-accent hover:underline font-medium"
-                  >
-                    Terms and Conditions
-                  </Link>
-                </span>
-              </label>
-            </div>
+            <label className="flex items-start gap-3 cursor-pointer group pt-1">
+              <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors mt-0.5 flex-shrink-0 ${formData.acceptTermsAndConditions ? 'bg-ai-accent border-ai-accent' : 'border-ai-muted group-hover:border-ai-accent'}`}>
+                {formData.acceptTermsAndConditions && <Check className="w-3 h-3 text-ai-dark" />}
+              </div>
+              <input
+                name="acceptTermsAndConditions"
+                type="checkbox"
+                checked={formData.acceptTermsAndConditions}
+                onChange={handleChange}
+                required
+                className="hidden"
+                disabled={isLoading}
+              />
+              <span className="text-sm text-ai-muted group-hover:text-ai-text transition-colors">
+                I accept the{' '}
+                <Link to="/terms" target="_blank" className="text-ai-accent hover:underline font-medium">
+                  Terms and Conditions
+                </Link>
+              </span>
+            </label>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 hover:border-ai-accent/50 text-ai-accent font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl bg-ai-accent hover:bg-ai-secondary text-white font-semibold transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-ai-accent border-t-transparent rounded-full animate-spin" />
-                  Creating account...
-                </>
-              ) : (
-                <>
-                  <User className="w-5 h-5" />
-                  Create Account
-                </>
-              )}
+              {isLoading && <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />}
+              {isLoading ? 'Sending code…' : 'Create account'}
             </button>
           </form>
 
@@ -362,13 +278,20 @@ export const Register = ({ onSwitchToLogin, embedded = false }: RegisterProps) =
             </p>
           </div>
 
+          <p className="mt-3 text-center text-xs text-ai-muted">
+            Travel agent?{' '}
+            <a href={`${AGENT_APP_URL}/register`} className="text-ai-accent hover:text-ai-accent/80 font-medium transition-colors">
+              Create an agency account
+            </a>
+          </p>
+
           {!embedded && (
             <div className="mt-4 text-center">
               <Link
                 to="/"
                 className="text-ai-muted hover:text-ai-text text-sm transition-colors"
               >
-                ← Continue as Guest
+                ← Back to Himato
               </Link>
             </div>
           )}

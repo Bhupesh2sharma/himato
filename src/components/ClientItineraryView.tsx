@@ -18,6 +18,7 @@ import {
 import { heroImageForItinerary } from '../utils/locationImages';
 import { ClientProposalActions } from './ClientProposalActions';
 import { DownloadItineraryButton } from './DownloadItineraryButton';
+import { Highlighted } from './Highlighted';
 
 // --- Types ---
 interface Activity {
@@ -287,7 +288,7 @@ export const ClientItineraryView = ({ data, slug }: ClientItineraryViewProps) =>
                                 </div>
                                 <div>
                                     <p className="text-[11px] font-bold uppercase tracking-wider text-ai-muted mb-0.5">Best time to visit</p>
-                                    <p className="text-sm text-ai-text leading-relaxed">{data.bestTime}</p>
+                                    <p className="text-sm text-ai-text leading-relaxed"><Highlighted text={data.bestTime} auto={false} /></p>
                                 </div>
                             </div>
                         )}
@@ -301,7 +302,7 @@ export const ClientItineraryView = ({ data, slug }: ClientItineraryViewProps) =>
                                     <ul className="space-y-2">
                                         {data.permits.map((p, i) => (
                                             <li key={i} className="text-sm text-ai-text leading-snug flex gap-2">
-                                                <span style={{ color: accentColor }}>•</span>{p}
+                                                <span style={{ color: accentColor }}>•</span><span><Highlighted text={p} /></span>
                                             </li>
                                         ))}
                                     </ul>
@@ -372,7 +373,7 @@ export const ClientItineraryView = ({ data, slug }: ClientItineraryViewProps) =>
                                                     {activity.time}
                                                 </span>
                                             </div>
-                                            <p className="text-ai-muted text-sm leading-relaxed mb-3">{activity.description}</p>
+                                            <p className="text-ai-muted text-sm leading-relaxed mb-3"><Highlighted text={activity.description} /></p>
                                             <div className="flex items-center gap-1.5 text-xs text-ai-muted font-medium">
                                                 <MapPin className="w-3 h-3" />
                                                 {activity.location}

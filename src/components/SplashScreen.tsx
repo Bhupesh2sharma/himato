@@ -33,7 +33,7 @@ export const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
                         transition={{ delay: 0.2, duration: 0.8 }}
                     >
                         <img
-                            src="/logo-trimmed.png"
+                            src="/logo-trimmed.webp"
                             alt="Himato"
                             className="h-16 md:h-24 w-auto"
                         />

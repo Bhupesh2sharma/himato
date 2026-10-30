@@ -1,208 +1,101 @@
 
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-    ArrowRight, PenLine, Wand2, Compass, ShieldCheck, Gem, Leaf,
-    Briefcase, Gift, MessageCircle,
-} from 'lucide-react';
+import { ArrowRight, CheckCheck } from 'lucide-react';
 import { LocalInsights } from '../components/LocalInsights';
 import { useAuth } from '../contexts/AuthContext';
 import { HiddenGemsLeadMagnet } from '../components/HiddenGemsLeadMagnet';
 import { decodeItineraryFromUrl } from '../utils/sharing';
 import { ClientItineraryView } from '../components/ClientItineraryView';
-import { getSeason } from '../data/season';
-import { usePopularPlaces } from '../hooks/usePopularPlaces';
+import { PrayerFlags, Ridgeline } from '../components/decor/HimalayanDecor';
+import { SampleTripCard } from '../components/landing/SampleTripCard';
+import { AgentOsSection } from '../components/landing/AgentOsSection';
+import { optimizedSrc } from '../data/optimizedImages';
 
-const GOLD = '#c9a961';
 
 const STEPS = [
-    { icon: PenLine, title: 'Describe your trip', body: 'Tell Himato your vibe in one sentence — days, pace, and who’s coming along.' },
-    { icon: Wand2, title: 'AI builds your plan', body: 'Get a day-by-day itinerary with permits, routes, and hidden valleys — in seconds.' },
-    { icon: Compass, title: 'Go explore', body: 'Tweak it, share it, or grab a PDF.' },
+    { title: 'Say what you want', body: 'How many days, who is coming, roughly when. One line is enough.' },
+    { title: 'Get a day-by-day plan', body: 'Stops with times, where you sleep each night, drive times, and the permits you need.' },
+    { title: 'Make it yours', body: 'Ask for changes in plain words, share a link with your group, or download the PDF.' },
 ];
 
-// Hero cell of the bento — grounded in a real Sikkim photo.
-const FEATURE_HERO = {
-    icon: Leaf,
-    image: '/yumgthang.jpeg',
-    title: 'Season-smart planning',
-    body: "Himato only suggests places worth visiting when you're actually going — rhododendrons in spring, clear peaks in autumn, and the passes that shut in deep winter.",
-};
-
-const FEATURES = [
-    { icon: ShieldCheck, title: 'Permits sorted', body: 'Restricted-area permits flagged and explained for North Sikkim and the passes.' },
-    { icon: Gem, title: 'Hidden valleys', body: 'The monasteries, lakes, and villages the travel blogs always miss.' },
-    { icon: Briefcase, title: 'Travel-agent mode', body: 'Agents build branded, client-ready itineraries in a fraction of the time.' },
-    { icon: MessageCircle, title: 'AI guide, always on', body: 'Answers questions and refines your plan as you chat.' },
-    { icon: Gift, title: 'Free', body: 'Full itineraries instantly, saved to your account.' },
-];
+// The request shown above the sample itinerary card.
+const SAMPLE_PROMPT = '4 days in North Sikkim with my parents in April, nothing too strenuous';
 
 function HowItWorks() {
     return (
-        <section className="relative py-28 border-t border-white/5">
-            <div className="container mx-auto px-4 max-w-6xl">
-                {/* Editorial, left-aligned intro */}
-                <div className="max-w-2xl mb-16">
-                    <p className="text-sm font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: GOLD }}>How it works</p>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.1]">
-                        From one sentence to a<br className="hidden md:block" /> full-blown itinerary.
-                    </h2>
-                </div>
-
-                {/* Connected step flow */}
-                <div className="relative grid md:grid-cols-3 gap-12 md:gap-8">
-                    <div className="hidden md:block absolute top-7 left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                    {STEPS.map((s, i) => (
-                        <motion.div
-                            key={s.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.12 }}
-                            className="relative"
-                        >
-                            <div className="flex items-center gap-4 mb-5">
-                                <div className="w-14 h-14 rounded-2xl border border-white/15 flex items-center justify-center relative z-10" style={{ background: '#0e1116' }}>
-                                    <s.icon className="w-6 h-6 text-ai-accent" />
-                                </div>
-                                <span className="text-sm font-semibold tracking-[0.25em]" style={{ color: GOLD }}>0{i + 1}</span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">{s.title}</h3>
-                            <p className="text-white/55 leading-relaxed max-w-xs">{s.body}</p>
-                        </motion.div>
-                    ))}
-                </div>
+        <section className="relative overflow-hidden pt-36 pb-40 md:pt-40 md:pb-48">
+            {/* Kanchenjunga from Singhik (Mangan), on the way to the example trip */}
+            <div className="absolute inset-0 z-0" aria-hidden="true">
+                <img
+                    src={optimizedSrc('/singhik-viewpoint-mangan-sikkim-1-attr-hero.jpeg')}
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover object-[60%_30%]"
+                />
+                {/* Dark on the text side, opening up towards the peaks */}
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(100deg, #0e1116 0%, rgba(14,17,22,0.88) 34%, rgba(14,17,22,0.35) 62%, rgba(14,17,22,0.15) 100%)' }} />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, #0e1116 0%, rgba(14,17,22,0.2) 20%, rgba(14,17,22,0) 45%, rgba(14,17,22,0.35) 100%)' }} />
+                {/* Phones stack text over the snowy middle of the photo — darken it a little more */}
+                <div className="absolute inset-0 lg:hidden bg-[rgba(14,17,22,0.45)]" />
             </div>
-        </section>
-    );
-}
+            <PrayerFlags className="absolute top-0 inset-x-0 w-full h-28 md:h-36 z-10 opacity-80" />
+            <Ridgeline className="absolute bottom-0 inset-x-0 w-full h-16 md:h-24 z-10" />
 
-function Features() {
-    const navigate = useNavigate();
-    const HeroIcon = FEATURE_HERO.icon;
-    return (
-        <section className="relative py-28 bg-white/[0.02] border-t border-white/5">
-            <div className="container mx-auto px-4 max-w-6xl">
-                {/* Left-aligned editorial header */}
-                <div className="max-w-2xl mb-12">
-                    <p className="text-sm font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: GOLD }}>Why Himato</p>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] mb-4">
-                        Built for real Sikkim trips
+            <div className="relative z-20 container mx-auto px-4 max-w-6xl grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center">
+                {/* Copy + steps */}
+                <div>
+                    <h2 className="text-3xl md:text-[2.75rem] font-bold text-white leading-[1.1] mb-4">
+                        Type one sentence.<br />Get the whole trip.
                     </h2>
-                    <p className="text-white/55 leading-relaxed max-w-lg">
-                        Not a generic trip generator — Himato knows Sikkim's permits, its seasons,
-                        and the mountain roads that actually close.
+                    <p className="text-white/55 leading-relaxed mb-10 max-w-md">
+                        No forms to fill in. Write the trip the way you would text a friend, and Himato works out the rest.
                     </p>
+
+                    <ol className="space-y-6">
+                        {STEPS.map((s, i) => (
+                            <li key={s.title} className="flex gap-4">
+                                <span className="shrink-0 w-7 h-7 rounded-full bg-white/10 text-white text-sm font-semibold flex items-center justify-center">{i + 1}</span>
+                                <div>
+                                    <h3 className="font-semibold text-white">{s.title}</h3>
+                                    <p className="text-white/55 text-[15px] leading-relaxed mt-0.5">{s.body}</p>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
                 </div>
 
-                {/* Bento grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:auto-rows-[196px]">
-                    {/* Photo hero cell (2×2) */}
+                {/* Live-looking example: the request, then the plan it produces */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="space-y-3 min-w-0"
+                >
+                    {/* The traveller's request, as a sent chat message */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        onClick={() => navigate('/chat')}
-                        className="group relative overflow-hidden rounded-3xl border border-white/10 cursor-pointer sm:col-span-2 lg:row-span-2 min-h-[320px] lg:min-h-0"
+                        initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true, amount: 0.8 }}
+                        transition={{ type: 'spring', stiffness: 320, damping: 24 }}
+                        style={{ transformOrigin: 'bottom right' }}
+                        className="relative ml-auto mr-2 max-w-md rounded-2xl rounded-br-[4px] bg-ai-accent text-white px-4 pt-2.5 pb-2 shadow-[0_10px_24px_-12px_rgba(0,0,0,0.6)]"
                     >
-                        <img
-                            src={FEATURE_HERO.image}
-                            alt={FEATURE_HERO.title}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(14,17,22,0.94) 0%, rgba(14,17,22,0.45) 55%, rgba(14,17,22,0.15) 100%)' }} />
-                        <div className="relative h-full flex flex-col justify-end p-7 md:p-8">
-                            <div className="w-12 h-12 rounded-xl bg-black/30 backdrop-blur-sm border border-white/20 flex items-center justify-center mb-4">
-                                <HeroIcon className="w-6 h-6" style={{ color: GOLD }} />
-                            </div>
-                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2.5">{FEATURE_HERO.title}</h3>
-                            <p className="text-white/70 max-w-md leading-relaxed mb-4">{FEATURE_HERO.body}</p>
-                            <span className="inline-flex items-center gap-1.5 text-sm font-semibold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all" style={{ color: GOLD }}>
-                                Plan by season <ArrowRight className="w-4 h-4" />
-                            </span>
-                        </div>
+                        <p className="leading-relaxed">{SAMPLE_PROMPT}</p>
+                        <p className="flex items-center justify-end gap-1 mt-0.5 text-[11px] text-white/60">
+                            09:41
+                            <CheckCheck className="w-3.5 h-3.5 text-[#9fd3ff]" aria-label="Read" />
+                        </p>
+                        {/* Bubble tail */}
+                        <svg className="absolute -right-2 bottom-0 w-3 h-3 text-ai-accent" viewBox="0 0 12 12" aria-hidden="true">
+                            <path d="M0 0 C0 6 4 10 12 12 L0 12 Z" fill="currentColor" />
+                        </svg>
                     </motion.div>
 
-                    {/* Small feature cells */}
-                    {FEATURES.map((f, i) => (
-                        <motion.div
-                            key={f.title}
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: (i % 3) * 0.06 }}
-                            className="rounded-2xl p-6 bg-white/[0.03] border border-white/10 hover:border-white/20 hover:bg-white/[0.05] transition-colors flex flex-col justify-center"
-                        >
-                            <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center mb-3" style={{ background: 'rgba(255,255,255,0.03)' }}>
-                                <f.icon className="w-5 h-5" style={{ color: GOLD }} />
-                            </div>
-                            <h3 className="font-bold text-white mb-1">{f.title}</h3>
-                            <p className="text-sm text-white/50 leading-relaxed">{f.body}</p>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function SeasonTeaser() {
-    const navigate = useNavigate();
-    const season = getSeason(new Date().getMonth() + 1);
-    const { places } = usePopularPlaces();
-    const top = places.slice(0, 5);
-    const monthName = new Date().toLocaleDateString('en-US', { month: 'long' });
-
-    return (
-        <section className="relative py-28 border-t border-white/5">
-            <div className="container mx-auto px-4 max-w-6xl">
-                <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-16 items-start">
-                    {/* Left: the season pitch */}
-                    <div className="lg:sticky lg:top-28">
-                        <p className="inline-flex items-center gap-2 text-sm font-semibold tracking-[0.2em] uppercase mb-4" style={{ color: GOLD }}>
-                            <span className="text-base">{season.emoji}</span> In season · {monthName}
-                        </p>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white leading-[1.1] mb-4">
-                            Great to visit<br />right now
-                        </h2>
-                        <p className="text-white/55 leading-relaxed mb-8 max-w-sm">
-                            Himato reads the calendar so you don't have to — {season.tagline}. These
-                            are the spots that pay off this month.
-                        </p>
-                        <button
-                            onClick={() => navigate('/chat')}
-                            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-ai-accent hover:bg-ai-secondary text-white font-semibold transition-colors"
-                        >
-                            Plan a {monthName} trip <ArrowRight className="w-4 h-4" />
-                        </button>
-                    </div>
-
-                    {/* Right: ranked in-season list with the reason for each */}
-                    {top.length > 0 && (
-                    <div className="rounded-2xl border border-white/10 bg-white/[0.02] divide-y divide-white/10 overflow-hidden">
-                        {top.map((p, i) => (
-                            <motion.button
-                                key={p._id}
-                                initial={{ opacity: 0, x: 12 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.06 }}
-                                onClick={() => navigate('/chat')}
-                                className="group w-full flex items-center gap-4 p-5 text-left hover:bg-white/[0.04] transition-colors"
-                            >
-                                <span className="shrink-0 w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-sm font-semibold" style={{ color: GOLD }}>
-                                    0{i + 1}
-                                </span>
-                                <div className="flex-1 min-w-0">
-                                    <h3 className="font-semibold text-white">{p.name}</h3>
-                                    <p className="text-sm text-white/45 truncate">{p.prompt}</p>
-                                </div>
-                                <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white group-hover:translate-x-0.5 transition-all shrink-0" />
-                            </motion.button>
-                        ))}
-                    </div>
-                    )}
-                </div>
+                    <SampleTripCard />
+                </motion.div>
             </div>
         </section>
     );
@@ -253,8 +146,10 @@ export function LandingPage() {
                 {/* Background Image */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/1.png"
+                        src={optimizedSrc('/1.png')}
                         alt="Sikkim Landscape"
+                        fetchPriority="high"
+                        decoding="async"
                         className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(14,17,22,0.6) 0%, rgba(14,17,22,0.3) 40%, rgba(14,17,22,0.75) 100%)' }} />
@@ -303,17 +198,16 @@ export function LandingPage() {
                             <span className="text-white/25">•</span>
                             <span><strong className="text-white font-semibold">60-second</strong> plans</span>
                             <span className="text-white/25">•</span>
-                            <span>Free</span>
+                            <span className="text-white font-semibold" >Free</span>
                             <span className="text-white/25">•</span>
-                            <span>Permits included</span>
+                            <span>Permits info included</span>
                         </div>
                     </motion.div>
                 </div>
             </section>
 
             <HowItWorks />
-            <Features />
-            <SeasonTeaser />
+            <AgentOsSection />
 
             <div id="insights">
                 <LocalInsights />

@@ -5,6 +5,7 @@ import { ArrowRight, X } from 'lucide-react';
 import { SEO_TOPICS, type SeoTopic } from '../data/seoTopics';
 import { apiClient } from '../services/api';
 import type { GuidePost } from '../services/api';
+import { optimizedSrc } from '../data/optimizedImages';
 
 const CATEGORY_COLOR: Record<string, string> = {
     Offbeat:      '#d97a2c',
@@ -118,7 +119,7 @@ function Slide({ topic, isActive, onReadGuide }: { topic: SlideItem; isActive: b
         <div className="relative h-screen w-full overflow-hidden" style={{ scrollSnapAlign: 'start' }}>
             {/* Photo */}
             <img
-                src={topic.image}
+                src={optimizedSrc(topic.image)}
                 alt={topic.title}
                 className="absolute inset-0 w-full h-full object-cover"
             />

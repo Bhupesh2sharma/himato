@@ -15,6 +15,11 @@ export interface RegisterData {
   businessName: string;
 }
 
+export interface SignupExtras {
+  asBusiness?: boolean;
+  businessName?: string;
+}
+
 export interface AuthResponse {
   status?: string;
   message?: string;
@@ -149,11 +154,57 @@ class ApiClient {
     });
   }
 
-  async register(data: RegisterData): Promise<AuthResponse> {
-    return this.request<AuthResponse>('/api/users/register', {
+  // Sign-up step 1: validates the details and emails a 6-digit code (no account yet).
+  async register(data: RegisterData): Promise<{ status: string; data: { verificationRequired: boolean; email: string; resendIn: number } }> {
+    return this.request('/api/users/register', {
       method: 'POST',
       body: JSON.stringify(data),
     });
+  }
+
+  // Sign-up step 2: confirms the code, creates the account and returns a session.
+  async verifyRegistration(email: string, otp: string): Promise<AuthResponse> {
+    return this.request<AuthResponse>('/api/users/register/verify', {
+      method: 'POST',
+      body: JSON.stringify({ email, otp }),
+    });
+  }
+
+  async resendRegistrationCode(email: string): Promise<{ status: string; data: { email: string; resendIn: number } }> {
+    return this.request('/api/users/register/resend', {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
+  }
+
+  // ── Google / phone sign-in ──
+  // `extra` lets the agent app create agency accounts (asBusiness + businessName).
+  async googleAuth(credential: string, extra: SignupExtras = {}): Promise<AuthResponse & { data: { isNewUser: boolean } }> {
+    return this.request('/api/users/auth/google', {
+      method: 'POST',
+      body: JSON.stringify({ credential, ...extra }),
+    });
+  }
+
+  async sendOtp(phone: string): Promise<{ status: string; data: { isNewUser: boolean; resendIn: number } }> {
+    return this.request('/api/users/auth/otp/send', {
+      method: 'POST',
+      body: JSON.stringify({ phone }),
+    });
+  }
+
+  async verifyOtp(data: { phone: string; otp: string; name?: string } & SignupExtras): Promise<AuthResponse & { data: { isNewUser: boolean } }> {
+    return this.request('/api/users/auth/otp/verify', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateMe(data: { name?: string; businessName?: string; business?: boolean }): Promise<{ status: string; data: { user: any } }> {
+    return this.request('/api/users/me', {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }, true);
   }
 
   async getCurrentUser(): Promise<AuthResponse['user']> {
@@ -196,6 +247,15 @@ class ApiClient {
     });
   }
 
+  // Short public link (himato.in/<slug>) for an itinerary the user owns.
+  // Sending itineraryData saves the on-screen version (e.g. after an AI tweak) first.
+  async createShortLink(id: string, itineraryData?: any): Promise<{ status: string; data: { slug: string } }> {
+    return this.request(`/api/itinerary/${id}/short-link`, {
+      method: 'POST',
+      body: JSON.stringify(itineraryData ? { itineraryData } : {}),
+    }, true);
+  }
+
   async getItineraryBySlug(slug: string): Promise<any> {
     return this.request(`/api/itinerary/slug/${slug}`, {
       method: 'GET',
@@ -211,29 +271,6 @@ class ApiClient {
   async updateItinerary(id: string, data: { itineraryData?: any; prompt?: string; shared?: boolean; slug?: string; isOneTime?: boolean }): Promise<any> {
     return this.request(`/api/itinerary/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(data),
-    });
-  }
-
-  /**
-   * Create a shareable itinerary record without requiring a prior /generate
-   * step. Used by BusinessShareModal so guests (and logged-out agents) can
-   * still produce short slug URLs instead of long ?plan= blobs.
-   *
-   * Backend contract (POST /api/itinerary/share, no auth required):
-   *   request:  { itineraryData, slug, isOneTime?: boolean }
-   *   response: { status: 'success', data: { itinerary: { _id, slug, ... } } }
-   *
-   * If the endpoint isn't implemented yet, this rejects with a 404, which
-   * the caller handles by falling back to the legacy long URL.
-   */
-  async createSharedItinerary(data: {
-    itineraryData: any;
-    slug: string;
-    isOneTime?: boolean;
-  }): Promise<{ status: string; data: { itinerary: { _id: string; slug: string } } }> {
-    return this.request('/api/itinerary/share', {
-      method: 'POST',
       body: JSON.stringify(data),
     });
   }
@@ -258,22 +295,6 @@ class ApiClient {
     });
   }
 
-  // Agent-facing (by id, requires auth + ownership)
-  async getItineraryMessages(id: string): Promise<{ status: string; data: { messages: any[] } }> {
-    return this.request(`/api/itinerary/${id}/messages`, {}, true);
-  }
-
-  async postAgentReply(id: string, data: { body: string; dayRef?: number }): Promise<{ status: string; data: { message: any } }> {
-    return this.request(`/api/itinerary/${id}/messages`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async markMessagesRead(id: string): Promise<{ status: string }> {
-    return this.request(`/api/itinerary/${id}/messages/read`, { method: 'POST' }, true);
-  }
-
   // ── Tourist → agent leads ──
   // Public: list registered agents a tourist can send an itinerary to.
   async getRegisteredAgents(): Promise<{ status: string; data: { agents: { _id: string; name: string; businessName: string }[] } }> {
@@ -292,137 +313,9 @@ class ApiClient {
     return this.request('/api/leads', { method: 'POST', body: JSON.stringify(data) });
   }
 
-  // Agent-facing (auth)
-  async getLeads(): Promise<{ status: string; data: { leads: any[]; unreadCount: number } }> {
-    return this.request('/api/leads', {}, true);
-  }
-
-  async updateLead(id: string, data: { status?: 'new' | 'contacted' | 'closed'; read?: boolean }): Promise<{ status: string; data: { lead: any } }> {
-    return this.request(`/api/leads/${id}`, { method: 'PATCH', body: JSON.stringify(data) }, true);
-  }
-
-  async markLeadsRead(): Promise<{ status: string }> {
-    return this.request('/api/leads/read', { method: 'POST' }, true);
-  }
-
-  // Generic image upload → R2 (branding logos, hero images). Requires auth.
-  async uploadImage(file: File, folder?: string): Promise<{ status: string; data: { url: string; key: string } }> {
-    if (!this.baseURL) throw new Error('API base URL not configured');
-    const token = this.getAuthToken();
-    const fd = new FormData();
-    fd.append('file', file);
-    if (folder) fd.append('folder', folder);
-    const res = await fetch(`${this.baseURL}/api/uploads/image`, {
-      method: 'POST',
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      body: fd,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Upload failed');
-    return data;
-  }
-
-  // ── Drivers roster (agent, auth) ──
-  async getDrivers(): Promise<{ status: string; data: { drivers: any[] } }> {
-    return this.request('/api/drivers', {}, true);
-  }
-  async createDriver(data: any): Promise<{ status: string; data: { driver: any } }> {
-    return this.request('/api/drivers', { method: 'POST', body: JSON.stringify(data) }, true);
-  }
-  async updateDriver(id: string, data: any): Promise<{ status: string; data: { driver: any } }> {
-    return this.request(`/api/drivers/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
-  }
-  async deleteDriver(id: string): Promise<{ status: string }> {
-    return this.request(`/api/drivers/${id}`, { method: 'DELETE' }, true);
-  }
-  async uploadDriverDocument(id: string, file: File, label?: string): Promise<{ status: string; data: { document: any } }> {
-    if (!this.baseURL) throw new Error('API base URL not configured');
-    const token = this.getAuthToken();
-    const fd = new FormData();
-    fd.append('file', file);
-    if (label) fd.append('label', label);
-    const res = await fetch(`${this.baseURL}/api/drivers/${id}/documents`, {
-      method: 'POST',
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      body: fd,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Upload failed');
-    return data;
-  }
-  async deleteDriverDocument(id: string, docId: string): Promise<{ status: string }> {
-    return this.request(`/api/drivers/${id}/documents/${docId}`, { method: 'DELETE' }, true);
-  }
-
-  // ── Clients (agent, auth) ──
-  async getClients(): Promise<{ status: string; data: { clients: any[] } }> {
-    return this.request('/api/clients', {}, true);
-  }
-  async createClient(data: any): Promise<{ status: string; data: { client: any } }> {
-    return this.request('/api/clients', { method: 'POST', body: JSON.stringify(data) }, true);
-  }
-  async updateClient(id: string, data: any): Promise<{ status: string; data: { client: any } }> {
-    return this.request(`/api/clients/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
-  }
-  async deleteClient(id: string): Promise<{ status: string }> {
-    return this.request(`/api/clients/${id}`, { method: 'DELETE' }, true);
-  }
-  async uploadClientDocument(id: string, file: File, label?: string): Promise<{ status: string; data: { document: any } }> {
-    if (!this.baseURL) throw new Error('API base URL not configured');
-    const token = this.getAuthToken();
-    const fd = new FormData();
-    fd.append('file', file);
-    if (label) fd.append('label', label);
-    const res = await fetch(`${this.baseURL}/api/clients/${id}/documents`, {
-      method: 'POST',
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      body: fd,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.message || 'Upload failed');
-    return data;
-  }
-  async deleteClientDocument(id: string, docId: string): Promise<{ status: string }> {
-    return this.request(`/api/clients/${id}/documents/${docId}`, { method: 'DELETE' }, true);
-  }
-
-  // Admin analytics
-  async getAdminAnalytics(): Promise<any> {
-    return this.request('/api/admin/analytics', {}, true);
-  }
-
-  async getAdminUsers(page = 1, search = ''): Promise<any> {
-    return this.request(`/api/admin/users?page=${page}&search=${encodeURIComponent(search)}`, {}, true);
-  }
-
-  async toggleAdminUser(id: string): Promise<any> {
-    return this.request(`/api/admin/users/${id}/toggle-admin`, { method: 'PATCH' }, true);
-  }
-
   // Popular place endpoints (public) — active places sorted by priority
   async getPopularPlaces(): Promise<{ status: string; data: { places: PopularPlace[] } }> {
     return this.request('/api/places');
-  }
-
-  // Popular place endpoints (admin)
-  async adminGetAllPlaces(): Promise<{ status: string; data: { places: PopularPlace[] } }> {
-    return this.request('/api/places/admin/all', {}, true);
-  }
-
-  async adminCreatePlace(data: Partial<PopularPlace>): Promise<{ status: string; data: { place: PopularPlace } }> {
-    return this.request('/api/places/admin', { method: 'POST', body: JSON.stringify(data) }, true);
-  }
-
-  async adminUpdatePlace(id: string, data: Partial<PopularPlace>): Promise<{ status: string; data: { place: PopularPlace } }> {
-    return this.request(`/api/places/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
-  }
-
-  async adminDeletePlace(id: string): Promise<void> {
-    return this.request(`/api/places/admin/${id}`, { method: 'DELETE' }, true);
-  }
-
-  async adminTogglePlace(id: string): Promise<{ status: string; data: { place: PopularPlace } }> {
-    return this.request(`/api/places/admin/${id}/toggle`, { method: 'PATCH' }, true);
   }
 
   // Guide endpoints (public)
@@ -432,45 +325,6 @@ class ApiClient {
 
   async getGuideBySlug(slug: string): Promise<{ status: string; data: { guide: GuidePost } }> {
     return this.request(`/api/guides/${slug}`);
-  }
-
-  // Guide endpoints (admin)
-  async adminGetAllGuides(): Promise<{ status: string; data: { guides: GuidePost[] } }> {
-    return this.request('/api/guides/admin/all', {}, true);
-  }
-
-  async adminCreateGuide(data: Partial<GuidePost>): Promise<{ status: string; data: { guide: GuidePost } }> {
-    return this.request('/api/guides/admin', { method: 'POST', body: JSON.stringify(data) }, true);
-  }
-
-  async adminUpdateGuide(id: string, data: Partial<GuidePost>): Promise<{ status: string; data: { guide: GuidePost } }> {
-    return this.request(`/api/guides/admin/${id}`, { method: 'PUT', body: JSON.stringify(data) }, true);
-  }
-
-  async adminDeleteGuide(id: string): Promise<void> {
-    return this.request(`/api/guides/admin/${id}`, { method: 'DELETE' }, true);
-  }
-
-  async adminTogglePublished(id: string): Promise<{ status: string; data: { guide: GuidePost } }> {
-    return this.request(`/api/guides/admin/${id}/toggle`, { method: 'PATCH' }, true);
-  }
-
-  async adminUploadGuideImage(file: File, guideId?: string, oldPublicId?: string): Promise<{ status: string; data: { url: string; publicId: string } }> {
-    if (!this.baseURL) throw new Error('API base URL not configured');
-    const token = this.getAuthToken();
-    const formData = new FormData();
-    formData.append('image', file);
-    if (guideId) formData.append('guideId', guideId);
-    if (oldPublicId) formData.append('oldPublicId', oldPublicId);
-
-    const response = await fetch(`${this.baseURL}/api/guides/admin/upload-image`, {
-      method: 'POST',
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-      body: formData,
-    });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message || 'Upload failed');
-    return data;
   }
 
   // Chat endpoints
@@ -506,120 +360,6 @@ class ApiClient {
     });
   }
 
-  // B2B specific endpoints
-  async requestSubscription(): Promise<any> {
-    return this.request('/api/users/subscribe', {
-      method: 'POST',
-    }, true);
-  }
-
-  async generateSocialContent(data: { platform: string; topic: string; targetAudience?: string }): Promise<any> {
-    return this.request('/api/users/b2b/generate-content', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async getSocialContentHistory(): Promise<any> {
-    return this.request('/api/users/b2b/content-history', { method: 'GET' }, true);
-  }
-
-  // Dashboard Data
-  async getBusinessDashboard(): Promise<any> {
-    return this.request('/api/users/business/dashboard', {
-      method: 'GET',
-    }, true);
-  }
-
-  // Finances — double-entry ledger
-  async getLedger(): Promise<any> {
-    return this.request('/api/users/business/ledger', {
-      method: 'GET',
-    }, true);
-  }
-
-  async addLedgerEntry(data: any): Promise<any> {
-    return this.request('/api/users/business/ledger', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async updateLedgerEntry(id: string, data: any): Promise<any> {
-    return this.request(`/api/users/business/ledger/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async addBooking(data: any): Promise<any> {
-    return this.request('/api/users/business/booking', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async addPayment(data: any): Promise<any> {
-    return this.request('/api/users/business/payment', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async addClient(data: any): Promise<any> {
-    return this.request('/api/users/business/client', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async updateBooking(id: string, data: any): Promise<any> {
-    return this.request(`/api/users/business/booking/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async updatePayment(id: string, data: any): Promise<any> {
-    return this.request(`/api/users/business/payment/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }, true);
-  }
-
-  async deleteBusinessItem(type: 'booking' | 'payment' | 'ledger' | 'client', id: string): Promise<any> {
-    return this.request(`/api/users/business/item/${type}/${id}`, {
-      method: 'DELETE',
-    }, true);
-  }
-
-  // --- Admin Methods ---
-  async getAdminStats(): Promise<any> {
-    return this.request('/api/admin/stats', { method: 'GET' }, true);
-  }
-
-  async getAllUsers(): Promise<any> {
-    return this.request('/api/admin/users', { method: 'GET' }, true);
-  }
-
-  async getAllItineraries(): Promise<any> {
-    return this.request('/api/admin/itineraries', { method: 'GET' }, true);
-  }
-
-  async getAllActivities(): Promise<any> {
-    return this.request('/api/admin/activities', { method: 'GET' }, true);
-  }
-
-  async getAdminSubscriptions(): Promise<any> {
-    return this.request('/api/admin/subscriptions', { method: 'GET' }, true);
-  }
-
-  async processSubscriptionRequest(data: { requestId: string; status: 'approved' | 'rejected'; type?: string }): Promise<any> {
-    return this.request('/api/admin/subscriptions/process', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }, true);
-  }
 }
 
 export const apiClient = new ApiClient();

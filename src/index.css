@@ -66,3 +66,44 @@
     transition: background-color 0.2s;
   }
 }
+/* Highlighter stroke for must-know details (see utils/highlights.tsx) */
+mark.hl {
+  color: #0e1116;
+  font-weight: 500;
+  padding: 0.05em 0.25em;
+  margin: 0 -0.1em;
+  border-radius: 0.3em 0.15em 0.35em 0.2em;
+  background: linear-gradient(100deg, rgba(201, 169, 97, 0.12) 0%, rgba(201, 169, 97, 0.42) 6%, rgba(201, 169, 97, 0.32) 50%, rgba(201, 169, 97, 0.45) 94%, rgba(201, 169, 97, 0.1) 100%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Prayer flags in the wind (components/decor/HimalayanDecor.tsx).
+   Each flag swings and ripples from its top edge; the string bobs gently. */
+@keyframes flag-wave {
+  0%, 100% { transform: rotate(-5deg) skewX(-4deg) scaleY(1); }
+  30%      { transform: rotate(3deg) skewX(5deg) scaleY(0.96); }
+  60%      { transform: rotate(6deg) skewX(-2deg) scaleY(1.02); }
+}
+@keyframes flag-string-sway {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(4px); }
+}
+.flag-wave {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  animation: flag-wave 2.6s ease-in-out infinite;
+}
+.flag-string {
+  animation: flag-string-sway 5s ease-in-out infinite;
+}
+[data-paused] .flag-wave, [data-paused] .flag-string { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .flag-wave, .flag-string { animation: none; }
+}
+
+/* On frosted-glass cards the translucent stroke turns muddy — use a solid pale gold */
+.on-glass mark.hl {
+  background: #e6d29f;
+  color: #0e1116;
+}

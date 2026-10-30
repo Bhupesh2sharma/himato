@@ -194,7 +194,7 @@ export const SikkimSherpa = () => {
                         <div className="p-4 bg-ai-accent/10 border-b border-black/10 flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <div className="p-1.5 bg-ai-accent/20 rounded-full">
-                                    <img src="/logo-mark.png" alt="Himato" className="w-6 h-6 object-contain" />
+                                    <img src="/logo-mark.webp" alt="Himato" className="w-6 h-6 object-contain" />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-ai-text">Himato AI</h3>
@@ -378,7 +378,7 @@ export const SikkimSherpa = () => {
                         <X className="w-6 h-6" />
                     ) : (
                         <>
-                            <img src="/logo-mark.png" alt="" className="w-6 h-6 object-contain brightness-0 invert" />
+                            <img src="/logo-mark.webp" alt="" className="w-6 h-6 object-contain brightness-0 invert" />
                             <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-green-400 border-2 border-white">
                                 <span className="absolute inset-0 rounded-full bg-green-400 animate-ping" />
                             </span>

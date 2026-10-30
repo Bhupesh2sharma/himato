@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { apiClient } from '../services/api';
-import type { LoginCredentials, RegisterData, AuthResponse } from '../services/api';
+import type { LoginCredentials, RegisterData, AuthResponse, SignupExtras } from '../services/api';
 
 interface User {
   id: string;
@@ -12,6 +12,8 @@ interface User {
   business: boolean;
   businessName?: string;
   isAdmin?: boolean;
+  avatar?: string;
+  phoneVerified?: boolean;
   subscriptionStatus?: 'active' | 'inactive' | 'cancelled' | string;
 }
 
@@ -20,7 +22,11 @@ interface AuthContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (credentials: LoginCredentials) => Promise<User>;
-  register: (data: RegisterData) => Promise<void>;
+  register: (data: RegisterData) => Promise<{ email: string; resendIn: number }>;
+  verifyRegistration: (email: string, otp: string) => Promise<User>;
+  loginWithGoogle: (credential: string, extra?: SignupExtras) => Promise<User>;
+  verifyPhoneOtp: (data: { phone: string; otp: string; name?: string } & SignupExtras) => Promise<User>;
+  updateProfile: (data: { name?: string; businessName?: string; business?: boolean }) => Promise<User>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 }
@@ -108,40 +114,42 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, []);
 
-  const register = useCallback(async (data: RegisterData) => {
-    try {
-      const response: AuthResponse = await apiClient.register(data);
-
-      // Handle new response format with nested data and token (auto-login)
-      if (response.data && response.data.token && response.data.user) {
-        localStorage.setItem('authToken', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        setUser(response.data.user as User);
-      }
-      // Handle new response format with user data but no token (registration only)
-      else if (response.data && response.data.user) {
-        // Registration successful but no auto-login token
-        // User will need to log in separately
-        // We don't set authToken or user here since there's no token
-        return; // Success, but no auto-login
-      }
-      // Handle legacy format with token
-      else if (response.token && response.user) {
-        localStorage.setItem('authToken', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        setUser(response.user as User);
-      }
-      // Handle legacy format with user only
-      else if (response.user) {
-        // Registration successful but no token
-        return; // Success, but no auto-login
-      } else {
-        throw new Error('Invalid response from server');
-      }
-    } catch (error) {
-      throw error;
+  // Store a session returned by Google / OTP sign-in.
+  const startSession = useCallback((response: AuthResponse): User => {
+    if (!response.data?.token || !response.data?.user) {
+      throw new Error('Invalid response from server');
     }
+    localStorage.setItem('authToken', response.data.token);
+    localStorage.setItem('user', JSON.stringify(response.data.user));
+    setUser(response.data.user as User);
+    return response.data.user as User;
   }, []);
+
+  const loginWithGoogle = useCallback(async (credential: string, extra: SignupExtras = {}) => {
+    return startSession(await apiClient.googleAuth(credential, extra));
+  }, [startSession]);
+
+  const verifyPhoneOtp = useCallback(async (data: { phone: string; otp: string; name?: string } & SignupExtras) => {
+    return startSession(await apiClient.verifyOtp(data));
+  }, [startSession]);
+
+  const updateProfile = useCallback(async (data: { name?: string; businessName?: string; business?: boolean }) => {
+    const res = await apiClient.updateMe(data);
+    const updated = res.data.user as User;
+    localStorage.setItem('user', JSON.stringify(updated));
+    setUser(updated);
+    return updated;
+  }, []);
+
+  // Sign-up: emails a verification code; the account is created by verifyRegistration.
+  const register = useCallback(async (data: RegisterData) => {
+    const response = await apiClient.register(data);
+    return { email: response.data.email, resendIn: response.data.resendIn };
+  }, []);
+
+  const verifyRegistration = useCallback(async (email: string, otp: string) => {
+    return startSession(await apiClient.verifyRegistration(email, otp));
+  }, [startSession]);
 
   const logout = useCallback(async () => {
     try {
@@ -175,6 +183,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isAuthenticated: !!user,
     login,
     register,
+    verifyRegistration,
+    loginWithGoogle,
+    verifyPhoneOtp,
+    updateProfile,
     logout,
     refreshUser,
   };

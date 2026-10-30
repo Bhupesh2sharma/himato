@@ -1,3 +1,5 @@
+import { optimizedSrc } from '../data/optimizedImages';
+
 /**
  * Match an itinerary location/title string to a real photo in /public/.
  *
@@ -75,14 +77,14 @@ const DEFAULT_ACTIVITY = '/sikkim-3.webp';
  * @param fallback  Override fallback (used to differentiate hero vs activity)
  */
 export function imageForLocation(query: string | undefined | null, fallback: string = DEFAULT_ACTIVITY): string {
-    if (!query) return fallback;
+    if (!query) return optimizedSrc(fallback);
     const q = query.toLowerCase();
     for (const rule of LOCATION_RULES) {
         if (rule.keywords.some((k) => q.includes(k))) {
-            return rule.image;
+            return optimizedSrc(rule.image);
         }
     }
-    return fallback;
+    return optimizedSrc(fallback);
 }
 
 /**
@@ -93,7 +95,7 @@ export function imageForLocation(query: string | undefined | null, fallback: str
 export function heroImageForItinerary(data: {
     days?: Array<{ activities?: Array<{ location?: string; title?: string }> }>;
 } | null | undefined): string {
-    if (!data?.days) return DEFAULT_HERO;
+    if (!data?.days) return optimizedSrc(DEFAULT_HERO);
     for (const day of data.days) {
         for (const activity of day.activities ?? []) {
             for (const text of [activity.location, activity.title]) {
@@ -101,11 +103,11 @@ export function heroImageForItinerary(data: {
                 const q = text.toLowerCase();
                 for (const rule of LOCATION_RULES) {
                     if (rule.keywords.some((k) => q.includes(k))) {
-                        return rule.image;
+                        return optimizedSrc(rule.image);
                     }
                 }
             }
         }
     }
-    return DEFAULT_HERO;
+    return optimizedSrc(DEFAULT_HERO);
 }

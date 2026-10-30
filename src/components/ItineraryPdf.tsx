@@ -1,4 +1,5 @@
 import { Document, Page, View, Text, Image, StyleSheet } from '@react-pdf/renderer';
+import { stripHighlights } from '../utils/highlights';
 
 interface Activity { time?: string; title?: string; description?: string; location?: string; }
 interface DayPlan {
@@ -96,14 +97,14 @@ export function ItineraryPdf({ data }: { data: ItineraryPdfData }) {
                     {data.bestTime ? (
                         <View style={s.card}>
                             <Text style={s.cardLabel}>Best time to visit</Text>
-                            <Text style={s.cardText}>{data.bestTime}</Text>
+                            <Text style={s.cardText}>{stripHighlights(data.bestTime)}</Text>
                         </View>
                     ) : null}
 
                     {data.permits && data.permits.length > 0 ? (
                         <View style={s.card}>
                             <Text style={s.cardLabel}>Permits you'll need</Text>
-                            {data.permits.map((p, i) => <Text key={i} style={s.cardText}>• {p}</Text>)}
+                            {data.permits.map((p, i) => <Text key={i} style={s.cardText}>• {stripHighlights(p)}</Text>)}
                         </View>
                     ) : null}
 
@@ -137,7 +138,7 @@ export function ItineraryPdf({ data }: { data: ItineraryPdfData }) {
                                         <Text style={s.actTitle}>{a.title}</Text>
                                         {a.time ? <Text style={s.actTime}>{a.time}</Text> : null}
                                     </View>
-                                    {a.description ? <Text style={s.actDesc}>{a.description}</Text> : null}
+                                    {a.description ? <Text style={s.actDesc}>{stripHighlights(a.description)}</Text> : null}
                                     {a.location ? <Text style={s.actLoc}>{a.location}</Text> : null}
                                 </View>
                             ))}

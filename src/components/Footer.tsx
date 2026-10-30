@@ -8,7 +8,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand Section */}
           <div>
-            <img src="/logo-trimmed.png" alt="Himato" className="h-9 w-auto mb-4" />
+            <img src="/logo-trimmed.webp" alt="Himato" className="h-9 w-auto mb-4" />
             <p className="text-ai-muted mb-4 leading-relaxed">
               Your AI-powered travel planner for Sikkim. Discover hidden gems and plan the perfect Himalayan adventure.
             </p>
@@ -24,6 +24,30 @@ export const Footer = () => {
                   className="text-ai-muted hover:text-ai-accent transition-colors"
                 >
                   Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/chat"
+                  className="text-ai-muted hover:text-ai-accent transition-colors"
+                >
+                  Plan a Sikkim Trip
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/guides"
+                  className="text-ai-muted hover:text-ai-accent transition-colors"
+                >
+                  Sikkim Travel Guides
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/hidden-gems"
+                  className="text-ai-muted hover:text-ai-accent transition-colors"
+                >
+                  Hidden Gems of Sikkim
                 </Link>
               </li>
               <li>

@@ -6,6 +6,7 @@ import { ArrowRight, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SEO_TOPICS } from '../data/seoTopics';
 import { apiClient } from '../services/api';
 import type { GuidePost } from '../services/api';
+import { optimizedSrc } from '../data/optimizedImages';
 
 type GuideItem = { id: string; title: string; shortDescription: string; category: string; image: string };
 
@@ -119,8 +120,10 @@ export const LocalInsights = () => {
                             className="snap-center group relative w-[300px] md:w-[400px] h-[400px] md:h-[500px] rounded-2xl overflow-hidden cursor-pointer flex-shrink-0 transition-all hover:shadow-[0_0_30px_rgba(0,0,0,0.5)]" style={{ border: '1px solid rgba(255,255,255,0.12)' }}
                         >
                             <img
-                                src={topic.image}
+                                src={optimizedSrc(topic.image)}
                                 alt={topic.title}
+                                loading="lazy"
+                                decoding="async"
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 opacity-90" style={{ background: 'linear-gradient(to top, #0e1116 0%, rgba(14,17,22,0.55) 50%, transparent 100%)' }} />

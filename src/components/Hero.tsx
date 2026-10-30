@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Send, Minus, User, Briefcase, MapPin, Search, X, ArrowUpRight, ChevronRight } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { Sparkles, Send, Minus, MapPin, Search, X, ArrowUpRight, ChevronRight } from 'lucide-react';
 import { ItineraryHistoryPreview } from './ItineraryHistoryPreview';
 import { getSeason } from '../data/season';
 import { PLACE_CATEGORY_META, PLACE_CATEGORY_KEYS } from '../data/placeCategories';
@@ -33,15 +32,13 @@ const INTENTS = [
 const VISIBLE_PICKS = 6;
 
 interface HeroProps {
-    onSearch: (prompt: string, isBusiness: boolean, businessName?: string) => void | Promise<void>;
+    onSearch: (prompt: string) => void | Promise<void>;
     isSearching: boolean;
     error?: string;
 }
 
 export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
-    const { user } = useAuth();
     const [prompt, setPrompt] = useState('');
-    const [isBusiness, setIsBusiness] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
     const [query, setQuery] = useState('');
     const [placeholderIndex, setPlaceholderIndex] = useState(0);
@@ -69,11 +66,9 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
     const handleSearch = () => {
         if (prompt.trim() && !localIsSubmitting && !isSearching) {
             setLocalIsSubmitting(true);
-            // If user is a business user, use their businessName, otherwise use undefined
-            const businessName = (isBusiness && user?.business && user?.businessName) ? user.businessName : undefined;
             // Unlock once the parent is done with the request — including when it
             // never starts a search (e.g. the login popup intercepts it).
-            Promise.resolve(onSearch(prompt, isBusiness, businessName))
+            Promise.resolve(onSearch(prompt))
                 .finally(() => setLocalIsSubmitting(false));
         }
     };
@@ -159,28 +154,6 @@ export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
                     transition={{ delay: 0.3, duration: 0.5 }}
                     className="relative"
                 >
-                    {/* Audience segmented toggle — travel agents self-identify before typing */}
-                    <div className="flex justify-center mb-4">
-                        <div className="inline-flex items-center p-1 rounded-full glass border border-black/10 shadow-sm">
-                            <button
-                                type="button"
-                                onClick={() => setIsBusiness(false)}
-                                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${!isBusiness ? 'bg-ai-accent text-white shadow' : 'text-ai-muted hover:text-ai-text'}`}
-                            >
-                                <User className="w-4 h-4" />
-                                For myself
-                            </button>
-                            <button
-                                type="button"
-                                onClick={() => setIsBusiness(true)}
-                                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${isBusiness ? 'bg-ai-accent text-white shadow' : 'text-ai-accent/80 hover:text-ai-accent'}`}
-                            >
-                                <Briefcase className="w-4 h-4" />
-                                I'm a travel agent
-                            </button>
-                        </div>
-                    </div>
-
                     <div className={`glass rounded-2xl p-3 text-left transition-all duration-300 ${error ? 'border-amber-500/50 shadow-[0_0_20px_rgba(245,158,11,0.2)]' : 'focus-within:border-ai-accent/50 focus-within:shadow-[0_10px_40px_-12px_rgba(47,74,58,0.35)]'}`}>
                         <textarea
                             ref={textareaRef}

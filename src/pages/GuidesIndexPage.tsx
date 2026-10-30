@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Search } from 'lucide-react';
 import { SEO_TOPICS } from '../data/seoTopics';
 import type { SeoTopic } from '../data/seoTopics';
+import { optimizedSrc } from '../data/optimizedImages';
 
 /**
  * /guides — the SEO hub page.
@@ -199,29 +200,6 @@ export function GuidesIndexPage() {
                 </div>
             </section>
 
-            {/* JSON-LD: ItemList of all guides for richer Google indexing */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        '@context': 'https://schema.org',
-                        '@type': 'CollectionPage',
-                        name: 'Sikkim Travel Guides — Himato',
-                        description: 'Hand-written Sikkim travel guides covering permits, hidden valleys, family safety, and everyday logistics.',
-                        url: 'https://www.himato.in/guides',
-                        mainEntity: {
-                            '@type': 'ItemList',
-                            numberOfItems: SEO_TOPICS.length,
-                            itemListElement: SEO_TOPICS.map((t, i) => ({
-                                '@type': 'ListItem',
-                                position: i + 1,
-                                url: `https://www.himato.in/guide/${t.id}`,
-                                name: t.title,
-                            })),
-                        },
-                    }),
-                }}
-            />
         </main>
     );
 }
@@ -300,7 +278,7 @@ function GuideCard({ topic }: { topic: SeoTopic }) {
                 style={{ background: '#2f4a3a' }}
             >
                 <img
-                    src={topic.image}
+                    src={optimizedSrc(topic.image)}
                     alt={topic.title}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"

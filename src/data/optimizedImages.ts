@@ -1,0 +1,46 @@
+// Generated: lighter WebP copies of the photos in /public (resized to at most
+// 1600px wide, 1920px for the hero). Originals are kept; the site loads these.
+// Regenerate after adding photos to /public.
+export const OPTIMIZED_IMAGES: Record<string, string> = {
+    "/1.png": "/1.webp",
+    "/14877699Borong_Hot_Springs.jpg": "/14877699Borong_Hot_Springs.webp",
+    "/288555765Namchi_Tendong_Hill_Main.jpg": "/288555765Namchi_Tendong_Hill_Main.webp",
+    "/68973b325e83ec80921034e58fd82ad1.jpg": "/68973b325e83ec80921034e58fd82ad1.webp",
+    "/Dongu.jpg": "/Dongu.opt.webp",
+    "/FY1tBLfXwAA4aeN.jpg": "/FY1tBLfXwAA4aeN.webp",
+    "/Gangtok-View.jpg": "/Gangtok-View.webp",
+    "/Pelling_Sky_walk.jpg": "/Pelling_Sky_walk.webp",
+    "/Rishikhola-resort-1.jpg": "/Rishikhola-resort-1.webp",
+    "/aritar.jpeg": "/aritar.opt.webp",
+    "/borong.jpg": "/borong.webp",
+    "/chardham.jpg": "/chardham.webp",
+    "/fly-sikkim-adventure.jpg": "/fly-sikkim-adventure.webp",
+    "/gangtok-bnnr copy.jpg": "/gangtok-bnnr copy.webp",
+    "/gangtok-bnnr.jpg": "/gangtok-bnnr.webp",
+    "/garden-itself.jpg": "/garden-itself.webp",
+    "/gathangvally.jpg": "/gathangvally.webp",
+    "/gurudongmar.jpeg": "/gurudongmar.webp",
+    "/gurudungmar.jpg": "/gurudungmar.webp",
+    "/maenam-hill.jpg": "/maenam-hill.webp",
+    "/maxresdefault.jpg": "/maxresdefault.webp",
+    "/our-huts-are-made-of.jpg": "/our-huts-are-made-of.webp",
+    "/p_20160324_151032.jpg": "/p_20160324_151032.webp",
+    "/pic_kupup_lake.jpg": "/pic_kupup_lake.webp",
+    "/pic_lampokri_lake.jpg": "/pic_lampokri_lake.webp",
+    "/rapdensti.jpg": "/rapdensti.webp",
+    "/ravangla.jpg": "/ravangla.webp",
+    "/riverrafting.jpg": "/riverrafting.webp",
+    "/rolepwaterfalls.jpg": "/rolepwaterfalls.webp",
+    "/singhik-viewpoint-mangan-sikkim-1-attr-hero.jpeg": "/singhik-viewpoint-mangan-sikkim-1-attr-hero.webp",
+    "/tangu.jpeg": "/tangu.webp",
+    "/tashiding.jpeg": "/tashiding.webp",
+    "/thulung.jpeg": "/thulung.webp",
+    "/tinkitam.jpg": "/tinkitam.webp",
+    "/yuksom.jpeg": "/yuksom.webp",
+    "/yumgthang.jpeg": "/yumgthang.webp",
+    "/zuluk.jpg": "/zuluk.webp",
+};
+
+/** The lighter WebP copy of a /public photo, or the original path if there isn't one. */
+export const optimizedSrc = (src: string | undefined | null): string =>
+    (src && OPTIMIZED_IMAGES[src]) || src || '';

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, LogOut, ChevronDown, Building2, Clock, ShieldCheck } from 'lucide-react';
+import { User, LogOut, ChevronDown, Building2, Clock, ExternalLink } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import { AGENT_APP_URL } from '../utils/externalApps';
+import { EMAIL_AUTH_ENABLED } from '../utils/authMethods';
 
 export const NavigationHeader = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -35,7 +37,7 @@ export const NavigationHeader = () => {
             aria-label="Himato home"
           >
             <img
-              src="/logo-trimmed.png"
+              src="/logo-trimmed.webp"
               alt="Himato"
               className={`h-8 w-auto ${onDark ? 'brightness-0 invert' : ''}`}
             />
@@ -85,14 +87,15 @@ export const NavigationHeader = () => {
                           )}
                         </div>
                         {user?.business && (
-                          <Link
-                            to="/dashboard"
+                          <a
+                            href={AGENT_APP_URL}
                             onClick={() => setShowUserMenu(false)}
                             className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
                           >
                             <Building2 className="w-4 h-4" />
-                            B2B Dashboard
-                          </Link>
+                            Agent workspace
+                            <ExternalLink className="w-3.5 h-3.5 ml-auto opacity-60" />
+                          </a>
                         )}
                         <Link
                           to="/history"
@@ -102,27 +105,6 @@ export const NavigationHeader = () => {
                           <Clock className="w-4 h-4" />
                           My Itineraries
                         </Link>
-                        {user?.isAdmin && (
-                          <>
-                            <div className="my-1 border-t border-black/8" />
-                            <Link
-                              to="/manage-himato"
-                              onClick={() => setShowUserMenu(false)}
-                              className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
-                            >
-                              <ShieldCheck className="w-4 h-4" />
-                              Admin Dashboard
-                            </Link>
-                            <Link
-                              to="/manage-himato/guides"
-                              onClick={() => setShowUserMenu(false)}
-                              className="w-full flex items-center gap-3 px-4 py-3 text-left text-ai-accent hover:bg-ai-accent/10 rounded-lg transition-colors text-sm font-medium"
-                            >
-                              <ShieldCheck className="w-4 h-4 opacity-60" />
-                              Admin: Guides
-                            </Link>
-                          </>
-                        )}
                         <button
                           onClick={handleLogout}
                           className="w-full flex items-center gap-3 px-4 py-3 text-left text-red-600 hover:bg-red-500/10 rounded-lg transition-colors text-sm"
@@ -139,16 +121,21 @@ export const NavigationHeader = () => {
               <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className={`hidden sm:inline px-4 py-2 text-sm transition-colors ${onDark ? 'text-white/70 hover:text-white' : 'text-ai-muted hover:text-ai-text'}`}
+                  className={`${EMAIL_AUTH_ENABLED ? 'hidden sm:inline px-4 py-2 text-sm transition-colors' : 'px-4 py-2 text-sm rounded-xl transition-all'} ${EMAIL_AUTH_ENABLED
+                    ? (onDark ? 'text-white/70 hover:text-white' : 'text-ai-muted hover:text-ai-text')
+                    : (onDark ? 'bg-white/15 hover:bg-white/25 border border-white/30 text-white' : 'bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 text-ai-accent')}`}
                 >
-                  Sign In
+                  Sign in
                 </Link>
-                <Link
-                  to="/register"
-                  className={`px-4 py-2 text-sm rounded-xl transition-all ${onDark ? 'bg-white/15 hover:bg-white/25 border border-white/30 text-white' : 'bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 text-ai-accent'}`}
-                >
-                  Sign Up
-                </Link>
+                {/* Email sign-up; Google sign-in creates accounts from the login page */}
+                {EMAIL_AUTH_ENABLED && (
+                  <Link
+                    to="/register"
+                    className={`px-4 py-2 text-sm rounded-xl transition-all ${onDark ? 'bg-white/15 hover:bg-white/25 border border-white/30 text-white' : 'bg-ai-accent/10 hover:bg-ai-accent/20 border border-ai-accent/30 text-ai-accent'}`}
+                  >
+                    Sign up
+                  </Link>
+                )}
               </div>
             )}
           </div>

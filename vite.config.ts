@@ -1,41 +1,17 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import Sitemap from 'vite-plugin-sitemap'
-import { SEO_TOPICS } from './src/data/seoTopics'
-
-const HOSTNAME = 'https://www.himato.in'
-
-// All public, indexable routes. Auth pages, /admin/*, /share/:id, /:slug,
-// /history, /dashboard, /itinerary/:id are NOT included on purpose — they
-// are auth-walled, ephemeral, or duplicate content.
-const STATIC_ROUTES = [
-  '/',
-  '/chat',
-  '/guides',
-  '/hidden-gems',
-  '/reach_us',
-  '/terms',
-]
-
-const GUIDE_ROUTES = SEO_TOPICS.map((t) => `/guide/${t.id}`)
+import { seoPrerender } from './scripts/seoPlugin'
 
 // https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    Sitemap({
-      hostname: HOSTNAME,
-      dynamicRoutes: [...STATIC_ROUTES, ...GUIDE_ROUTES],
-      // robots.txt is generated alongside; tell Google + others where the
-      // sitemap lives so new guides get crawled within days, not weeks.
-      generateRobotsTxt: true,
-      robots: [
-        {
-          userAgent: '*',
-          allow: '/',
-          disallow: ['/admin', '/login', '/register', '/dashboard', '/history'],
-        },
-      ],
-    }),
-  ],
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+  return {
+    plugins: [
+      react(),
+      // Prerendered HTML per public route + sitemap.xml, robots.txt, llms.txt.
+      // Pulls admin-published guides from the API when reachable
+      // (set SEO_FETCH_GUIDES=false to skip).
+      seoPrerender({ apiBaseUrl: env.VITE_API_BASE_URL }),
+    ],
+  }
 })

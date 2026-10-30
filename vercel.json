@@ -1,8 +1,13 @@
 {
+    "cleanUrls": true,
     "rewrites": [
         {
+            "source": "/guide/:slug",
+            "destination": "/guide-shell.html"
+        },
+        {
             "source": "/(.*)",
-            "destination": "/index.html"
+            "destination": "/app-shell.html"
         }
     ]
 }

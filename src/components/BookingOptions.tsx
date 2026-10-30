@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Shield, ArrowRight, BadgeCheck, Loader2 } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { SendToAgentModal } from './SendToAgentModal';
+import { AGENT_APP_URL } from '../utils/externalApps';
 
 interface Agent {
     _id: string;
@@ -36,7 +37,7 @@ export const BookingOptions = ({ data }: { data?: any }) => {
     }, []);
 
     return (
-        <section className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-16 mt-8 border-t border-black/8">
+        <section className="w-full py-16 mt-12 border-t border-black/8">
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
                 <div>
@@ -51,7 +52,7 @@ export const BookingOptions = ({ data }: { data?: any }) => {
                 </div>
 
                 <motion.a
-                    href="mailto:list@himato.in"
+                    href={`${AGENT_APP_URL}/register`}
                     whileHover={{ y: -2 }}
                     className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-dashed border-black/15 text-sm font-semibold text-ai-muted hover:border-ai-accent hover:text-ai-accent transition-all"
                 >

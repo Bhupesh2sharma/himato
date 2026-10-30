@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { Login } from './Login';
@@ -11,22 +11,41 @@ interface AuthModalProps {
     message?: string;
 }
 
+// Mounted only while the popup is open, so it always starts on sign-in.
+function AuthForms({ message, onSuccess }: { message?: string; onSuccess: () => void }) {
+    const [mode, setMode] = useState<'login' | 'register'>('login');
+    const [email, setEmail] = useState('');
+
+    return (
+        <>
+            {mode === 'login' ? (
+                <Login
+                    key={email}
+                    embedded
+                    initialEmail={email}
+                    subtitle={message}
+                    onSuccess={onSuccess}
+                    onSwitchToRegister={() => setMode('register')}
+                />
+            ) : (
+                <Register
+                    embedded
+                    onSuccess={onSuccess}
+                    onSwitchToLogin={(registeredEmail) => {
+                        setEmail(registeredEmail || '');
+                        setMode('login');
+                    }}
+                />
+            )}
+        </>
+    );
+}
+
 /**
  * Login / sign-up popup. Opens on the sign-in view; sign-up switches back to
  * sign-in (email pre-filled) since registration doesn't auto-login.
  */
 export const AuthModal = ({ isOpen, onClose, onSuccess, message }: AuthModalProps) => {
-    const [mode, setMode] = useState<'login' | 'register'>('login');
-    const [email, setEmail] = useState('');
-
-    // Reset to the sign-in view each time the popup opens
-    useEffect(() => {
-        if (isOpen) {
-            setMode('login');
-            setEmail('');
-        }
-    }, [isOpen]);
-
     return (
         <AnimatePresence>
             {isOpen && (
@@ -52,24 +71,7 @@ export const AuthModal = ({ isOpen, onClose, onSuccess, message }: AuthModalProp
                             >
                                 <X className="w-5 h-5" />
                             </button>
-                            {mode === 'login' ? (
-                                <Login
-                                    key={email}
-                                    embedded
-                                    initialEmail={email}
-                                    subtitle={message}
-                                    onSuccess={onSuccess}
-                                    onSwitchToRegister={() => setMode('register')}
-                                />
-                            ) : (
-                                <Register
-                                    embedded
-                                    onSwitchToLogin={(registeredEmail) => {
-                                        setEmail(registeredEmail || '');
-                                        setMode('login');
-                                    }}
-                                />
-                            )}
+                            <AuthForms message={message} onSuccess={onSuccess} />
                         </motion.div>
                     </div>
                 </div>

@@ -1,12 +1,15 @@
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, MapPin, Calendar, Share2, Sparkles, Brain, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MapPin, Calendar, Share2, Sparkles, Brain, X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { SEO_TOPICS } from '../data/seoTopics';
 import { apiClient } from '../services/api';
 import { chatWithSherpa } from '../services/ai';
+import { optimizedSrc } from '../data/optimizedImages';
+import { SEO } from '../components/SEO';
+import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, type GuideInput } from '../seo/meta';
 
 interface GuideTopic {
     id: string;
@@ -16,7 +19,21 @@ interface GuideTopic {
     category: string;
     image: string;
     content: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
+
+const toGuideInput = (t: GuideTopic): GuideInput => ({
+    slug: t.id,
+    title: t.title,
+    shortDescription: t.shortDescription,
+    description: t.description,
+    category: t.category,
+    image: t.image,
+    content: t.content,
+    createdAt: t.createdAt,
+    updatedAt: t.updatedAt,
+});
 
 export const GuidePage = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -50,7 +67,7 @@ export const GuidePage = () => {
         apiClient.getGuideBySlug(slug)
             .then(res => {
                 const g = res.data.guide;
-                setTopic({ id: g.slug, title: g.title, shortDescription: g.shortDescription, description: g.description, category: g.category, image: g.image, content: g.content });
+                setTopic({ id: g.slug, title: g.title, shortDescription: g.shortDescription, description: g.description, category: g.category, image: g.image, content: g.content, createdAt: g.createdAt, updatedAt: g.updatedAt });
             })
             .catch(() => {
                 const staticTopic = SEO_TOPICS.find(t => t.id === slug);
@@ -70,6 +87,7 @@ export const GuidePage = () => {
     if (!topic) {
         return (
             <div className="min-h-screen bg-ai-dark text-ai-text flex items-center justify-center">
+                <SEO meta={{ ...privatePageMeta(`/guide/${slug}`), title: 'Guide not found | Himato' }} />
                 <div className="text-center">
                     <h1 className="text-4xl font-bold mb-4">Guide Not Found</h1>
                     <button onClick={() => navigate('/')} className="text-ai-accent hover:underline">Return Home</button>
@@ -78,12 +96,17 @@ export const GuidePage = () => {
         );
     }
 
+    const guide = toGuideInput(topic);
+    const related = relatedGuides(guide, STATIC_GUIDES);
+
     return (
         <article className="min-h-screen bg-ai-dark text-ai-text selection:bg-ai-accent/30 font-sans">
+            <SEO meta={guideMeta(guide)} />
+
             {/* Hero Image */}
             <header className="relative h-[60vh] w-full overflow-hidden">
                 <img
-                    src={topic.image}
+                    src={optimizedSrc(topic.image)}
                     alt={topic.title}
                     className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -131,6 +154,11 @@ export const GuidePage = () => {
             <main className="container mx-auto px-4 md:px-6 py-12 flex flex-col lg:flex-row gap-12 relative z-10 -mt-10">
                 {/* Main Article */}
                 <div className="flex-1 bg-white border border-black/10 rounded-2xl p-6 md:p-10 shadow-sm">
+                    <section aria-label="Quick answer" className="mb-8 p-5 rounded-xl bg-ai-accent/5 border border-ai-accent/20">
+                        <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-ai-accent mb-2">Quick answer</p>
+                        <p className="text-ai-text leading-relaxed">{guideAnswer(guide)}</p>
+                    </section>
+
                     <div className="prose prose-lg max-w-none prose-headings:text-ai-text prose-headings:font-semibold prose-p:text-ai-muted prose-li:text-ai-muted prose-strong:text-ai-text">
                         {/* 
                             Note: In a real production app, we would sanitize this content.
@@ -164,6 +192,31 @@ export const GuidePage = () => {
                             This is just a starting point. Himato AI can generate a fully personalized itinerary based on this guide, customized to your exact dates and budget.
                         </p>
                     </div>
+
+                    {related.length > 0 && (
+                        <nav aria-label="Related guides" className="mt-8 pt-8 border-t border-black/10">
+                            <h2 className="text-xl font-bold text-ai-text mb-4">Related Sikkim guides</h2>
+                            <ul className="grid sm:grid-cols-2 gap-3">
+                                {related.map((r) => (
+                                    <li key={r.slug}>
+                                        <Link
+                                            to={`/guide/${r.slug}`}
+                                            className="group flex h-full items-start justify-between gap-3 p-4 rounded-xl border border-black/10 hover:border-ai-accent/40 transition-colors"
+                                        >
+                                            <span>
+                                                <span className="block text-[11px] font-semibold tracking-widest uppercase text-ai-muted mb-1">{r.category}</span>
+                                                <span className="block text-sm font-semibold text-ai-text leading-snug">{r.title}</span>
+                                            </span>
+                                            <ArrowRight className="w-4 h-4 mt-1 flex-shrink-0 text-ai-muted group-hover:text-ai-accent transition-colors" />
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <Link to="/guides" className="inline-block mt-4 text-sm font-semibold text-ai-accent hover:underline">
+                                Browse all Sikkim guides
+                            </Link>
+                        </nav>
+                    )}
                 </div>
 
                 {/* Sidebar / CTA */}

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useLocation, useParams } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import { ClientItineraryView } from './components/ClientItineraryView';
 import { Footer } from './components/Footer';
 import { ReachUs } from './components/ReachUs';
-import { SEO } from './components/SEO';
+import { RouteSEO } from './components/SEO';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { TermsAndConditions } from './pages/TermsAndConditions';
@@ -14,18 +14,18 @@ import { HiddenGemsPage } from './pages/HiddenGemsPage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
 import { GuidesIndexPage } from './pages/GuidesIndexPage';
-import { B2BDashboard } from './pages/B2BDashboard';
-import { AdminGuidesPage } from './pages/AdminGuidesPage';
-import { AdminPlacesPage } from './pages/AdminPlacesPage';
-import { AdminDashboard } from './pages/AdminDashboard';
-import { AdminLogin } from './pages/AdminLogin';
 import { apiClient } from './services/api';
+import { ExternalRedirect } from './components/ExternalRedirect';
+import { EMAIL_AUTH_ENABLED } from './utils/authMethods';
+import { AGENT_APP_URL, ADMIN_APP_URL } from './utils/externalApps';
 
 
 // Shared Itinerary View Component (for /share/:id and /:slug routes)
 function SharedItineraryPage() {
   const { shareId, slug } = useParams<{ shareId?: string; slug?: string }>();
   const [itineraryData, setItineraryData] = useState(null);
+  // Agent proposals get the accept / request-changes panel; traveller shares don't.
+  const [isProposal, setIsProposal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -47,6 +47,7 @@ function SharedItineraryPage() {
 
       if (response.status === 'success') {
         setItineraryData(response.data.itinerary.itineraryData);
+        setIsProposal(Boolean(response.data.itinerary.isBusiness));
       }
     } catch (error: any) {
       console.error('Failed to load shared itinerary:', error);
@@ -85,7 +86,7 @@ function SharedItineraryPage() {
     );
   }
 
-  return <ClientItineraryView data={itineraryData} slug={slug} />;
+  return <ClientItineraryView data={itineraryData} slug={isProposal ? slug : undefined} />;
 }
 
 function App() {
@@ -98,16 +99,15 @@ function App() {
   // case, so we don't want the marketing nav/footer wrapping it.
   const hasInlinePlan = new URLSearchParams(location.search).has('plan');
   const isSharedView = location.pathname.startsWith('/share/') || hasInlinePlan || (!isKnownPath && location.pathname !== '/');
-  const isAdminLogin = location.pathname === '/manage-himato/login';
-  // Agent dashboard has its own sidebar + top bar — hide the marketing nav/footer.
-  const isDashboard = location.pathname === '/dashboard' || location.pathname.startsWith('/dashboard/');
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register' || isAdminLogin;
+  // Old agent/admin URLs redirect to their own apps — render no chrome meanwhile.
+  const isMovedPath = ['/dashboard', '/manage-himato'].some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
   const isTermsPage = location.pathname === '/terms';
 
   return (
     <>
-      <SEO />
-      {!isSharedView && !isAdminLogin && !isDashboard && <NavigationHeader />}
+      <RouteSEO />
+      {!isSharedView && !isMovedPath && <NavigationHeader />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/chat" element={<PlannerPage />} />
@@ -116,14 +116,12 @@ function App() {
         <Route path="/history" element={<ItineraryHistory />} />
         <Route path="/reach_us" element={<ReachUs />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<B2BDashboard />} />
-        <Route path="/dashboard/:agentCode" element={<B2BDashboard />} />
-        <Route path="/manage-himato/login" element={<AdminLogin />} />
-        <Route path="/manage-himato/guides" element={<AdminGuidesPage />} />
-        <Route path="/manage-himato/places" element={<AdminPlacesPage />} />
-        <Route path="/manage-himato" element={<AdminDashboard />} />
+        {/* Email sign-up (switch off with VITE_ENABLE_EMAIL_AUTH=false) */}
+        <Route path="/register" element={EMAIL_AUTH_ENABLED ? <Register /> : <Navigate to="/login" replace />} />
         <Route path="/terms" element={<TermsAndConditions />} />
+        {/* Agent dashboard and admin panel moved to their own apps */}
+        <Route path="/dashboard/*" element={<ExternalRedirect to={AGENT_APP_URL} />} />
+        <Route path="/manage-himato/*" element={<ExternalRedirect to={ADMIN_APP_URL} />} />
 
         <Route path="/guide/:slug" element={<GuidePage />} />
         <Route path="/guides" element={<GuidesIndexPage />} />
@@ -132,7 +130,7 @@ function App() {
         {/* Custom Slug Route - Should be near the end to avoid clashing with static paths */}
         <Route path="/:slug" element={<SharedItineraryPage />} />
       </Routes>
-      {!isSharedView && !isAuthPage && !isTermsPage && !isDashboard && <Footer />}
+      {!isSharedView && !isAuthPage && !isTermsPage && !isMovedPath && <Footer />}
     </>
   );
 }
