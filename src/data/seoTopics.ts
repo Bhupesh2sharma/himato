@@ -93,7 +93,7 @@ For Lachung, Yumthang, Lachen and Gurudongmar you need a 2–3 day package: see 
 
 ## How many days in Gangtok?
 
-- **2 days:** town sights on one day, Tsomgo Lake and Baba Mandir on the other.
+- **2 days:** town sights on one day, Tsomgo Lake and Baba Mandir on the other. See the [3-day Sikkim itinerary](/guide/sikkim-itinerary-3-days).
 - **3 days:** add Rumtek Monastery, or Nathula (Wednesday to Sunday).
 - **As a base:** most 5–7 day trips start and end in Gangtok. See the [5-day](/guide/sikkim-itinerary-5-days) and [7-day](/guide/sikkim-itinerary-7-days) itineraries.
 
@@ -389,6 +389,332 @@ March to May for rhododendrons and flowers, or October to November for clear ski
         `
     },
     {
+        id: 'sikkim-itinerary-3-days',
+        title: "3-Day Sikkim Itinerary: Gangtok & Tsomgo Lake (Plus a North Sikkim Option)",
+        shortDescription: "The best way to spend 3 days in Sikkim, day by day, with drive times, permits and what to skip.",
+        description: "Three days covers Gangtok and Tsomgo Lake; North Sikkim and Pelling need more time.",
+        answer: "A 3-day Sikkim itinerary: Day 1 drive from Bagdogra or NJP to Gangtok (about 4–5 hours) and spend the evening on MG Marg; Day 2 Tsomgo Lake and Baba Mandir, plus Nathula from Wednesday to Sunday; Day 3 Gangtok's sights in the morning, then drive back. Three days is enough for Gangtok and Tsomgo, but not for North Sikkim or Pelling.",
+        updated: '2026-10-30',
+        category: 'Itinerary',
+        image: '/pic_kupup_lake.jpg',
+        content: `
+# 3-Day Sikkim Itinerary
+
+Three days is a short trip, because the drive from Bagdogra or NJP takes 4–5 hours each way. The best use of it is **Gangtok plus Tsomgo Lake**. Save North Sikkim (Lachung, Gurudongmar) and Pelling for a longer trip.
+
+## The plan at a glance
+
+| Day | Plan | Drive | Overnight |
+|---|---|---|---|
+| 1 | Bagdogra / NJP → Gangtok; evening on MG Marg | ~4–4.5 hours | Gangtok |
+| 2 | Tsomgo Lake and Baba Mandir (+ Nathula, Wed–Sun) | ~2–3 hours each way | Gangtok |
+| 3 | Gangtok sights in the morning → Bagdogra / NJP | ~4–4.5 hours | — |
+
+## Day 1: Arrive in Gangtok
+
+Drive up from **Bagdogra** (about 123 km) or **NJP** (about 113 km). Check in and walk **MG Marg** in the evening. Give your hotel or operator your ID and photos for tomorrow's Tsomgo permit (Voter ID, driving licence or passport; not Aadhaar).
+
+## Day 2: Tsomgo Lake, Baba Mandir and Nathula
+
+**Tsomgo Lake** is about 40 km (~2 hours) from Gangtok, with **Baba Mandir** beyond it. Indian citizens can add **Nathula Pass** from **Wednesday to Sunday**. In winter, this is where you'll find snow. Back in Gangtok by evening.
+
+## Day 3: Gangtok sights, then home
+
+Spend the morning on a half-day sightseeing tour (about ₹1,500–2,000 per car): **Enchey Monastery**, **Do Drul Chorten**, **Tashi View Point** or **Hanuman Tok** for the views, and the **ropeway** if time allows. Leave by early afternoon for Bagdogra or NJP. See the [Gangtok travel guide](/guide/gangtok-travel-guide) for all the sights.
+
+## Other ways to spend 3 days
+
+| Option | Plan | Best for |
+|---|---|---|
+| **Already in Gangtok?** | 2 days / 1 night in Lachung for Yumthang Valley, then a day in Gangtok | Snow and mountain valleys |
+| **3 nights instead of 2** | Add Rumtek Monastery or Temi Tea Garden | A less rushed trip |
+| **Fly in by helicopter** | Bagdogra → Gangtok in about 35 minutes (about ₹3,100, hand baggage only) | Saving half a day each way |
+
+See the [Lachung travel guide](/guide/lachung-travel-guide) and [How to reach Gangtok](/guide/how-to-reach-gangtok).
+
+## What doesn't fit in 3 days
+
+- **Gurudongmar Lake** needs a night in Lachen and a 3:30–4:30 AM start, so at least 5–7 days in total.
+- **Pelling** is about 5 hours from Gangtok, so it needs 2 extra nights.
+
+For more time, see the [5-day](/guide/sikkim-itinerary-5-days) and [7-day](/guide/sikkim-itinerary-7-days) itineraries.
+
+## Permits, cost and best time
+
+- **Permits:** Tsomgo and Nathula need a permit through a registered operator, arranged the day before. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+- **Cost:** see [Sikkim trip cost](/guide/sikkim-trip-cost) for taxi, hotel and day-trip prices.
+- **Best time:** October to November for clear views; December to February for snow at Tsomgo. See [Best time to visit Sikkim](/guide/best-time-to-visit-sikkim).
+
+[Customise this 3-day plan](/chat?prompt=3%20days%20in%20Sikkim%3A%20Gangtok%20sightseeing%20and%20Tsomgo%20Lake%20with%20Baba%20Mandir): tell Himato your dates and group, and get your own day-by-day version with permit info.
+
+## FAQ
+
+**Is 3 days enough for Sikkim?**
+Enough for Gangtok and Tsomgo Lake. North Sikkim and Pelling each need more time, so plan 5–7 days to see more.
+
+**Can I see snow in 3 days in Sikkim?**
+Yes, from December to February at Tsomgo Lake and Nathula, if the road is open after snowfall.
+
+**Can I visit Nathula on a 3-day trip?**
+Yes, if your Tsomgo day falls on Wednesday to Sunday and you're an Indian citizen. Your operator applies for the permit a day ahead.
+
+**What should I skip on a 3-day Sikkim trip?**
+Gurudongmar Lake and Pelling. Both need long drives and extra nights.
+        `
+    },
+    {
+        id: 'best-time-to-visit-sikkim',
+        title: "Best Time to Visit Sikkim: Month-by-Month Weather, Festivals & What's Open",
+        shortDescription: "Every month in Sikkim at a glance: temperatures, rain, festivals, snow, flowers and which roads are open.",
+        description: "October–November is best for clear views; March–May for flowers; December–February for snow; June–September is monsoon.",
+        answer: "The best time to visit Sikkim is October to November for clear skies and mountain views, and March to May for rhododendrons and pleasant weather. December to February brings snow at Tsomgo, Lachung and Yumthang, but high roads can close. June to September is the monsoon, with heavy rain and landslides.",
+        updated: '2026-10-30',
+        category: 'Seasonal',
+        image: '/zuluk.jpg',
+        content: `
+# Best Time to Visit Sikkim
+
+Sikkim changes a lot through the year. The best month depends on what you want: **clear mountain views**, **flowers**, **snow**, or **fewer crowds and lower prices**.
+
+## The short answer
+
+| If you want… | Go in… |
+|---|---|
+| Clear skies and Kanchenjunga views | **October–November** |
+| Rhododendrons and flowers | **March–May** (Yumthang peaks around mid-April to early May) |
+| Snow | **December–February** (Tsomgo, Lachung, Yumthang, Zero Point) |
+| Gurudongmar Lake | **April–June** or **October–November** |
+| Cherry blossoms | **Mid to late November** |
+| Fewer tourists | **June–September** (monsoon) and January after New Year |
+
+## Sikkim month by month
+
+Temperatures and rainfall are long-term averages for **Gangtok** (about 1,650 m). North Sikkim is much colder.
+
+| Month | Gangtok (min–max) | Rain | What to expect |
+|---|---|---|---|
+| **January** | 6–13°C | 27 mm | Coldest month; best snow up high, but roads often close. [Sikkim in January](/guide/sikkim-in-january) |
+| **February** | 8–14°C | 72 mm | Cold, more frequent rain or snow; Losar (Tibetan New Year) falls in February or March |
+| **March** | 10–17°C | 126 mm | Warming up; rhododendrons start in West Sikkim (Barsey, Dentam) |
+| **April** | 13–20°C | 297 mm | Rhododendron season; mild in Gangtok; North Sikkim reopening |
+| **May** | 15–21°C | 496 mm | Flowers at Yumthang; pre-monsoon showers; busy season |
+| **June** | 17–22°C | 610 mm | Monsoon begins; landslides possible; Saga Dawa in May or June |
+| **July** | 18–22°C | 626 mm | Wettest month; green, misty and quiet; leeches on trails. [Sikkim in July](/guide/sikkim-monsoon-leeches) |
+| **August** | 18–22°C | 566 mm | Heavy rain; Pang Lhabsol in August or September |
+| **September** | 17–22°C | 439 mm | Rain easing towards the end of the month |
+| **October** | 14–21°C | 173 mm | Skies clearing; festival-holiday crowds; great views from late October |
+| **November** | 11–18°C | 38 mm | **The best month for many:** dry, clear and mild; cherry blossoms. [Sikkim in November](/guide/sikkim-in-november) |
+| **December** | 8–14°C | 20 mm | Dry and cold; snow at Tsomgo and Nathula; Losoong and Christmas–New Year crowds. [Sikkim in December](/guide/sikkim-in-december) |
+
+Festival dates follow the lunar calendar and change every year, so check the exact dates before you plan around one. See the [Losoong festival guide](/guide/losoong-festival).
+
+## The seasons
+
+### Autumn (October–November): clearest views
+
+The monsoon has gone, skies are clear and Kanchenjunga is sharp from Pelling, Ravangla and Gangtok. North Sikkim, including Gurudongmar, is usually open. The trade-off is festival-holiday crowds in October, so book early.
+
+### Winter (December–February): snow
+
+Gangtok stays above freezing and rarely sees snow, but **Tsomgo, Nathula, Lachung, Yumthang and Zero Point** do. Heavy snow can close high roads for days, especially in January, so keep buffer days. Gurudongmar is often unreachable.
+
+### Spring (March–May): flowers
+
+Rhododendrons flower from **late March in West Sikkim** (Barsey, Dentam) to **April–May in North Sikkim** (Yumthang, Shingba). The weather is mild, and it's a busy season. See [the Barsey rhododendron trek](/guide/barsey-rhododendron-trek).
+
+### Monsoon (June–September): green and quiet
+
+Rain falls almost every day, sometimes heavily, and **landslides can block roads**, especially to North Sikkim. It's the quietest and often cheapest time, good for slow trips around Gangtok and West Sikkim if you're flexible.
+
+## Best time for specific places
+
+| Place | Best months | Guide |
+|---|---|---|
+| Gurudongmar Lake | April–June, October–November | [Best time to visit Gurudongmar](/guide/gurudongmar-frozen-lake-best-time) |
+| Lachung and Yumthang | March–May (flowers), Oct–Nov (clear), Dec–Feb (snow) | [Lachung travel guide](/guide/lachung-travel-guide) |
+| Pelling | October–November | [Pelling travel guide](/guide/pelling-travel-guide) |
+| Gangtok | October–November, March–May | [Gangtok travel guide](/guide/gangtok-travel-guide) |
+| Temi Tea Garden (cherry blossoms) | mid to late November | [Cherry blossom in Sikkim](/guide/cherry-blossom-sikkim) |
+
+## Plan around your dates
+
+[Plan your trip with Himato](/chat?prompt=Plan%20my%20Sikkim%20trip%20for%20the%20best%20month%3A%20tell%20me%20when%20to%20go%20and%20build%20a%20day-by-day%20plan): tell it your month and it builds a day-by-day plan that fits the season, with permit info.
+
+## FAQ
+
+**Which is the best month to visit Sikkim?**
+November is the best all-round month: dry, clear and mild, with cherry blossoms. October is similar but busier, and March to May is best for flowers.
+
+**When can I see snow in Sikkim?**
+From December to February at Tsomgo Lake, Nathula, Lachung, Yumthang and Zero Point. Gangtok itself very rarely gets snow.
+
+**Is it safe to visit Sikkim in the monsoon?**
+It's possible, but rain is heavy from June to September and landslides can block roads, especially to North Sikkim. Keep extra days and check road status daily.
+
+**When do rhododendrons bloom in Sikkim?**
+From late March in West Sikkim (Barsey, Dentam) to April and May in North Sikkim. Yumthang usually peaks from mid-April to early May.
+
+**What is the cheapest time to visit Sikkim?**
+The monsoon months (June to September) and January after the New Year rush, outside festival and holiday dates.
+        `
+    },
+    {
+        id: 'sikkim-vs-darjeeling',
+        title: "Sikkim vs Darjeeling: Which Should You Visit? (Or How to Do Both)",
+        shortDescription: "Gangtok and Sikkim or Darjeeling? A side-by-side comparison of views, snow, permits, travel time and who each suits.",
+        description: "Choose Sikkim for snow, high lakes and monasteries; Darjeeling for tea gardens, the toy train and an easy trip. Both fit in 6–8 days.",
+        answer: "Choose Sikkim for snow, high-altitude lakes such as Tsomgo and Gurudongmar, North Sikkim's valleys and monasteries; choose Darjeeling for tea gardens, the UNESCO-listed toy train and Tiger Hill sunrise, on an easier, shorter trip with no permits. They're about 95–110 km apart (3–4.5 hours), so you can do both in 6–8 days.",
+        updated: '2026-10-30',
+        category: 'Logistics',
+        image: '/gangtok-bnnr.jpg',
+        content: `
+# Sikkim vs Darjeeling
+
+Sikkim (with Gangtok as its base) and Darjeeling (in West Bengal) are neighbours, reached from the same airport and railway station. They feel quite different, though.
+
+## Side by side
+
+| | Sikkim (Gangtok) | Darjeeling |
+|---|---|---|
+| State | Sikkim | West Bengal |
+| From Bagdogra airport | about 123 km, ~4.5 hours | about 68 km, ~2.5–3 hours |
+| Famous for | Snow, high lakes, monasteries, North Sikkim valleys | Tea gardens, the toy train, colonial hill town |
+| Snow | Yes: Tsomgo, Nathula, Lachung, Yumthang (Dec–Feb) | Rarely |
+| Big-name sights | Tsomgo Lake, Nathula, Gurudongmar, Yumthang, Pelling | Tiger Hill sunrise, Darjeeling Himalayan Railway, Batasia Loop, tea estates |
+| Permits | Needed for Tsomgo, Nathula, North Sikkim (through an operator) | None for Darjeeling town |
+| Best for | Adventure, snow, longer trips (5–7 days) | A shorter, easier trip (2–3 days) |
+
+## Choose Sikkim if…
+
+- You want **snow** or **high-altitude lakes**: Tsomgo, Gurudongmar and Zero Point.
+- You have **5 days or more**.
+- You like **monasteries** and remote **mountain valleys** such as Lachung and Yumthang.
+- You don't mind long mountain drives and a little permit paperwork.
+
+Start with the [5-day](/guide/sikkim-itinerary-5-days) or [7-day](/guide/sikkim-itinerary-7-days) itinerary.
+
+## Choose Darjeeling if…
+
+- You want an **easy, shorter trip**: it's closer to Bagdogra.
+- You love **tea gardens** and old hill-station charm.
+- You want to ride the **Darjeeling Himalayan Railway**, the toy train, a UNESCO World Heritage Site since 1999.
+- You want a **Tiger Hill sunrise**, about 11 km from town, with views of Kanchenjunga and, on clear mornings, Everest.
+- You'd rather skip permits.
+
+## Do both in 6–8 days
+
+Darjeeling and Gangtok are about **95–110 km apart (3–4.5 hours)**, so they combine well.
+
+| Days | Plan |
+|---|---|
+| 1–2 | Bagdogra → Darjeeling (~2.5–3 hours): tea gardens, toy train, Tiger Hill sunrise, Batasia Loop |
+| 3 | Darjeeling → Gangtok (~3–4.5 hours) |
+| 4 | Tsomgo Lake and Baba Mandir (+ Nathula, Wed–Sun) |
+| 5 | Gangtok sights |
+| 6 | Gangtok → Bagdogra (~4.5 hours) |
+
+With 2 more days, add Lachung and Yumthang from Gangtok. See the [Lachung travel guide](/guide/lachung-travel-guide).
+
+## Good to know
+
+- **Same entry point:** both are reached from Bagdogra airport or NJP station. See [How to reach Gangtok](/guide/how-to-reach-gangtok).
+- **Sikkim permits:** Indian citizens don't need one to enter Sikkim, but do for Tsomgo, Nathula and North Sikkim. Foreign nationals need the Sikkim Restricted Area Permit. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+- **Best time for both:** October to November for clear views, and March to May for flowers. See [Best time to visit Sikkim](/guide/best-time-to-visit-sikkim).
+
+[Plan a Darjeeling and Gangtok trip](/chat?prompt=6%20days%20covering%20Darjeeling%20and%20Gangtok%20with%20Tsomgo%20Lake): Himato builds the day-by-day plan with drive times and permit info.
+
+## FAQ
+
+**Which is better, Sikkim or Darjeeling?**
+Sikkim is better for snow, high lakes and remote valleys; Darjeeling is better for tea gardens, the toy train and a short, easy trip. With 6–8 days you can do both.
+
+**How far is Darjeeling from Gangtok?**
+About 95–110 km by road, roughly 3–4.5 hours depending on traffic.
+
+**Can I see snow in Darjeeling?**
+Rarely. For reliable snow, go to Sikkim's Tsomgo Lake, Nathula, Lachung or Yumthang from December to February.
+
+**Do I need a permit for Darjeeling?**
+No special permit is needed for Darjeeling town. Sikkim's protected areas, such as Tsomgo, Nathula and North Sikkim, do need permits.
+
+**How many days do I need for Sikkim and Darjeeling together?**
+Six to eight days: 2 in Darjeeling, 3–4 in Gangtok, plus travel days.
+        `
+    },
+    {
+        id: 'sikkim-trip-from-kolkata',
+        title: "Sikkim Trip from Kolkata (2026): Trains, Flights, Itineraries & Tips",
+        shortDescription: "How to get from Kolkata to Gangtok by train or flight, how many days to plan, and itineraries that fit.",
+        description: "From Kolkata, take a train to NJP or fly to Bagdogra, then drive 4–5 hours to Gangtok.",
+        answer: "From Kolkata, take a train to New Jalpaiguri (NJP), such as the Howrah–NJP Vande Bharat (05:55 to 13:30, about 7.5 hours), or fly to Bagdogra (about an hour), then drive 4–5 hours to Gangtok. Plan 5–7 days in Sikkim plus travel time; overnight trains save a day each way.",
+        updated: '2026-10-30',
+        category: 'Logistics',
+        image: '/Gangtok-View.jpg',
+        content: `
+# Sikkim Trip from Kolkata
+
+Kolkata is the most common starting point for a Sikkim trip. Every route goes through **New Jalpaiguri (NJP)** station or **Bagdogra** airport near Siliguri, then up the hills by road.
+
+> Train times and days change; check IRCTC or the NTES app before you book.
+
+## Kolkata to Sikkim: your options
+
+| Option | Kolkata → NJP / Bagdogra | Then to Gangtok | Best for |
+|---|---|---|---|
+| **Flight** to Bagdogra | about 1 hour in the air | ~4.5 hours by road | Saving time |
+| **Vande Bharat** Howrah → NJP | 05:55 → 13:30 (about 7.5 hours), 6 days a week | ~4 hours, reaching Gangtok by evening | A daytime train |
+| **Overnight trains** to NJP | roughly 8–11 hours | ~4 hours, reaching Gangtok by early afternoon | Saving a hotel night and a day |
+| **Overnight bus** to Siliguri | overnight | ~4.5 hours from Siliguri | The lowest cost |
+
+From NJP or Bagdogra to Gangtok: a shared taxi costs about ₹400–600 a seat, and a private car ₹2,500–6,000. A helicopter from Bagdogra takes about 35 minutes for around ₹3,100. Details: [How to reach Gangtok](/guide/how-to-reach-gangtok).
+
+## How many days to plan from Kolkata
+
+| Trip | Days in Sikkim | Total with travel (overnight trains) |
+|---|---|---|
+| Gangtok + Tsomgo | 3 | about 4–5 days |
+| Gangtok + North Sikkim (Lachung) | 5 | about 6–7 days |
+| Gangtok + North Sikkim + Pelling | 7 | about 8–9 days |
+
+Itineraries: [3 days](/guide/sikkim-itinerary-3-days) · [5 days](/guide/sikkim-itinerary-5-days) · [7 days](/guide/sikkim-itinerary-7-days)
+
+## A sample 6-day trip from Kolkata
+
+| Day | Plan |
+|---|---|
+| 0 (night) | Overnight train from Kolkata to NJP |
+| 1 | Arrive NJP in the morning → Gangtok by afternoon; evening on MG Marg |
+| 2 | Tsomgo Lake and Baba Mandir (+ Nathula, Wed–Sun) |
+| 3 | Gangtok → Lachung (~6.5 hours) |
+| 4 | Yumthang Valley → back to Gangtok |
+| 5 | Gangtok sights → NJP; overnight train to Kolkata |
+
+## Tips for travellers from Kolkata
+
+- **Book early around Durga Puja and Diwali.** Trains, hotels and North Sikkim packages fill up fast in October.
+- **Carry your Voter ID, driving licence or passport** and passport photos for permits. Aadhaar isn't accepted for Tsomgo, Nathula or North Sikkim.
+- **Reach NJP or Bagdogra by early afternoon** if you're driving up the same day; the hill road is slow after dark.
+- **Add Darjeeling?** It's on the way. See [Sikkim vs Darjeeling](/guide/sikkim-vs-darjeeling).
+- **Budget:** see [Sikkim trip cost](/guide/sikkim-trip-cost) for taxis, packages and hotels.
+
+[Plan your trip from Kolkata](/chat?prompt=5%20days%20in%20Sikkim%20from%20Kolkata%20by%20train%20to%20NJP%3A%20Gangtok%2C%20Tsomgo%20Lake%20and%20Lachung): Himato builds the day-by-day plan around your train or flight, and connects you with local agencies for quotes.
+
+## FAQ
+
+**How do I go from Kolkata to Sikkim?**
+Take a train to New Jalpaiguri (NJP) or a flight to Bagdogra, then a shared or private taxi to Gangtok (4–5 hours).
+
+**Which is the best train from Kolkata to NJP?**
+The Howrah–NJP Vande Bharat is the fastest daytime train (about 7.5 hours, 05:55 to 13:30, six days a week). Overnight trains take longer but save a day and a hotel night.
+
+**How many days do I need for Sikkim from Kolkata?**
+About 6–7 days in total for Gangtok and North Sikkim with overnight trains, or 4–5 days for just Gangtok and Tsomgo Lake.
+
+**How long is the flight from Kolkata to Bagdogra?**
+About an hour, then around 4.5 hours by road to Gangtok.
+        `
+    },
+    {
         id: 'sikkim-itinerary-5-days',
         title: "5-Day Sikkim Itinerary: Gangtok, Tsomgo Lake & Lachung–Yumthang (2026)",
         shortDescription: "The classic first Sikkim trip, day by day: drive times, overnight stops, permits and what to book.",
@@ -464,7 +790,7 @@ Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
 
 [Customise this 5-day plan](/chat?prompt=5%20days%20in%20Sikkim%3A%20Gangtok%2C%20Tsomgo%20Lake%20and%20Lachung%20with%20Yumthang%20Valley): tell Himato your dates, who's coming and your budget, and get your own day-by-day version with permit info.
 
-Need more time? See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days), which adds Gurudongmar Lake and Pelling.
+Need more time? See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days), which adds Gurudongmar Lake and Pelling. Shorter trip? See the [3-day itinerary](/guide/sikkim-itinerary-3-days).
 
 What will it cost? See [Sikkim trip cost](/guide/sikkim-trip-cost) for budget, mid-range and premium prices.
 
@@ -1451,6 +1777,7 @@ Book through STDC and reconfirm the day before you fly.
 ## Plan the rest of your trip
 
 - [Gangtok travel guide](/guide/gangtok-travel-guide): what to see, how many days and where to stay
+- [Sikkim trip from Kolkata](/guide/sikkim-trip-from-kolkata): trains, flights and itineraries
 - [5-day Sikkim itinerary](/guide/sikkim-itinerary-5-days) · [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days)
 - [Sikkim trip cost](/guide/sikkim-trip-cost)
 - [Plan your trip with Himato](/chat): a day-by-day plan with drive times and permit info
@@ -1957,7 +2284,7 @@ Permits for all of these: [Sikkim permits guide](/guide/sikkim-permits-guide).
 - Sunglasses and sunscreen: the sun is strong at altitude
 - Your **Voter ID, driving licence or passport** and passport photos for permits (Aadhaar isn't accepted)
 
-**Other months:** [Sikkim in December](/guide/sikkim-in-december) · [Sikkim in January](/guide/sikkim-in-january)
+**Other months:** [Sikkim in December](/guide/sikkim-in-december) · [Sikkim in January](/guide/sikkim-in-january) · [All months](/guide/best-time-to-visit-sikkim)
 
 ## FAQ
 
@@ -2062,7 +2389,7 @@ Layer up: thermals, a fleece and a windproof down jacket, waterproof gloves, two
 
 [Customise this for your dates](/chat): Himato builds the day-by-day plan with permit info.
 
-**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in January](/guide/sikkim-in-january)
+**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in January](/guide/sikkim-in-january) · [All months](/guide/best-time-to-visit-sikkim)
 
 ## FAQ
 
@@ -2158,7 +2485,7 @@ Check road and permit status daily with your operator. Permit rules: [Sikkim per
 
 [Plan your January trip](/chat): Himato builds a day-by-day plan with permit info and backup options.
 
-**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in December](/guide/sikkim-in-december)
+**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in December](/guide/sikkim-in-december) · [All months](/guide/best-time-to-visit-sikkim)
 
 ## FAQ
 
