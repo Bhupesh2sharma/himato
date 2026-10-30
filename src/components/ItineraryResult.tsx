@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Calendar, Clock, MapPin, Copy, Check, Link as LinkIcon, Edit2, Save, X, Phone, Sun, Backpack, ShieldCheck, Sparkles, Send, Loader2, BedDouble, Mountain, CheckCircle2, Landmark, Waves, Car, UtensilsCrossed, ShoppingBag, Footprints } from 'lucide-react';
+import { Calendar, Clock, MapPin, Copy, Check, Link as LinkIcon, Edit2, Save, X, Phone, Sun, Backpack, ShieldCheck, Sparkles, Send, Loader2, BedDouble, Mountain, CheckCircle2, Landmark, Waves, Car, UtensilsCrossed, ShoppingBag, Footprints, Lock } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { encodeItineraryToUrl } from '../utils/sharing';
@@ -24,6 +24,8 @@ interface DayPlan {
     overnightStay?: string;
     altitude?: string;
     activities: Activity[];
+    /** Guest preview: later days arrive with only a title until sign-in */
+    locked?: boolean;
 }
 
 interface ItineraryResultProps {
@@ -36,6 +38,9 @@ interface ItineraryResultProps {
     } | null;
     itineraryId?: string | null;
     onItineraryChange?: (data: any) => void;
+    /** Guest preview: share/PDF/edit/agent actions ask the visitor to sign in */
+    locked?: boolean;
+    onUnlock?: () => void;
 }
 
 
@@ -55,7 +60,7 @@ const ACTIVITY_ICONS: Array<[RegExp, LucideIcon]> = [
 const activityIcon = (activity: Activity): LucideIcon =>
     ACTIVITY_ICONS.find(([re]) => re.test(`${activity.title} ${activity.location}`))?.[1] ?? MapPin;
 
-export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: ItineraryResultProps) => {
+export const ItineraryResult = ({ data, itineraryId, onItineraryChange, locked = false, onUnlock }: ItineraryResultProps) => {
     const { isAuthenticated } = useAuth();
     const [refineText, setRefineText] = useState('');
     const [refining, setRefining] = useState(false);
@@ -448,6 +453,12 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                                 </button>
                             </>
                         )}
+                        {locked ? (
+                            <button onClick={onUnlock}
+                                className={`${toolbarBtn} rounded-xl bg-ai-accent text-white hover:bg-ai-secondary shrink-0`}>
+                                <Lock className="w-4 h-4" />Sign in to save, share &amp; get the PDF
+                            </button>
+                        ) : (
                         <div className="flex items-center rounded-xl border border-black/10 bg-white divide-x divide-black/10 overflow-hidden shrink-0">
                             <button onClick={shareLink} disabled={sharing}
                                 className={`${toolbarBtn} ${shared ? 'text-ai-accent' : 'text-ai-text hover:bg-black/[0.03]'}`}>
@@ -465,6 +476,7 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                                 className={`${toolbarBtn} text-ai-text hover:bg-black/[0.03]`}
                             />
                         </div>
+                        )}
                     </div>
                 </div>
             </header>
@@ -496,7 +508,17 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                     </div>
 
                     <div className="space-y-6">
-                        {displayData.days.map((day, dayIndex) => (
+                        {displayData.days.map((day, dayIndex) => day.locked ? (
+                            <LockedDay
+                                key={day.day}
+                                day={day}
+                                isFirstLocked={!displayData.days[dayIndex - 1]?.locked}
+                                lockedCount={displayData.days.filter((d) => d.locked).length}
+                                totalDays={displayData.days.length}
+                                onUnlock={onUnlock}
+                                registerRef={(el) => { if (el) dayRefs.current.set(day.day, el); else dayRefs.current.delete(day.day); }}
+                            />
+                        ) : (
                             <motion.section
                                 key={day.day}
                                 ref={(el) => { if (el) dayRefs.current.set(day.day, el); else dayRefs.current.delete(day.day); }}
@@ -629,12 +651,12 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                                 className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2.5 text-sm text-ai-text placeholder:text-ai-muted/70 focus:outline-none focus:border-ai-accent resize-none disabled:opacity-60"
                             />
                             <button
-                                onClick={handleRefine}
-                                disabled={refining || !refineText.trim()}
+                                onClick={locked ? onUnlock : handleRefine}
+                                disabled={refining || (!locked && !refineText.trim())}
                                 className="mt-2 w-full inline-flex items-center justify-center gap-2 h-10 rounded-xl bg-ai-accent text-white text-sm font-semibold hover:bg-ai-secondary transition-colors disabled:opacity-50"
                             >
                                 {refining ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                                {refining ? 'Updating…' : 'Update itinerary'}
+                                {refining ? 'Updating…' : locked ? 'Sign in to tweak this trip' : 'Update itinerary'}
                             </button>
                             {refineNote && <p className="mt-3 text-sm font-medium text-ai-accent flex items-start gap-1.5"><Check className="w-4 h-4 shrink-0 mt-0.5" />{refineNote}</p>}
                             {refineError && <p className="mt-3 text-sm text-red-600">{refineError}</p>}
@@ -644,7 +666,7 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
                         <div className="rounded-2xl bg-ai-accent text-ai-dark p-5">
                             <h3 className="text-sm font-bold">Want this booked?</h3>
                             <p className="text-xs text-ai-dark/75 leading-relaxed mt-1 mb-4">Send it to local Sikkim agents and get a callback with quotes.</p>
-                            <button onClick={() => setShowSendModal(true)}
+                            <button onClick={() => (locked ? onUnlock?.() : setShowSendModal(true))}
                                 className="w-full inline-flex items-center justify-center gap-2 h-10 rounded-xl bg-ai-dark text-ai-accent text-sm font-semibold hover:bg-white transition-colors">
                                 <Phone className="w-4 h-4" />
                                 Send to a travel agent
@@ -658,3 +680,63 @@ export const ItineraryResult = ({ data, itineraryId, onItineraryChange }: Itiner
         </article>
     );
 };
+
+/** A day the guest can't see yet: title and overnight stop, over a blurred placeholder. */
+function LockedDay({ day, isFirstLocked, lockedCount, totalDays, onUnlock, registerRef }: {
+    day: DayPlan;
+    isFirstLocked: boolean;
+    lockedCount: number;
+    totalDays: number;
+    onUnlock?: () => void;
+    registerRef: (el: HTMLElement | null) => void;
+}) {
+    const firstLockedDay = totalDays - lockedCount + 1;
+    return (
+        <section ref={registerRef} className="scroll-mt-20 relative bg-white rounded-3xl border border-black/[0.07] overflow-hidden">
+            <div className="flex items-start gap-4 px-5 sm:px-7 pt-6 pb-5 border-b border-black/[0.06]">
+                <div className="w-12 h-12 shrink-0 rounded-2xl flex flex-col items-center justify-center bg-ai-accent/10 text-ai-accent">
+                    <span className="text-[9px] font-bold uppercase tracking-wider leading-none opacity-80">Day</span>
+                    <span className="text-lg font-bold leading-tight">{day.day}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                    <h3 className="text-lg sm:text-xl text-ai-text font-semibold leading-snug">{day.title}</h3>
+                    {day.overnightStay && (
+                        <span className="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-ai-muted">
+                            <BedDouble className="w-3.5 h-3.5 text-ai-accent" />Overnight in {day.overnightStay}
+                        </span>
+                    )}
+                </div>
+                <Lock className="w-4 h-4 text-ai-muted shrink-0 mt-1" aria-label="Locked" />
+            </div>
+
+            {/* Placeholder timeline (decorative) */}
+            <div aria-hidden="true" className="px-5 sm:px-7 py-6 space-y-5 blur-[3px] select-none pointer-events-none">
+                {[0.9, 0.7, 0.8].map((w, i) => (
+                    <div key={i} className="flex gap-4">
+                        <div className="w-9 h-9 rounded-xl bg-ai-accent/10 shrink-0" />
+                        <div className="flex-1 space-y-2 pt-1">
+                            <div className="h-2.5 w-16 rounded bg-black/10" />
+                            <div className="h-3.5 rounded bg-black/15" style={{ width: `${w * 60}%` }} />
+                            <div className="h-2.5 rounded bg-black/10" style={{ width: `${w * 100}%` }} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {isFirstLocked && (
+                <div className="absolute inset-x-0 bottom-0 top-[5.5rem] flex items-center justify-center p-5 bg-gradient-to-t from-white via-white/85 to-white/40">
+                    <div className="text-center max-w-sm">
+                        <p className="text-base font-semibold text-ai-text">
+                            {lockedCount === 1 ? `Day ${firstLockedDay} is ready` : `Days ${firstLockedDay}–${totalDays} are ready`}
+                        </p>
+                        <p className="text-sm text-ai-muted mt-1">Sign in free to see the full plan, save it, share it and download the PDF.</p>
+                        <button onClick={onUnlock}
+                            className="mt-4 inline-flex items-center justify-center gap-2 px-5 h-11 rounded-xl bg-ai-accent text-white text-sm font-semibold hover:bg-ai-secondary transition-colors">
+                            <Lock className="w-4 h-4" />Unlock my full plan, free
+                        </button>
+                    </div>
+                </div>
+            )}
+        </section>
+    );
+}

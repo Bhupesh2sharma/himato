@@ -15,13 +15,15 @@ import { decodeItineraryFromUrl } from '../utils/sharing';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { AuthModal } from '../components/AuthModal';
+import { TripProfileModal } from '../components/TripProfileModal';
+import { shouldAskTripProfile } from '../utils/tripProfile';
 
 type SearchRequest = { prompt: string };
 
 export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
     const navigate = useNavigate();
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
     const [showSplash, setShowSplash] = useState(() => {
         const seen = localStorage.getItem('himato_splash_seen');
         if (seen) return false;
@@ -35,6 +37,11 @@ export function PlannerPage() {
     // Search the user tried to run while logged out — replayed after login
     const [pendingSearch, setPendingSearch] = useState<SearchRequest | null>(null);
     const [showAuthModal, setShowAuthModal] = useState(false);
+    const [authMessage, setAuthMessage] = useState('Sign in free to see your full plan');
+    // Guests see a preview (first days in full); signing in unlocks the rest.
+    const [isPreview, setIsPreview] = useState(false);
+    const [lastPrompt, setLastPrompt] = useState('');
+    const [showTripProfile, setShowTripProfile] = useState(false);
 
     useEffect(() => {
         // Check for shared itinerary in URL relative to planner
@@ -76,33 +83,43 @@ export function PlannerPage() {
         setView('home');
     };
 
-    const requireLoginFor = (request: SearchRequest) => {
+    const requireLoginFor = (request: SearchRequest, message: string) => {
         setPendingSearch(request);
+        setAuthMessage(message);
         setShowAuthModal(true);
     };
 
+    // Sign in to see the whole plan, then re-run the same prompt (served from
+    // the backend's prompt cache, so it's instant and costs no AI call).
+    const unlockFullPlan = () => {
+        track('preview_unlock_clicked');
+        requireLoginFor({ prompt: lastPrompt }, 'Sign in free to see your full plan, save it and download the PDF');
+    };
+
     const handleSearch = async (prompt: string) => {
-        if (!isAuthenticated) {
-            requireLoginFor({ prompt });
-            return;
-        }
         setIsSearching(true);
         setError('');
         setItineraryId(null);
         try {
-            const { itinerary, id } = await generateItinerary(prompt);
+            const { itinerary, id, preview } = await generateItinerary(prompt);
+            // Signed in on this device but the server treated us as a guest:
+            // the session has expired. Drop it so the unlock flow takes over.
+            if (preview && isAuthenticated) await logout();
             setItineraryData(itinerary);
             setItineraryId(id || null);
+            setIsPreview(preview);
+            setLastPrompt(prompt);
             setView('results');
             track('itinerary_generated', {
                 prompt_length: prompt.length,
-              });
+                preview,
+            });
+            if (!preview && shouldAskTripProfile(user)) setShowTripProfile(true);
         } catch (err: any) {
             console.error(err);
-            // Session expired / invalid token — log out and ask to sign in again
-            if (err?.status === 401) {
-                await logout();
-                requireLoginFor({ prompt });
+            // Guest daily limit reached: sign in to keep planning
+            if (err?.status === 429) {
+                requireLoginFor({ prompt }, "You've used today's free plans. Sign in free to keep planning");
                 return;
             }
             setError(err.message || 'Failed to generate plan. Please try again.');
@@ -168,8 +185,14 @@ export function PlannerPage() {
                                                 {error}
                                             </div>
                                         )}
-                                        <ItineraryResult data={itineraryData} itineraryId={itineraryId} onItineraryChange={setItineraryData} />
-                                        {itineraryData && <BookingOptions data={itineraryData} />}
+                                        <ItineraryResult
+                                            data={itineraryData}
+                                            itineraryId={itineraryId}
+                                            onItineraryChange={setItineraryData}
+                                            locked={isPreview}
+                                            onUnlock={unlockFullPlan}
+                                        />
+                                        {itineraryData && !isPreview && <BookingOptions data={itineraryData} />}
 
                                         <div className="mt-12 sm:mt-20">
                                             {/* <SikkimShowcase /> */}
@@ -185,13 +208,14 @@ export function PlannerPage() {
 
             <AuthModal
                 isOpen={showAuthModal}
-                message="Sign in to generate your Sikkim itinerary"
+                message={authMessage}
                 onClose={() => {
                     setShowAuthModal(false);
                     setPendingSearch(null);
                 }}
                 onSuccess={() => setShowAuthModal(false)}
             />
+            <TripProfileModal isOpen={showTripProfile} onClose={() => setShowTripProfile(false)} />
         </main>
     );
 }

@@ -75,7 +75,7 @@ export const Register = ({ onSuccess, onSwitchToLogin, embedded = false }: Regis
 
   // Code confirmed → account created and signed in
   const handleVerified = () => {
-    track('signup_completed');
+    track('signup_completed', { method: 'email' });
     if (onSuccess) onSuccess();
     else navigate('/');
   };

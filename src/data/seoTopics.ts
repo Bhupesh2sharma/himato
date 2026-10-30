@@ -938,6 +938,303 @@ The waterfalls are roaring monsters. The clouds play tag with the mountains. It'
         `
     },
     {
+        id: 'sikkim-in-november',
+        title: "Sikkim in November 2026: Weather, Places Open & Is It a Good Time?",
+        shortDescription: "Clear skies, cherry blossoms and open roads: what November in Sikkim is really like.",
+        description: "November is one of the best months for Sikkim: dry, clear skies, mountain views and most roads still open.",
+        answer: "Yes, November is one of the best months to visit Sikkim. It's dry with clear skies, so Kanchenjunga views are at their best. Gangtok averages about 11–18°C, the cherry blossoms peak in mid to late November, and North Sikkim (including Gurudongmar) is usually still open before heavy winter snow. Nights in Lachen, Lachung and Zuluk drop below freezing.",
+        updated: '2026-10-30',
+        category: 'Seasonal',
+        image: '/singhik-viewpoint-mangan-sikkim-1-attr-hero.jpeg',
+        content: `
+# Sikkim in November
+
+November is when the monsoon haze has gone and winter snow hasn't yet closed the high roads. Skies are clear, the air is dry and the mountains are sharp. If you can only pick one month for a first trip to Sikkim, November is a strong choice.
+
+## Is November a good time to visit Sikkim?
+
+**Yes.** You get:
+
+- **Clear, dry weather.** Gangtok averages only about 38 mm of rain in November, against heavy monsoon months.
+- **The best mountain views of the year** from Pelling, Ravangla and Zuluk
+- **North Sikkim still open:** Lachung, Yumthang, Lachen and Gurudongmar usually run until the first heavy snow
+- **Cherry blossom season,** peaking mid to late November
+
+The trade-off: **cold nights**, especially in the north.
+
+## November weather in Sikkim
+
+| Place | Days | Nights |
+|---|---|---|
+| **Gangtok** | About 18°C | About 11°C |
+| **Pelling, Ravangla** | Mild and sunny | Cool to cold |
+| **Lachung, Lachen, Zuluk** | Cool | **Below freezing** |
+| **Gurudongmar Lake** | 0°C to 10°C | −10°C or below |
+
+Gangtok figures are long-term averages. Pack warm layers for the north even on sunny days.
+
+## What's open in November
+
+| Place | Usually | Notes |
+|---|---|---|
+| Tsomgo Lake, Baba Mandir | Open | Permit through a tour operator |
+| Nathula Pass | Open Wed–Sun | Indians only; can close for weather |
+| Zuluk, Kupup (Silk Route) | Open | Indians only; cold nights |
+| Lachung, Yumthang | Open | Permit (PAP) through an operator |
+| **Gurudongmar Lake** | **Open, starting to freeze** | **November is the best month to see ice with the road still open** |
+
+Permits for all of these: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## What to do in Sikkim in November
+
+- **See the cherry blossoms** at Temi Tea Garden and around Ravangla, at their peak in mid to late November. The **Sikkim Cherry Festival** runs **25–28 November 2026**. See [Cherry blossom in Sikkim](/guide/cherry-blossom-sikkim).
+- **Gurudongmar with ice:** the lake starts freezing in November, while the road is usually still open. See [Best time to visit Gurudongmar](/guide/gurudongmar-frozen-lake-best-time).
+- **Kanchenjunga views** from Pelling and Ravangla are at their clearest.
+- **The Silk Route (Zuluk)**, before winter snow makes the hairpin bends harder.
+
+## A 7-day November itinerary
+
+| Day | Plan |
+|---|---|
+| 1 | Arrive Bagdogra/NJP, drive to Gangtok |
+| 2 | Tsomgo Lake and Baba Mandir (Nathula if it's Wed–Sun) |
+| 3 | Gangtok to Lachen |
+| 4 | Gurudongmar at dawn, then on to Lachung |
+| 5 | Yumthang Valley, back to Gangtok |
+| 6 | Gangtok to Temi Tea Garden (cherry blossoms) and Ravangla |
+| 7 | Drive back to Bagdogra/NJP |
+
+[Customise this for your dates](/chat): Himato builds the day-by-day plan with permit info.
+
+## What to pack
+
+- **Warm layers:** a down or padded jacket, a fleece and thermals, even though Gangtok days are mild
+- Gloves, a woollen cap and warm socks for North Sikkim
+- Sunglasses and sunscreen: the sun is strong at altitude
+- Your **Voter ID, driving licence or passport** and passport photos for permits (Aadhaar isn't accepted)
+
+**Other months:** [Sikkim in December](/guide/sikkim-in-december) · [Sikkim in January](/guide/sikkim-in-january)
+
+## FAQ
+
+**Is November a good time to visit Sikkim?**
+Yes. It's dry with clear skies and the best mountain views, and most roads, including North Sikkim, are usually open. Nights are cold.
+
+**What is the temperature in Gangtok in November?**
+On average about 11°C at night and 18°C during the day.
+
+**Is Gurudongmar Lake open in November?**
+Usually, yes. November is the best month to see the lake starting to freeze while the road is still open.
+
+**Is there snow in Sikkim in November?**
+Only at high altitude, such as around Gurudongmar and the high passes. Gangtok doesn't get snow in November.
+
+**Can I see cherry blossoms in Sikkim in November?**
+Yes. They peak in mid to late November, especially at Temi Tea Garden and around Ravangla. The Sikkim Cherry Festival runs 25–28 November 2026.
+        `
+    },
+    {
+        id: 'sikkim-in-december',
+        title: "Sikkim in December 2026: Weather, Snow, Festivals & Road Status",
+        shortDescription: "Cold, clear and festive: where you'll find snow, what may close, and how to plan around Christmas and New Year.",
+        description: "December in Sikkim is cold and mostly dry, with snow at Tsomgo and Nathula and festive crowds in Gangtok.",
+        answer: "December in Sikkim is cold, dry and mostly clear. Gangtok averages about 7–14°C and rarely sees snow, but Tsomgo Lake, Nathula and North Sikkim can get snow, and heavy snow can close those roads at short notice. Losoong (Sikkimese New Year) and monastery mask dances fall in December, and Gangtok is busy and expensive around Christmas and New Year, so book early.",
+        updated: '2026-10-30',
+        category: 'Seasonal',
+        image: '/pic_kupup_lake.jpg',
+        content: `
+# Sikkim in December
+
+December is Sikkim's festive winter month: crisp clear days, cold nights, snow at the high lakes and passes, and Gangtok lit up for Christmas and New Year. It's a great month, if you plan for the cold and keep your plans flexible.
+
+## Is December a good time to visit Sikkim?
+
+**Yes, with two caveats:**
+
+- **Snow can close high roads.** Tsomgo, Nathula, Zuluk and North Sikkim can be blocked after heavy snowfall, sometimes for days.
+- **Christmas and New Year are peak season.** Gangtok hotels fill up and prices rise. Pelling is a quieter alternative.
+
+Book stays early, and keep a buffer day in case a high road closes.
+
+## December weather in Sikkim
+
+| Place | Days | Nights | Snow? |
+|---|---|---|---|
+| **Gangtok** | About 14°C | About 7°C | Very rare |
+| **Pelling, Ravangla** | Cool, mostly sunny | Cold | Rare |
+| **Tsomgo Lake, Nathula** | Freezing | Well below freezing | **Possible, more likely late December** |
+| **Lachung, Yumthang** | Cold | Below freezing | Possible |
+| **Gurudongmar** | −15°C to −25°C | Colder | Frozen; road often blocked |
+
+Gangtok is dry in December (about 20 mm of rain on average). It gets dark early, around 5 PM, so plan long drives to finish before dusk.
+
+## What's open in December
+
+| Place | Usually | Notes |
+|---|---|---|
+| Tsomgo Lake, Baba Mandir | Open | Can close after heavy snow |
+| Nathula Pass | Open Wed–Sun | **Often closes for snow**; Indians only |
+| Zuluk, Kupup | Open | Snow on the hairpin bends; drive with care |
+| Lachung, Yumthang | Usually open | Very cold; Zero Point may be blocked by snow |
+| **Gurudongmar Lake** | **Frequently blocked** | Many trips cancelled; November or spring is more reliable |
+
+**Always check road and permit status the evening before** with your tour operator. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Where to see snow in December
+
+1. **Tsomgo Lake and Baba Mandir:** the easiest snow from Gangtok, as a day trip
+2. **Nathula Pass:** if it's open (Wed–Sun) and not closed for weather
+3. **Zuluk and the Silk Route:** snow-dusted hairpin bends
+4. **Lachung, Yumthang and Zero Point:** the most snow, the most cold
+
+Don't expect snow in Gangtok town.
+
+## Festivals in December
+
+- **Losoong / Namsoong:** the Sikkimese New Year and harvest festival, in December. Dates follow the lunar calendar, so check the Sikkim government calendar for exact 2026 dates. See [Losoong festival](/guide/losoong-festival).
+- **Kagyed and Chhaam mask dances:** monastery dances in early to mid December, at places such as Rumtek and Tsuklakhang Palace
+- **Christmas and New Year in Gangtok:** MG Marg is decorated and lively. Expect crowds.
+
+## Christmas and New Year tips
+
+- **Book Gangtok hotels and North Sikkim trips weeks ahead.** The holiday week is the busiest time of winter.
+- **Prefer quiet?** Base yourself in **Pelling**, with Kanchenjunga views and far fewer people.
+- **Keep a buffer day.** A snow closure on Nathula or North Sikkim is common in late December.
+
+## What to pack
+
+Layer up: thermals, a fleece and a windproof down jacket, waterproof gloves, two pairs of socks and boots with grip. See the full [December packing list](/guide/packing-december).
+
+## A 6-day December itinerary
+
+| Day | Plan |
+|---|---|
+| 1 | Arrive Bagdogra/NJP, drive to Gangtok |
+| 2 | Tsomgo Lake and Baba Mandir (snow likely late in the month) |
+| 3 | Gangtok to Lachung |
+| 4 | Yumthang Valley (and Zero Point if open), back to Gangtok or stay in Lachung |
+| 5 | Gangtok to Pelling, for Kanchenjunga views |
+| 6 | Drive back to Bagdogra/NJP |
+
+[Customise this for your dates](/chat): Himato builds the day-by-day plan with permit info.
+
+**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in January](/guide/sikkim-in-january)
+
+## FAQ
+
+**Is December a good time to visit Sikkim?**
+Yes, for clear skies, snow at the high lakes and passes, and festivals. Plan for cold, book early around Christmas and New Year, and keep a buffer day in case a road closes.
+
+**Does it snow in Gangtok in December?**
+Very rarely. For snow, go to Tsomgo Lake, Nathula, Zuluk or Lachung and Yumthang.
+
+**Is Nathula open in December?**
+It's usually open Wednesday to Sunday, but often closes after heavy snow. Check with your operator the evening before.
+
+**Can I visit Gurudongmar Lake in December?**
+Sometimes, but the road is frequently blocked by snow and many trips get cancelled. November or April to June are more reliable.
+
+**What is the temperature in Gangtok in December?**
+On average about 7°C at night and 14°C during the day.
+        `
+    },
+    {
+        id: 'sikkim-in-january',
+        title: "Sikkim in January 2027: Snowfall, Weather & Which Roads Are Open",
+        shortDescription: "Peak snow season: where to find it, what usually closes, and how to plan a January trip.",
+        description: "January is Sikkim's coldest month and best for snow, but heavy snowfall often closes Nathula, Tsomgo and North Sikkim roads.",
+        answer: "January is Sikkim's coldest month and the best for snow, at Tsomgo Lake, Zuluk, Lachung, Yumthang and Zero Point. Gangtok averages about 6–13°C and rarely gets snow itself. Heavy snowfall often closes Nathula, the road beyond Tsomgo, Zero Point and Gurudongmar for days at a time, so build buffer days into your plan and check road status daily.",
+        updated: '2026-10-30',
+        category: 'Seasonal',
+        image: '/tangu.jpeg',
+        content: `
+# Sikkim in January
+
+January is deep winter in Sikkim. It's the coldest month and the best for snow, with crisp clear days, white passes and quiet towns after the New Year rush. It's also the month when roads close most often, so it rewards flexible travellers.
+
+## Is January a good time to visit Sikkim?
+
+**Yes, if you want snow and can be flexible.**
+
+- **Best snow of the year** at Tsomgo, Zuluk, Lachung, Yumthang and Zero Point
+- **Fewer crowds** after the first week, once the New Year rush is over
+- **But:** heavy snow regularly closes high roads. In January 2025, for example, snow closed the road to Nathula beyond 10th Mile, Tsomgo and Nathula permits were halted, and Zero Point was cut off while Yumthang stayed open.
+
+## January weather in Sikkim
+
+| Place | Days | Nights | Snow? |
+|---|---|---|---|
+| **Gangtok** | About 13°C | About 6°C | Very rare |
+| **Pelling, Ravangla** | Cool, often sunny | Near freezing | Occasional on higher ground |
+| **Tsomgo Lake, Nathula** | Below freezing | Far below freezing | **Likely** |
+| **Lachung, Yumthang** | Below freezing | Far below freezing | **Likely** |
+| **Zero Point** | Severe cold | Severe cold | **Heavy; often blocked** |
+| **Gurudongmar** | −15°C to −25°C | Colder | Frozen; road usually closed |
+
+Gangtok figures are long-term averages. The higher places are much colder.
+
+## What's open in January
+
+| Place | Usually | Notes |
+|---|---|---|
+| Tsomgo Lake, Baba Mandir | Open, closes after heavy snow | The road from Gangtok to Tsomgo is often kept open when the road beyond is blocked |
+| Nathula Pass | **Often closed** | Open Wed–Sun when clear; Indians only |
+| Zuluk, Kupup | Open with care | Snow and ice on the hairpin bends |
+| Lachung, Yumthang | Usually open | Yumthang often reachable even when Zero Point isn't |
+| Zero Point | **Often blocked** | Don't build your trip around it |
+| **Gurudongmar Lake** | **Rarely runs** | Snow and black ice beyond Thangu; go in spring or November instead |
+
+Check road and permit status daily with your operator. Permit rules: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Where to see snow in January
+
+1. **Tsomgo Lake:** the easiest snow from Gangtok, and often frozen
+2. **Lachung and Yumthang Valley:** reliable deep snow
+3. **Zuluk and the Silk Route:** snow on the famous hairpin bends
+4. **Zero Point:** the most snow, if the road is open
+
+## Tips for a January trip
+
+- **Add 1–2 buffer days.** Closures can last a day or several.
+- **Plan Gangtok-based day trips first**, and move to North Sikkim once roads are confirmed open.
+- **Travel early in the day.** Roads ice over in the evening and it gets dark around 5 PM.
+- **Use a local driver** who knows winter driving. Snow chains may be needed on high roads.
+- **Pack for −10°C or colder** in the north: down jacket, thermals, waterproof gloves and boots. See the [winter packing list](/guide/packing-december).
+
+## A flexible 6-day January itinerary
+
+| Day | Plan |
+|---|---|
+| 1 | Arrive Bagdogra/NJP, drive to Gangtok |
+| 2 | Tsomgo Lake (snow), if open; otherwise Gangtok sightseeing |
+| 3 | Gangtok to Lachung, if roads are open |
+| 4 | Yumthang in snow (Zero Point if open), back towards Gangtok |
+| 5 | Buffer day, or Ravangla and Temi |
+| 6 | Drive back to Bagdogra/NJP |
+
+[Plan your January trip](/chat): Himato builds a day-by-day plan with permit info and backup options.
+
+**Other months:** [Sikkim in November](/guide/sikkim-in-november) · [Sikkim in December](/guide/sikkim-in-december)
+
+## FAQ
+
+**Is January a good time to visit Sikkim?**
+Yes, for snow and quiet towns, but heavy snowfall often closes Nathula, Zero Point and Gurudongmar. Keep buffer days.
+
+**Does it snow in Gangtok in January?**
+Very rarely in town. For snow, go to Tsomgo Lake, Lachung and Yumthang, Zuluk or Zero Point.
+
+**Is Nathula open in January?**
+It's often closed after heavy snow. When roads are clear it opens Wednesday to Sunday, for Indian citizens only.
+
+**Can I go to Gurudongmar Lake in January?**
+Usually not. Snow and black ice beyond Thangu mean tours rarely run. Go in November or April to June instead.
+
+**What is the temperature in Gangtok in January?**
+On average about 6°C at night and 13°C during the day. Lachung, Yumthang and Zero Point are well below freezing.
+        `
+    },
+    {
         id: 'cherry-blossom-sikkim',
         title: "Cherry Blossom in Sikkim 2026: When and Where to See It",
         shortDescription: "Peak bloom dates, the Cherry Festival (25–28 Nov 2026), the best spots and how to get there.",

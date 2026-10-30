@@ -33,11 +33,12 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     });
     return {
       itinerary: response.data.itinerary,
-      id: response.data.itineraryId
+      id: response.data.itineraryId,
+      preview: Boolean(response.data.preview),
     };
   } catch (error: any) {
-    // Keep the 401 status so the planner can re-prompt for login
-    if (error?.status === 401) throw error;
+    // Keep the status (429 = guest daily limit) so the planner can ask to sign in
+    if (error?.status === 401 || error?.status === 429) throw error;
     throw new Error(error.message || 'Failed to generate itinerary');
   }
 };

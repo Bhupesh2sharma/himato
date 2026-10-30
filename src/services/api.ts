@@ -47,6 +47,14 @@ export interface AuthResponse {
   };
 }
 
+/** Trip intent a traveller shares after signing up (all optional). */
+export interface TravelProfile {
+  travelMonth?: string; // "2026-12" or "not-sure"
+  groupSize?: string;   // "1", "2", "3-4", "5-8", "9+"
+  whatsapp?: string;
+  updatedAt?: string;
+}
+
 export interface GuidePost {
   _id: string;
   title: string;
@@ -200,7 +208,7 @@ class ApiClient {
     });
   }
 
-  async updateMe(data: { name?: string; businessName?: string; business?: boolean }): Promise<{ status: string; data: { user: any } }> {
+  async updateMe(data: { name?: string; businessName?: string; business?: boolean; travelProfile?: TravelProfile }): Promise<{ status: string; data: { user: any } }> {
     return this.request('/api/users/me', {
       method: 'PATCH',
       body: JSON.stringify(data),
@@ -219,11 +227,12 @@ class ApiClient {
   }
 
   // Itinerary endpoints
-  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string } }> {
+  // Signed-out visitors get a preview (first days in full, later days locked).
+  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string; preview?: boolean; previewDays?: number } }> {
     return this.request('/api/itinerary/generate', {
       method: 'POST',
       body: JSON.stringify(data),
-    }, true);
+    });
   }
 
   // Refine an itinerary with a natural-language instruction (returns full updated plan)

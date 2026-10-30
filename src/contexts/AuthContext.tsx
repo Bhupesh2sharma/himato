@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { apiClient } from '../services/api';
-import type { LoginCredentials, RegisterData, AuthResponse, SignupExtras } from '../services/api';
+import type { LoginCredentials, RegisterData, AuthResponse, SignupExtras, TravelProfile } from '../services/api';
+import { track } from '../utils/analytics';
 
 interface User {
   id: string;
@@ -15,6 +16,7 @@ interface User {
   avatar?: string;
   phoneVerified?: boolean;
   subscriptionStatus?: 'active' | 'inactive' | 'cancelled' | string;
+  travelProfile?: TravelProfile;
 }
 
 interface AuthContextType {
@@ -26,7 +28,7 @@ interface AuthContextType {
   verifyRegistration: (email: string, otp: string) => Promise<User>;
   loginWithGoogle: (credential: string, extra?: SignupExtras) => Promise<User>;
   verifyPhoneOtp: (data: { phone: string; otp: string; name?: string } & SignupExtras) => Promise<User>;
-  updateProfile: (data: { name?: string; businessName?: string; business?: boolean }) => Promise<User>;
+  updateProfile: (data: { name?: string; businessName?: string; business?: boolean; travelProfile?: TravelProfile }) => Promise<User>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 }
@@ -126,14 +128,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   const loginWithGoogle = useCallback(async (credential: string, extra: SignupExtras = {}) => {
-    return startSession(await apiClient.googleAuth(credential, extra));
+    const res = await apiClient.googleAuth(credential, extra);
+    track(res.data?.isNewUser ? 'signup_completed' : 'login_completed', { method: 'google' });
+    return startSession(res);
   }, [startSession]);
 
   const verifyPhoneOtp = useCallback(async (data: { phone: string; otp: string; name?: string } & SignupExtras) => {
-    return startSession(await apiClient.verifyOtp(data));
+    const res = await apiClient.verifyOtp(data);
+    track(res.data?.isNewUser ? 'signup_completed' : 'login_completed', { method: 'phone' });
+    return startSession(res);
   }, [startSession]);
 
-  const updateProfile = useCallback(async (data: { name?: string; businessName?: string; business?: boolean }) => {
+  const updateProfile = useCallback(async (data: { name?: string; businessName?: string; business?: boolean; travelProfile?: TravelProfile }) => {
     const res = await apiClient.updateMe(data);
     const updated = res.data.user as User;
     localStorage.setItem('user', JSON.stringify(updated));

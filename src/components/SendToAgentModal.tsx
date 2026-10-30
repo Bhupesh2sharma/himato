@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Loader2, Phone, Users, MapPin, BadgeCheck } from 'lucide-react';
 import { apiClient } from '../services/api';
+import { useAuth } from '../contexts/AuthContext';
+import { track } from '../utils/analytics';
 
 interface Agent {
     _id: string;
@@ -41,11 +43,19 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
     const [submitting, setSubmitting] = useState(false);
     const [done, setDone] = useState<number | null>(null);
     const [error, setError] = useState('');
+    const { user } = useAuth();
 
     useEffect(() => {
         if (!isOpen) return;
         setDone(null);
         setError('');
+        // Prefill from the account and the trip profile (WhatsApp first)
+        setForm((f) => ({
+            ...f,
+            name: f.name || user?.name || '',
+            phone: f.phone || user?.travelProfile?.whatsapp || user?.phoneNo || '',
+            email: f.email || user?.email || '',
+        }));
         setSelected(new Set(preselectAgentId ? [preselectAgentId] : []));
         setLoadingAgents(true);
         apiClient
@@ -78,6 +88,7 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                 itineraryData: data,
             });
             setDone(res.data.count);
+            track('lead_sent_to_agent', { agents: res.data.count });
         } catch (err: any) {
             setError(err.message || 'Could not send. Please try again.');
         } finally {

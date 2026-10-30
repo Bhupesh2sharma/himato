@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FileDown, Loader2 } from 'lucide-react';
 import type { ItineraryPdfData } from './ItineraryPdf';
+import { track } from '../utils/analytics';
 
 /**
  * Generates the branded itinerary PDF on click and downloads it. The heavy
@@ -36,6 +37,7 @@ export function DownloadItineraryButton({
             a.click();
             a.remove();
             URL.revokeObjectURL(url);
+            track('pdf_downloaded');
         } catch (e) {
             console.error('PDF generation failed', e);
             alert('Could not generate the PDF. Please try again.');

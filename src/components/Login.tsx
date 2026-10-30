@@ -30,7 +30,6 @@ export const Login = ({ onSuccess, onSwitchToRegister, embedded = false, initial
   const [showPassword, setShowPassword] = useState(false);
 
   const finish = useCallback(() => {
-    track('signup_completed');
     if (onSuccess) {
       onSuccess();
     } else {
@@ -40,7 +39,7 @@ export const Login = ({ onSuccess, onSwitchToRegister, embedded = false, initial
 
   const handleGoogle = useCallback(async (credential: string) => {
     setError('');
-    track('signup_started');
+    track('auth_started', { method: 'google' });
     setIsLoading(true);
     try {
       await loginWithGoogle(credential);
@@ -55,11 +54,12 @@ export const Login = ({ onSuccess, onSwitchToRegister, embedded = false, initial
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    track('signup_started');
+    track('auth_started', { method: 'email' });
     setIsLoading(true);
 
     try {
       await login({ email, password });
+      track('login_completed', { method: 'email' });
       finish();
     } catch (err: any) {
       setError(err.message || 'Login failed. Please check your credentials.');

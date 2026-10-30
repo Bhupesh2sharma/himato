@@ -10,6 +10,7 @@ import { apiClient } from '../services/api';
 import { chatWithSherpa } from '../services/ai';
 import { optimizedSrc } from '../data/optimizedImages';
 import { SEO } from '../components/SEO';
+import { track } from '../utils/analytics';
 import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, type GuideInput } from '../seo/meta';
 
 interface GuideTopic {
@@ -258,7 +259,10 @@ export const GuidePage = () => {
                                 </p>
 
                                 <button
-                                    onClick={() => navigate('/', { state: { prompt: `Plan a trip based on: ${topic.title}` } })}
+                                    onClick={() => {
+                                        track('guide_plan_clicked', { guide: topic.id });
+                                        navigate('/', { state: { prompt: `Plan a trip based on: ${topic.title}` } });
+                                    }}
                                     className="w-full py-4 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 group"
                                     style={{ background: '#f6f1e7', color: '#0e1116', boxShadow: '0 8px 24px -6px rgba(0,0,0,0.4)' }}
                                 >
