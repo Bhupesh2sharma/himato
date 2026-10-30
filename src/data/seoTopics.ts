@@ -4,16 +4,151 @@ export interface SeoTopic {
     title: string;
     shortDescription: string;
     description: string;
-    category: 'Itinerary' | 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
+    category: 'Destination' | 'Itinerary' | 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
     image: string;
     content: string; // Markdown content for the guide
     /** Direct 1–3 sentence answer shown as "Quick answer" and used in FAQ schema / AI answers. Falls back to `description`. */
     answer?: string;
     /** YYYY-MM-DD the guide's facts were last checked. Falls back to GUIDES_LAST_REVIEWED. */
     updated?: string;
+    /** Destination pages: adds TouristDestination schema (map position + attractions). */
+    place?: { name: string; latitude: number; longitude: number; attractions: string[] };
 }
 
 export const SEO_TOPICS: SeoTopic[] = [
+    {
+        id: 'gangtok-travel-guide',
+        title: "Gangtok Travel Guide 2026: Places to Visit, How Many Days, Best Time & Where to Stay",
+        shortDescription: "Sikkim's capital, made easy: the top sights, sightseeing taxi rates, day trips, best time and where to stay.",
+        description: "Gangtok is Sikkim's capital and the base for most trips. Two to three days covers the town, Tsomgo Lake and Rumtek.",
+        answer: "Gangtok, Sikkim's capital at about 1,650 m, is the base for most Sikkim trips. Spend 2–3 days: one for the town (MG Marg, Enchey Monastery, Do Drul Chorten, the ropeway, the Namgyal Institute of Tibetology and viewpoints like Tashi View Point and Hanuman Tok), one for Tsomgo Lake and Nathula, and one for Rumtek Monastery. It's about 4–5 hours by road from Bagdogra or NJP.",
+        updated: '2026-10-30',
+        category: 'Destination',
+        image: '/Gangtok-View.jpg',
+        place: {
+            name: 'Gangtok',
+            latitude: 27.33,
+            longitude: 88.61,
+            attractions: ['MG Marg', 'Enchey Monastery', 'Do Drul Chorten', 'Namgyal Institute of Tibetology', 'Gangtok Ropeway', 'Hanuman Tok', 'Ganesh Tok', 'Tashi View Point', 'Banjhakri Falls', 'Rumtek Monastery'],
+        },
+        content: `
+# Gangtok Travel Guide
+
+**Gangtok** is Sikkim's capital and the starting point for almost every trip: Tsomgo Lake and Nathula to the east, North Sikkim's Lachung and Lachen, and West Sikkim's Pelling. The town itself is worth a day or two, with monasteries, viewpoints over Kanchenjunga, and MG Marg, its car-free main street.
+
+> Prices and opening times on this page are approximate (October 2026) and can change. Check before you go.
+
+## Gangtok at a glance
+
+| Quick facts | |
+|---|---|
+| Altitude | about 1,650 m (5,400 ft) |
+| Nearest airport | Bagdogra, about 123 km (~4.5 hours) |
+| Nearest railway station | New Jalpaiguri (NJP), about 113 km (~4 hours) |
+| How many days | 2–3 days in Gangtok, more as a base for North Sikkim |
+| Best time | October–November (clear skies), March–May (flowers, mild weather) |
+| Permits | None for Gangtok itself (Indian citizens); foreigners need the Sikkim Restricted Area Permit |
+
+Getting there: [How to reach Gangtok](/guide/how-to-reach-gangtok), covering taxis, the helicopter and buses.
+
+## Best places to visit in Gangtok
+
+| Place | Why go | Tip |
+|---|---|---|
+| **MG Marg** | Gangtok's pedestrian-only main street: shops, cafés and evening strolls | Best in the evening; early morning is quiet and good for kids |
+| **Enchey Monastery** | One of Gangtok's main Buddhist monasteries, on a ridge above town | Combine with Ganesh Tok and Tashi View Point |
+| **Do Drul Chorten** | A large stupa built in 1945 by Trulshik Rinpoche, among the most important in Sikkim | Walk clockwise around it, past the prayer wheels |
+| **Namgyal Institute of Tibetology** | Museum of Tibetan Buddhist art, manuscripts and icons | Open roughly 10 AM–4 PM Monday to Saturday; closed Sundays, second Saturdays and public holidays |
+| **Gangtok Ropeway** | A short cable-car ride with views over the town | About ₹117 per adult (sources vary); hours depend on weather |
+| **Tashi View Point** | Classic Kanchenjunga viewpoint | Go early in the morning for clear views |
+| **Hanuman Tok** | Hilltop temple with views over the city and the Himalaya | One of the best sunrise spots |
+| **Ganesh Tok** | Tiny hilltop temple with a wide view | The viewing gallery near the parking gives most of the view without the stairs |
+| **Banjhakri Falls** | A waterfall of about 30 m in a shaman-themed park | A ramp leads almost to the base of the falls |
+| **Rumtek Monastery** | One of Sikkim's most important monasteries, outside town | About 22–24 km, roughly an hour by road |
+
+Travelling with seniors or wheelchair users? See [accessible viewpoints in Sikkim](/guide/accessible-viewpoints-sikkim). With toddlers? See [parks for toddlers in Gangtok](/guide/parks-for-toddlers).
+
+## Local sightseeing by taxi
+
+Most visitors see Gangtok on a **sightseeing taxi tour** that covers several "points" in one trip.
+
+| Tour | Typical price per car |
+|---|---|
+| Half day (4–5 points) | about ₹1,500–2,000 |
+| Full day (7–10 points) | about ₹2,500–3,500 |
+
+Tashi View Point at sunrise is often booked as a separate early-morning trip, and Rumtek is often added for a few hours more. Prices rise in peak season (April–June and October–December). Agree the list of points, the duration and the vehicle before you set off.
+
+## Day trips from Gangtok
+
+| Trip | Distance / time | Notes |
+|---|---|---|
+| **Tsomgo Lake and Baba Mandir** | about 40 km, ~2 hours each way | Permit through a tour operator |
+| **+ Nathula Pass** | about 54 km, ~3 hours | Indian citizens only, usually Wednesday to Sunday |
+| **Rumtek Monastery** | about 22–24 km, ~1 hour | Half-day trip |
+| **Temi Tea Garden** | about 50 km, ~2 hours | Best during the [cherry blossom season](/guide/cherry-blossom-sikkim) |
+| **Kupup and the Silk Route** | long day | Indian citizens only; see the [Kupup Lake day trip](/guide/kupup-lake-day-trip) |
+
+For Lachung, Yumthang, Lachen and Gurudongmar you need a 2–3 day package: see the [North Sikkim travel guide](/guide/north-sikkim-travel-guide). Permits for everything: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## How many days in Gangtok?
+
+- **2 days:** town sights on one day, Tsomgo Lake and Baba Mandir on the other.
+- **3 days:** add Rumtek Monastery, or Nathula (Wednesday to Sunday).
+- **As a base:** most 5–7 day trips start and end in Gangtok. See the [5-day](/guide/sikkim-itinerary-5-days) and [7-day](/guide/sikkim-itinerary-7-days) itineraries.
+
+## Best time to visit Gangtok
+
+| Months | What to expect |
+|---|---|
+| **October–November** | Clear skies and the best Kanchenjunga views. See [Sikkim in November](/guide/sikkim-in-november). |
+| **December–February** | Cold, dry and mostly clear; snow is very rare in town but likely at Tsomgo. See [Sikkim in December](/guide/sikkim-in-december). |
+| **March–May** | Mild weather and flowers; a busy season |
+| **June–September** | Monsoon: green and quiet, but landslides can delay drives |
+
+## Where to stay in Gangtok
+
+| Area | Good for |
+|---|---|
+| **Around MG Marg** | Walking to cafés, shops and restaurants; the most central choice |
+| **Development Area** | A quieter base close to town |
+
+| Budget | Typical price per room per night |
+|---|---|
+| Homestay or budget hotel | ₹1,000–2,500 |
+| 3-star / mid-range | ₹3,000–5,000 |
+| Premium hotel | ₹7,000 or more |
+
+Book early around Durga Puja, Diwali, Christmas and New Year. Full costs: [Sikkim trip cost](/guide/sikkim-trip-cost).
+
+## Food, cafés and getting around
+
+- **Eat:** thukpa and tingmo at Taste of Tibet on MG Marg, momos everywhere, and Sikkimese fermented dishes. See [Food in Sikkim](/guide/food-in-sikkim).
+- **Work remotely:** cafés with tested Wi-Fi and coworking-friendly hostels. See [Workation in Sikkim](/guide/workation-in-sikkim).
+- **Get around:** walk around MG Marg, take shared or reserved taxis further out, or [rent a scooter](/guide/rent-scooter-gangtok) (about ₹600 a day).
+
+## Plan your Gangtok trip
+
+[Plan your Gangtok trip with Himato](/chat?prompt=3%20days%20in%20Gangtok%3A%20local%20sightseeing%2C%20Tsomgo%20Lake%20and%20Baba%20Mandir%2C%20and%20Rumtek%20Monastery): a day-by-day plan with drive times and permit info, and free quotes from local agencies if you want them booked.
+
+## FAQ
+
+**How many days are enough for Gangtok?**
+Two to three days: one for local sights, one for Tsomgo Lake (and Nathula, Wednesday to Sunday), and optionally one for Rumtek Monastery.
+
+**What are the best places to visit in Gangtok?**
+MG Marg, Enchey Monastery, Do Drul Chorten, the Namgyal Institute of Tibetology, the ropeway, Tashi View Point, Hanuman Tok, Ganesh Tok, Banjhakri Falls and, just outside town, Rumtek Monastery.
+
+**How much is local sightseeing in Gangtok by taxi?**
+About ₹1,500–2,000 per car for a half-day tour of 4–5 points, and ₹2,500–3,500 for a full day of 7–10 points. Prices rise in peak season.
+
+**Do I need a permit to visit Gangtok?**
+Not if you're an Indian citizen. Foreign nationals need the Sikkim Restricted Area Permit, applied for online. Tsomgo Lake and Nathula need separate permits through a tour operator.
+
+**What is the best time to visit Gangtok?**
+October to November for clear skies and mountain views, or March to May for mild weather and flowers.
+        `
+    },
     {
         id: 'sikkim-itinerary-5-days',
         title: "5-Day Sikkim Itinerary: Gangtok, Tsomgo Lake & Lachung–Yumthang (2026)",
@@ -40,7 +175,7 @@ Five days is the most popular length for a first Sikkim trip. It covers **Gangto
 
 ## Day 1: Arrive in Gangtok
 
-Fly into **Bagdogra** (about 123 km, ~4.5 hours) or arrive by train at **NJP** (about 113 km, ~4 hours) and drive up to Gangtok. Spend the evening on **MG Marg**, the walking street in the centre of town.
+Fly into **Bagdogra** (about 123 km, ~4.5 hours) or arrive by train at **NJP** (about 113 km, ~4 hours) and drive up to Gangtok. Spend the evening on **MG Marg**, the walking street in the centre of town. What else to see in town: [Gangtok travel guide](/guide/gangtok-travel-guide).
 
 Other ways to arrive, including the 35-minute helicopter: [How to reach Gangtok](/guide/how-to-reach-gangtok).
 
@@ -140,7 +275,7 @@ A week lets you see the best of Sikkim: **Gangtok**, **Tsomgo Lake**, both valle
 
 ## Day 1: Arrive in Gangtok
 
-Drive from **Bagdogra** (about 123 km, ~4.5 hours) or **NJP** (about 113 km, ~4 hours). Evening on **MG Marg**. Hand your tour operator your ID and photos for the Tsomgo and North Sikkim permits (Voter ID, driving licence or passport; not Aadhaar).
+Drive from **Bagdogra** (about 123 km, ~4.5 hours) or **NJP** (about 113 km, ~4 hours). Evening on **MG Marg**. See the [Gangtok travel guide](/guide/gangtok-travel-guide) for what to do in town. Hand your tour operator your ID and photos for the Tsomgo and North Sikkim permits (Voter ID, driving licence or passport; not Aadhaar).
 
 ## Day 2: Tsomgo Lake, Baba Mandir and Nathula
 
@@ -1073,6 +1208,7 @@ Book through STDC and reconfirm the day before you fly.
 
 ## Plan the rest of your trip
 
+- [Gangtok travel guide](/guide/gangtok-travel-guide): what to see, how many days and where to stay
 - [5-day Sikkim itinerary](/guide/sikkim-itinerary-5-days) · [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days)
 - [Sikkim trip cost](/guide/sikkim-trip-cost)
 - [Plan your trip with Himato](/chat): a day-by-day plan with drive times and permit info

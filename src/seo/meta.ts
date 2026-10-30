@@ -55,6 +55,7 @@ export interface GuideInput {
   content: string;
   createdAt?: string;
   updatedAt?: string;
+  place?: { name: string; latitude: number; longitude: number; attractions: readonly string[] };
 }
 
 export const absUrl = (pathOrUrl: string) =>
@@ -72,6 +73,7 @@ export const topicToGuide = (t: SeoTopic): GuideInput => ({
   image: t.image,
   content: t.content,
   updatedAt: t.updated,
+  place: t.place,
 });
 
 export const STATIC_GUIDES: GuideInput[] = SEO_TOPICS.map(topicToGuide);
@@ -170,6 +172,19 @@ export function guideMeta(g: GuideInput): PageMeta {
       { name: g.title, path },
     ]),
   ];
+
+  if (g.place) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'TouristDestination',
+      name: g.place.name,
+      description: answer,
+      url,
+      geo: { '@type': 'GeoCoordinates', latitude: g.place.latitude, longitude: g.place.longitude },
+      containedInPlace: { '@type': 'State', name: 'Sikkim', containedInPlace: { '@type': 'Country', name: 'India' } },
+      includesAttraction: g.place.attractions.map((name) => ({ '@type': 'TouristAttraction', name })),
+    });
+  }
 
   // FAQ markup only for Q&A that is visible on the page: a question-style
   // title (answered by the "Quick answer" box) plus the guide's FAQ section.

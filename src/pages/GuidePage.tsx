@@ -23,6 +23,7 @@ interface GuideTopic {
     content: string;
     answer?: string;
     updated?: string;
+    place?: GuideInput['place'];
     createdAt?: string;
     updatedAt?: string;
 }
@@ -52,6 +53,7 @@ const toGuideInput = (t: GuideTopic): GuideInput => ({
     content: t.content,
     createdAt: t.createdAt,
     updatedAt: t.updatedAt ?? t.updated,
+    place: t.place,
 });
 
 export const GuidePage = () => {
