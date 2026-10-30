@@ -1,9 +1,19 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Loader2, CalendarDays, Users, Phone } from 'lucide-react';
+import { X, Loader2, CalendarDays, Users, Phone, MapPin, Wallet } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { track } from '../utils/analytics';
 import { markTripProfileSkipped } from '../utils/tripProfile';
+
+// Per-person budget tiers for ~5 days, matching the Sikkim trip cost guide.
+type Budget = 'budget' | 'mid' | 'premium';
+const BUDGETS: { value: Budget; label: string; hint: string }[] = [
+    { value: 'budget', label: 'Budget', hint: '₹10–15k' },
+    { value: 'mid', label: 'Mid-range', hint: '₹18–30k' },
+    { value: 'premium', label: 'Premium', hint: '₹35k+' },
+];
+
+const CITY_SUGGESTIONS = ['Kolkata', 'Delhi', 'Mumbai', 'Bengaluru', 'Siliguri', 'Guwahati', 'Chennai', 'Hyderabad', 'Pune', 'Ahmedabad'];
 
 const GROUP_SIZES = [
     { value: '1', label: 'Just me' },
@@ -44,6 +54,8 @@ export function TripProfileModal({ isOpen, onClose }: Props) {
     const [travelMonth, setTravelMonth] = useState('');
     const [groupSize, setGroupSize] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
+    const [startingCity, setStartingCity] = useState('');
+    const [budget, setBudget] = useState<Budget | ''>('');
     const [saving, setSaving] = useState(false);
     const [error, setError] = useState('');
 
@@ -58,8 +70,22 @@ export function TripProfileModal({ isOpen, onClose }: Props) {
         setSaving(true);
         setError('');
         try {
-            await updateProfile({ travelProfile: { travelMonth, groupSize, whatsapp: whatsapp.trim() || undefined } });
-            track('trip_profile_completed', { travel_month: travelMonth, group_size: groupSize, has_whatsapp: Boolean(whatsapp.trim()) });
+            await updateProfile({
+                travelProfile: {
+                    travelMonth,
+                    groupSize,
+                    whatsapp: whatsapp.trim() || undefined,
+                    startingCity: startingCity.trim() || undefined,
+                    budget: budget || undefined,
+                },
+            });
+            track('trip_profile_completed', {
+                travel_month: travelMonth,
+                group_size: groupSize,
+                has_whatsapp: Boolean(whatsapp.trim()),
+                starting_city: startingCity.trim() || undefined,
+                budget: budget || undefined,
+            });
             onClose();
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Could not save. Please try again.');
@@ -91,7 +117,7 @@ export function TripProfileModal({ isOpen, onClose }: Props) {
                             <div>
                                 <p className="text-[10px] uppercase tracking-[0.18em] text-ai-accent font-bold">Your plan is unlocked</p>
                                 <h3 id="trip-profile-title" className="text-lg font-bold text-ai-text">Tell us about your trip</h3>
-                                <p className="text-xs text-ai-muted mt-0.5">Two quick taps, so we can tailor tips and agent quotes to you.</p>
+                                <p className="text-xs text-ai-muted mt-0.5">A few quick taps, so we can tailor tips and agent quotes to you.</p>
                             </div>
                             <button onClick={skip} className="text-ai-muted hover:text-ai-text" aria-label="Skip">
                                 <X className="w-5 h-5" />
@@ -124,6 +150,39 @@ export function TripProfileModal({ isOpen, onClose }: Props) {
                                         </button>
                                     ))}
                                 </div>
+                            </div>
+
+                            <label className="block">
+                                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ai-muted mb-2">
+                                    <MapPin className="w-4 h-4 text-ai-accent" />Travelling from <span className="normal-case tracking-normal font-medium">(optional)</span>
+                                </span>
+                                <input
+                                    list="trip-profile-cities"
+                                    value={startingCity}
+                                    onChange={(e) => setStartingCity(e.target.value)}
+                                    placeholder="e.g. Kolkata"
+                                    autoComplete="address-level2"
+                                    className="w-full bg-white border border-black/10 rounded-xl px-4 py-2.5 text-sm text-ai-text placeholder:text-ai-muted/60 focus:outline-none focus:border-ai-accent"
+                                />
+                                <datalist id="trip-profile-cities">
+                                    {CITY_SUGGESTIONS.map((c) => <option key={c} value={c} />)}
+                                </datalist>
+                            </label>
+
+                            <div>
+                                <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ai-muted mb-2">
+                                    <Wallet className="w-4 h-4 text-ai-accent" />Budget per person <span className="normal-case tracking-normal font-medium">(optional)</span>
+                                </span>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {BUDGETS.map((b) => (
+                                        <button key={b.value} type="button" onClick={() => setBudget(budget === b.value ? '' : b.value)} aria-pressed={budget === b.value}
+                                            className={`${chip(budget === b.value)} flex flex-col items-center leading-tight`}>
+                                            <span>{b.label}</span>
+                                            <span className={`text-[11px] font-normal ${budget === b.value ? 'text-white/80' : 'text-ai-muted'}`}>{b.hint}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                                <span className="block text-[11px] text-ai-muted mt-1.5">Roughly, for a 5-day trip. Helps agents quote the right hotels.</span>
                             </div>
 
                             <label className="block">

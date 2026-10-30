@@ -52,6 +52,8 @@ export interface TravelProfile {
   travelMonth?: string; // "2026-12" or "not-sure"
   groupSize?: string;   // "1", "2", "3-4", "5-8", "9+"
   whatsapp?: string;
+  startingCity?: string;
+  budget?: 'budget' | 'mid' | 'premium';
   updatedAt?: string;
 }
 
