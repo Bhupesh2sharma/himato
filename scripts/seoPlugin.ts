@@ -19,6 +19,7 @@ import {
   relatedGuides,
   SITE_URL,
   STATIC_GUIDES,
+  GUIDE_REDIRECTS,
   staticPageMeta,
   type GuideInput,
   type PageMeta,
@@ -350,6 +351,23 @@ ${g.content.trim().replace(/^# .*\n+/, '')}
   .join('\n')}`;
 }
 
+// Merged guides must 301 in vercel.json exactly as GUIDE_REDIRECTS says, and
+// point at guides that exist — otherwise old URLs (with Google history) break.
+async function checkRedirects(root: string, guides: GuideInput[]) {
+  const vercel = JSON.parse(await fs.readFile(path.join(root, 'vercel.json'), 'utf8')) as {
+    redirects?: { source: string; destination: string; permanent?: boolean }[];
+  };
+  const actual = new Map((vercel.redirects ?? []).map((r) => [r.source, `${r.destination}|${r.permanent}`]));
+  const slugs = new Set(guides.map((g) => g.slug));
+  const problems: string[] = [];
+  for (const [from, to] of Object.entries(GUIDE_REDIRECTS)) {
+    if (actual.get(`/guide/${from}`) !== `/guide/${to}|true`) problems.push(`vercel.json needs a permanent redirect /guide/${from} → /guide/${to}`);
+    if (!slugs.has(to)) problems.push(`redirect target /guide/${to} is not a guide`);
+    if (slugs.has(from)) problems.push(`/guide/${from} still exists but is redirected`);
+  }
+  if (problems.length) throw new Error(`[seo] Guide redirects out of sync:\n  ${problems.join('\n  ')}`);
+}
+
 // ── Plugin ───────────────────────────────────────────────────────────────────
 
 export function seoPrerender(options: { apiBaseUrl?: string } = {}): Plugin {
@@ -384,6 +402,7 @@ export function seoPrerender(options: { apiBaseUrl?: string } = {}): Plugin {
       };
 
       const guides = await loadGuides(options.apiBaseUrl, log);
+      await checkRedirects(config.root, guides);
 
       for (const p of INDEXABLE_STATIC_PATHS) {
         await write(p, page(renderHead(staticPageMeta(p, guides)!), renderStaticBody(p, guides)));

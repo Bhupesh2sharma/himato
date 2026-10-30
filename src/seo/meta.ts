@@ -75,6 +75,22 @@ export const topicToGuide = (t: SeoTopic): GuideInput => ({
 
 export const STATIC_GUIDES: GuideInput[] = SEO_TOPICS.map(topicToGuide);
 
+/**
+ * Guides merged into hubs: old slug → new slug. Served as 301s by vercel.json
+ * (the build fails if the two lists differ) and followed in-app by GuidePage.
+ */
+export const GUIDE_REDIRECTS: Record<string, string> = {
+  'gangtok-work-cafes': 'workation-in-sikkim',
+  'gangtok-coworking-hostels': 'workation-in-sikkim',
+  'kaluk-workation-homestays': 'workation-in-sikkim',
+  'pelling-internet-speed': 'workation-in-sikkim',
+  'vegetarian-north-sikkim': 'food-in-sikkim',
+  'vegan-gluten-free-gangtok': 'food-in-sikkim',
+  'best-thukpa-gangtok': 'food-in-sikkim',
+  'gundruk-sinki-guide': 'food-in-sikkim',
+  'best-bakeries-gangtok': 'food-in-sikkim',
+};
+
 /** The short, direct answer shown at the top of a guide (and used in FAQ schema). */
 export const guideAnswer = (g: GuideInput) => (g.answer || g.description || g.shortDescription).trim();
 

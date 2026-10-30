@@ -9,5 +9,52 @@
             "source": "/(.*)",
             "destination": "/app-shell"
         }
+    ],
+    "redirects": [
+        {
+            "source": "/guide/gangtok-work-cafes",
+            "destination": "/guide/workation-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/gangtok-coworking-hostels",
+            "destination": "/guide/workation-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/kaluk-workation-homestays",
+            "destination": "/guide/workation-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/pelling-internet-speed",
+            "destination": "/guide/workation-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/vegetarian-north-sikkim",
+            "destination": "/guide/food-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/vegan-gluten-free-gangtok",
+            "destination": "/guide/food-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/best-thukpa-gangtok",
+            "destination": "/guide/food-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/gundruk-sinki-guide",
+            "destination": "/guide/food-in-sikkim",
+            "permanent": true
+        },
+        {
+            "source": "/guide/best-bakeries-gangtok",
+            "destination": "/guide/food-in-sikkim",
+            "permanent": true
+        }
     ]
 }

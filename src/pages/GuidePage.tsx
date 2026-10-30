@@ -11,7 +11,7 @@ import { chatWithSherpa } from '../services/ai';
 import { optimizedSrc } from '../data/optimizedImages';
 import { SEO } from '../components/SEO';
 import { track } from '../utils/analytics';
-import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, type GuideInput } from '../seo/meta';
+import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, GUIDE_REDIRECTS, type GuideInput } from '../seo/meta';
 
 interface GuideTopic {
     id: string;
@@ -81,6 +81,11 @@ export const GuidePage = () => {
 
     useEffect(() => {
         if (!slug) return;
+        // Merged guides: follow the redirect in-app (vercel.json 301s full loads)
+        if (GUIDE_REDIRECTS[slug]) {
+            navigate(`/guide/${GUIDE_REDIRECTS[slug]}`, { replace: true });
+            return;
+        }
 
         // Try API first, fall back to static data
         apiClient.getGuideBySlug(slug)

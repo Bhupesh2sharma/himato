@@ -602,40 +602,6 @@ The complex is huge. Follow this anti-clockwise route to save energy.
 
     // --- Category 3: "Workation & Modern Travel" ---
     {
-        id: 'gangtok-work-cafes',
-        title: "Cafes in Gangtok with the best Wi-Fi and power backups",
-        shortDescription: "Digital Nomad's survival guide.",
-        description: "Where to zoom call without fear. Tested speeds at The Local Cafe, Rachna, and more.",
-        answer: "The best cafés for working in Gangtok are The Local Cafe on MG Marg (about 80 Mbps Wi-Fi, plenty of sockets, quiet and popular with local freelancers), Rachna Books & Cafe (about 40 Mbps, cosy, good for creative work) and Baker's Cafe.",
-        category: 'Workation',
-        image: '/gangtok-bnnr.jpg',
-        content: `
-# Best Cafes in Gangtok for Digital Nomads
-
-Finding a reliable workspace in the mountains can be tricky. We've tested the Wi-Fi speeds, coffee quality, and power socket availability in Gangtok to bring you this list.
-
-## 1. The Local Cafe, MG Marg
-**Wi-Fi Speed:** 80 Mbps  
-**Power Sockets:** Plenty  
-**Vibe:** Quiet, focused
-
-Located right on MG Marg, this cafe is a favorite among local freelancers. The coffee is sourced from local estatest.
-
-## 2. Rachna Books & Cafe
-**Wi-Fi Speed:** 40 Mbps  
-**Power Sockets:** Limited  
-**Vibe:** Intellectual, cozy
-
-More than just a cafe, it's a cultural hub. Great for creative work like writing or designing.
-
-## 3. Baker's Cafe
-**Wi-Fi Speed:** 30 Mbps  
-**View:** Panoramic range view  
-
-Come here for the view, stay for the pastries. Good for checking emails and light work.
-        `
-    },
-    {
         id: 'gangtok-rooftop-cafes',
         title: "Top 'Insta-worthy' rooftop cafes in Gangtok with Kanchenjunga views",
         shortDescription: "Coffee with a view.",
@@ -653,49 +619,163 @@ Traditional decor, brass plates, and a killer view of the mesmerizing peaks.
 Famous for its pizzas and the open terrace that faces the Kanchenjunga range directly. Arrive at 4 PM for the golden hour light.
         `
     },
+
+    // --- Category 4: "Family & Senior Citizen Friendly" ---
     {
-        id: 'kaluk-workation-homestays',
-        title: "Best 'Work from Mountains' homestays in Kaluk with stable 4G",
-        shortDescription: "Remote work with a view.",
-        description: "Kaluk offers 180-degree mountain views and surprisingly good Jio/Airtel 4G connectivity.",
-        answer: "Kaluk in West Sikkim has 180-degree mountain views and surprisingly good 4G: about 20 Mbps on Airtel and 30 Mbps or more on Jio in our tests. Choose a homestay with separate cottages and inverter power backup, which matters during storms.",
-        category: 'Workation',
-        image: '/Pelling_Sky_walk.jpg',
-        content: `
-# Kaluk: The Quiet Workstation
-
-If Gangtok is too noisy, head to Kaluk in West Sikkim.
-
-## Connectivity
-We tested Airtel 4G carrying 20Mbps+ speeds. Jio is faster (30Mbps+).
-
-## Recommended Stay
-**Ghonday Village Resort:** Offers separate cottages where you can set up a desk by the window. They have power backup (inverter), which is crucial during storms.
-        `
-    },
-    {
-        id: 'gangtok-coworking-hostels',
-        title: "Top 5 coworking-friendly hostels in Gangtok for solo travelers",
-        shortDescription: "Budget-friendly work spots.",
-        description: "Where to meet other nomads: Zostel, Tagalong, and hidden backpacker gems.",
-        answer: "The best hostels for remote work in Gangtok are Zostel Gangtok (fast Wi-Fi, a lively common room and a valley-view terrace), Tagalong Backpackers in the quieter Development Area (with a quiet zone for calls) and Mochilero Ostrich (a budget pick with great views, a short climb from the road).",
+        id: 'workation-in-sikkim',
+        title: "Workation in Sikkim: Best Cafés, Hostels & Internet in Gangtok, Pelling and Kaluk",
+        shortDescription: "Where to work remotely in Sikkim: tested Wi-Fi cafés, coworking-friendly hostels and 4G speeds in Pelling and Kaluk.",
+        description: "Gangtok has the best cafés and hostels for remote work; Pelling and Kaluk are quieter with good 4G.",
+        answer: "For a workation in Sikkim, base yourself in Gangtok for cafés such as The Local Cafe on MG Marg (about 80 Mbps Wi-Fi) and coworking-friendly hostels such as Zostel Gangtok, or go quieter in Pelling or Kaluk, where Jio 4G gives about 20–30 Mbps. Carry a small UPS, since power cuts happen during rain.",
+        updated: '2026-10-30',
         category: 'Workation',
         image: '/gangtok-bnnr.jpg',
         content: `
-# Coworking & Community
+# Workation in Sikkim
 
-## 1. Zostel Gangtok
-The common room is legendary. Fast Wi-Fi, bean bags, and a terrace that looks over the valley.
+Sikkim works well for remote work if you pick the right base. **Gangtok** has the most reliable cafés and the social hostels; **Pelling** and **Kaluk** in West Sikkim trade some convenience for quiet and big mountain views.
 
-## 2. Tagalong Backpackers
-Located in Development Area. quieter than MG Marg. They have a dedicated "quiet zone" for calls.
+## Where to base yourself
 
-## 3. Mochilero Ostrich
-Great for budget travelers. It's a bit of a climb from the main road, but the views and community vibe make up for it.
+| Base | Best for | Connectivity |
+|---|---|---|
+| **Gangtok** | Cafés, hostels, community, everything within reach | Café Wi-Fi up to about 80 Mbps |
+| **Pelling** | Kanchenjunga views, quieter stays | Jio 4G about 20–30 Mbps; fibre in some premium hotels |
+| **Kaluk** | Real quiet, 180-degree mountain views | Airtel 4G 20 Mbps+, Jio 30 Mbps+ |
+
+## Cafés to work from in Gangtok
+
+| Café | Wi-Fi | Power sockets | Good for |
+|---|---|---|---|
+| **The Local Cafe**, MG Marg | about 80 Mbps | Plenty | Quiet, focused work; popular with local freelancers |
+| **Rachna Books & Cafe** | about 40 Mbps | Limited | Writing and creative work in a cosy cultural space |
+| **Baker's Cafe** | about 30 Mbps | — | Email and light work with a panoramic range view and pastries |
+
+## Coworking-friendly hostels in Gangtok
+
+- **Zostel Gangtok:** a legendary common room with fast Wi-Fi, bean bags and a terrace over the valley.
+- **Tagalong Backpackers:** in the Development Area, quieter than MG Marg, with a dedicated quiet zone for calls.
+- **Mochilero Ostrich:** a budget pick, a short climb from the main road, with great views and a good community.
+
+## Pelling
+
+Pelling is no longer off the grid.
+
+- **Jio 4G** has the strongest signal, with a consistent 20–30 Mbps that's good for video calls.
+- **Airtel 4G** covers the town but can be patchy indoors.
+- **Broadband:** many premium hotels, such as Elgin and Chumbi Mountain Retreat, now have fibre connections.
+
+## Kaluk
+
+If Gangtok is too noisy, head to **Kaluk** in West Sikkim. In our tests Airtel 4G gave 20 Mbps or more, and Jio 30 Mbps or more. **Ghonday Village Resort** has separate cottages where you can set up a desk by the window, with inverter power backup, which matters during storms.
+
+## Tips
+
+- **Carry a small UPS** for your router or laptop: power cuts happen during rain.
+- **Pick stays with power backup** (an inverter or generator).
+- **Have both Jio and Airtel** if you can: coverage varies from place to place.
+- **North Sikkim is not for working:** connectivity is unreliable, and there are practically no ATMs in Lachen and Lachung. See [ATMs in Lachen and Lachung](/guide/atm-lachen-lachung).
+
+[Plan your workation with Himato](/chat?prompt=Workation%20in%20Sikkim%20for%202%20weeks%3A%20Gangtok%20and%20Pelling%20with%20reliable%20internet%2C%20work%20days%20and%20weekend%20sightseeing): a day-by-day plan that fits work days around sightseeing.
+
+## FAQ
+
+**Which cafés in Gangtok have the best Wi-Fi?**
+The Local Cafe on MG Marg (about 80 Mbps, plenty of sockets) is the best for focused work. Rachna Books & Cafe has about 40 Mbps, and Baker's Cafe about 30 Mbps with a great view.
+
+**Is the internet good enough for video calls in Pelling?**
+Yes, on Jio 4G, which gives a consistent 20–30 Mbps. Airtel can be patchy indoors, and some premium hotels have fibre broadband.
+
+**What is the best place in Sikkim for a quiet workation?**
+Kaluk in West Sikkim, with 4G speeds of 20–30 Mbps or more and homestays with power backup, or Pelling for Kanchenjunga views.
+
+**Are there coworking spaces in Gangtok?**
+Hostels such as Zostel Gangtok, Tagalong Backpackers and Mochilero Ostrich work as coworking spaces, with fast Wi-Fi, quiet zones and common rooms.
         `
     },
+    {
+        id: 'food-in-sikkim',
+        title: "Food in Sikkim: What to Eat & Where in Gangtok (Thukpa, Tingmo, Gundruk, Veg & Vegan)",
+        shortDescription: "Sikkim's must-try dishes and where to eat them in Gangtok, plus tips for vegetarians, vegans and gluten-free diets.",
+        description: "Must-try Sikkimese food: thukpa, thenthuk, tingmo and fermented gundruk, sinki and kinema. Vegetarians and vegans are well served.",
+        answer: "Must-try Sikkimese food includes thukpa and thenthuk (noodle soups), tingmo (steamed Tibetan bread) and the fermented gundruk, sinki and kinema. In Gangtok, try Taste of Tibet on MG Marg for thukpa and tingmo. Vegetarians can rely on dal-bhat everywhere, and gundruk and kinema are naturally vegan.",
+        updated: '2026-10-30',
+        category: 'Food',
+        image: '/gangtok-bnnr.jpg',
+        content: `
+# Food in Sikkim
 
-    // --- Category 4: "Family & Senior Citizen Friendly" ---
+Sikkimese food is built for the cold: hot noodle soups, soft steamed breads and sour fermented greens. Here's what to order, and where to find it in Gangtok.
+
+## Dishes to try
+
+| Dish | What it is |
+|---|---|
+| **Thukpa** | Hot noodle soup; the mixed version (beef, chicken and pork) is a meal in itself |
+| **Thenthuk** | Soup with hand-pulled flat noodles |
+| **Tingmo** | Layered steamed Tibetan bun; it should be cloud-soft |
+| **Gundruk** | Dried, fermented mustard leaves; sour and earthy |
+| **Sinki** | Fermented radish root, with a similar sour taste |
+| **Kinema** | Fermented soybeans: sticky, pungent and high in protein |
+| **Dal-bhat** | Lentil soup and rice, the everyday staple |
+
+## Where to eat in Gangtok
+
+**Thukpa and noodle soups**
+
+- **Taste of Tibet, MG Marg:** the legendary spot. The mixed thukpa has a rich, spicy broth.
+- **Shuffle Momos:** known for momos, but the thenthuk is the hidden star.
+- **Stalls on the roof of Lal Bazaar:** the cheap, spicy, greasy version that warms you up instantly.
+
+**Tingmo**
+
+- **Taste of Tibet:** huge, hot and slightly sweet, perfect with chilli chicken.
+- **Dragon Wok:** fried tingmo, crispy outside and soft inside.
+
+**Desserts**
+
+- **Loafing Around** and **Baker's Cafe** are the go-to places for cinnamon rolls and doughnuts.
+
+## Fermented foods: gundruk and sinki
+
+If it smells strong, it tastes good. Order **gundruk ko jhol** (gundruk soup) with rice: it's a probiotic dish that's good for your gut at altitude.
+
+## Vegetarian in North Sikkim
+
+Locals love meat, but vegetarian food is always available.
+
+- **Dal-bhat** (lentils and rice) is always vegetarian.
+- **Sabji** is usually potato, cauliflower or squash.
+- **Ask whether the "veg soup" uses chicken stock:** "pure veg" isn't always understood.
+- **Pack** instant veg noodles, dry fruits and biscuits. Remote homestays may only have eggs as a protein source.
+
+## Vegan and gluten-free in Gangtok
+
+- **Gundruk** soup is fully vegan; ask for no butter.
+- **Kinema** (fermented soybeans) is vegan and protein-packed.
+- **Mu Kimchi**, a Korean place on MG Marg, serves good vegan bibimbap.
+- **Baker's Cafe** offers gluten-free options on request.
+
+Want a drink with dinner? See [authentic Sikkimese chang (millet beer)](/guide/authentic-chang-gangtok).
+
+## FAQ
+
+**What is the famous food of Sikkim?**
+Thukpa and thenthuk (noodle soups), momos, tingmo (steamed bread) and fermented foods such as gundruk, sinki and kinema.
+
+**Where can I eat the best thukpa in Gangtok?**
+Taste of Tibet on MG Marg for the classic mixed thukpa, Shuffle Momos for thenthuk, or the stalls on the roof of Lal Bazaar for a cheap, spicy bowl.
+
+**Is it easy to find vegetarian food in North Sikkim?**
+Yes. Dal-bhat and vegetable sabji are always available. Ask whether soups use chicken stock, and pack snacks, since remote homestays may only offer eggs as protein.
+
+**Is Sikkim vegan-friendly?**
+Surprisingly, yes. Gundruk (ask for no butter) and kinema are naturally vegan, and Mu Kimchi on MG Marg serves vegan bibimbap.
+
+**Where can I find gluten-free food in Gangtok?**
+Baker's Cafe offers gluten-free options on request.
+        `
+    },
     {
         id: 'senior-citizen-itinerary',
         title: "5-day Sikkim itinerary for senior citizens with minimal walking",
@@ -1328,27 +1408,6 @@ Stronger currents in monsoon, but often calmer in winter. Better for birdwatchin
 
     // --- Category 8: "Food & Nightlife" ---
     {
-        id: 'best-thukpa-gangtok',
-        title: "Where to eat the best Sikkimese 'Thukpa' in Gangtok (Local favorites)",
-        shortDescription: "Slurping down comfort bowls.",
-        description: "Skip the tourist traps. Here is where the locals eat hot noodle soup.",
-        answer: "For the best thukpa in Gangtok, go to Taste of Tibet on MG Marg for its rich, spicy mixed thukpa, Shuffle Momos for hand-pulled thenthuk, or the cheap, spicy stalls near Lal Bazaar.",
-        category: 'Food',
-        image: '/gangtok-bnnr.jpg',
-        content: `
-# The Hunt for Authentic Thukpa
-
-## 1. Taste of Tibet, MG Marg
-The legendary spot. Their **Mixed Thukpa** (beef + chicken + pork) is a meal in itself. Broth is rich and spicy.
-
-## 2. Shuffle Momos
-Known for momos, but their **Thenthuk** (hand-pulled flat noodle soup) is the real hidden star.
-
-## 3. Local stalls near Lal Bazaar
-If you want the cheap, spicy, greasy version that warms you instantly, head to the small stalls on the roof of Lal Bazaar.
-        `
-    },
-    {
         id: 'cafe-live-loud',
         title: "The 'Cafe Live & Loud' guide: When to go for the best local bands",
         shortDescription: "Gangtok after dark.",
@@ -1934,27 +1993,6 @@ Driving a scooter in Gangtok gives you freedom from taxi haggling.
         `
     },
     {
-        id: 'pelling-internet-speed',
-        title: "High-speed internet availability in Pelling for Zoom calls",
-        shortDescription: "Working from West Sikkim.",
-        description: "Which networks work in Pelling? Airtel vs Jio speed tests.",
-        answer: "Yes. Jio 4G has the strongest signal in Pelling, with a consistent 20–30 Mbps that's good for video calls; Airtel covers the town but can be patchy indoors. Some premium hotels have fibre broadband, and a small UPS helps during power cuts in the rain.",
-        category: 'Workation',
-        image: '/Pelling_Sky_walk.jpg',
-        content: `
-# Pelling Connectivity Report
-
-Pelling is no longer off the grid.
-
-## The Stats
-*   **Jio 4G:** Strongest signal. Consistent 20-30 Mbps download speeds. Good for video calls.
-*   **Airtel 4G:** Decent coverage but spotty indoors. 
-*   **Broadband:** Many premium hotels (Elgin, Chumbi Mountain Retreat) now have optical fiber connections.
-
-**Tip:** Carry a small UPS for your router/laptop as power cuts can happen during rain.
-        `
-    },
-    {
         id: 'safest-cabs-gangtok',
         title: "Safest private cab services in Gangtok for a family of 6",
         shortDescription: "Reliable wheels for families.",
@@ -1968,8 +2006,9 @@ Pelling is no longer off the grid.
 For a family of 6, you need an **Innova** or **Xylo**. A small car won't fit you.
 
 ## Booking Tips
-*   **Pre-paid Counters:** Use the stand at Bagdogra or Pakyong. They track drivers.
-*   **Tour Operators:** Booking a full-trip vehicle from a registered agency (like Himato!) is safer than picking random taxis off the street daily. We vet our drivers for alcohol and behaviour.
+*   **Pre-paid counter:** Use the prepaid taxi stand at Bagdogra airport. They track their drivers.
+*   **Tour operators:** Booking one vehicle for the whole trip from a registered Sikkim tour operator is safer than picking random taxis off the street each day. Ask for the driver's name and number before your trip.
+*   **Get quotes:** [Plan your trip with Himato](/chat) and request free quotes; our team connects you with registered local agencies.
         `
     },
     {
@@ -2011,28 +2050,6 @@ Located above the Flower Exhibition Centre. It's a flat, paved stretch with no t
 
 ## 2. M.G. Marg
 The entire road is pedestrian-only. Early mornings (before 10 AM) are perfect for kids to run around before the shoppers arrive.
-        `
-    },
-    {
-        id: 'vegetarian-north-sikkim',
-        title: "How to plan a vegetarian-only trip through North Sikkim",
-        shortDescription: "Surviving without meat.",
-        description: "North Sikkim food is heavy on pork/chicken. What should vegetarians pack and order?",
-        answer: "Vegetarian food is always available in North Sikkim: dal-bhat (lentils and rice) and simple vegetable sabji. Ask whether 'veg soup' uses chicken stock, pack instant veg noodles, dry fruits and biscuits, and expect remote homestays to offer eggs as the only protein.",
-        category: 'Food',
-        image: '/tangu.jpeg',
-        content: `
-# Being Veg in the North
-
-While locals love meat, vegetarian food is always available.
-
-## The Menu
-*   **Dal-Bhat:** The staple lentil soup and rice is always veg.
-*   **Sabji:** Usually potato, cauliflower, or squash.
-*   **Warning:** Ask if the "veg soup" uses chicken stock. Sometimes the concept of 'pure veg' is lost.
-
-## Pack This
-Instant noodles (Veg), dry fruits, and biscuits. Remote homestays might only have eggs as a protein source.
         `
     },
     {
@@ -2536,70 +2553,6 @@ You cannot camp *anywhere*. The Forest Department has designated spots near the 
 *   **Permit:** You must declare "Camping" on your permit application in Gangtok.
 *   **Gear:** Bring -10°C sleeping bags. The ground freezes at night.
 *   **Fire:** Campfires are strictly regulated to prevent forest fires. Use dead wood only.
-        `
-    },
-    {
-        id: 'vegan-gluten-free-gangtok',
-        title: "Vegan and Gluten-free dining options in Gangtok",
-        shortDescription: "Dietary inclusive spots.",
-        description: "Local fermented foods are naturally vegan. Where to find GF momos?",
-        answer: "Sikkim's fermented foods are naturally vegan: try gundruk (fermented leafy-green soup, ask for no butter) and kinema (fermented soybeans). In Gangtok, a Korean place on MG Marg serves vegan bibimbap, and Baker's Café makes gluten-free options on request.",
-        category: 'Food',
-        image: '/gangtok-bnnr.jpg',
-        content: `
-# Vegan Sikkim
-
-Sikkim is surprisingly vegan-friendly if you know what to order.
-
-## Dishes
-*   **Gundruk:** Fermented leafy green soup. 100% Vegan (ask for no butter).
-*   **Kinema:** Fermented soy beans (sticky, pungent, protein-packed).
-
-## Cafes
-**Mu Kimchi** (Korean place on MG Marg) offers great vegan bibimbap.
-**Baker's Cafe** has started offering GF options on request.
-        `
-    },
-    {
-        id: 'gundruk-sinki-guide',
-        title: "How to try 'Gundruk' and 'Sinki': A beginner's guide to fermented food",
-        shortDescription: "Funk and flavor.",
-        description: "Understanding the smell and taste of Sikkim's superfoods.",
-        answer: "Gundruk is dried, fermented mustard leaves and sinki is fermented radish root; both taste sour and earthy. Order gundruk ko jhol (gundruk soup) with rice: it's a probiotic dish that's good for your gut at altitude.",
-        category: 'Food',
-        image: '/gangtok-bnnr.jpg',
-        content: `
-# The Funk of the North: Gundruk & Sinki
-
-If it smells strong, it tastes good.
-
-## What is it?
-*   **Gundruk:** Dried, fermented mustard leaves. Tastes sour and earthy.
-*   **Sinki:** Fermented radish roots. Similiar sour profile.
-
-## How to eat
-Order "Gundruk ko Jhol" (Soup) with rice. It is a probiotic bomb, great for gut health at high altitudes.
-        `
-    },
-    {
-        id: 'best-bakeries-gangtok',
-        title: "Best bakeries in Gangtok for freshly baked 'Tingmo'",
-        shortDescription: "Steamed fluffy bread.",
-        description: "Where to get the softest Tingmo (Tibetan bread) to dip in your curry.",
-        answer: "For soft tingmo (steamed Tibetan bread), go to Taste of Tibet for a big, hot, slightly sweet one that's perfect with chilli chicken, or Dragon Wok for crispy fried tingmo. For cinnamon rolls and doughnuts, try Loafing Around and Baker's Café.",
-        category: 'Food',
-        image: '/gangtok-bnnr.jpg',
-        content: `
-# The Hunt for Tingmo
-
-Tingmo is a layered, steamed bun. It should be cloud-soft.
-
-## Top Spots
-1.  **Taste of Tibet:** Their Tingmo is huge, hot, and slightly sweet. Perfect with Chili Chicken.
-2.  **Dragon Wok:** Offers a "Fried Tingmo" variant which is crispy outside, soft inside.
-
-## Sweet Treats
-For desserts, **Loafing Around** and **Baker's Cafe** are the gold standard for cinnamon rolls and donuts.
         `
     },
     {
