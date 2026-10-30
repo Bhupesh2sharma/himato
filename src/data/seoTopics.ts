@@ -34,7 +34,7 @@ export const SEO_TOPICS: SeoTopic[] = [
         content: `
 # Gangtok Travel Guide
 
-**Gangtok** is Sikkim's capital and the starting point for almost every trip: Tsomgo Lake and Nathula to the east, North Sikkim's Lachung and Lachen, and West Sikkim's [Pelling](/guide/pelling-travel-guide). The town itself is worth a day or two, with monasteries, viewpoints over Kanchenjunga, and MG Marg, its car-free main street.
+**Gangtok** is Sikkim's capital and the starting point for almost every trip: Tsomgo Lake and Nathula to the east, North Sikkim's [Lachung](/guide/lachung-travel-guide) and Lachen, and West Sikkim's [Pelling](/guide/pelling-travel-guide). The town itself is worth a day or two, with monasteries, viewpoints over Kanchenjunga, and MG Marg, its car-free main street.
 
 > Prices and opening times on this page are approximate (October 2026) and can change. Check before you go.
 
@@ -270,6 +270,125 @@ It's usually open in the daytime, roughly 9 AM to 5 PM, and may close in bad wea
         `
     },
     {
+        id: 'lachung-travel-guide',
+        title: "Lachung Travel Guide 2026: Yumthang Valley, Zero Point, Best Time & Packages",
+        shortDescription: "North Sikkim's mountain village and gateway to Yumthang and Zero Point: how to get there, what to see, when to go and what it costs.",
+        description: "Lachung in North Sikkim is the base for Yumthang Valley and Zero Point, about 6.5 hours from Gangtok.",
+        answer: "Lachung is a mountain village in North Sikkim at about 8,600 ft, and the base for Yumthang Valley (about 25 km, ~1.5 hours, at around 11,800 ft) and Zero Point (about 23 km further, at around 15,300 ft). It's about 117 km, or 6.5 hours, from Gangtok. Most people visit on a 2–3 day package with a protected-area permit arranged by a registered operator.",
+        updated: '2026-10-30',
+        category: 'Destination',
+        image: '/yumgthang.jpeg',
+        place: {
+            name: 'Lachung',
+            latitude: 27.69,
+            longitude: 88.74,
+            attractions: ['Yumthang Valley', 'Zero Point (Yumesamdong)', 'Shingba Rhododendron Sanctuary', 'Yumthang hot spring', 'Lachung Monastery'],
+        },
+        content: `
+# Lachung Travel Guide
+
+**Lachung** is a mountain village in North Sikkim, set in a deep valley close to the Tibet border. It's the overnight stop for **Yumthang Valley**, the "Valley of Flowers", and **Zero Point**, the end of the civilian road. Almost every visitor comes on a package from Gangtok.
+
+> Altitudes, distances and prices are approximate (October 2026) and vary between sources. Roads and permits depend on the weather, so confirm with your operator the evening before.
+
+## Lachung at a glance
+
+| Quick facts | |
+|---|---|
+| Altitude | Lachung about 8,600 ft; Yumthang about 11,800 ft; Zero Point about 15,300 ft |
+| From Gangtok | about 117 km, ~6.5 hours |
+| How many days | 2 days / 1 night for Yumthang; 3 days to add Lachen and Gurudongmar |
+| Best time | March–May (rhododendrons) and October–November (clear skies); December–February for snow |
+| Permits | Protected Area Permit for everyone, through a registered operator |
+| Foreign nationals | Allowed up to Yumthang and Zero Point, in groups of 2 or more |
+| Cash | Practically no working ATMs, so bring cash from Gangtok |
+
+## What to see
+
+| Place | From Lachung | Why go |
+|---|---|---|
+| **Yumthang Valley** | about 25 km, ~1.5 hours | Wide alpine meadows, rhododendrons in spring, a river and a natural hot spring |
+| **Shingba Rhododendron Sanctuary** | on the way to Yumthang | Forests of rhododendron that flower in spring |
+| **Zero Point (Yumesamdong)** | about 23 km beyond Yumthang, ~1.5 hours | Snowfields at the end of the civilian road, often snowy even when Yumthang isn't |
+| **Lachung Monastery** | in the village | A monastery above the village with views over the valley and its prayer flags |
+
+### Yumthang Valley
+
+Yumthang is the main reason to come to Lachung: a broad valley of meadows and rhododendrons at about 11,800 ft, with a hot spring. Go early in the morning from Lachung, before the clouds come in. In winter it's under snow; from March to May it's in flower.
+
+### Zero Point
+
+Zero Point is higher and harsher: around 15,300 ft, where the air is thin and the cold is serious.
+
+- **The extra cost:** local drivers usually charge about **₹3,000–4,000 per vehicle** to go beyond Yumthang. Agree it in Lachung, not Gangtok.
+- **In heavy snow (February to April)**, vehicles often stop 3–4 km short. You can walk the rest in **snow boots, which you can rent in Lachung**.
+- **Who should skip it:** infants and anyone with heart or breathing problems should stop at Yumthang. See [Is Thangu Valley safe for kids under 5?](/guide/thangu-valley-kids-safety) for the same altitude advice.
+
+## How to plan a Lachung trip
+
+The usual plan is a **2-day / 1-night** trip from Gangtok:
+
+| Day | Plan |
+|---|---|
+| 1 | Gangtok → Lachung (about 6.5 hours), with waterfall stops on the way |
+| 2 | Early to Yumthang (and Zero Point if open), back to Lachung for lunch, then drive to Gangtok |
+
+**With 3 days**, add **Lachen and Gurudongmar Lake**: Gangtok → Lachen, Gurudongmar at dawn, then on to Lachung (about 49 km, ~3 hours) and Yumthang the next day. See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days) and [Best time to visit Gurudongmar Lake](/guide/gurudongmar-frozen-lake-best-time).
+
+Prone to car sickness? The road north is twisty: see [Gangtok to Lachen without motion sickness](/guide/gangtok-lachen-motion-sickness).
+
+## Packages and cost
+
+Lachung is usually booked as part of a North Sikkim package that includes vehicle, stay, meals and permits.
+
+| Package | Typical price |
+|---|---|
+| **Shared** (shared SUV, basic stay) | about ₹3,000–6,000 per person |
+| **Private / premium** (private car, better hotels) | about ₹15,000 or more per person |
+| **Zero Point extra** | about ₹3,000–4,000 per vehicle |
+
+Prices rise on festive and peak dates. More: [North Sikkim travel guide](/guide/north-sikkim-travel-guide) and [Sikkim trip cost](/guide/sikkim-trip-cost).
+
+## Best time to visit Lachung
+
+| Months | What to expect |
+|---|---|
+| **March–May** | Rhododendrons and flowers at Yumthang; cold mornings |
+| **June–September** | Monsoon: green valleys, but landslides can close the road |
+| **October–November** | Clear skies and good views; nights below freezing |
+| **December–February** | Deep snow at Yumthang and Zero Point; Zero Point is often blocked, so keep plans flexible. See [Sikkim in January](/guide/sikkim-in-january). |
+
+## Good to know
+
+- **Permits:** your operator needs your Voter ID, driving licence or passport and photos 24–48 hours before you leave Gangtok; Aadhaar isn't accepted. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+- **Cash:** there are practically no working ATMs, and drivers and small shops want cash.
+- **Warm clothes:** even in summer, Yumthang and Zero Point are cold. In winter, pack for well below freezing. See the [winter packing list](/guide/packing-december).
+- **Vegetarians:** dal-bhat and sabji are always available. See [Food in Sikkim](/guide/food-in-sikkim).
+- **Camping:** possible only at designated spots in Yumthang. See the [North Sikkim travel guide](/guide/north-sikkim-travel-guide).
+
+## Plan your Lachung trip
+
+[Plan your Lachung and Yumthang trip with Himato](/chat?prompt=2%20days%20in%20Lachung%20from%20Gangtok%3A%20Yumthang%20Valley%20and%20Zero%20Point%2C%20back%20to%20Gangtok): a day-by-day plan with drive times and permit info, and free quotes from local agencies.
+
+## FAQ
+
+**How far is Lachung from Gangtok?**
+About 117 km, or roughly 6.5 hours by road.
+
+**What is the altitude of Lachung, Yumthang and Zero Point?**
+Lachung is at about 8,600 ft, Yumthang Valley about 11,800 ft and Zero Point about 15,300 ft.
+
+**Is 1 night in Lachung enough?**
+Yes, for Yumthang Valley (and Zero Point if the road is open). Add a night in Lachen if you also want Gurudongmar Lake.
+
+**Can foreigners visit Lachung and Yumthang?**
+Yes, with a Protected Area Permit through a registered agent, in a group of two or more. Foreigners can go as far as Yumthang and Zero Point.
+
+**What is the best time to visit Yumthang Valley?**
+March to May for rhododendrons and flowers, or October to November for clear skies. In winter it's under snow.
+        `
+    },
+    {
         id: 'sikkim-itinerary-5-days',
         title: "5-Day Sikkim Itinerary: Gangtok, Tsomgo Lake & Lachung–Yumthang (2026)",
         shortDescription: "The classic first Sikkim trip, day by day: drive times, overnight stops, permits and what to book.",
@@ -307,7 +426,7 @@ Drive about 40 km (~2 hours) to **Tsomgo Lake**, then on to **Baba Harbhajan Sin
 
 ## Day 3: Gangtok to Lachung
 
-The long drive north to **Lachung** takes about **6.5 hours** for 117 km, with waterfalls and viewpoints along the way. Leave early; it gets dark early in the hills. Overnight in Lachung.
+The long drive north to **Lachung** takes about **6.5 hours** for 117 km, with waterfalls and viewpoints along the way. See the [Lachung travel guide](/guide/lachung-travel-guide). Leave early; it gets dark early in the hills. Overnight in Lachung.
 
 ## Day 4: Yumthang Valley, then back to Gangtok
 
@@ -546,6 +665,9 @@ Thangu Valley is the last stop before Gurudongmar Lake. It sits at a breathless 
 North Sikkim is the high, remote part of the state, with **Lachung**, **Yumthang Valley** and **Zero Point** on one side, and **Lachen** and **Gurudongmar Lake** on the other. Most visitors go on a **2–3 day package from Gangtok** that includes the vehicle, stays, meals and permits.
 
 ## The two valleys
+
+For the Lachung side in detail, see the [Lachung travel guide](/guide/lachung-travel-guide).
+
 
 | | Lachung side | Lachen side |
 |---|---|---|
