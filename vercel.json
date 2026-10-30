@@ -55,6 +55,31 @@
             "source": "/guide/best-bakeries-gangtok",
             "destination": "/guide/food-in-sikkim",
             "permanent": true
+        },
+        {
+            "source": "/guide/yumesamdong-zero-point-access",
+            "destination": "/guide/north-sikkim-travel-guide",
+            "permanent": true
+        },
+        {
+            "source": "/guide/atm-lachen-lachung",
+            "destination": "/guide/north-sikkim-travel-guide",
+            "permanent": true
+        },
+        {
+            "source": "/guide/camping-yumthang-valley",
+            "destination": "/guide/north-sikkim-travel-guide",
+            "permanent": true
+        },
+        {
+            "source": "/guide/luxury-vs-standard-north-sikkim",
+            "destination": "/guide/north-sikkim-travel-guide",
+            "permanent": true
+        },
+        {
+            "source": "/guide/group-travel-savings",
+            "destination": "/guide/north-sikkim-travel-guide",
+            "permanent": true
         }
     ]
 }

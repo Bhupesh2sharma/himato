@@ -277,6 +277,103 @@ Thangu Valley is the last stop before Gurudongmar Lake. It sits at a breathless 
         `
     },
     {
+        id: 'north-sikkim-travel-guide',
+        title: "North Sikkim Travel Guide 2026: Lachung, Lachen, Yumthang, Zero Point & Packages",
+        shortDescription: "Everything for a North Sikkim trip: routes, shared vs luxury packages, Zero Point, cash, camping and permits.",
+        description: "North Sikkim (Lachung, Yumthang, Zero Point, Lachen, Gurudongmar) is usually visited on a 2–3 day package from Gangtok.",
+        answer: "North Sikkim is usually visited on a 2–3 day package from Gangtok: Lachung (about 6.5 hours away) for Yumthang Valley and Zero Point, and Lachen (about 7 hours) for Gurudongmar Lake. Shared packages cost about ₹3,000–6,000 per person and private or luxury ones about ₹15,000 or more. You need a permit through a registered operator, and should carry cash, since there are practically no working ATMs.",
+        updated: '2026-10-30',
+        category: 'Adventure',
+        image: '/yumgthang.jpeg',
+        content: `
+# North Sikkim Travel Guide
+
+North Sikkim is the high, remote part of the state, with **Lachung**, **Yumthang Valley** and **Zero Point** on one side, and **Lachen** and **Gurudongmar Lake** on the other. Most visitors go on a **2–3 day package from Gangtok** that includes the vehicle, stays, meals and permits.
+
+## The two valleys
+
+| | Lachung side | Lachen side |
+|---|---|---|
+| From Gangtok | about 117 km, ~6.5 hours | about 123 km, ~7 hours |
+| Highlights | Yumthang Valley (~25 km from Lachung), Zero Point (~23 km beyond) | Thangu Valley, Gurudongmar Lake (~62 km from Lachen) |
+| Foreign nationals | Allowed up to Yumthang and Zero Point | Up to Thangu only |
+
+Lachen and Lachung are about 49 km (~3 hours) apart, so a 3-day trip can cover both. See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days) for how, and [Best time to visit Gurudongmar Lake](/guide/gurudongmar-frozen-lake-best-time) for the Lachen side in detail.
+
+## Standard vs luxury packages
+
+| | Standard (shared) | Luxury (private) |
+|---|---|---|
+| Typical price | about ₹3,000–6,000 per person | about ₹15,000 or more per person |
+| Vehicle | Shared SUV (a Tata Sumo can carry about 10 people) | Private Innova or Xylo |
+| Stay | Basic homestays; electricity can be erratic; bucket hot water | Premium hotels with heated beds, carpeted floors and generator backup |
+| Food | Fixed menu (dal, rice, sabji, egg) | Buffet spreads |
+
+**Our view:** if you're over 40 or travelling in winter, take the slippery roads and freezing nights seriously and choose the more comfortable option. Prices vary by season; see [Sikkim trip cost](/guide/sikkim-trip-cost).
+
+### How to find a shared package
+
+Travel agencies in Gangtok sell North Sikkim **per seat**, which is much cheaper than a private trip (about ₹15,000–20,000 for the vehicle). A seat usually includes:
+
+1. A shared vehicle
+2. Standard accommodation (shared room)
+3. Meals
+4. Permits
+
+Walk along **MG Marg** or **Tibet Road** and look for boards saying **"North Sikkim Sharing Available for Tomorrow"**, or ask your hotel.
+
+## Zero Point (Yumesamdong)
+
+- **Zero Point** is about 23 km beyond Yumthang. Drivers usually charge **about ₹3,000–4,000 extra** per vehicle to go there. Negotiate it in **Lachung**, not Gangtok.
+- **In heavy snow (February to April)**, vehicles often get stuck 3–4 km before Zero Point. You can walk the rest if you have **snow boots**, which you can rent in Lachung. It's tiring, but the untouched snowfields are worth it.
+
+## Cash and ATMs
+
+- **There are practically no working ATMs in Lachen or Lachung.** The few that exist are often out of cash or offline.
+- **Carry all the cash you expect to need, plus about 20% extra**, from Gangtok or Siliguri.
+- **UPI** (GPay, PhonePe) works in some hotels and shops when the internet does, but don't rely on it: drivers and small tea shops want cash.
+
+## Camping in Yumthang Valley
+
+You can wake up to yaks grazing outside your tent, but **you can't camp just anywhere**.
+
+- The **Forest Department** has designated camping spots near the river.
+- **Declare "camping"** on your permit application in Gangtok.
+- **Bring sleeping bags rated to −10°C:** the ground freezes at night.
+- **Campfires are strictly regulated** to prevent forest fires; use dead wood only.
+
+## Permits
+
+Everyone needs a **Protected Area Permit** for North Sikkim, arranged by a **registered tour operator** at least 24–48 hours before you leave Gangtok. Bring a Voter ID, driving licence or passport and photos; Aadhaar isn't accepted. Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Before you go
+
+- **Motion sickness:** the road north is famously twisty. See [How to travel from Gangtok to Lachen without motion sickness](/guide/gangtok-lachen-motion-sickness).
+- **Young children:** see [Is Thangu Valley safe for kids under 5?](/guide/thangu-valley-kids-safety).
+- **Vegetarians:** dal-bhat is always available, but pack snacks. See [Food in Sikkim](/guide/food-in-sikkim).
+- **Winter:** snow often closes the roads to Gurudongmar and Zero Point. See [Sikkim in January](/guide/sikkim-in-january).
+
+[Plan your North Sikkim trip](/chat?prompt=3%20days%20in%20North%20Sikkim%20from%20Gangtok%3A%20Lachen%20with%20Gurudongmar%20Lake%2C%20Lachung%20with%20Yumthang%20Valley): Himato builds the day-by-day plan with drive times and permit info, and connects you with local agents for quotes.
+
+## FAQ
+
+**How many days do I need for North Sikkim?**
+Two to three days from Gangtok: one night in Lachung covers Yumthang, and a 3-day trip with a night in Lachen adds Gurudongmar Lake.
+
+**How much does a North Sikkim package cost?**
+About ₹3,000–6,000 per person for a shared package with basic stays, and about ₹15,000 or more per person for a private vehicle and premium hotels. Prices vary by season.
+
+**Are there ATMs in Lachen and Lachung?**
+Practically no working ones. Carry all the cash you need, plus about 20% extra, from Gangtok or Siliguri.
+
+**How much extra does Zero Point cost?**
+Drivers usually charge about ₹3,000–4,000 per vehicle to go beyond Yumthang to Zero Point. Negotiate it in Lachung.
+
+**Can you camp in Yumthang Valley?**
+Yes, but only at the Forest Department's designated spots near the river, and you must declare camping on your permit application in Gangtok.
+        `
+    },
+    {
         id: 'gurudongmar-frozen-lake-best-time',
         title: "Best Time to Visit Gurudongmar Lake: Months, Permits, Timings & Costs (2026)",
         shortDescription: "Month-by-month guide, the frozen-lake season, permit rules, army cut-off times, altitude advice and prices.",
@@ -492,26 +589,6 @@ There are only homestays here, no hotels. They are basic but warm, often using "
 Spending a night here is tough due to low oxygen. Acclimatize in Zuluk or Padamchen first.
         `
     },
-    {
-        id: 'yumesamdong-zero-point-access',
-        title: "How to reach Yumesamdong (Zero Point) when roads are partially blocked",
-        shortDescription: "End of the road guide.",
-        description: "What to do when snow blocks the route to Zero Point.",
-        answer: "During heavy snowfall (February to April), vehicles often get stuck 3–4 km before Zero Point; you can walk the rest if you have snow boots, which you can rent in Lachung. Drivers charge about ₹3,000–4,000 extra to go beyond Yumthang, so negotiate it in Lachung, not Gangtok.",
-        category: 'Adventure',
-        image: '/yumgthang.jpeg',
-        content: `
-# Stuck on the way to Zero Point?
-
-During heavy snowfall (Feb-April), vehicles often get stuck 3-4 kms before Zero Point.
-
-## The Walk
-You can walk the remaining distance if you have snow boots (rentable in Lachung). It is physically demanding but the untouched snow fields are worth it.
-
-## Cost
-Drivers charge extra (₹3000-4000) for the permit extension to Zero Point from Yumthang. Negotiate this in Lachung, not Gangtok.
-        `
-    },
 
     // --- Category 2: "Spiritual & Cultural" (West & South Sikkim) ---
     {
@@ -674,7 +751,7 @@ If Gangtok is too noisy, head to **Kaluk** in West Sikkim. In our tests Airtel 4
 - **Carry a small UPS** for your router or laptop: power cuts happen during rain.
 - **Pick stays with power backup** (an inverter or generator).
 - **Have both Jio and Airtel** if you can: coverage varies from place to place.
-- **North Sikkim is not for working:** connectivity is unreliable, and there are practically no ATMs in Lachen and Lachung. See [ATMs in Lachen and Lachung](/guide/atm-lachen-lachung).
+- **North Sikkim is not for working:** connectivity is unreliable, and there are practically no ATMs in Lachen and Lachung. See the [North Sikkim travel guide](/guide/north-sikkim-travel-guide).
 
 [Plan your workation with Himato](/chat?prompt=Workation%20in%20Sikkim%20for%202%20weeks%3A%20Gangtok%20and%20Pelling%20with%20reliable%20internet%2C%20work%20days%20and%20weekend%20sightseeing): a day-by-day plan that fits work days around sightseeing.
 
@@ -1306,32 +1383,6 @@ Officially the Restricted Area Permit (RAP). Free, valid for 30 days. **Since 12
 *   **Must:** Go through a registered travel agent.
 *   **Allowed:** Lachen, Lachung, Yumthang.
 *   **Banned:** Nathula Pass, Gurudongmar Lake (sometimes allowed till Thangu), Baba Mandir.
-        `
-    },
-    {
-        id: 'luxury-vs-standard-north-sikkim',
-        title: "Difference between Luxury vs. Standard North Sikkim packages",
-        shortDescription: "Is the upgrade worth it?",
-        description: "Standard means shared Sumo and basic wooden cottages. Luxury means Innova and heated hotels. A cost-benefit analysis.",
-        answer: "Standard North Sikkim packages (about ₹3,500 per person) use a shared Tata Sumo, basic homestays with erratic electricity and a fixed menu. Luxury packages (about ₹15,000 per person) give you a private Innova or Xylo, heated premium hotels and buffet meals; if you're over 40, the upgrade is worth it.",
-        category: 'Logistics',
-        image: '/gurudungmar.jpg',
-        content: `
-# North Sikkim: Standard vs. Luxury
-
-The price difference is huge (₹3,500 vs ₹15,000 per person). Why?
-
-## Standard (The Backpacker Way)
-*   **Travel:** Shared Tata Sumo (10 people jammed in).
-*   **Stay:** Basic homestays. Electricity is erratic. No geysers (bucket hot water).
-*   **Food:** Fixed menu (Dal, Rice, Sabji, Egg).
-
-## Luxury (The Comfort Way)
-*   **Travel:** Private Innova/Xylo (My personal space!).
-*   **Stay:** Premium hotels like Yarlam or Apple Orchard. Heated beds, carpeted floors, generator backup.
-*   **Food:** Buffet spreads.
-
-**Verdict:** If you are over 40, take slippery roads and freezing nights seriously. Upgrade to Luxury.
         `
     },
     {
@@ -2140,30 +2191,6 @@ Sikkim runs on Boleros and Sumos.
         `
     },
     {
-        id: 'group-travel-savings',
-        title: "How to save money on a North Sikkim trip by joining a group",
-        shortDescription: "Cost-sharing hacks.",
-        description: "Solo travelers can join 'package groups' to split the cost of the vehicle and permit.",
-        answer: "Join a shared 'per seat' North Sikkim package: about ₹3,500 instead of ₹15,000–20,000 for a private trip, covering a shared vehicle, standard shared rooms, meals and permits. Look for 'North Sikkim sharing available for tomorrow' boards on MG Marg and Tibet Road.",
-        category: 'Logistics',
-        image: '/gurudungmar.jpg',
-        content: `
-# North Sikkim on a Budget
-
-Private trips to North Sikkim are expensive (₹15k-20k). Here is how to pay ₹3.5k instead.
-
-## The "Package" System
-Travel agencies sell "per seat" packages. This includes:
-1.  Shared Vehicle (10 pax).
-2.  Standard Accommodation (Shared room).
-3.  Meals.
-4.  Permits.
-
-## How to find them
-Walk down MG Marg or Tibet Road. Look for boards saying **"North Sikkim Sharing Available for Tomorrow"**.
-        `
-    },
-    {
         id: 'packing-december',
         title: "What to pack for Sikkim in December: The 'Layering' guide",
         shortDescription: "Freezing survival gear.",
@@ -2185,28 +2212,6 @@ Temperatures will range from 10°C (Gangtok day) to -10°C (Gurudongmar morning)
 *   **Gloves:** Waterproof ones. Woolen gloves get wet in snow and freeze your fingers.
 *   **Socks:** Two layers. Thin inner, thick woolen outer.
 *   **Shoes:** Boots with good grip. Sneakers will slip on ice.
-        `
-    },
-    {
-        id: 'atm-lachen-lachung',
-        title: "Where to exchange currency or find reliable ATMs in Lachen/Lachung",
-        shortDescription: "Cash is King.",
-        description: "There are NO reliable ATMs in North Sikkim. You must withdraw in Gangtok.",
-        answer: "There are practically no reliable ATMs in Lachen or Lachung, so withdraw all the cash you need, plus about 20% extra, in Gangtok or Siliguri. UPI works in some hotels when the internet does, but drivers and small shops want cash.",
-        category: 'Logistics',
-        image: '/tangu.jpeg',
-        content: `
-# The Cash Crisis: North Sikkim
-
-## The Reality
-**There are practically NO working ATMs in Lachen or Lachung.**
-The ones that exist are often out of cash or connectivity.
-
-## The Rule
-Carry 100% of your expected cash + 20% emergency fund from Gangtok or Siliguri.
-
-## Digital Payments?
-UPI (GPay/PhonePe) works in some hotels/shops in Lachen/Lachung if the internet is working. But do not rely on it. Drivers and small chai shops want cash.
         `
     },
     {
@@ -2533,26 +2538,6 @@ Fishing is controlled to protect the Golden Mahseer.
 
 ## Best Spots
 Legship (West Sikkim) on the Rangeet river is the angler's favorite camp.
-        `
-    },
-    {
-        id: 'camping-yumthang-valley',
-        title: "Best camping spots in Yumthang Valley with permissions",
-        shortDescription: "Sleeping under the flowers.",
-        description: "Can you pitch your own tent in the sanctuary? Yes, in designated zones.",
-        answer: "Yes, but only at the Forest Department's designated spots near the river. Declare 'camping' on your permit application in Gangtok, bring a sleeping bag rated to −10°C, and use only dead wood for strictly regulated campfires.",
-        category: 'Adventure',
-        image: '/yumgthang.jpeg',
-        content: `
-# Camping in the Valley of Flowers
-
-Wake up to yaks grazing outside your tent.
-
-## Zones
-You cannot camp *anywhere*. The Forest Department has designated spots near the river.
-*   **Permit:** You must declare "Camping" on your permit application in Gangtok.
-*   **Gear:** Bring -10°C sleeping bags. The ground freezes at night.
-*   **Fire:** Campfires are strictly regulated to prevent forest fires. Use dead wood only.
         `
     },
     {

@@ -89,6 +89,11 @@ export const GUIDE_REDIRECTS: Record<string, string> = {
   'best-thukpa-gangtok': 'food-in-sikkim',
   'gundruk-sinki-guide': 'food-in-sikkim',
   'best-bakeries-gangtok': 'food-in-sikkim',
+  'yumesamdong-zero-point-access': 'north-sikkim-travel-guide',
+  'atm-lachen-lachung': 'north-sikkim-travel-guide',
+  'camping-yumthang-valley': 'north-sikkim-travel-guide',
+  'luxury-vs-standard-north-sikkim': 'north-sikkim-travel-guide',
+  'group-travel-savings': 'north-sikkim-travel-guide',
 };
 
 /** The short, direct answer shown at the top of a guide (and used in FAQ schema). */
