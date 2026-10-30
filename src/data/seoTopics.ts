@@ -69,22 +69,131 @@ Thangu Valley is the last stop before Gurudongmar Lake. It sits at a breathless 
     },
     {
         id: 'gurudongmar-frozen-lake-best-time',
-        title: "Best time to see the 'frozen lake' effect at Gurudongmar without the crowds",
-        shortDescription: "Beat the rush to the icy spectacle.",
-        description: "Timing your visit to see the crystal blue ice before the summer melt, minus the peak season rush.",
-        category: 'Offbeat',
-        image: '/gurudongmar.jpeg',
+        title: "Best Time to Visit Gurudongmar Lake: Months, Permits, Timings & Costs (2026)",
+        shortDescription: "Month-by-month guide, the frozen-lake season, permit rules, army cut-off times, altitude advice and prices.",
+        description: "Go April to June or October to November. Avoid July–September (landslides) and January–February (snow blocks).",
+        answer: "The best time to visit Gurudongmar Lake is April to June for milder weather, or October to November for the clearest skies. Avoid July to September (landslides) and January to February, when snow often blocks the road. You need a Protected Area Permit through a registered Sikkim tour operator and a night in Lachen, and you leave Lachen around 3:30–4:30 AM.",
+        updated: '2026-10-30',
+        category: 'Adventure',
+        image: '/gurudongmar-lake-clear-sky.jpg',
         content: `
-# Chasing the Frozen Gurudongmar
+# Best Time to Visit Gurudongmar Lake
 
-Gurudongmar is frozen for half the year, but visiting in deep winter (Jan-Feb) is often impossible due to road blocks.
+Gurudongmar Lake sits at **17,800 ft (5,430 m)** in North Sikkim, close to the Tibet border. It's one of the highest lakes in the world, and one of the hardest day trips in India. Timing decides whether you see it at all: the road is at the mercy of landslides in the monsoon and snow in winter.
 
-## The Sweet Spot: Early November or End of March
-*   **November:** The lake starts freezing. The edges are icy, the water is deep blue. Crowds are thin before the December holidays.
-*   **End March/April:** The lake is still fully white/frozen, but roads are clearer.
+## The short answer
 
-## Avoiding Crowds
-Leave Lachen by **4:00 AM**. Most tourists leave at 5:00 AM. That one hour makes you the first at the lake.
+- **Best months:** **April to June** (milder weather, thawing ice, alpine flowers) and **October to November** (the clearest skies and best mountain views)
+- **To see it frozen:** **November** is your best chance. The lake is frozen or partly frozen from November to March/April, but January and February tours rarely run.
+- **Avoid:** **July to September** (monsoon landslides) and **January to February** (snow and black ice beyond Thangu)
+
+## Gurudongmar Lake month by month
+
+| Month | Lake | Road | Verdict |
+|---|---|---|---|
+| January–February | Frozen | Often blocked by snow beyond Thangu; tours rarely run | Avoid |
+| March | Frozen | Reopening, depends on weather | Possible, unpredictable |
+| **April–June** | Thawing, alpine flowers | Usually open | **Best: milder weather** |
+| July–September | Not frozen | Landslide risk | Avoid |
+| **October** | Not frozen | Usually open | **Best: clearest skies** |
+| **November** | Starts freezing | Usually open | **Best: clear skies and ice** |
+| December | Frozen | Frequently blocked by snow | Risky |
+
+> **Road status in 2026:** after major flood damage, access to Lachen and Gurudongmar fully reopened in March 2026. Operations still depend on the weather day to day, so confirm with your tour operator the evening before.
+
+## Seeing Gurudongmar frozen
+
+![Gurudongmar Lake half frozen, with snow peaks reflected in the open water](/gurudongmar-lake-half-frozen.jpg)
+
+The lake stays completely or partly frozen from **November to March/April**. Of those months, **November** is the most reliable: the ice is forming, skies are clear and the road is usually still open. In December, January and February the lake is frozen solid, but heavy snow and black ice often close the road beyond Thangu, so many trips get cancelled.
+
+## Permit rules
+
+Gurudongmar is near a sensitive international border, so **you can't go independently**.
+
+- **Permit:** a **Protected Area Permit (PAP)**, arranged by a **registered Sikkim tour operator**
+- **When:** at least **24–48 hours** before you leave Gangtok
+- **Documents:** **Voter ID or Driving Licence**, plus **two passport-size photos**
+- **Not accepted as primary ID:** Aadhaar card and PAN card
+- **Children under 18:** a birth certificate or passport
+- **Foreign nationals:** **not allowed** at Gurudongmar Lake. Foreigners can get permits only as far as **Thangu Valley** or **Yumthang Valley**, in groups of two or more, with a registered agent.
+
+## What the day looks like
+
+| Time | What happens |
+|---|---|
+| 3:30–4:30 AM | Leave Lachen, to cross the high terrain before fog rolls in |
+| By 10:00–11:00 AM | **Army cut-off:** pass the checkposts by now, or you won't be allowed further |
+| At the lake | Usually **30–45 minutes** before you're asked to head down |
+| By noon | Everyone descends, ahead of the midday winds |
+
+The early start isn't optional. Miss the army cut-off and you turn back without seeing the lake.
+
+## Altitude and health
+
+You climb from **Lachen at about 9,000 ft (2,750 m)** to **17,800 ft (5,430 m)** in one morning. Oxygen at the lake is close to **50% of sea level**.
+
+- **A night in Lachen is mandatory**, to help your body adjust.
+- **Children under 5** are not allowed past the army camps. **Under 8** is strongly discouraged.
+- **Over 65, or with heart conditions, asthma or high blood pressure:** strongly advised not to go. See our guide on [Nathula and high blood pressure](/guide/nathula-blood-pressure).
+- **Vehicles must carry a working oxygen cylinder.**
+- **Turn back** if anyone has a severe headache, vomiting, confusion or real trouble breathing. Going down is the treatment for altitude sickness.
+
+Travelling with young kids? Read [Is Thangu Valley safe for kids under 5?](/guide/thangu-valley-kids-safety) and consider Yumthang Valley instead.
+
+## Temperatures at Gurudongmar
+
+| Season | Day | Night |
+|---|---|---|
+| April–June | 5°C to 15°C | Near freezing |
+| October–November | 0°C to 10°C | −10°C or below |
+| December–February | −15°C to −25°C or lower | Colder still |
+
+Even in May, pack a down jacket, thermals, gloves, a woollen cap and sunglasses. The sun is harsh at this height.
+
+## Cost of a Gurudongmar trip
+
+Only heavy-duty, Sikkim-registered SUVs (Scorpio, Bolero, Innova) are allowed on this route under local union rules. Small hatchbacks aren't.
+
+| Option | Typical price | What's included |
+|---|---|---|
+| **Shared package**, 3 days / 2 nights from Gangtok | **₹2,200–4,500 per person** | Transport, basic homestay, permits, meals |
+| **Private SUV package**, North Sikkim circuit | **₹15,000–25,000 per vehicle package** | Depends on season and hotel tier |
+
+Both usually cover **Lachen, Gurudongmar, Lachung and Yumthang Valley**. Prices are as of October 2026; confirm with your operator.
+
+## The usual 3-day North Sikkim trip
+
+**Day 1: Gangtok to Lachen.** Drive north and stay the night in Lachen to acclimatise.
+
+**Day 2: Gurudongmar, then Lachung.** Leave around 4 AM, reach the lake before the army cut-off, spend 30–45 minutes there, and head down by noon. Continue to Lachung for the night.
+
+**Day 3: Yumthang Valley, then Gangtok.** Morning at Yumthang Valley, then drive back to Gangtok.
+
+Want this planned for your dates and group? [Plan your North Sikkim trip](/chat): Himato builds the day-by-day plan, with permit info.
+
+## FAQ
+
+**What is the best time to visit Gurudongmar Lake?**
+April to June for milder weather, or October to November for the clearest skies. Avoid July to September and January to February.
+
+**When is Gurudongmar Lake frozen?**
+From November to March/April. November is the best month to see ice, because the road is usually still open.
+
+**Can foreigners visit Gurudongmar Lake?**
+No. Foreign nationals can get permits only as far as Thangu Valley or Yumthang Valley, in groups of two or more, with a registered agent.
+
+**Is Aadhaar card accepted for the Gurudongmar permit?**
+No. Bring a Voter ID or Driving Licence, plus two passport-size photos. Aadhaar and PAN cards are not accepted as primary ID.
+
+**Can children go to Gurudongmar Lake?**
+Children under 5 are not allowed past the army camps, and under 8 is strongly discouraged. Children under 18 need a birth certificate or passport for the permit.
+
+**How long can you stay at Gurudongmar Lake?**
+Usually 30 to 45 minutes. Everyone must head back down by noon.
+
+**How much does a Gurudongmar trip cost?**
+About ₹2,200–4,500 per person for a shared 3-day / 2-night package from Gangtok, or ₹15,000–25,000 for a private SUV package (as of October 2026).
         `
     },
     {

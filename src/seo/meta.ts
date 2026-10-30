@@ -78,6 +78,33 @@ export const STATIC_GUIDES: GuideInput[] = SEO_TOPICS.map(topicToGuide);
 /** The short, direct answer shown at the top of a guide (and used in FAQ schema). */
 export const guideAnswer = (g: GuideInput) => (g.answer || g.description || g.shortDescription).trim();
 
+const stripMarkdown = (md: string) =>
+  md
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+/**
+ * Q&A pairs from a guide's "## FAQ" section, written as a bold question line
+ * ("**Question?**") followed by its answer. These are visible on the page, so
+ * they can be marked up as FAQPage.
+ */
+export function guideFaq(content: string): { question: string; answer: string }[] {
+  const lines = content.split('\n');
+  const start = lines.findIndex((l) => /^##\s+(faq|frequently asked questions)\b/i.test(l.trim()));
+  if (start === -1) return [];
+  const out: { question: string; answer: string }[] = [];
+  for (const raw of lines.slice(start + 1)) {
+    const line = raw.trim();
+    if (/^#{1,2}\s/.test(line)) break;
+    const q = line.match(/^\*\*(.+\?)\*\*$/);
+    if (q) out.push({ question: stripMarkdown(q[1]), answer: '' });
+    else if (line && out.length) out[out.length - 1].answer += ` ${line}`;
+  }
+  return out.map((f) => ({ ...f, answer: stripMarkdown(f.answer) })).filter((f) => f.answer);
+}
+
 const breadcrumb = (items: { name: string; path: string }[]): JsonLd => ({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
@@ -122,19 +149,21 @@ export function guideMeta(g: GuideInput): PageMeta {
     ]),
   ];
 
-  // Question-style guides get FAQ markup — the answer is rendered visibly
-  // as the "Quick answer" box on the page, which FAQ markup requires.
-  if (g.title.trim().endsWith('?')) {
+  // FAQ markup only for Q&A that is visible on the page: a question-style
+  // title (answered by the "Quick answer" box) plus the guide's FAQ section.
+  const faq = [
+    ...(g.title.trim().endsWith('?') ? [{ question: g.title.trim(), answer }] : []),
+    ...guideFaq(g.content),
+  ];
+  if (faq.length) {
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: g.title,
-          acceptedAnswer: { '@type': 'Answer', text: answer },
-        },
-      ],
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
     });
   }
 

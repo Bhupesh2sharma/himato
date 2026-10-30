@@ -23,6 +23,8 @@ export const OPTIMIZED_IMAGES: Record<string, string> = {
     "/gathangvally.jpg": "/gathangvally.webp",
     "/gurudongmar.jpeg": "/gurudongmar.webp",
     "/gurudungmar.jpg": "/gurudungmar.webp",
+    "/gurudongmar-lake-clear-sky.jpg": "/gurudongmar-lake-clear-sky.webp",
+    "/gurudongmar-lake-half-frozen.jpg": "/gurudongmar-lake-half-frozen.webp",
     "/maenam-hill.jpg": "/maenam-hill.webp",
     "/maxresdefault.jpg": "/maxresdefault.webp",
     "/our-huts-are-made-of.jpg": "/our-huts-are-made-of.webp",
