@@ -99,10 +99,16 @@ const STATIC_CSS = `
 .seo-static .answer{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:12px;padding:16px;margin:16px 0}
 .seo-static .cta{display:inline-block;background:#2f4a3a;color:#fff;padding:12px 20px;border-radius:10px;text-decoration:none;font-weight:600}
 .seo-static footer{font-size:.875rem;color:#555;border-top:1px solid rgba(0,0,0,.1);margin-top:40px}
+.seo-static::before{content:'';position:fixed;inset:0;z-index:2147483647;background:#f6f1e7}
 `;
 
+// The prerendered text is for crawlers. Visitors with JavaScript see the
+// parchment cover above for the split second before React replaces #root
+// (which removes the cover too); visitors without JavaScript see the text.
+const NOSCRIPT = '<noscript><style>.seo-static::before{display:none}</style></noscript>';
+
 function layout(main: string): string {
-  return `<div class="seo-static"><style>${STATIC_CSS}</style>
+  return `<div class="seo-static"><style>${STATIC_CSS}</style>${NOSCRIPT}
 <header><nav aria-label="Main"><a href="/">Himato</a><a href="/chat">Plan a trip</a><a href="/guides">Sikkim guides</a><a href="/hidden-gems">Hidden gems</a><a href="/reach_us">Contact</a></nav></header>
 <main>${main}</main>
 <footer><p>Himato is a free AI trip planner for Sikkim, India, by Waglogy. Contact: hello@himato.in · +91 9733814168</p>

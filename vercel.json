@@ -3,11 +3,11 @@
     "rewrites": [
         {
             "source": "/guide/:slug",
-            "destination": "/guide-shell.html"
+            "destination": "/guide-shell"
         },
         {
             "source": "/(.*)",
-            "destination": "/app-shell.html"
+            "destination": "/app-shell"
         }
     ]
 }
