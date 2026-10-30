@@ -111,7 +111,9 @@ export const attribution = () => {
 // when the tab closes. Never throws: analytics must not break the site.
 const EVENTS_URL = `${(import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')}/api/events`;
 const SESSION_ID_KEY = 'himato_session_id';
-type QueuedEvent = { name: string; path: string; props?: Record<string, unknown>; ts: number };
+const PENDING_KEY = 'himato_pending_events';
+// `id` lets the backend drop duplicates (an event can be both beaconed on unload and re-sent from storage).
+type QueuedEvent = { id: string; name: string; path: string; props?: Record<string, unknown>; ts: number };
 const queue: QueuedEvent[] = [];
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -166,14 +168,33 @@ const flush = () => {
 
 const enqueue = (name: string, props?: Record<string, unknown>) => {
   if (typeof window === 'undefined') return;
-  queue.push({ name, path: window.location.pathname, props: props && primitiveProps(props), ts: Date.now() });
+  const id = crypto.randomUUID?.() || `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+  queue.push({ id, name, path: window.location.pathname, props: props && primitiveProps(props), ts: Date.now() });
   if (queue.length >= 10) flush();
   else if (!flushTimer) flushTimer = setTimeout(flush, 4000);
 };
 
+// Events still queued when the page unloads are also saved, and sent on the
+// next page load (a beacon during unload is best-effort in some browsers).
+const savePending = () => {
+  try {
+    if (queue.length) window.sessionStorage.setItem(PENDING_KEY, JSON.stringify(queue.slice(-25)));
+  } catch { /* storage unavailable */ }
+};
+
 if (typeof window !== 'undefined') {
+  try {
+    const saved = window.sessionStorage.getItem(PENDING_KEY);
+    window.sessionStorage.removeItem(PENDING_KEY);
+    if (saved) queue.push(...(JSON.parse(saved) as QueuedEvent[]));
+  } catch { /* storage unavailable */ }
+  if (queue.length) flushTimer = setTimeout(flush, 1000);
+
   // Send whatever is queued when the visitor leaves or backgrounds the tab
-  window.addEventListener('pagehide', flush);
+  window.addEventListener('pagehide', () => {
+    savePending();
+    flush();
+  });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') flush();
   });

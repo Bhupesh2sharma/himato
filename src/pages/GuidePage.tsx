@@ -34,6 +34,13 @@ const CATEGORY_LOCATIONS: Record<string, string[]> = {
     Adventure: ['Lachen', 'Gurudongmar', 'Lachung', 'Zero Point'],
 };
 
+// Internal links in guide markdown ("/chat", "/guide/…") navigate inside the
+// app instead of reloading the page; external links open in a new tab.
+const MarkdownLink = ({ href = '', children }: { href?: string; children?: React.ReactNode }) =>
+    href.startsWith('/') && !href.startsWith('//')
+        ? <Link to={href}>{children}</Link>
+        : <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>;
+
 const toGuideInput = (t: GuideTopic): GuideInput => ({
     slug: t.id,
     title: t.title,
@@ -177,7 +184,7 @@ export const GuidePage = () => {
                             Note: In a real production app, we would sanitize this content.
                             Since it comes from our internal file, it's safe.
                         */}
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{topic.content}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ a: MarkdownLink }}>{topic.content}</ReactMarkdown>
                     </div>
 
                     <div className="mt-10 pt-8 border-t border-black/10">
