@@ -267,7 +267,22 @@ export function staticPageMeta(path: string, guides: GuideInput[] = STATIC_GUIDE
         title: 'Hidden Gems of Sikkim: Offbeat Places Most Tourists Miss | Himato',
         description:
           'Offbeat Sikkim — Dzongu, Gnathang, Biksthang, Yangang, Okhrey and more quiet villages and valleys most itineraries skip, with how to reach them.',
-        jsonLd: [breadcrumb([{ name: 'Home', path: '/' }, { name: 'Hidden gems', path: '/hidden-gems' }])],
+        jsonLd: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: 'Hidden Gems of Sikkim',
+            url: canonicalUrl('/hidden-gems'),
+            isPartOf: { '@id': WEBSITE_ID },
+            mainEntity: {
+              '@type': 'ItemList',
+              itemListElement: guides
+                .filter((g) => g.category === 'Hidden Gem' || g.category === 'Offbeat')
+                .map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: canonicalUrl(`/guide/${g.slug}`), name: g.title })),
+            },
+          },
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'Hidden gems', path: '/hidden-gems' }]),
+        ],
       };
     case '/reach_us':
       return {
