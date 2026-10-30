@@ -1,4 +1,5 @@
 import { apiClient } from './api';
+import { requestContext } from '../utils/analytics';
 
 const CHAT_SESSION_KEY = 'himato_chat_session_id';
 
@@ -29,7 +30,8 @@ export const generateItinerary = async (prompt: string, isBusiness: boolean = fa
     const response = await apiClient.generateItinerary({
       prompt,
       isBusiness,
-      ...(businessName && { businessName })
+      ...(businessName && { businessName }),
+      ...requestContext(),
     });
     return {
       itinerary: response.data.itinerary,

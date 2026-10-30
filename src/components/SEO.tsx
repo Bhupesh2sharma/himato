@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { absUrl, canonicalUrl, DEFAULT_IMAGE, DEFAULT_IMAGE_ALT, routeMeta, type PageMeta } from '../seo/meta';
+import { trackPageView } from '../utils/analytics';
 
 // Prerendered HTML (scripts/seoPlugin.ts) marks its page-level JSON-LD with
 // this attribute, so client-side navigation replaces it instead of piling up.
@@ -72,6 +73,7 @@ export const RouteSEO = () => {
   useEffect(() => {
     const meta = routeMeta(pathname);
     if (meta) applyMeta(meta);
+    trackPageView();
   }, [pathname]);
   return null;
 };

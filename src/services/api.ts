@@ -228,7 +228,7 @@ class ApiClient {
 
   // Itinerary endpoints
   // Signed-out visitors get a preview (first days in full, later days locked).
-  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string; preview?: boolean; previewDays?: number } }> {
+  async generateItinerary(data: { prompt: string; isBusiness: boolean; businessName?: string; visitorId?: string; attribution?: { landingPage?: string; firstLandingPage?: string; referrer?: string } }): Promise<{ status: string; data: { itinerary: any; itineraryId?: string; preview?: boolean; previewDays?: number } }> {
     return this.request('/api/itinerary/generate', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -321,6 +321,7 @@ class ApiClient {
     message?: string;
     itineraryData: any;
     attribution?: { landingPage?: string; firstLandingPage?: string; referrer?: string };
+    visitorId?: string;
   }): Promise<{ status: string; data: { requestId: string; preferredCount: number; slug: string | null } }> {
     return this.request('/api/leads', { method: 'POST', body: JSON.stringify(data) });
   }

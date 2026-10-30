@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Loader2, Phone, Users, MapPin, BadgeCheck } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { track, attribution } from '../utils/analytics';
+import { track, requestContext } from '../utils/analytics';
 
 interface Agent {
     _id: string;
@@ -87,11 +87,7 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                 touristEmail: form.email.trim() || undefined,
                 message: form.message.trim() || undefined,
                 itineraryData: data,
-                attribution: (({ landing_page, first_landing_page, landing_referrer }) => ({
-                    landingPage: landing_page,
-                    firstLandingPage: first_landing_page,
-                    referrer: landing_referrer,
-                }))(attribution()),
+                ...requestContext(),
             });
             setDone(res.data.preferredCount);
             track('lead_sent_to_agent', { preferred_agents: res.data.preferredCount });
