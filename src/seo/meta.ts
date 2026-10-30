@@ -162,7 +162,7 @@ export function staticPageMeta(path: string, guides: GuideInput[] = STATIC_GUIDE
         path: '/',
         title: 'Himato — Plan Your Sikkim Trip in 60 Seconds (Free AI Planner)',
         description:
-          'Free AI-built Sikkim itineraries with permits, drive times and the hidden valleys blogs miss. Gangtok, Lachung, Yumthang, Gurudongmar, Pelling — your day-by-day plan in a minute.',
+          'Free day-by-day Sikkim itineraries with permit info, drive times and the hidden valleys blogs miss. Gangtok, Lachung, Yumthang, Gurudongmar, Pelling — your day-by-day plan in a minute.',
         jsonLd: [
           {
             '@context': 'https://schema.org',

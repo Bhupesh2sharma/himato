@@ -167,7 +167,7 @@ export function LandingPage() {
                         </h1>
 
                         <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-                            AI-built itineraries with permits, hidden valleys, and the spots blogs miss. Free.
+                            Day-by-day itineraries with permit info, hidden valleys, and the spots blogs miss. Free.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
