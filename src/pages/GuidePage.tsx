@@ -11,7 +11,7 @@ import { chatWithSherpa } from '../services/ai';
 import { optimizedSrc } from '../data/optimizedImages';
 import { SEO } from '../components/SEO';
 import { track } from '../utils/analytics';
-import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, GUIDE_REDIRECTS, type GuideInput } from '../seo/meta';
+import { guideAnswer, guideMeta, privatePageMeta, relatedGuides, STATIC_GUIDES, GUIDE_REDIRECTS, GUIDES_LAST_REVIEWED, type GuideInput } from '../seo/meta';
 
 interface GuideTopic {
     id: string;
@@ -179,6 +179,10 @@ export const GuidePage = () => {
             <main className="container mx-auto px-4 md:px-6 py-12 flex flex-col lg:flex-row gap-12 relative z-10 -mt-10">
                 {/* Main Article */}
                 <div className="flex-1 bg-white border border-black/10 rounded-2xl p-6 md:p-10 shadow-sm">
+                    <p className="text-xs text-ai-muted mb-4">
+                        Updated <time dateTime={(guide.updatedAt || GUIDES_LAST_REVIEWED).slice(0, 10)}>{new Date(`${(guide.updatedAt || GUIDES_LAST_REVIEWED).slice(0, 10)}T00:00:00`).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</time>
+                        {' · '}By the <Link to="/about" className="font-medium text-ai-text hover:text-ai-accent">Himato team</Link>
+                    </p>
                     <section aria-label="Quick answer" className="mb-8 p-5 rounded-xl bg-ai-accent/5 border border-ai-accent/20">
                         <p className="text-[11px] font-semibold tracking-[0.22em] uppercase text-ai-accent mb-2">Quick answer</p>
                         <p className="text-ai-text leading-relaxed">{guideAnswer(guide)}</p>

@@ -52,6 +52,14 @@ export const Footer = () => {
               </li>
               <li>
                 <Link
+                  to="/about"
+                  className="text-ai-muted hover:text-ai-accent transition-colors"
+                >
+                  About Himato
+                </Link>
+              </li>
+              <li>
+                <Link
                   to="/reach_us"
                   className="text-ai-muted hover:text-ai-accent transition-colors"
                 >

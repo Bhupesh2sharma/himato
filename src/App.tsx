@@ -14,6 +14,7 @@ import { HiddenGemsPage } from './pages/HiddenGemsPage';
 import { LandingPage } from './pages/LandingPage';
 import { PlannerPage } from './pages/PlannerPage';
 import { GuidesIndexPage } from './pages/GuidesIndexPage';
+import { AboutPage } from './pages/AboutPage';
 import { apiClient } from './services/api';
 import { ExternalRedirect } from './components/ExternalRedirect';
 import { EMAIL_AUTH_ENABLED } from './utils/authMethods';
@@ -91,7 +92,7 @@ function SharedItineraryPage() {
 
 function App() {
   const location = useLocation();
-  const knownPaths = ['/', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/manage-himato'];
+  const knownPaths = ['/', '/about', '/chat', '/history', '/reach_us', '/login', '/register', '/dashboard', '/terms', '/guide', '/guides', '/hidden-gems', '/manage-himato'];
   const isKnownPath = knownPaths.some(path => location.pathname === path || location.pathname.startsWith(path + '/'));
 
   // Treat URLs carrying a ?plan= payload (legacy long-form share links) as
@@ -115,6 +116,7 @@ function App() {
         <Route path="/share/:shareId" element={<SharedItineraryPage />} />
         <Route path="/history" element={<ItineraryHistory />} />
         <Route path="/reach_us" element={<ReachUs />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<Login />} />
         {/* Email sign-up (switch off with VITE_ENABLE_EMAIL_AUTH=false) */}
         <Route path="/register" element={EMAIL_AUTH_ENABLED ? <Register /> : <Navigate to="/login" replace />} />

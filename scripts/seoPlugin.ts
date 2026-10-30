@@ -24,6 +24,7 @@ import {
   type GuideInput,
   type PageMeta,
 } from '../src/seo/meta';
+import { ABOUT } from '../src/seo/about';
 
 /**
  * Build-time SEO for the traveller site (runs after `vite build`).
@@ -114,7 +115,7 @@ function layout(main: string): string {
 <header><nav aria-label="Main"><a href="/">Himato</a><a href="/chat">Plan a trip</a><a href="/guides">Sikkim guides</a><a href="/hidden-gems">Hidden gems</a><a href="/reach_us">Contact</a></nav></header>
 <main>${main}</main>
 <footer><p>Himato is a free AI trip planner for Sikkim, India, by Waglogy. Contact: hello@himato.in · +91 9733814168 · <a href="https://www.instagram.com/himato_ai/" rel="me">Instagram @himato_ai</a></p>
-<p><a href="/chat">Plan a Sikkim trip</a> · <a href="/guides">Sikkim travel guides</a> · <a href="/hidden-gems">Hidden gems of Sikkim</a> · <a href="/terms">Terms</a></p></footer>
+<p><a href="/chat">Plan a Sikkim trip</a> · <a href="/guides">Sikkim travel guides</a> · <a href="/hidden-gems">Hidden gems of Sikkim</a> · <a href="/about">About Himato</a> · <a href="/terms">Terms</a></p></footer>
 </div>`;
 }
 
@@ -135,6 +136,7 @@ function renderGuideBody(g: GuideInput, all: GuideInput[]): string {
 <article>
 <h1>${esc(g.title)}</h1>
 <p>${esc(g.shortDescription)}</p>
+<p>Updated <time datetime="${guideDate(g)}">${guideDate(g)}</time> · By the <a href="/about">Himato team</a></p>
 <section class="answer" aria-label="Quick answer"><strong>Quick answer:</strong> ${esc(guideAnswer(g))}</section>
 ${markdownToHtml(g.content)}
 <p><a class="cta" href="/chat">Turn this guide into a day-by-day Sikkim itinerary — free</a></p>
@@ -190,6 +192,23 @@ ${intro}
 </ul>
 <p>Each plan includes where you stay each night, drive times between stops, and which permits you need (for example for Nathula, Tsomgo, North Sikkim and Dzongu).</p>
 <p><a href="/guides">Read the Sikkim travel guides</a></p>`);
+    case '/about': {
+      const list = (items: readonly string[]) => `<ul>${items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>`;
+      const cards = (items: readonly { title: string; body: string }[]) =>
+        `<ul>${items.map((i) => `<li><strong>${esc(i.title)}.</strong> ${esc(i.body)}</li>`).join('')}</ul>`;
+      return layout(`
+<h1>${esc(ABOUT.title)}</h1>
+<p>${esc(ABOUT.intro)}</p>
+<h2>${esc(ABOUT.problems.heading)}</h2>
+<h3>${esc(ABOUT.problems.travellers.heading)}</h3>${list(ABOUT.problems.travellers.points)}
+<h3>${esc(ABOUT.problems.agents.heading)}</h3>${list(ABOUT.problems.agents.points)}
+<h2>${esc(ABOUT.travellers.heading)}</h2>${cards(ABOUT.travellers.points)}
+<p><a class="cta" href="/chat">Plan your trip free</a></p>
+<h2>${esc(ABOUT.agents.heading)}</h2>${cards(ABOUT.agents.points)}
+<h2>${esc(ABOUT.guides.heading)}</h2>${list(ABOUT.guides.points)}
+<h2>${esc(ABOUT.company.heading)}</h2>
+<p>${esc(ABOUT.company.body)} Email ${esc(ABOUT.company.email)} · Phone ${esc(ABOUT.company.phone)} · <a href="${ABOUT.company.instagram}" rel="me">Instagram @himato_ai</a></p>`);
+    }
     case '/reach_us':
       return layout(`
 <h1>Contact Himato</h1>
@@ -323,6 +342,7 @@ ${byCategory(guides)
 ## Optional
 
 - [Full text of all guides](${SITE_URL}/llms-full.txt)
+- [About Himato](${SITE_URL}/about): who builds Himato (Waglogy) and how guides are researched
 - [Contact](${SITE_URL}/reach_us)
 - [Terms](${SITE_URL}/terms)
 `;

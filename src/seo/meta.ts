@@ -1,4 +1,5 @@
 import { SEO_TOPICS, type SeoTopic } from '../data/seoTopics';
+import { ABOUT_DESCRIPTION } from './about';
 
 /**
  * Single source of truth for page-level SEO.
@@ -208,7 +209,7 @@ export function relatedGuides(g: GuideInput, all: GuideInput[], limit = 4): Guid
 }
 
 /** Public pages that should be indexed and prerendered (guides are added separately). */
-export const INDEXABLE_STATIC_PATHS = ['/', '/chat', '/guides', '/hidden-gems', '/reach_us', '/terms'] as const;
+export const INDEXABLE_STATIC_PATHS = ['/', '/about', '/chat', '/guides', '/hidden-gems', '/reach_us', '/terms'] as const;
 
 export function staticPageMeta(path: string, guides: GuideInput[] = STATIC_GUIDES): PageMeta | null {
   switch (path) {
@@ -303,6 +304,24 @@ export function staticPageMeta(path: string, guides: GuideInput[] = STATIC_GUIDE
             },
           },
           breadcrumb([{ name: 'Home', path: '/' }, { name: 'Hidden gems', path: '/hidden-gems' }]),
+        ],
+      };
+    case '/about':
+      return {
+        path: '/about',
+        title: 'About Himato — Sikkim Trip Planner by Waglogy',
+        description: ABOUT_DESCRIPTION,
+        jsonLd: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'AboutPage',
+            url: canonicalUrl('/about'),
+            name: 'About Himato',
+            description: ABOUT_DESCRIPTION,
+            mainEntity: { '@id': ORG_ID },
+            isPartOf: { '@id': WEBSITE_ID },
+          },
+          breadcrumb([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }]),
         ],
       };
     case '/reach_us':
