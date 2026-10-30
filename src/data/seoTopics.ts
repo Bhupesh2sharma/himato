@@ -34,7 +34,7 @@ export const SEO_TOPICS: SeoTopic[] = [
         content: `
 # Gangtok Travel Guide
 
-**Gangtok** is Sikkim's capital and the starting point for almost every trip: Tsomgo Lake and Nathula to the east, North Sikkim's Lachung and Lachen, and West Sikkim's Pelling. The town itself is worth a day or two, with monasteries, viewpoints over Kanchenjunga, and MG Marg, its car-free main street.
+**Gangtok** is Sikkim's capital and the starting point for almost every trip: Tsomgo Lake and Nathula to the east, North Sikkim's Lachung and Lachen, and West Sikkim's [Pelling](/guide/pelling-travel-guide). The town itself is worth a day or two, with monasteries, viewpoints over Kanchenjunga, and MG Marg, its car-free main street.
 
 > Prices and opening times on this page are approximate (October 2026) and can change. Check before you go.
 
@@ -147,6 +147,126 @@ Not if you're an Indian citizen. Foreign nationals need the Sikkim Restricted Ar
 
 **What is the best time to visit Gangtok?**
 October to November for clear skies and mountain views, or March to May for mild weather and flowers.
+        `
+    },
+    {
+        id: 'pelling-travel-guide',
+        title: "Pelling Travel Guide 2026: Places to Visit, Kanchenjunga Views, How Many Days & Where to Stay",
+        shortDescription: "West Sikkim's base for Kanchenjunga views: the Skywalk, Pemayangtse, Rabdentse, sacred lakes and waterfalls, with distances and tips.",
+        description: "Pelling in West Sikkim has some of the best Kanchenjunga views. Two nights covers the Skywalk, Pemayangtse, Rabdentse and Khecheopalri Lake.",
+        answer: "Pelling, in West Sikkim, is known for close-up views of Kanchenjunga. Spend 2 nights: one day for the Pelling Skywalk and Chenrezig statue, Pemayangtse Monastery and the Rabdentse Ruins (all close to town), and one for Khecheopalri Lake, Rimbi Falls and Kanchenjunga Falls. Pelling is about 5 hours from Gangtok (124 km) or Bagdogra (135 km), and Indian citizens need no permit.",
+        updated: '2026-10-30',
+        category: 'Destination',
+        image: '/Pelling_Sky_walk.jpg',
+        place: {
+            name: 'Pelling',
+            latitude: 27.3,
+            longitude: 88.24,
+            attractions: ['Pelling Skywalk and Chenrezig Statue', 'Pemayangtse Monastery', 'Rabdentse Ruins', 'Khecheopalri Lake', 'Kanchenjunga Falls', 'Rimbi Falls', 'Singshore Bridge'],
+        },
+        content: `
+# Pelling Travel Guide
+
+**Pelling** is a small hill town in West Sikkim with some of the closest views of **Kanchenjunga** anywhere in India. It's quieter than Gangtok and makes a good base for monasteries, sacred lakes, waterfalls and the old capital of Sikkim.
+
+> Distances, fees and opening times on this page are approximate (October 2026) and vary between sources. Check locally before you go.
+
+## Pelling at a glance
+
+| Quick facts | |
+|---|---|
+| From Gangtok | about 124 km, ~5 hours (or break the drive at Ravangla) |
+| From Bagdogra | about 135 km, ~5 hours |
+| How many days | 2 nights |
+| Best time | October–November for clear Kanchenjunga views; March–May for flowers |
+| Permits | None for Indian citizens; foreigners need the Sikkim Restricted Area Permit |
+| Mobile internet | Jio 4G is strongest (about 20–30 Mbps) |
+
+## Best places to visit in and around Pelling
+
+| Place | Distance from Pelling | Why go |
+|---|---|---|
+| **Pelling Skywalk and Chenrezig statue** | in town | A glass skywalk beside a 137 ft statue of Chenrezig, with mountain views |
+| **Pemayangtse Monastery** | about 2 km | One of Sikkim's most important monasteries |
+| **Rabdentse Ruins** | near Pemayangtse | The ruins of Sikkim's second capital; best at sunset |
+| **Khecheopalri Lake** | about 31–32 km (~1.5 hours) | A sacred lake revered by Buddhists and Hindus |
+| **Rimbi Falls** | on the road to Khecheopalri | A roadside waterfall near Darap |
+| **Kanchenjunga Falls** | about 24–30 km (~1 hour) | A tall waterfall on the road towards Yuksom |
+| **Singshore Bridge** | about 23–28 km | A high suspension bridge over a deep gorge |
+
+### Pelling Skywalk and Chenrezig statue
+
+The Skywalk is a glass walkway leading towards the large Chenrezig (Avalokiteshvara) statue. It's one of the most accessible sights in Sikkim: there's **ramped access from the parking and a lift up to the bridge level**; only the stairs up to the statue itself are steps-only. Entry is a small fee (sources quote ₹20–100), and it's usually open in the daytime, roughly 9 AM to 5 PM. Details: [Is the Pelling Skywalk wheelchair-accessible?](/guide/pelling-skywalk-wheelchair)
+
+### Rabdentse Ruins at sunset
+
+The ruins of Sikkim's second capital are a 20-minute jungle walk from the main gate near Pemayangtse Monastery. At sunset, the orange light hits the Kanchenjunga range while the stone ruins sit in shadow. Bring a torch for the walk back. See [Rabdentse Ruins at sunset](/guide/rabdentse-ruins-sunset).
+
+### Khecheopalri Lake
+
+A foot-shaped, sacred lake in the forest, believed to be the footprint of Goddess Tara. Walk the boardwalk quietly, and don't feed the fish or dip your feet. See [Khecheopalri Lake: do's and don'ts](/guide/khecheopalri-lake-myth).
+
+## Kanchenjunga views
+
+Pelling faces Kanchenjunga head-on. The clearest views are early in the morning, especially from **October to November**. For a different angle with fewer people, photographers go to [Biksthang](/guide/biksthang-kanchenjunga-view) or [Mangalbarey Dara](/guide/mangalbarey-dara-sunrise) for sunrise.
+
+## How many days in Pelling?
+
+- **Day 1:** Skywalk and Chenrezig statue, Pemayangtse Monastery, and Rabdentse Ruins at sunset.
+- **Day 2:** Khecheopalri Lake, Rimbi Falls and Kanchenjunga Falls, or Singshore Bridge.
+- **More time?** Stay in quiet villages nearby: [Uttarey](/guide/uttarey-exploration) (about 20 km), [Yuksom and Dubdi Monastery](/guide/dubdi-monastery-history), or [Kaluk](/guide/workation-in-sikkim) for a workation.
+
+Pelling fits into longer trips too: see the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days), which reaches Pelling via Ravangla.
+
+## Where to stay in Pelling
+
+Pelling has a good range of hotels, from homestays to premium resorts with mountain views.
+
+| Budget | Typical price per room per night |
+|---|---|
+| Homestay or budget hotel | ₹1,000–2,500 |
+| 3-star / mid-range | ₹3,000–5,000 |
+| Premium resort | ₹7,000 or more |
+
+- **Ask for a mountain-facing room.** It's the reason to stay in Pelling.
+- **Travelling with elderly parents?** The streets are steep, so choose a hotel with a lift. See [Pelling vs Ravangla for an elderly couple](/guide/pelling-vs-ravangla-elderly).
+- **Working remotely?** Some premium hotels have fibre broadband. See [Workation in Sikkim](/guide/workation-in-sikkim).
+
+## Best time to visit Pelling
+
+| Months | What to expect |
+|---|---|
+| **October–November** | The clearest Kanchenjunga views |
+| **December–February** | Cold, often clear mornings; much quieter |
+| **March–May** | Pleasant weather and rhododendrons in the hills around West Sikkim |
+| **June–September** | Monsoon: cloudy, green and quiet; roads can be slow |
+
+## Getting to Pelling
+
+- **From Gangtok:** about 124 km, ~5 hours. Many people stop at Ravangla's Buddha Park on the way (Gangtok → Ravangla ~3 hours, Ravangla → Pelling ~2.5 hours).
+- **From Bagdogra or NJP:** about 135 km from Bagdogra, ~5 hours. See [How to reach Gangtok](/guide/how-to-reach-gangtok) for taxi fares from the airport and station.
+- **Shared jeeps** from Gangtok to Pelling leave from the Deorali stand and cost about ₹400 a seat. See [shared taxis in Sikkim](/guide/shared-taxis-guide).
+
+## Plan your Pelling trip
+
+[Plan your Pelling trip with Himato](/chat?prompt=2%20nights%20in%20Pelling%3A%20Pelling%20Skywalk%2C%20Pemayangtse%20Monastery%2C%20Rabdentse%20Ruins%2C%20Khecheopalri%20Lake%20and%20Kanchenjunga%20Falls): a day-by-day plan with drive times, and free quotes from local agencies if you want it booked.
+
+## FAQ
+
+**How many days are enough for Pelling?**
+Two nights: one day for the Skywalk, Pemayangtse Monastery and the Rabdentse Ruins, and one for Khecheopalri Lake and the waterfalls.
+
+**What is Pelling famous for?**
+Close-up views of Kanchenjunga, the Pelling Skywalk and Chenrezig statue, Pemayangtse Monastery and the Rabdentse Ruins, Sikkim's second capital.
+
+**How far is Pelling from Gangtok?**
+About 124 km, or roughly 5 hours by road. You can break the drive at Ravangla.
+
+**Do I need a permit for Pelling?**
+Not if you're an Indian citizen. Foreign nationals need the Sikkim Restricted Area Permit, applied for online.
+
+**Is the Pelling Skywalk open every day?**
+It's usually open in the daytime, roughly 9 AM to 5 PM, and may close in bad weather or the monsoon. Check locally before you go.
         `
     },
     {
@@ -297,7 +417,7 @@ Morning at **Yumthang Valley** (about 25 km, ~1.5 hours). **Zero Point** is abou
 
 ## Day 6: Ravangla and Pelling
 
-Drive to **Ravangla** (about 64 km, ~3 hours) for **Buddha Park**, then on to **Pelling** (about 50 km, ~2.5 hours). On a clear evening, Pelling has some of the best Kanchenjunga views in Sikkim.
+Drive to **Ravangla** (about 64 km, ~3 hours) for **Buddha Park**, then on to **Pelling** (about 50 km, ~2.5 hours). On a clear evening, Pelling has some of the best Kanchenjunga views in Sikkim. See the [Pelling travel guide](/guide/pelling-travel-guide).
 
 ## Day 7: Pelling and departure
 
