@@ -90,6 +90,8 @@ Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
 
 Need more time? See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days), which adds Gurudongmar Lake and Pelling.
 
+What will it cost? See [Sikkim trip cost](/guide/sikkim-trip-cost) for budget, mid-range and premium prices.
+
 ## FAQ
 
 **Is 5 days enough for Sikkim?**
@@ -194,6 +196,8 @@ Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
 [Customise this 7-day plan](/chat?prompt=7%20days%20in%20Sikkim%3A%20Gangtok%2C%20Tsomgo%2C%20Lachen%20with%20Gurudongmar%20Lake%2C%20Lachung%20with%20Yumthang%2C%20Ravangla%20and%20Pelling): tell Himato your dates, group and budget, and get your own day-by-day version with permit info.
 
 Shorter trip? See the [5-day Sikkim itinerary](/guide/sikkim-itinerary-5-days).
+
+What will it cost? See [Sikkim trip cost](/guide/sikkim-trip-cost) for budget, mid-range and premium prices.
 
 ## FAQ
 
@@ -819,6 +823,135 @@ Start from Hilley (reachable by car). Walk 4km on a flat, well-paved path to Gur
 
     // --- Category 6: "Logistics & Niche Hacks" ---
     {
+        id: 'sikkim-trip-cost',
+        title: "Sikkim Trip Cost 2026: Budget, Mid-Range & Luxury Prices for 5–7 Days",
+        shortDescription: "What a Sikkim trip really costs: taxis, North Sikkim packages, hotels, permits and food, with budget, mid-range and premium totals.",
+        description: "A 5-day Sikkim trip costs roughly ₹10,000–15,000 per person on a budget, ₹18,000–30,000 mid-range and ₹35,000+ premium.",
+        answer: "A 5-day Sikkim trip typically costs about ₹10,000–15,000 per person on a budget, ₹18,000–30,000 mid-range and ₹35,000 or more for premium, for two people sharing and not counting flights or trains to Bagdogra or NJP. Vehicles and the North Sikkim package are the biggest costs. These are approximate October 2026 prices and vary by season and dates.",
+        updated: '2026-10-30',
+        category: 'Logistics',
+        image: '/Gangtok-View.jpg',
+        content: `
+# Sikkim Trip Cost (2026)
+
+> **Prices may vary.** The figures on this page are approximate, based on rates published by Sikkim tour operators and taxi services in October 2026. Actual prices depend on the season and your dates (Durga Puja, Diwali and Christmas–New Year are the most expensive), your vehicle, your hotel and your group size. Always confirm the final quote, and exactly what it includes, before you pay.
+
+## How much does a Sikkim trip cost?
+
+For **5 days, per person, two people sharing**, not counting your flight or train to Bagdogra or NJP:
+
+| Budget level | Per person (5 days) | What it looks like |
+|---|---|---|
+| **Budget** | **₹10,000–15,000** | Shared taxis, shared North Sikkim package, homestays and simple hotels, local food |
+| **Mid-range** | **₹18,000–30,000** | Private car, 3-star hotels, Nathula included, cafés and restaurants |
+| **Premium** | **₹35,000+** | Private SUV (Innova Crysta) throughout, top hotels and resorts, everything private |
+
+For **7 days**, add roughly 30–40%. These totals are our estimates, built from the typical prices below.
+
+## Getting to Gangtok: Bagdogra or NJP
+
+| Option | Typical price | Notes |
+|---|---|---|
+| Shared taxi seat | ₹400–600 per person | Reserved seat: about ₹600–800 |
+| Private hatchback (WagonR, Swift) | ₹2,500–4,000 per car | Up to 4 people |
+| Private SUV (Innova, Ertiga, Xylo) | ₹3,100–6,000 per car | Innova Crysta: up to about ₹7,000 |
+
+The drive takes about 4–5 hours. See the [5-day itinerary](/guide/sikkim-itinerary-5-days) for drive times.
+
+## Tsomgo Lake, Baba Mandir and Nathula
+
+| Option | Typical price |
+|---|---|
+| Shared day tour | ₹900–1,500 per person |
+| Reserved car: Tsomgo + Baba Mandir | ₹4,500–7,000 per car |
+| Reserved car: including Nathula | about ₹6,000–12,000 per car, depending on vehicle |
+
+Your operator arranges the permits. Nathula is for Indian citizens only and is usually open Wednesday to Sunday. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## North Sikkim package (Lachung, Yumthang, Lachen, Gurudongmar)
+
+Most travellers do North Sikkim as a **3-day / 2-night package** from Gangtok.
+
+| Package | Typical price | Usually includes |
+|---|---|---|
+| **Shared SUV** | **₹3,000–6,000 per person** | Shared vehicle, basic stays in Lachen/Lachung, breakfast and dinner, usually permits |
+| **3-star with better stays** | from about ₹14,000 per person | Better hotels; check whether the vehicle is shared or private |
+
+Prices rise on festive and peak dates. **Zero Point** is usually extra: local drivers typically charge about ₹3,000–3,500 per vehicle to go beyond Yumthang. Only Sikkim-registered SUVs run these routes.
+
+## Where you stay: price per night
+
+| Type | Typical price per room |
+|---|---|
+| Homestay or budget hotel | ₹1,000–2,500 |
+| 3-star / mid-range hotel | ₹3,000–5,000 |
+| Premium hotel or resort | ₹7,000–15,000+ |
+
+Gangtok has the widest choice. In Lachen and Lachung, rooms are simpler and are usually part of your North Sikkim package.
+
+## Permits
+
+- **Indian citizens:** no permit to enter Sikkim. Protected areas (Tsomgo, Nathula, Zuluk, North Sikkim) need permits, which your **registered tour operator** arranges and usually includes in the price. Ask before you book.
+- **Foreign nationals:** the Restricted Area Permit is free and applied for online.
+- **Changes in 2026:** Sikkim is moving protected-area permits to a single online system run through registered agencies, and new per-vehicle permit fees have been proposed. Ask your operator whether permit fees are included in your quote.
+
+Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Food
+
+| Where | Typical spend |
+|---|---|
+| Local eateries (momos, thukpa, thali) | about ₹300–600 per person per day |
+| Cafés and hotel restaurants | about ₹1,000–2,000 per person per day |
+
+North Sikkim packages usually include breakfast and dinner.
+
+## Sample budgets for 5 days (per person, 2 sharing)
+
+Based on the [5-day itinerary](/guide/sikkim-itinerary-5-days): 3 nights in Gangtok, 1 night in Lachung.
+
+| | Budget | Mid-range | Premium |
+|---|---|---|---|
+| Bagdogra ↔ Gangtok (both ways) | ₹1,000 (shared) | ₹3,000 (private car, split) | ₹6,000 (SUV, split) |
+| Tsomgo / Nathula day | ₹1,200 (shared tour) | ₹4,000 (reserved car, split) | ₹6,000 (SUV, split) |
+| Lachung–Yumthang (vehicle, 1 night, meals) | ₹3,500 (shared) | ₹8,000 (private) | ₹14,000 |
+| Gangtok hotel (3 nights, room split) | ₹3,000 | ₹6,000 | ₹15,000 |
+| Food and extras | ₹2,000 | ₹5,000 | ₹8,000 |
+| **Total (approx.)** | **₹10,700** | **₹26,000** | **₹49,000+** |
+
+These are illustrations built from typical prices; your quote will differ.
+
+## How to keep the cost down
+
+- **Travel outside peak dates.** Avoid Durga Puja, Diwali and Christmas–New Year if you can.
+- **Use shared taxis and the shared North Sikkim package.** They're the biggest savings.
+- **Travel in a group of 4–6** and split a private vehicle.
+- **Compare quotes** and check what's included: permits, meals, Zero Point and Nathula.
+- **Book North Sikkim in advance** in peak season, when packages sell out.
+
+## Get a real quote
+
+Every trip is different. [Plan your trip with Himato](/chat?prompt=5%20days%20in%20Sikkim%20for%202%20people%20on%20a%20mid-range%20budget%3A%20Gangtok%2C%20Tsomgo%20Lake%20and%20Lachung%20with%20Yumthang): build your day-by-day plan, then ask for free quotes from verified local agents. Our team reviews your request and connects you with the right agency.
+
+## FAQ
+
+**How much does a 5-day Sikkim trip cost?**
+About ₹10,000–15,000 per person on a budget, ₹18,000–30,000 mid-range and ₹35,000 or more premium, for two people sharing and excluding travel to Bagdogra or NJP. Prices vary by season.
+
+**What is the taxi fare from Bagdogra to Gangtok?**
+About ₹400–600 per person in a shared taxi, ₹2,500–4,000 for a private hatchback and ₹3,100–6,000 for a private SUV.
+
+**How much is a North Sikkim package?**
+A shared 3-day / 2-night package typically costs about ₹3,000–6,000 per person, including shared vehicle, basic stays, breakfast and dinner. Premium packages with better hotels cost more.
+
+**Are permits included in Sikkim tour packages?**
+Usually, yes. Registered operators arrange protected-area permits and normally include them. Always confirm, especially with permit changes in 2026.
+
+**What is the cheapest time to visit Sikkim?**
+Outside the peak festival and holiday dates. The monsoon months (July to September) are usually cheaper, but landslides can disrupt travel.
+        `
+    },
+    {
         id: 'sikkim-permits-guide',
         title: "Sikkim Permits 2026: Which Permit You Need for Every Place (Indians & Foreigners)",
         shortDescription: "Tsomgo, Nathula, Zuluk, North Sikkim, Dzongu and Goecha La: who needs a permit, how to get it and what to carry.",
@@ -928,7 +1061,7 @@ Gangtok (including MG Marg, Rumtek and Hanuman Tok), **Pelling**, **Ravangla**, 
 - **Bring originals and photocopies**, and extra photos.
 - **Don't plan Nathula on a Monday or Tuesday.**
 - **Build in a buffer day.** Weather or the army can close Nathula, Zuluk or North Sikkim at short notice.
-- **Check the rules close to your date.** They change, and this guide reflects what we know as of October 2026.
+- **Check the rules close to your date.** They change, and this guide reflects what we know as of October 2026. Sikkim is moving protected-area permits to a single online system run through registered agencies, applied for at least a day before travel, and new per-vehicle fees have been proposed but not finalised.
 
 Want a plan with the permits built in? [Plan your Sikkim trip](/chat): Himato's itineraries include permit info for every stop.
 
