@@ -42,6 +42,8 @@ Five days is the most popular length for a first Sikkim trip. It covers **Gangto
 
 Fly into **Bagdogra** (about 123 km, ~4.5 hours) or arrive by train at **NJP** (about 113 km, ~4 hours) and drive up to Gangtok. Spend the evening on **MG Marg**, the walking street in the centre of town.
 
+Other ways to arrive, including the 35-minute helicopter: [How to reach Gangtok](/guide/how-to-reach-gangtok).
+
 **Do today:** give your tour operator your ID and photos for the Tsomgo and North Sikkim permits. Use a Voter ID, driving licence or passport; Aadhaar is not accepted.
 
 ## Day 2: Tsomgo Lake, Baba Mandir and Nathula
@@ -223,6 +225,7 @@ Yes. Foreign nationals can't visit Nathula or Gurudongmar, but can do Tsomgo, La
         title: "How to get a permit for Dzongu if I am staying in a local homestay?",
         shortDescription: "Exclusive guide to entering the Lepcha Reserve.",
         description: "Dzongu is a restricted area. Here is the step-by-step process to get your permit through your homestay host.",
+        answer: "You need a confirmed booking with a local homestay in Dzongu, because your host sponsors your permit. Send your host your Voter ID or passport and a passport-size photo 3–4 days ahead; they get the permit issued at the DC Office in Mangan, and you collect it at the Mangan or Sankalang checkpost.",
         category: 'Offbeat',
         image: '/Dongu.jpg',
         content: `
@@ -250,6 +253,7 @@ Which permit do you need for the rest of your trip? See the [complete Sikkim per
         title: "Is Thangu Valley safe for kids under 5 years old in October?",
         shortDescription: "High altitude safety guide for toddlers.",
         description: "Thangu is at 13,000 ft. Honest medical advice on bringing young children to this height.",
+        answer: "Generally no. Thangu Valley is at about 13,000 ft, toddlers can't reliably tell you about altitude-sickness symptoms, and October nights drop below freezing. If you go, spend 2 nights in Lachen first, carry a pulse oximeter and descend if oxygen drops below 85%, or choose the lower Yumthang Valley instead.",
         category: 'Family',
         image: '/tangu.jpeg',
         content: `
@@ -406,6 +410,7 @@ About ₹2,200–4,500 per person for a shared 3-day / 2-night package from Gang
         title: "Can I visit Kupup Lake (Elephant Lake) on a day trip from Gangtok?",
         shortDescription: "Exploring the Silk Route in a day.",
         description: "A long but rewarding itinerary: Gangtok -> Tsomgo -> Baba Mandir -> Kupup -> Gangtok.",
+        answer: "Yes, as a long day trip of 10–12 hours: leave Gangtok around 7:30 AM, stop at Tsomgo Lake and Baba Mandir, reach Kupup (Elephant Lake) by late morning and be back by about 4 PM. You need a permit that covers the route beyond Nathula; a standard Tsomgo permit won't work, and foreigners aren't allowed.",
         category: 'Adventure',
         image: '/pic_kupup_lake.jpg',
         content: `
@@ -430,6 +435,7 @@ Ask for a permit that includes "Nathula and Beyond" or specifically mentions Kup
         title: "What are the '32 hairpin bends' of Zuluk like during a winter snowfall?",
         shortDescription: "Driving the Zig-Zag road in snow.",
         description: "A survival guide to driving the most dizzying road in East Sikkim during snowfall.",
+        answer: "In January and February the 32 hairpin bends of Zuluk become a slippery white ribbon, with black ice on the bends and fog that can cut visibility to zero. Don't attempt it in a hatchback: go only in a 4x4 or chained SUV (Bolero, Scorpio) driven by a local.",
         category: 'Adventure',
         image: '/zuluk.jpg',
         content: `
@@ -451,6 +457,7 @@ If the sky clears, the contrast of the black tarmac loops against white snow is 
         title: "Secret waterfalls near Rolep that tourists don't know about",
         shortDescription: "Chasing waterfalls in East Sikkim.",
         description: "The Rangpo Khola river trails lead to hidden cascades. Here's how to find them.",
+        answer: "A 45-minute hike along the river from Rolep leads to a secluded waterfall with a natural pool, safe for swimming outside the monsoon. Cross the old hanging bridge and walk about 200 m upstream to find a second hidden chute falling into the Rangpo Khola.",
         category: 'Hidden Gem',
         image: '/rolepwaterfalls.jpg',
         content: `
@@ -470,6 +477,7 @@ Cross the old hanging bridge. Just 200m upstream, a hidden chute falls directly 
         title: "Guide to Gnathang Valley: The 'Ladakh of the East'",
         shortDescription: "Cold desert vibes in Sikkim.",
         description: "At 13,500ft, Gnathang Valley is a high-altitude plateau. How to stay here comfortably.",
+        answer: "Gnathang Valley is a barren, wind-swept plateau at about 13,500 ft, often called the 'Ladakh of the East'. There are only basic homestays heated with wood-fired bukharis, and the low oxygen makes a night hard, so acclimatise in Zuluk or Padamchen first.",
         category: 'Offbeat',
         image: '/gathangvally.jpg',
         content: `
@@ -489,6 +497,7 @@ Spending a night here is tough due to low oxygen. Acclimatize in Zuluk or Padamc
         title: "How to reach Yumesamdong (Zero Point) when roads are partially blocked",
         shortDescription: "End of the road guide.",
         description: "What to do when snow blocks the route to Zero Point.",
+        answer: "During heavy snowfall (February to April), vehicles often get stuck 3–4 km before Zero Point; you can walk the rest if you have snow boots, which you can rent in Lachung. Drivers charge about ₹3,000–4,000 extra to go beyond Yumthang, so negotiate it in Lachung, not Gangtok.",
         category: 'Adventure',
         image: '/yumgthang.jpeg',
         content: `
@@ -510,6 +519,7 @@ Drivers charge extra (₹3000-4000) for the permit extension to Zero Point from 
         title: "How to do the Tashiding Monastery hike without a guide",
         shortDescription: "A self-guided spiritual trek.",
         description: "The trail to the holiest monastery in Sikkim is well-marked but steep. Here's your DIY map.",
+        answer: "Yes, you can do it without a guide. Start at Tashiding Market, ask for the 'Gompa path' and follow the prayer flags and mani stones uphill for 40–60 minutes. Carry water, as there are no shops on the climb, and visit the Bhumchu stupa complex at the top.",
         category: 'Spiritual',
         image: '/tashiding.jpeg',
         content: `
@@ -532,6 +542,7 @@ Legend says a mere glimpse of Tashiding washes away sins. The hike adds penance 
         title: "Is the Pelling Skywalk accessible for wheelchair users?",
         shortDescription: "Accessibility review of the Skywalk.",
         description: "Can you take a wheelchair to the glass bridge? We checked the ramps and lifts.",
+        answer: "Mostly yes. The Pelling Skywalk has ramped access from the parking and a working elevator up to the flat glass bridge, which is easy for wheels. Only the golden stairs up to the Chenrezig statue itself are stairs-only.",
         category: 'Family',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -551,6 +562,7 @@ good news: The Pelling Skywalk (Chenrezig Statue) is one of the most accessible 
         title: "Exploring the Rabdentse Ruins at sunset for the best photos",
         shortDescription: "Golden hour at the ancient capital.",
         description: "Why sunset is the magical time to visit the 2nd capital of Sikkim.",
+        answer: "Sunset is the best time to photograph the Rabdentse Ruins, Sikkim's second capital: the orange light hits the Kanchenjunga range while the stone ruins sit in shadow. It's a 20-minute jungle walk from the main gate near Pemayangtse Monastery, so bring a torch for the way back.",
         category: 'History',
         image: '/riverrafting.jpg',
         content: `
@@ -570,6 +582,7 @@ It's a 20-minute jungle walk from the main gate (near Pemayangtse Monastery). Br
         title: "How to spend 4 hours at Namchi Chardham effectively",
         shortDescription: "Optimizing your pilgrimage.",
         description: "Don't just wander aimlessly. Here is the perfect route to cover all 4 Dhams and the Shiva statue.",
+        answer: "Follow an anti-clockwise route: the Kirateshwar statue first, then the Sai Baba temple, the main Shiva statue for the view over Namchi, and finally the four Dham replicas (Badrinath, Jagannath, Dwarka and Rameshwaram). The vegetarian canteen inside serves dosa and thali.",
         category: 'Spiritual',
         image: '/chardham.jpg',
         content: `
@@ -593,6 +606,7 @@ The complex is huge. Follow this anti-clockwise route to save energy.
         title: "Cafes in Gangtok with the best Wi-Fi and power backups",
         shortDescription: "Digital Nomad's survival guide.",
         description: "Where to zoom call without fear. Tested speeds at The Local Cafe, Rachna, and more.",
+        answer: "The best cafés for working in Gangtok are The Local Cafe on MG Marg (about 80 Mbps Wi-Fi, plenty of sockets, quiet and popular with local freelancers), Rachna Books & Cafe (about 40 Mbps, cosy, good for creative work) and Baker's Cafe.",
         category: 'Workation',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -626,6 +640,7 @@ Come here for the view, stay for the pastries. Good for checking emails and ligh
         title: "Top 'Insta-worthy' rooftop cafes in Gangtok with Kanchenjunga views",
         shortDescription: "Coffee with a view.",
         description: "The most photogenic spots on MG Marg to sip hazelnut lattes while watching the mountains.",
+        answer: "For Kanchenjunga views from a rooftop, go to the rooftop section of Nimtho, with traditional decor and a big mountain view, or The Coffee Shop, known for its pizzas and an open terrace facing the range. Arrive around 4 PM for golden-hour light.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -643,6 +658,7 @@ Famous for its pizzas and the open terrace that faces the Kanchenjunga range dir
         title: "Best 'Work from Mountains' homestays in Kaluk with stable 4G",
         shortDescription: "Remote work with a view.",
         description: "Kaluk offers 180-degree mountain views and surprisingly good Jio/Airtel 4G connectivity.",
+        answer: "Kaluk in West Sikkim has 180-degree mountain views and surprisingly good 4G: about 20 Mbps on Airtel and 30 Mbps or more on Jio in our tests. Choose a homestay with separate cottages and inverter power backup, which matters during storms.",
         category: 'Workation',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -662,6 +678,7 @@ We tested Airtel 4G carrying 20Mbps+ speeds. Jio is faster (30Mbps+).
         title: "Top 5 coworking-friendly hostels in Gangtok for solo travelers",
         shortDescription: "Budget-friendly work spots.",
         description: "Where to meet other nomads: Zostel, Tagalong, and hidden backpacker gems.",
+        answer: "The best hostels for remote work in Gangtok are Zostel Gangtok (fast Wi-Fi, a lively common room and a valley-view terrace), Tagalong Backpackers in the quieter Development Area (with a quiet zone for calls) and Mochilero Ostrich (a budget pick with great views, a short climb from the road).",
         category: 'Workation',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -684,6 +701,7 @@ Great for budget travelers. It's a bit of a climb from the main road, but the vi
         title: "5-day Sikkim itinerary for senior citizens with minimal walking",
         shortDescription: "Comfortable travel for the elderly.",
         description: "Gangtok staying, Nathula by luxury car, and Pelling skywalk (elevator access). No treks.",
+        answer: "Stay 3 nights in Gangtok and 2 in Pelling so you don't change hotels every day, and use an Innova Crysta for comfort. Choose low-walking sights: the Gangtok ropeway, the Pelling Skywalk (it has an elevator), Nathula by car, and a drive through Temi Tea Garden.",
         category: 'Family',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -706,6 +724,7 @@ Traveling with seniors requires careful planning. Steep stairs, long walks, and 
         title: "How to travel from Gangtok to Lachen without getting 'motion sickness'",
         shortDescription: "Surviving the winding roads.",
         description: "Tips for the nausea-prone: Seat selection, medication, and stop-planning for the 6-hour twisted drive.",
+        answer: "Sit in the front seat so you can watch the horizon, take motion-sickness medicine such as Avomine an hour before you leave (ask your doctor first), and keep ginger or lemon to suck on. Ask your driver for fresh-air breaks every 90 minutes, for example at Seven Sisters and Naga waterfalls.",
         category: 'Logistics',
         image: '/tangu.jpeg',
         content: `
@@ -727,6 +746,7 @@ Ask your driver to stop at **Seven Sisters Waterfall** and **Naga Waterfalls**. 
         title: "Pelling vs. Ravangla: Which is better for an elderly couple?",
         shortDescription: "Choosing the right hill station.",
         description: "A comparison based on terrain, hotel accessibility, and medical facilities.",
+        answer: "Pelling, if you book a premium hotel with a lift: it has better Kanchenjunga views and more luxury hotels, though its streets are steep. Ravangla is flatter around Buddha Park and quieter, but has fewer premium hotels and is farther from hospitals.",
         category: 'Family',
         image: '/ravangla.jpg',
         content: `
@@ -750,6 +770,7 @@ Ask your driver to stop at **Seven Sisters Waterfall** and **Naga Waterfalls**. 
         title: "Borong Hot Springs: A guide to the natural 'Cha-chu' baths",
         shortDescription: "Healing waters in the wild.",
         description: "Unlike the commercialized Reshi hot springs, Borong is wild and raw. Here's how to hike there.",
+        answer: "Borong's natural sulphur hot springs, near Ravangla, are a steep 2–3 km walk down from Borong village to the Rangit river. In winter (December to February) locals put up temporary huts, and visitors bring their own bedding and food to bathe by day and sleep by the river.",
         category: 'Hidden Gem',
         image: '/borong.jpg',
         content: `
@@ -769,6 +790,7 @@ Temporary huts are built by locals in winter (Dec-Feb). You carry your own beddi
         title: "Biksthang: The secret village where Kanchenjunga looks 'touchable'",
         shortDescription: "Closer than Pelling?",
         description: "Why photographers prefer Biksthang (Mangalbarey) over Pelling for mountain shots.",
+        answer: "Biksthang (Chuchen), near Mangalbarey, lines up with Kanchenjunga at an angle that shows the full scale of the range, which is why photographers prefer it to Pelling. It's far quieter too: you may be the only visitor.",
         category: 'Hidden Gem',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -788,6 +810,7 @@ Unlike the bustling Pelling, you might be the only tourist here.
         title: "Martam Village: Best agricultural tours and paddy field hikes",
         shortDescription: "Farm life near Rumtek.",
         description: "A slow-travel guide to the terraced paddy fields of Martam.",
+        answer: "Martam, just below Rumtek Monastery, is a quiet village of terraced rice fields. Walk through the paddies, try local tongba (millet beer) in season, and stay at the heritage-style Martam Resort.",
         category: 'Hidden Gem',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -806,6 +829,7 @@ Located just below Rumtek Monastery, Martam is lush, green, and quiet.
         title: "Barsey Rhododendron Sanctuary: Can you do the trek in a single day?",
         shortDescription: "Walking through red forests.",
         description: "Yes! It's the easiest trek in Sikkim. A 4km flat walk through blooming rhododendrons.",
+        answer: "Yes. Barsey is the easiest trek in Sikkim: a flat, well-paved 4 km walk from Hilley (reachable by car) to Guras Kunj, about 1.5 hours each way. Go in April or May, when the rhododendrons bloom red, pink and white.",
         category: 'Adventure',
         image: '/Dongu.jpg',
         content: `
@@ -822,6 +846,98 @@ Start from Hilley (reachable by car). Walk 4km on a flat, well-paved path to Gur
     },
 
     // --- Category 6: "Logistics & Niche Hacks" ---
+    {
+        id: 'how-to-reach-gangtok',
+        title: "How to Reach Gangtok from Bagdogra & NJP (2026): Taxi, Helicopter, Bus & Train",
+        shortDescription: "Every way to get to Gangtok, with travel times, fares and which option suits you.",
+        description: "Fly to Bagdogra or take a train to NJP, then a 4–5 hour taxi to Gangtok. A helicopter takes about 35 minutes.",
+        answer: "The usual way to reach Gangtok is to fly to Bagdogra airport (about 123 km) or take a train to New Jalpaiguri (NJP, about 113 km), then drive 4–5 hours by taxi: about ₹400–600 per seat shared, or ₹2,500–6,000 for a private car. A government helicopter flies Bagdogra to Gangtok in about 35 minutes for around ₹3,100. Pakyong airport has had no scheduled flights since 2024.",
+        updated: '2026-10-30',
+        category: 'Logistics',
+        image: '/gangtok-bnnr.jpg',
+        content: `
+# How to Reach Gangtok
+
+Gangtok has no railway station and, for now, no scheduled flights. Almost everyone arrives through **Bagdogra airport** or **New Jalpaiguri (NJP) railway station**, both near Siliguri in West Bengal, and drives up from there.
+
+> Fares on this page are approximate (October 2026) and vary by season and operator. Confirm before you book.
+
+## The options at a glance
+
+| Option | From | Time | Typical cost | Best for |
+|---|---|---|---|---|
+| **Shared taxi** | Bagdogra / NJP / Siliguri | 4–5 hours | ₹400–600 per seat | Solo travellers and budgets |
+| **Private taxi** | Bagdogra / NJP | 4–5 hours | ₹2,500–4,000 (hatchback), ₹3,100–6,000 (SUV) | Families and groups |
+| **Helicopter** | Bagdogra | about 35 minutes | about ₹3,100 per person | Saving time, light luggage |
+| **Bus (SNT)** | Siliguri SNT bus stand | 4–5 hours | about ₹240–500 | Lowest cost |
+
+## By air: Bagdogra airport
+
+**Bagdogra (IXB)** is the nearest working airport, with flights from Delhi, Kolkata, Mumbai, Bengaluru and other cities. From the airport it's about **123 km to Gangtok, roughly 4.5 hours** by road.
+
+- **Private taxis** wait outside arrivals. A hatchback costs about ₹2,500–4,000 and an SUV (Innova, Ertiga) about ₹3,100–6,000.
+- **Shared taxis** to Gangtok cost about ₹400–600 per seat, or ₹600–800 for a reserved seat.
+- **Book ahead** in peak season, or arrange the car with your hotel or tour operator.
+
+### What about Pakyong airport?
+
+Sikkim's own airport at **Pakyong**, near Gangtok, has had **no scheduled passenger flights since June 2024**. Check the latest before planning around it, but for now plan on Bagdogra.
+
+## By helicopter: Bagdogra to Gangtok in 35 minutes
+
+The **Sikkim Tourism Development Corporation (STDC)** runs a helicopter between **Bagdogra** and **Burtuk helipad** in Gangtok, about 4 km from town.
+
+| | Details |
+|---|---|
+| Flight time | about 35 minutes |
+| Fare | about ₹3,100 per person, one way, booked with STDC (agents may charge ₹3,500–5,500) |
+| Schedule | usually one flight each way per day (Bagdogra to Gangtok late morning) |
+| Baggage | **7 kg hand baggage only**; check-in luggage isn't included |
+| Weather | flights are often cancelled in bad weather, so keep a road backup |
+
+Book through STDC and reconfirm the day before you fly.
+
+## By train: New Jalpaiguri (NJP)
+
+**NJP** is the main railway station for Sikkim, with trains from Kolkata, Delhi, Guwahati and beyond. It's about **113 km from Gangtok, roughly 4 hours** by road. Shared and private taxis run from the station at similar fares to Bagdogra.
+
+**The Sevoke–Rangpo railway** into Sikkim is still being built. Extending it to Gangtok is a later phase, so there's **no train to Gangtok yet**.
+
+## By bus: SNT from Siliguri
+
+**Sikkim Nationalised Transport (SNT)** buses run from the **SNT bus stand in Siliguri** to Gangtok, mostly in the morning and early afternoon. Fares are about **₹240–500** depending on the bus, and the trip takes 4–5 hours. Check the day's timings at the bus stand or on a bus booking site.
+
+## Tips for the drive
+
+- **Leave by early afternoon.** It gets dark early in the hills, and the road through the Teesta gorge is slow.
+- **Expect traffic** around Sevoke and Rangpo, and delays from roadworks or landslides in the monsoon (June to September).
+- **Foreign nationals** need a Sikkim Restricted Area Permit, applied for online before travelling. See the [Sikkim permits guide](/guide/sikkim-permits-guide).
+- **Carry ID.** You'll pass a checkpost at Rangpo when entering Sikkim.
+
+## Plan the rest of your trip
+
+- [5-day Sikkim itinerary](/guide/sikkim-itinerary-5-days) · [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days)
+- [Sikkim trip cost](/guide/sikkim-trip-cost)
+- [Plan your trip with Himato](/chat): a day-by-day plan with drive times and permit info
+
+## FAQ
+
+**What is the nearest airport to Gangtok?**
+Bagdogra (IXB), about 123 km away, or about 4.5 hours by road. Pakyong airport near Gangtok has had no scheduled flights since June 2024.
+
+**How much is a taxi from Bagdogra to Gangtok?**
+About ₹400–600 per seat in a shared taxi, ₹2,500–4,000 for a private hatchback and ₹3,100–6,000 for a private SUV.
+
+**Is there a helicopter from Bagdogra to Gangtok?**
+Yes. STDC runs a helicopter to Burtuk helipad in about 35 minutes for around ₹3,100 per person one way, with hand baggage only. Flights depend on the weather.
+
+**Is there a train to Gangtok?**
+No. The nearest major station is New Jalpaiguri (NJP), about 4 hours away by road. A railway into Sikkim is under construction.
+
+**How long does it take to reach Gangtok from NJP?**
+About 4 hours for the 113 km drive, longer in traffic or bad weather.
+        `
+    },
     {
         id: 'sikkim-trip-cost',
         title: "Sikkim Trip Cost 2026: Budget, Mid-Range & Luxury Prices for 5–7 Days",
@@ -856,7 +972,7 @@ For **7 days**, add roughly 30–40%. These totals are our estimates, built from
 | Private hatchback (WagonR, Swift) | ₹2,500–4,000 per car | Up to 4 people |
 | Private SUV (Innova, Ertiga, Xylo) | ₹3,100–6,000 per car | Innova Crysta: up to about ₹7,000 |
 
-The drive takes about 4–5 hours. See the [5-day itinerary](/guide/sikkim-itinerary-5-days) for drive times.
+The drive takes about 4–5 hours. All the options, including the helicopter and buses: [How to reach Gangtok](/guide/how-to-reach-gangtok).
 
 ## Tsomgo Lake, Baba Mandir and Nathula
 
@@ -1008,7 +1124,7 @@ More detail: [Sikkim permits for foreign nationals](/guide/foreign-nationals-per
 - Documents: Voter ID, driving licence or passport, plus 2 photos (no Aadhaar or PAN)
 - **Usually open Wednesday to Sunday, closed Monday and Tuesday.** Always confirm for your date, because the army can close it for weather.
 - **Cost:** the government fee is about **₹200 per person**. With the vehicle and operator charges, a Nathula trip package usually comes to **₹4,000–5,000 per vehicle**.
-- At **14,400 ft**, Nathula is **strongly discouraged for children under 5** and for people with heart or blood pressure problems. See [Is Nathula safe with high blood pressure?](/guide/nathula-blood-pressure)
+- At **14,140 ft**, Nathula is **strongly discouraged for children under 5** and for people with heart or blood pressure problems. See [Is Nathula safe with high blood pressure?](/guide/nathula-blood-pressure)
 
 Which day to go: [Nathula on a Wednesday vs Sunday](/guide/nathula-permit-wed-sun).
 
@@ -1094,6 +1210,7 @@ Your operator needs your documents at least 24–48 hours before you leave Gangt
         title: "How to get a Sikkim permit for foreign nationals (ILP vs. PAP)",
         shortDescription: "The Expat/Foreigner Guide.",
         description: "Can foreigners visit Nathula? No. Can they visit North Sikkim? Yes, with rules. The complete breakdown.",
+        answer: "Foreign nationals need a free Restricted Area Permit, valid for 30 days and applied for online through e-FRRO before travel since January 2026. North Sikkim also needs a Protected Area Permit, in a group of two or more through a registered agent; Nathula and Gurudongmar aren't allowed.",
         category: 'Logistics',
         image: '/gathangvally.jpg',
         content: `
@@ -1116,6 +1233,7 @@ Officially the Restricted Area Permit (RAP). Free, valid for 30 days. **Since 12
         title: "Difference between Luxury vs. Standard North Sikkim packages",
         shortDescription: "Is the upgrade worth it?",
         description: "Standard means shared Sumo and basic wooden cottages. Luxury means Innova and heated hotels. A cost-benefit analysis.",
+        answer: "Standard North Sikkim packages (about ₹3,500 per person) use a shared Tata Sumo, basic homestays with erratic electricity and a fixed menu. Luxury packages (about ₹15,000 per person) give you a private Innova or Xylo, heated premium hotels and buffet meals; if you're over 40, the upgrade is worth it.",
         category: 'Logistics',
         image: '/gurudungmar.jpg',
         content: `
@@ -1141,6 +1259,7 @@ The price difference is huge (₹3,500 vs ₹15,000 per person). Why?
         title: "Can I take my Delhi-registered private car to North Sikkim?",
         shortDescription: "Self-drive rules explained.",
         description: "Driving your own car to Gurudongmar? It's complicated. You need a specific permit from Gangtok.",
+        answer: "Possibly, but it's not simple. You need a vehicle permit from the police checkpost in Gangtok with your RC, licence, insurance and PUC, and a high-clearance SUV, since hatchbacks scrape and get stuck. Rules for outside vehicles are changing in 2026, so check before you drive.",
         category: 'Logistics',
         image: '/zuluk.jpg',
         content: `
@@ -1165,6 +1284,7 @@ Sometimes, local taxi syndicates can be hostile to private cars doing "sightseei
         title: "Paragliding in Gangtok: High Fly vs. Medium Fly prices",
         shortDescription: "Flying over the capital.",
         description: "Understanding the difference between the 10-minute 'Medium' fly and the 30-minute 'High' fly.",
+        answer: "Medium Fly costs about ₹2,500–3,000 for 5–10 minutes at around 1,300–1,400 m. High Fly costs about ₹4,500–5,000 for 20–30 minutes from Bulbulay at about 2,200 m, with Kanchenjunga at eye level, and is worth the extra.",
         category: 'Adventure',
         image: '/fly-sikkim-adventure.jpg',
         content: `
@@ -1190,6 +1310,7 @@ Sometimes, local taxi syndicates can be hostile to private cars doing "sightseei
         title: "River Rafting in Teesta: Melli vs. Rangpo stretches",
         shortDescription: "White water thrills.",
         description: "Where to find Grade 3+ rapids vs. where to take the family for a gentle float.",
+        answer: "The Melli stretch, where the Teesta meets the Rangeet, is the popular one: Grade 2–3 rapids that are fun and safe for beginners and non-swimmers, on courses of about 7 km or 11 km. The Triveni/Bardang stretch is calmer, especially in winter, and better for birdwatching and riverside camping.",
         category: 'Adventure',
         image: '/riverrafting.jpg',
         content: `
@@ -1211,6 +1332,7 @@ Stronger currents in monsoon, but often calmer in winter. Better for birdwatchin
         title: "Where to eat the best Sikkimese 'Thukpa' in Gangtok (Local favorites)",
         shortDescription: "Slurping down comfort bowls.",
         description: "Skip the tourist traps. Here is where the locals eat hot noodle soup.",
+        answer: "For the best thukpa in Gangtok, go to Taste of Tibet on MG Marg for its rich, spicy mixed thukpa, Shuffle Momos for hand-pulled thenthuk, or the cheap, spicy stalls near Lal Bazaar.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1231,6 +1353,7 @@ If you want the cheap, spicy, greasy version that warms you instantly, head to t
         title: "The 'Cafe Live & Loud' guide: When to go for the best local bands",
         shortDescription: "Gangtok after dark.",
         description: "Sikkim has a huge rock/blues culture. This is the Mecca for live music.",
+        answer: "Café Live & Loud on Tibet Road is Gangtok's home of live rock music. Go on a Wednesday for acoustic sets you can talk over, or on Friday and Saturday for full bands playing covers and local originals.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1253,6 +1376,7 @@ Red walls, dim lights, great pork ribs, and the best sound system in town.
         title: "Visiting Sikkim in July: Dealing with leeches and rain",
         shortDescription: "The wet wilderness guide.",
         description: "Monsoon Sikkim is devastatingly green but filled with bloodsuckers. How to dress and prep.",
+        answer: "In July, carry a small pouch of salt to dab on leeches (they drop off instantly), tuck your trousers into high socks, and spray shoes with tobacco water as locals do. In return you get a lush, misty and almost tourist-free Sikkim with roaring waterfalls.",
         category: 'Seasonal',
         image: '/Dongu.jpg',
         content: `
@@ -1670,6 +1794,7 @@ Only lightly. Some wild cherry, peach and plum trees bloom in March and April, b
         title: "Spiritual significance of Khecheopalri Lake: Do's and Don'ts",
         shortDescription: "The wish-fulfilling lake.",
         description: "Why is this lake sacred to both Buddhists and Hindus? And why you shouldn't wish for material things here.",
+        answer: "Khecheopalri is a sacred, foot-shaped lake in West Sikkim, believed to be the footprint of Goddess Tara and revered by Buddhists and Hindus. Walk the boardwalk quietly and light a butter lamp, but don't feed the fish, dip your feet or wash anything in the lake.",
         category: 'Spiritual',
         image: '/pic_kupup_lake.jpg',
         content: `
@@ -1690,6 +1815,7 @@ They say birds pick up every leaf that falls onto the lake surface, keeping it p
         title: "Peace and meditation retreats near Ralong Monastery",
         shortDescription: "Finding inner peace in Ravangla.",
         description: "A guide to the guest houses and retreat centers around the magnificent Ralong Monastery.",
+        answer: "The guest house at Ralong Monastery, about 6 km from Ravangla, hosts visitors for meditation retreats. Expect 4 AM morning prayers, simple vegetarian monastic food and weak mobile signal, which makes it ideal for a digital detox.",
         category: 'Spiritual',
         image: '/tashiding.jpeg',
         content: `
@@ -1709,6 +1835,7 @@ The monastery guest house allows visitors to stay for meditation retreats.
         title: "Best tea-tasting experience at Temi Tea Garden",
         shortDescription: "Sip organic tea in the clouds.",
         description: "How to book a tea tasting session at the factory and what brings out the 'muscatel' flavor.",
+        answer: "At Temi, Sikkim's only tea garden, you can tour the factory to see withering, rolling and drying, then taste four teas (first flush, second flush, oolong and white) for about ₹200. Buy the Golden Flowery Orange Pekoe directly from the outlet.",
         category: 'Food',
         image: '/ravangla.jpg',
         content: `
@@ -1727,6 +1854,7 @@ Temi is Sikkim's only tea garden, renowned worldwide for its organic orthodox te
         title: "Visiting Buddha Park Ravangla during the evening prayer session",
         shortDescription: "Sunset spirituality.",
         description: "The park transforms at dusk. The lights, the chanting, and the view of Narsing peak.",
+        answer: "Stay past 4 PM, when most day-trippers leave. Around 5:30 PM the 130 ft Buddha statue at Ravangla lights up in gold and monks from nearby Rabong Monastery begin their evening chants. Bring a jacket: it gets windy and cold after sunset.",
         category: 'Spiritual',
         image: '/ravangla.jpg',
         content: `
@@ -1747,6 +1875,7 @@ At 5:30 PM, the massive 130ft Buddha statue is illuminated with golden lights. T
         title: "Hidden cocktail bars in Gangtok that play indie music",
         shortDescription: "Sipping creative mixes.",
         description: "Gangtok's nightlife isn't just beer. Discover speakeasy-style bars serving Rhododendron gin cocktails.",
+        answer: "Try The Mezzanine Lounge, tucked into the alleys near MG Marg, for indie music and a 'Sikkim Mule' made with local vodka and ginger, or Knock Bar at Hotel Tashi Delek, a wood-panelled, pub-style bar for a quiet Negroni.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1766,6 +1895,7 @@ Old school charm. The wood-paneled bar feels like a British pub. Great for a qui
         title: "Grocery shopping in Gangtok for long-term 'self-catering' stays",
         shortDescription: "Living like a local.",
         description: "Where to buy fresh organic veggies, yak cheese, and staples if you are renting an Airbnb.",
+        answer: "Buy fresh organic vegetables in the basement of Lal Bazaar (Kanchenjunga Shopping Complex), where villagers sell produce such as dalle chillies and ningro ferns, plus churpi (local cheese) in the dried-goods section. For bread, pasta and toiletries, Mangan Departmental Store is the best-stocked supermarket.",
         category: 'Workation',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1786,6 +1916,7 @@ For your bread, butter, pasta, and toiletries. It's the most stocked supermarket
         title: "How to rent a scooter or MTB in Gangtok for a week",
         shortDescription: "Two-wheeled freedom.",
         description: "Rental agencies, documents needed, and the best roads for a joyride.",
+        answer: "Rentals on Tibet Road cost about ₹600 a day for a scooter and ₹1,200 a day for a motorbike, with discounts for a week. You must leave your original driving licence as a deposit, and pillion riders must wear a helmet, which police strictly enforce.",
         category: 'Logistics',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1807,6 +1938,7 @@ Driving a scooter in Gangtok gives you freedom from taxi haggling.
         title: "High-speed internet availability in Pelling for Zoom calls",
         shortDescription: "Working from West Sikkim.",
         description: "Which networks work in Pelling? Airtel vs Jio speed tests.",
+        answer: "Yes. Jio 4G has the strongest signal in Pelling, with a consistent 20–30 Mbps that's good for video calls; Airtel covers the town but can be patchy indoors. Some premium hotels have fibre broadband, and a small UPS helps during power cuts in the rain.",
         category: 'Workation',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -1827,6 +1959,7 @@ Pelling is no longer off the grid.
         title: "Safest private cab services in Gangtok for a family of 6",
         shortDescription: "Reliable wheels for families.",
         description: "How to book 'Wagon-R' vs 'Innova' taxis and ensuring you get a sober, safe driver.",
+        answer: "For a family of 6 you need an Innova or Xylo, as a small car won't fit you. Use the prepaid taxi counter at Bagdogra, which tracks its drivers, or book one vehicle for the whole trip through a registered tour operator rather than picking up street taxis each day.",
         category: 'Logistics',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1844,6 +1977,7 @@ For a family of 6, you need an **Innova** or **Xylo**. A small car won't fit you
         title: "Is Nathula Pass safe for people with high blood pressure?",
         shortDescription: "Medical advisory for 14,000ft.",
         description: "The risks of HAPE/HACE. Why you should consult a doctor before visiting the border.",
+        answer: "Not if your blood pressure is uncontrolled or you have heart problems. Nathula is at 14,140 ft with roughly 60% of sea-level oxygen, and the altitude naturally raises blood pressure. Consult your doctor, and if in doubt stop at Tsomgo Lake (12,400 ft) and go no higher.",
         category: 'Family',
         image: '/gathangvally.jpg',
         content: `
@@ -1864,6 +1998,7 @@ High altitude constricts blood vessels, naturally raising blood pressure. If you
         title: "Best parks in Gangtok for toddlers to play safely",
         shortDescription: "Where to let the kids run.",
         description: "White Hall, Ridge Park, and flower shows. Safe, fenced areas for children.",
+        answer: "Ridge Park (White Hall), above the Flower Exhibition Centre, is a flat, paved, pedestrian-only stretch with space to run. MG Marg is also traffic-free: go before 10 AM, before the shoppers arrive.",
         category: 'Family',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -1883,6 +2018,7 @@ The entire road is pedestrian-only. Early mornings (before 10 AM) are perfect fo
         title: "How to plan a vegetarian-only trip through North Sikkim",
         shortDescription: "Surviving without meat.",
         description: "North Sikkim food is heavy on pork/chicken. What should vegetarians pack and order?",
+        answer: "Vegetarian food is always available in North Sikkim: dal-bhat (lentils and rice) and simple vegetable sabji. Ask whether 'veg soup' uses chicken stock, pack instant veg noodles, dry fruits and biscuits, and expect remote homestays to offer eggs as the only protein.",
         category: 'Food',
         image: '/tangu.jpeg',
         content: `
@@ -1904,6 +2040,7 @@ Instant noodles (Veg), dry fruits, and biscuits. Remote homestays might only hav
         title: "Accessible viewpoints in Sikkim that don't require climbing stairs",
         shortDescription: "No-hike stunning views.",
         description: "Tashi View Point requires climbing. Here are the ones you can drive right up to.",
+        answer: "Ganesh Tok's viewing gallery near the parking gives most of the view without the temple stairs; Burtuk Helipad, which you can drive onto when it's not in use, has a 360-degree view of Gangtok and Kanchenjunga; and Ban Jhakri Falls has a ramp almost to the base of the waterfall.",
         category: 'Family',
         image: '/gurudungmar.jpg',
         content: `
@@ -1926,6 +2063,7 @@ There is a ramp that leads almost all the way to the waterfall base.
         title: "Exploring Uttarey: The last village before the Nepal border",
         shortDescription: "End of the line in West Sikkim.",
         description: "The gateway to the Singalila trek. Using Uttarey as a quiet base for nature walks.",
+        answer: "Uttarey, about 20 km from Pelling near the Nepal border, is a quiet base for nature walks and the start of the Chewabhanjyang pass trek. Nearby are the powerful Mainbas Waterfall, an old Kagyu monastery in dense forest and the quirky ship-shaped Titanic Park.",
         category: 'Hidden Gem',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -1946,6 +2084,7 @@ It's the starting point for the Chewabhanjyang pass trek to Nepal.
         title: "Kewzing: Staying in a village surrounded by 7 monasteries",
         shortDescription: "The spiritual circle.",
         description: "Kewzing is a birdwatcher's paradise and holds spiritual significance for the Bhutias.",
+        answer: "Kewzing, near Ravangla, is a village known for its monasteries, including a rare one of the pre-Buddhist Bon faith, and for birdwatching. Stay through the Kewzing Home Stay Association with a local family, eating organic food from their garden.",
         category: 'Hidden Gem',
         image: '/tashiding.jpeg',
         content: `
@@ -1965,6 +2104,7 @@ The **Kewzing Home Stay Association** is very organized. You stay with local fam
         title: "Guide to 'Shared Taxis' in Sikkim: Routes, timings, and prices",
         shortDescription: "Travel like a local for cheap.",
         description: "How to navigate the synapses of Sikkim's transport network. Where are the stands? How to book a seat?",
+        answer: "Shared jeeps (Boleros and Sumos) leave Gangtok's Vajra Stand for North and East Sikkim and the Siliguri Stand at Deorali for West and South Sikkim, mostly between 12 PM and 2 PM. Book a seat at the counter a day ahead; Gangtok to Pelling costs about ₹400 a seat against ₹4,000 for a private car.",
         category: 'Logistics',
         image: '/zuluk.jpg',
         content: `
@@ -1987,6 +2127,7 @@ Sikkim runs on Boleros and Sumos.
         title: "How to save money on a North Sikkim trip by joining a group",
         shortDescription: "Cost-sharing hacks.",
         description: "Solo travelers can join 'package groups' to split the cost of the vehicle and permit.",
+        answer: "Join a shared 'per seat' North Sikkim package: about ₹3,500 instead of ₹15,000–20,000 for a private trip, covering a shared vehicle, standard shared rooms, meals and permits. Look for 'North Sikkim sharing available for tomorrow' boards on MG Marg and Tibet Road.",
         category: 'Logistics',
         image: '/gurudungmar.jpg',
         content: `
@@ -2010,6 +2151,7 @@ Walk down MG Marg or Tibet Road. Look for boards saying **"North Sikkim Sharing 
         title: "What to pack for Sikkim in December: The 'Layering' guide",
         shortDescription: "Freezing survival gear.",
         description: "Thermals aren't enough. You need windbreakers and proper shoes.",
+        answer: "Layer up for anything from about 10°C in Gangtok to −10°C at Gurudongmar: a thermal base layer, a fleece or heavy sweater, and a windproof, waterproof down jacket. Add waterproof gloves, two pairs of socks and boots with good grip, since sneakers slip on ice.",
         category: 'Logistics',
         image: '/gurudungmar.jpg',
         content: `
@@ -2033,6 +2175,7 @@ Temperatures will range from 10°C (Gangtok day) to -10°C (Gurudongmar morning)
         title: "Where to exchange currency or find reliable ATMs in Lachen/Lachung",
         shortDescription: "Cash is King.",
         description: "There are NO reliable ATMs in North Sikkim. You must withdraw in Gangtok.",
+        answer: "There are practically no reliable ATMs in Lachen or Lachung, so withdraw all the cash you need, plus about 20% extra, in Gangtok or Siliguri. UPI works in some hotels when the internet does, but drivers and small shops want cash.",
         category: 'Logistics',
         image: '/tangu.jpeg',
         content: `
@@ -2054,6 +2197,7 @@ UPI (GPay/PhonePe) works in some hotels/shops in Lachen/Lachung if the internet 
         title: "Red Panda sighting guide: Best time and locations in Sikkim",
         shortDescription: "Finding the state animal.",
         description: "Pangolakha and Kyongnosla are the hotspots. Why you need a naturalist guide.",
+        answer: "The best places to spot Sikkim's red panda are Pangolakha Wildlife Sanctuary near the Zuluk route and Barsey Rhododendron Sanctuary, in April–May or October–November. Go early morning or late afternoon, on foot and quietly, with a local naturalist tracker.",
         category: 'Adventure',
         image: '/Dongu.jpg',
         content: `
@@ -2079,6 +2223,7 @@ You cannot spot them from a loud jeep. You need to hike silently with a local na
         title: "Guide to the Samdruptse Hill hike from Namchi town",
         shortDescription: "Walking to the Wish Fulfilling Hill.",
         description: "A scenic 2km uphill walk through forests to reach the massive Guru Rinpoche statue.",
+        answer: "The Samdruptse hike from Namchi helipad is a moderate 2.5 km climb through oak and chestnut forest to the 135 ft statue of Guru Padmasambhava (Guru Rinpoche).",
         category: 'Spiritual',
         image: '/ravangla.jpg',
         content: `
@@ -2098,6 +2243,7 @@ Starts from Namchi Helipad. The path cuts through a dense forest of oak and ches
         title: "History of the Dubdi Monastery: Why it's the oldest in Sikkim",
         shortDescription: "The Hermit's Cell.",
         description: "A walk through history (literally) to the first monastery built in 1701.",
+        answer: "Dubdi Monastery near Yuksom was built in 1701 during the reign of Chogyal Chakdor Namgyal, making it Sikkim's oldest. It's a 3 km walk on a mossy stone path from Yuksom; inside are statues of the three lamas who consecrated Sikkim's first king.",
         category: 'History',
         image: '/tashiding.jpeg',
         content: `
@@ -2117,6 +2263,7 @@ Look for the original statues of the three lamas who consecrated the first king 
         title: "Where to find authentic 'Sikkimese Chang' (millet beer) in a local bar",
         shortDescription: "Drinking from bamboo.",
         description: "Tongba or Chang is a warm fermented millet drink. Here is where to try it hygienically.",
+        answer: "Try chang (tongba), warm fermented millet beer sipped through a bamboo straw, at Nimtho on MG Marg, served in traditional wooden tongbas, or at Absolute Demazong, a local favourite. Keep topping up with hot water: the flavour lasts 4–5 rounds.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -2137,6 +2284,7 @@ It's warm water poured over fermented grains. Keep refilling hot water; the tast
         title: "Best gym or yoga studios in Gangtok that offer weekly passes",
         shortDescription: "Staying fit on the road.",
         description: "Don't break your workout streak. Gyms with day passes.",
+        answer: "Gold's Gym Gangtok, near Deorali, offers 3-day and 7-day tourist passes, and studios such as Yoga with Mountains on Bypass Road run drop-in morning classes with Kanchenjunga views.",
         category: 'Workation',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -2154,6 +2302,7 @@ Several studios on the Bypass Road offer drop-in morning classes. The view of Ka
         title: "Mangalbarey Dara: The best-kept secret for sunrise in West Sikkim",
         shortDescription: "Better than Tiger Hill?",
         description: "A community-run viewpoint that offers 360-degree views without the Darjeeling crowds.",
+        answer: "Mangalbarey Dara, a community-run hilltop near Rinchenpong, has a small watchtower with a panoramic view of the whole Kanchenjunga range and the valleys of Kalimpong and Darjeeling. In October and November, arrive by 4:30 AM for sunrise.",
         category: 'Hidden Gem',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -2172,6 +2321,7 @@ Locals have built a small watchtower.
         title: "Tendong Hill: A 6-hour trek for the best 360-degree view of Sikkim",
         shortDescription: "The hill that saved the Lepchas.",
         description: "Legend says this hill rose like a horn to save people from a great flood. A nature trek through history.",
+        answer: "Tendong Hill is a 6 km uphill trek from Damthang, about 13 km from Namchi, through rhododendron and magnolia forest; the round trip takes about 6 hours. From the old watchtower at the top you can see the plains of Bengal to the south and Tibetan peaks to the north.",
         category: 'Adventure',
         image: '/ravangla.jpg',
         content: `
@@ -2190,6 +2340,7 @@ Locals have built a small watchtower.
         title: "Rinchenpong: The 'Poison Lake' legend and the British Bungalow",
         shortDescription: "History of resistance.",
         description: "How the Lepchas poisoned a lake to stop the British invasion. Exploring the historical Poison Lake.",
+        answer: "Rinchenpong's 'Poison Lake' is where, according to local history, Lepcha people poisoned the water with herbs in 1860 to stop invading British troops. The lake is now dried up and surrounded by forest; nearby is the Rinchenpong Bungalow, where Rabindranath Tagore once stayed.",
         category: 'History',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -2209,6 +2360,7 @@ Visit the **Rinchenpong Bungalow**, where Rabindranath Tagore once stayed.
         title: "Sumin Reserve Forest: A guide to the Gadi Fort ruins",
         shortDescription: "Archeology in the jungle.",
         description: "An offbeat hike near Singtam to discover ancient ruins and rare butterflies.",
+        answer: "Inside Sumin Reserve Forest near Singtam lies Budang Gadi, a moss-covered stone fort from the Chogyal era. The forest is also a hotspot for rare butterflies such as the Blue Duke and Kaiser-i-Hind.",
         category: 'Hidden Gem',
         image: '/Dongu.jpg',
         content: `
@@ -2228,6 +2380,7 @@ The forest is a hotspot for butterflies like the Blue Duke and Kaiser-i-Hind.
         title: "Okhrey: The gateway to Varsey that most people skip",
         shortDescription: "Sherpa hospitality.",
         description: "Why you should stay in Okhrey village before trekking to Barsey.",
+        answer: "Okhrey is a Sherpa village on the way to Barsey, worth a night for its culture: wooden homestays, local potato dishes, rhododendron wine and the Ugen Thonling Monastery, built in 1953.",
         category: 'Hidden Gem',
         image: '/Pelling_Sky_walk.jpg',
         content: `
@@ -2246,6 +2399,7 @@ Inhabited by the Sherpa community. You will find "Haryali" (local potato) dishes
         title: "Soreng: Cardamom plantation tours and village life",
         shortDescription: "The spice capital.",
         description: "Walk through miles of large cardamom plantations and learn how the 'black gold' is harvested.",
+        answer: "Soreng is the hub of Sikkim's large-cardamom farming. Visit in September or October, the harvest season, to help farmers cut the pods and see the wood-fired bhatti drying houses that give the spice its smoky flavour.",
         category: 'Hidden Gem',
         image: '/ravangla.jpg',
         content: `
@@ -2264,6 +2418,7 @@ September-October is harvest season.
         title: "Yangang: The hidden gem near Ravangla for slow travel",
         shortDescription: "Below the Mainam Hill.",
         description: "A quiet town known for the Bhaley Dunga cliff and its upcoming ropeway.",
+        answer: "Yangang, about 30 minutes from Ravangla, is a quiet and cheaper base known for the Bhaley Dunga rock, which juts out like a rooster's comb, as well as Tiger Rock (a picnic spot) and the spiritually important Neydam cave.",
         category: 'Hidden Gem',
         image: '/ravangla.jpg',
         content: `
@@ -2282,6 +2437,7 @@ Currently quiet, but famous for the **Bhaley Dunga** rock that protrudes like a 
         title: "Permit requirements for Nathula Pass on a Wednesday vs. Sunday",
         shortDescription: "Planning your border run.",
         description: "Nathula is closed Mon/Tue. Why Wednesday is the best day to go.",
+        answer: "Nathula is open Wednesday to Sunday and closed on Monday and Tuesday. Wednesday is often best: there may be fresh snow from Monday and Tuesday and none of the Sunday crowds, but demand for passes is high, so book about 2 days ahead.",
         category: 'Logistics',
         image: '/gathangvally.jpg',
         content: `
@@ -2304,6 +2460,7 @@ Which permit do you need for the rest of your trip? See the [complete Sikkim per
         title: "Rock climbing spots for amateurs in Bulbulay, Gangtok",
         shortDescription: "Climbing natural rocks.",
         description: "Did you know Gangtok has natural climbing faces? Local clubs offer gear and guidance.",
+        answer: "Near Tashi View Point there are natural rock faces for bouldering and top-roping at beginner to intermediate grades. Through local adventure outfits or the Sikkim Mountaineering Association, a 2-hour session with shoes and harness costs about ₹1,000.",
         category: 'Adventure',
         image: '/fly-sikkim-adventure.jpg',
         content: `
@@ -2322,6 +2479,7 @@ Contact the **Sikkim Mountaineering Association** or local adventure outfits.
         title: "Mountain biking route: Gangtok to Temi Tea Garden",
         shortDescription: "Downhill thrill.",
         description: "A 50km route that takes you from the capital to the tea gardens via winding downhill roads.",
+        answer: "The roughly 50 km ride from Gangtok to Temi Tea Garden runs downhill and flat to Singtam, then climbs steeply up to Temi. Rent a good mountain bike in Gangtok and start around 6 AM to avoid truck traffic on NH10.",
         category: 'Adventure',
         image: '/zuluk.jpg',
         content: `
@@ -2343,6 +2501,7 @@ The route from Gangtok to Temi via Singtam is thrilling.
         title: "Angling and fishing rules in the Rangeet River",
         shortDescription: "Catch and Release.",
         description: "You need a permit to fish. Where to find Golden Mahseer and Trout.",
+        answer: "You need a fishing permit from the Fisheries Directorate in Gangtok; only rod and line are allowed (nets are illegal), and the season runs October to December and March to April, closed in the monsoon breeding season. Legship on the Rangeet is anglers' favourite base for Golden Mahseer.",
         category: 'Adventure',
         image: '/riverrafting.jpg',
         content: `
@@ -2364,6 +2523,7 @@ Legship (West Sikkim) on the Rangeet river is the angler's favorite camp.
         title: "Best camping spots in Yumthang Valley with permissions",
         shortDescription: "Sleeping under the flowers.",
         description: "Can you pitch your own tent in the sanctuary? Yes, in designated zones.",
+        answer: "Yes, but only at the Forest Department's designated spots near the river. Declare 'camping' on your permit application in Gangtok, bring a sleeping bag rated to −10°C, and use only dead wood for strictly regulated campfires.",
         category: 'Adventure',
         image: '/yumgthang.jpeg',
         content: `
@@ -2383,6 +2543,7 @@ You cannot camp *anywhere*. The Forest Department has designated spots near the 
         title: "Vegan and Gluten-free dining options in Gangtok",
         shortDescription: "Dietary inclusive spots.",
         description: "Local fermented foods are naturally vegan. Where to find GF momos?",
+        answer: "Sikkim's fermented foods are naturally vegan: try gundruk (fermented leafy-green soup, ask for no butter) and kinema (fermented soybeans). In Gangtok, a Korean place on MG Marg serves vegan bibimbap, and Baker's Café makes gluten-free options on request.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -2404,6 +2565,7 @@ Sikkim is surprisingly vegan-friendly if you know what to order.
         title: "How to try 'Gundruk' and 'Sinki': A beginner's guide to fermented food",
         shortDescription: "Funk and flavor.",
         description: "Understanding the smell and taste of Sikkim's superfoods.",
+        answer: "Gundruk is dried, fermented mustard leaves and sinki is fermented radish root; both taste sour and earthy. Order gundruk ko jhol (gundruk soup) with rice: it's a probiotic dish that's good for your gut at altitude.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -2424,6 +2586,7 @@ Order "Gundruk ko Jhol" (Soup) with rice. It is a probiotic bomb, great for gut 
         title: "Best bakeries in Gangtok for freshly baked 'Tingmo'",
         shortDescription: "Steamed fluffy bread.",
         description: "Where to get the softest Tingmo (Tibetan bread) to dip in your curry.",
+        answer: "For soft tingmo (steamed Tibetan bread), go to Taste of Tibet for a big, hot, slightly sweet one that's perfect with chilli chicken, or Dragon Wok for crispy fried tingmo. For cinnamon rolls and doughnuts, try Loafing Around and Baker's Café.",
         category: 'Food',
         image: '/gangtok-bnnr.jpg',
         content: `
@@ -2444,6 +2607,7 @@ For desserts, **Loafing Around** and **Baker's Cafe** are the gold standard for 
         title: "Losoong Festival: Where to watch the Chhaam dances in December",
         shortDescription: "Sikkimese New Year.",
         description: "The Black Hat dance is a spectacle. Catch it at Rumtek or Phodong.",
+        answer: "Losoong, Sikkim's harvest new year, is held in December, when masked monks perform the Chhaam dance to drive away evil spirits. Rumtek Monastery has the biggest and most crowded celebration; Phodong and Tsuklakhang Palace are more intimate and better for photos.",
         category: 'Seasonal',
         image: '/tashiding.jpeg',
         content: `
