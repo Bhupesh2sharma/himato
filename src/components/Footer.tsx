@@ -101,7 +101,7 @@ export const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-ai-muted">
                 <Building2 className="w-5 h-5 text-ai-accent flex-shrink-0" />
-                <span>Waglogy</span>
+                <a href="https://waglogy.com/" target="_blank" rel="noopener" className="hover:text-ai-accent transition-colors">A Waglogy product</a>
               </li>
             </ul>
           </div>

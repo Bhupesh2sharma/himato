@@ -64,7 +64,13 @@ export function AboutPage() {
                 {/* Company */}
                 <section aria-labelledby="company">
                     <h2 id="company" className="text-2xl font-semibold mb-3">{ABOUT.company.heading}</h2>
-                    <p className="text-ai-muted mb-4">{ABOUT.company.body}</p>
+                    <p className="text-ai-muted mb-4">
+                        {ABOUT.company.body}{' '}
+                        Learn more about Waglogy at{' '}
+                        <a href={ABOUT.company.waglogy.website} target="_blank" rel="noopener" className="font-medium text-ai-text hover:text-ai-accent">waglogy.com</a>
+                        {' · '}<a href={ABOUT.company.waglogy.linkedin} target="_blank" rel="noopener" className="font-medium text-ai-text hover:text-ai-accent">LinkedIn</a>
+                        {' · '}<a href={ABOUT.company.waglogy.instagram} target="_blank" rel="noopener" className="font-medium text-ai-text hover:text-ai-accent">Instagram</a>.
+                    </p>
                     <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-3 text-sm">
                         <li><a href={`mailto:${ABOUT.company.email}`} className="inline-flex items-center gap-2 hover:text-ai-accent"><Mail className="w-4 h-4 text-ai-accent" />{ABOUT.company.email}</a></li>
                         <li><a href={`tel:${ABOUT.company.phone.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 hover:text-ai-accent"><Phone className="w-4 h-4 text-ai-accent" />{ABOUT.company.phone}</a></li>

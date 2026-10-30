@@ -207,7 +207,8 @@ ${intro}
 <h2>${esc(ABOUT.agents.heading)}</h2>${cards(ABOUT.agents.points)}
 <h2>${esc(ABOUT.guides.heading)}</h2>${list(ABOUT.guides.points)}
 <h2>${esc(ABOUT.company.heading)}</h2>
-<p>${esc(ABOUT.company.body)} Email ${esc(ABOUT.company.email)} · Phone ${esc(ABOUT.company.phone)} · <a href="${ABOUT.company.instagram}" rel="me">Instagram @himato_ai</a></p>`);
+<p>${esc(ABOUT.company.body)} More about Waglogy: <a href="${ABOUT.company.waglogy.website}">waglogy.com</a> · <a href="${ABOUT.company.waglogy.linkedin}">LinkedIn</a> · <a href="${ABOUT.company.waglogy.instagram}">Instagram</a>.</p>
+<p>Email ${esc(ABOUT.company.email)} · Phone ${esc(ABOUT.company.phone)} · <a href="${ABOUT.company.instagram}" rel="me">Instagram @himato_ai</a></p>`);
     }
     case '/reach_us':
       return layout(`

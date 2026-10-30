@@ -60,7 +60,12 @@ export const ABOUT = {
 
   company: {
     heading: 'Who we are',
-    body: 'Himato is a product of Waglogy.',
+    body: 'Himato is a product of Waglogy (Tech Waglogy LLP).',
+    waglogy: {
+      website: 'https://waglogy.com/',
+      linkedin: 'https://www.linkedin.com/company/waglogy',
+      instagram: 'https://www.instagram.com/waglogy/',
+    },
     email: 'hello@himato.in',
     phone: '+91 9733814168',
     instagram: 'https://www.instagram.com/himato_ai/',
