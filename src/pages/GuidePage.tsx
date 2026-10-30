@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, MapPin, Calendar, Share2, Sparkles, Brain, X } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { SEO_TOPICS } from '../data/seoTopics';
 import { apiClient } from '../services/api';
 import { chatWithSherpa } from '../services/ai';
@@ -19,20 +20,30 @@ interface GuideTopic {
     category: string;
     image: string;
     content: string;
+    answer?: string;
+    updated?: string;
     createdAt?: string;
     updatedAt?: string;
 }
+
+const CATEGORY_LOCATIONS: Record<string, string[]> = {
+    Workation: ['Gangtok', 'MG Marg', 'Tadong'],
+    Offbeat: ['Zuluk', 'Lungthung', 'Nathang Valley'],
+    Family: ['Ravangla', 'Pelling', 'Darap'],
+    Adventure: ['Lachen', 'Gurudongmar', 'Lachung', 'Zero Point'],
+};
 
 const toGuideInput = (t: GuideTopic): GuideInput => ({
     slug: t.id,
     title: t.title,
     shortDescription: t.shortDescription,
     description: t.description,
+    answer: t.answer,
     category: t.category,
     image: t.image,
     content: t.content,
     createdAt: t.createdAt,
-    updatedAt: t.updatedAt,
+    updatedAt: t.updatedAt ?? t.updated,
 });
 
 export const GuidePage = () => {
@@ -98,6 +109,7 @@ export const GuidePage = () => {
 
     const guide = toGuideInput(topic);
     const related = relatedGuides(guide, STATIC_GUIDES);
+    const locations = CATEGORY_LOCATIONS[topic.category] ?? [];
 
     return (
         <article className="min-h-screen bg-ai-dark text-ai-text selection:bg-ai-accent/30 font-sans">
@@ -159,12 +171,12 @@ export const GuidePage = () => {
                         <p className="text-ai-text leading-relaxed">{guideAnswer(guide)}</p>
                     </section>
 
-                    <div className="prose prose-lg max-w-none prose-headings:text-ai-text prose-headings:font-semibold prose-p:text-ai-muted prose-li:text-ai-muted prose-strong:text-ai-text">
+                    <div className="guide-prose">
                         {/* 
                             Note: In a real production app, we would sanitize this content.
                             Since it comes from our internal file, it's safe.
                         */}
-                        <ReactMarkdown>{topic.content}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{topic.content}</ReactMarkdown>
                     </div>
 
                     <div className="mt-10 pt-8 border-t border-black/10">
@@ -258,26 +270,19 @@ export const GuidePage = () => {
                             </div>
                         </motion.div>
 
-                        <div className="mt-4 bg-white border border-black/10 rounded-2xl p-6">
-                            <h4 className="font-semibold text-ai-text mb-4 flex items-center gap-2 text-sm">
-                                <MapPin className="w-4 h-4 text-ai-accent" />
-                                Locations Covered
-                            </h4>
-                            <div className="flex flex-wrap gap-2">
-                                {topic.category === 'Workation' && ['Gangtok', 'MG Marg', 'Tadong'].map(loc => (
-                                    <span key={loc} className="text-xs px-3 py-1 bg-black/5 rounded-lg border border-black/10 text-gray-500">{loc}</span>
-                                ))}
-                                {topic.category === 'Offbeat' && ['Zuluk', 'Lungthung', 'Nathang Valley'].map(loc => (
-                                    <span key={loc} className="text-xs px-3 py-1 bg-black/5 rounded-lg border border-black/10 text-gray-500">{loc}</span>
-                                ))}
-                                {topic.category === 'Family' && ['Ravangla', 'Pelling', 'Darap'].map(loc => (
-                                    <span key={loc} className="text-xs px-3 py-1 bg-black/5 rounded-lg border border-black/10 text-gray-500">{loc}</span>
-                                ))}
-                                {topic.category === 'Adventure' && ['Lachen', 'Gurudongmar', 'Lachung', 'Zero Point'].map(loc => (
-                                    <span key={loc} className="text-xs px-3 py-1 bg-black/5 rounded-lg border border-black/10 text-gray-500">{loc}</span>
-                                ))}
+                        {locations.length > 0 && (
+                            <div className="mt-4 bg-white border border-black/10 rounded-2xl p-6">
+                                <h4 className="font-semibold text-ai-text mb-4 flex items-center gap-2 text-sm">
+                                    <MapPin className="w-4 h-4 text-ai-accent" />
+                                    Locations Covered
+                                </h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {locations.map(loc => (
+                                        <span key={loc} className="text-xs px-3 py-1 bg-black/5 rounded-lg border border-black/10 text-gray-500">{loc}</span>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </aside>
             </main>
@@ -310,8 +315,8 @@ export const GuidePage = () => {
                                     <p className="text-ai-muted text-sm">Gathering everything about {topic.title}…</p>
                                 </div>
                             ) : (
-                                <div className="prose prose-sm max-w-none prose-headings:text-ai-text prose-headings:font-semibold prose-p:text-ai-muted prose-li:text-ai-muted prose-strong:text-ai-text">
-                                    <ReactMarkdown>{knowMoreContent}</ReactMarkdown>
+                                <div className="guide-prose guide-prose-sm">
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{knowMoreContent}</ReactMarkdown>
                                 </div>
                             )}
                         </div>

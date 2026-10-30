@@ -14,6 +14,8 @@ export const OPTIMIZED_IMAGES: Record<string, string> = {
     "/aritar.jpeg": "/aritar.opt.webp",
     "/borong.jpg": "/borong.webp",
     "/chardham.jpg": "/chardham.webp",
+    "/cherry-blossom-south-sikkim-road.jpg": "/cherry-blossom-south-sikkim-road.webp",
+    "/cherry-blossom-temi-tea-garden.jpg": "/cherry-blossom-temi-tea-garden.webp",
     "/fly-sikkim-adventure.jpg": "/fly-sikkim-adventure.webp",
     "/gangtok-bnnr copy.jpg": "/gangtok-bnnr copy.webp",
     "/gangtok-bnnr.jpg": "/gangtok-bnnr.webp",

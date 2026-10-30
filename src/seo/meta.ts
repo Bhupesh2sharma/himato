@@ -48,6 +48,7 @@ export interface GuideInput {
   title: string;
   shortDescription: string;
   description?: string;
+  answer?: string;
   category: string;
   image: string;
   content: string;
@@ -65,15 +66,17 @@ export const topicToGuide = (t: SeoTopic): GuideInput => ({
   title: t.title,
   shortDescription: t.shortDescription,
   description: t.description,
+  answer: t.answer,
   category: t.category,
   image: t.image,
   content: t.content,
+  updatedAt: t.updated,
 });
 
 export const STATIC_GUIDES: GuideInput[] = SEO_TOPICS.map(topicToGuide);
 
 /** The short, direct answer shown at the top of a guide (and used in FAQ schema). */
-export const guideAnswer = (g: GuideInput) => (g.description || g.shortDescription).trim();
+export const guideAnswer = (g: GuideInput) => (g.answer || g.description || g.shortDescription).trim();
 
 const breadcrumb = (items: { name: string; path: string }[]): JsonLd => ({
   '@context': 'https://schema.org',
@@ -138,7 +141,9 @@ export function guideMeta(g: GuideInput): PageMeta {
   return {
     path,
     title: `${g.title} | ${SITE_NAME}`,
-    description: truncate(`${answer}${/[.!?]$/.test(answer) ? '' : '.'} ${g.shortDescription}`.trim(), 160),
+    description: g.answer
+      ? truncate(answer, 160)
+      : truncate(`${answer}${/[.!?]$/.test(answer) ? '' : '.'} ${g.shortDescription}`.trim(), 160),
     image: g.image,
     imageAlt: g.title,
     type: 'article',

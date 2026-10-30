@@ -7,6 +7,10 @@ export interface SeoTopic {
     category: 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
     image: string;
     content: string; // Markdown content for the guide
+    /** Direct 1–3 sentence answer shown as "Quick answer" and used in FAQ schema / AI answers. Falls back to `description`. */
+    answer?: string;
+    /** YYYY-MM-DD the guide's facts were last checked. Falls back to GUIDES_LAST_REVIEWED. */
+    updated?: string;
 }
 
 export const SEO_TOPICS: SeoTopic[] = [
@@ -686,20 +690,99 @@ The waterfalls are roaring monsters. The clouds play tag with the mountains. It'
     },
     {
         id: 'cherry-blossom-sikkim',
-        title: "The 'Cherry Blossom' season in South Sikkim (November guide)",
-        shortDescription: "Pink winter is coming.",
-        description: "Forget Japan. November in Temi Tea Garden and Ravangla paints the town pink.",
+        title: "Cherry Blossom in Sikkim 2026: When and Where to See It",
+        shortDescription: "Peak bloom dates, the Cherry Festival (25–28 Nov 2026), the best spots and how to get there.",
+        description: "Sikkim's cherry blossoms bloom in autumn, peaking mid to late November. Temi Tea Garden is the best place to see them.",
+        answer: "Sikkim's cherry blossoms bloom in autumn, not spring: from late October into February, with the main peak from mid to late November. The best place to see them is Temi Tea Garden in South Sikkim, about 2 hours from Gangtok. The Sikkim Cherry Festival 2026 runs from 25 to 28 November.",
+        updated: '2026-10-30',
         category: 'Seasonal',
-        image: '/ravangla.jpg',
+        image: '/cherry-blossom-temi-tea-garden.jpg',
         content: `
-# Sikkim's Sakura Season
+# Cherry Blossom in Sikkim: The 2026 Guide
 
-Every November, the Cherry Blossom Festival (usually in Ravangla or Temi) kicks off.
+Most people expect cherry blossoms in spring. In Sikkim they arrive in **autumn**. The trees here are mostly Himalayan wild cherry (*Prunus cerasoides*), which flowers in late autumn and early winter, unlike Japanese sakura, which bloom in spring. For a few weeks the tea slopes and mountain roads of South Sikkim turn pink.
 
-## Where to see them
-*   **Temi Tea Garden:** The pink trees lining the green tea slopes is a photographer's dream contrast.
-*   **Ravangla:** The road to Ralong Monastery is often lined with full blooms.
-*   **Khangchendzonga National Park:** Wild cherry trees bloom amidst the dense green forest.
+## When do cherry blossoms bloom in Sikkim?
+
+| Period | What you'll see |
+|---|---|
+| Late October | First trees start flowering |
+| **Mid to late November** | **Peak bloom: the best time to go** |
+| December to February | Blossoms continue on and off, thinning out |
+| March to April | Light spring blooms of wild cherry, peach and plum (not the main show) |
+
+**Best dates for 2026:** plan for **15–30 November**. If you can, time your trip for the **Sikkim Cherry Festival, 25–28 November 2026**.
+
+## Sikkim Cherry Festival 2026
+
+- **Dates:** 25 to 28 November 2026
+- **What's on:** live music, cultural performances, local Sikkimese food stalls, adventure sports such as paragliding and mountain biking, and guided walks through the pink-lined tea slopes
+- **Tip:** stays near Temi, Namchi and Ravangla fill up around festival dates, so book early. Check the final schedule with Sikkim Tourism a week before you travel.
+
+## Where to see cherry blossoms in Sikkim
+
+| Place | Why go | From Gangtok |
+|---|---|---|
+| **Temi Tea Garden** (Temi-Tarku, South Sikkim) | The best spot. Pink cherry trees against 400 acres of green tea bushes, with walking paths and a multi-level watchtower | About 2 hours (~50 km) |
+| **Ravangla** | Rows of blooming cherry trees along the roads towards Ralong Monastery | About 2.5 hours |
+| **Gangtok** | Occasional blossoms around Ridge Park, the Flower Exhibition Centre and Jawaharlal Nehru Botanical Garden | In town |
+| **Khangchendzonga National Park** | Wild cherry trees flowering in dense forest, for trekkers | Varies by trail |
+
+### Temi Tea Garden
+
+Sikkim's only tea estate is the classic cherry blossom view: a winding road and terraced tea bushes, with pink trees along the edges. Walk the paths between the bushes, then climb the **watchtower** for the view over the whole slope. Go in the morning, when the light is soft and the garden is quieter.
+
+### Ravangla and the road to Ralong Monastery
+
+![Cherry blossom trees lining a quiet road in South Sikkim](/cherry-blossom-south-sikkim-road.jpg)
+
+The drive from Ravangla towards Ralong Monastery has long stretches lined with cherry trees. It pairs well with Temi on the same trip, and Ravangla's Buddha Park is close by.
+
+## How to reach Temi Tea Garden
+
+| From | Time by road | Distance |
+|---|---|---|
+| Gangtok (via Singtam) | About 2 hours | ~50 km |
+| Namchi | About 45 minutes | ~20 km |
+| Siliguri / Bagdogra airport | About 4.5–5 hours | — |
+
+**From Gangtok:** a day trip works, but you'll spend about 4 hours on the road. Staying a night near Temi, Namchi or Ravangla lets you see the garden in the morning light.
+
+**From Bagdogra or Siliguri:** don't do it in one day. Drive to Namchi or Ravangla, stay overnight, and visit Temi the next morning.
+
+## A 3-day cherry blossom trip
+
+**Day 1: Gangtok to Temi.** Leave Gangtok in the morning (about 2 hours). Spend the afternoon walking Temi Tea Garden and climb the watchtower. Stay near Temi or Namchi.
+
+**Day 2: Ravangla and Ralong.** Early morning at Temi for photos, then drive to Ravangla. Visit Buddha Park and drive the cherry-lined road towards Ralong Monastery. Stay in Ravangla.
+
+**Day 3: back to Gangtok.** Drive back to Gangtok (about 2.5 hours), or continue towards Siliguri or Bagdogra if you're flying out.
+
+Want this planned around your dates and group? [Plan your cherry blossom trip](/chat): Himato builds the day-by-day plan, with stays and drive times.
+
+## Tips
+
+- **Go in mid to late November** for full bloom. Late October is early; by December the bloom is thinning.
+- **Mornings are best** for photos and fewer people.
+- **Pack warm layers.** November mornings and evenings in the hills are cold.
+- **During festival dates** (25–28 Nov), book stays and taxis in advance.
+
+## FAQ
+
+**When is the best time to see cherry blossoms in Sikkim?**
+Mid to late November is the peak. Blossoms start in late October and continue lightly until February.
+
+**Where is the best place to see cherry blossoms in Sikkim?**
+Temi Tea Garden in South Sikkim, where the pink trees line a winding road through green tea slopes. The roads around Ravangla towards Ralong Monastery come second.
+
+**Can I visit Temi Tea Garden as a day trip from Gangtok?**
+Yes. It's about 2 hours each way (~50 km via Singtam). An overnight stay nearby is better if you want morning light.
+
+**When is the Sikkim Cherry Festival 2026?**
+25 to 28 November 2026, with music, cultural shows, local food, paragliding, mountain biking and guided walks through the tea slopes.
+
+**Are there cherry blossoms in Sikkim in spring?**
+Only lightly. Some wild cherry, peach and plum trees bloom in March and April, but the main cherry blossom season is autumn.
         `
     }
     ,

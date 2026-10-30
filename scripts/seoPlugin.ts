@@ -3,6 +3,7 @@ import path from 'node:path';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { Plugin, ResolvedConfig } from 'vite';
 import {
   absUrl,
@@ -87,7 +88,7 @@ function renderHead(meta: PageMeta, { canonical = true } = {}): string {
 
 const markdownToHtml = (md: string) =>
   // The page already has an <h1> (the guide title), so demote markdown h1s.
-  renderToStaticMarkup(createElement(Markdown, { components: { h1: 'h2' } }, md));
+  renderToStaticMarkup(createElement(Markdown, { components: { h1: 'h2' }, remarkPlugins: [remarkGfm] }, md));
 
 const STATIC_CSS = `
 .seo-static{font-family:Inter,system-ui,sans-serif;background:#f6f1e7;color:#0e1116;line-height:1.65;min-height:100vh}
