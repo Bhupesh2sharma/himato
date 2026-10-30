@@ -38,6 +38,8 @@ You MUST have a confirmed booking with a local homestay. Your host is your spons
 
 ## Cost
 Technically, the permit fee is nominal, but hosts might charge a service fee for the travel to Mangan.
+
+Which permit do you need for the rest of your trip? See the [complete Sikkim permits guide](/guide/sikkim-permits-guide).
         `
     },
     {
@@ -109,7 +111,7 @@ The lake stays completely or partly frozen from **November to March/April**. Of 
 
 ## Permit rules
 
-Gurudongmar is near a sensitive international border, so **you can't go independently**.
+Gurudongmar is near a sensitive international border, so **you can't go independently**. (For every other Sikkim permit, see the [complete Sikkim permits guide](/guide/sikkim-permits-guide).)
 
 - **Permit:** a **Protected Area Permit (PAP)**, arranged by a **registered Sikkim tour operator**
 - **When:** at least **24–48 hours** before you leave Gangtok
@@ -134,7 +136,7 @@ The early start isn't optional. Miss the army cut-off and you turn back without 
 You climb from **Lachen at about 9,000 ft (2,750 m)** to **17,800 ft (5,430 m)** in one morning. Oxygen at the lake is close to **50% of sea level**.
 
 - **A night in Lachen is mandatory**, to help your body adjust.
-- **Children under 5** are not allowed past the army camps. **Under 8** is strongly discouraged.
+- **Children under 5:** operators report they aren't allowed past the army checkposts, so confirm with yours before booking. **Under 8** is strongly discouraged.
 - **Over 65, or with heart conditions, asthma or high blood pressure:** strongly advised not to go. See our guide on [Nathula and high blood pressure](/guide/nathula-blood-pressure).
 - **Vehicles must carry a working oxygen cylinder.**
 - **Turn back** if anyone has a severe headache, vomiting, confusion or real trouble breathing. Going down is the treatment for altitude sickness.
@@ -187,7 +189,7 @@ No. Foreign nationals can get permits only as far as Thangu Valley or Yumthang V
 No. Bring a Voter ID or Driving Licence, plus two passport-size photos. Aadhaar and PAN cards are not accepted as primary ID.
 
 **Can children go to Gurudongmar Lake?**
-Children under 5 are not allowed past the army camps, and under 8 is strongly discouraged. Children under 18 need a birth certificate or passport for the permit.
+Operators report that children under 5 aren't allowed past the army checkposts, and under 8 is strongly discouraged. Confirm with your operator. Children under 18 need a birth certificate or passport for the permit.
 
 **How long can you stay at Gurudongmar Lake?**
 Usually 30 to 45 minutes. Everyone must head back down by noon.
@@ -217,7 +219,7 @@ Kupup Lake (Elephant Lake) is on the Old Silk Route, past Nathula and Baba Mandi
 *   **04:00 PM:** Back in Gangtok.
 
 ## Permit Note
-Ask for a permit that includes "Nathula and Beyond" or specifically mentions Kupup/Zuluk route. Standard Tsomgo permits won't work.
+Ask for a permit that includes "Nathula and Beyond" or specifically mentions Kupup/Zuluk route. Standard Tsomgo permits won't work. Foreigners are not allowed on this route. See the [complete Sikkim permits guide](/guide/sikkim-permits-guide).
         `
     },
     {
@@ -618,6 +620,144 @@ Start from Hilley (reachable by car). Walk 4km on a flat, well-paved path to Gur
 
     // --- Category 6: "Logistics & Niche Hacks" ---
     {
+        id: 'sikkim-permits-guide',
+        title: "Sikkim Permits 2026: Which Permit You Need for Every Place (Indians & Foreigners)",
+        shortDescription: "Tsomgo, Nathula, Zuluk, North Sikkim, Dzongu and Goecha La: who needs a permit, how to get it and what to carry.",
+        description: "Indians need no permit for Gangtok, Pelling or South Sikkim, but do need one for Tsomgo, Nathula, Zuluk, North Sikkim and Dzongu.",
+        answer: "Indian citizens need no permit for Gangtok, Pelling, Ravangla, Namchi or Temi. They do need a permit, arranged by a registered tour operator, for Tsomgo Lake, Nathula, Zuluk, North Sikkim (Lachung, Yumthang, Lachen, Gurudongmar) and Dzongu. Carry a Voter ID, driving licence or passport and passport photos, because Aadhaar is not accepted. Foreigners need a Restricted Area Permit, applied for online via e-FRRO, and can't visit Nathula, Zuluk or Gurudongmar.",
+        updated: '2026-10-30',
+        category: 'Logistics',
+        image: '/gathangvally.jpg',
+        content: `
+# Sikkim Permits: The Complete 2026 Guide
+
+Sikkim borders China (Tibet), Nepal and Bhutan, so many of its best places are **protected areas**. You can't drive into them on your own. You need a permit, and for most of them a **registered Sikkim tour operator** applies on your behalf. Here's exactly what you need, place by place.
+
+## Sikkim permits at a glance
+
+| Place | Indians | Foreigners | How you get it |
+|---|---|---|---|
+| Gangtok, Pelling, Ravangla, Namchi, Temi | **No permit** | Restricted Area Permit (RAP) | Foreigners: online via e-FRRO |
+| Tsomgo Lake, Baba Mandir | Permit needed | Allowed with permit | Registered tour operator |
+| **Nathula Pass** | Permit needed | **Not allowed** | Registered tour operator, a day ahead |
+| Kupup, Zuluk (Old Silk Route) | Permit needed | **Not allowed** | Zuluk homestay (via Rongli) or Gangtok operator |
+| Lachung, Yumthang, Zero Point | Permit needed | Allowed, groups of 2+ | Registered tour operator, 24–48 h ahead |
+| Lachen, Thangu, **Gurudongmar** | Permit needed | **Up to Thangu only**, groups of 2+ | Registered tour operator, 24–48 h ahead |
+| Dzongu | Permit needed | Check with your host | Your homestay host, 3–4 days ahead |
+| Goecha La / Dzongri trek | Trekking permits | RAP + groups of 2+ | Registered trekking agency, at Yuksom |
+
+## Documents to carry (Indian citizens)
+
+- **Original Voter ID, driving licence or passport**, plus photocopies
+- **Passport-size photos.** Usually 2 per person per permit, so carry several spares.
+- **Children under 18:** a birth certificate or passport
+- **Aadhaar and PAN cards are not accepted** for protected-area permits. This is the most common reason people get stuck in Gangtok.
+
+## Foreign nationals
+
+- **Since 12 January 2026, Sikkim no longer issues paper permits for foreigners on arrival.** You apply online for the **Restricted Area Permit (RAP)** through the **e-FRRO** portal before you travel. The RAP is sometimes called the Sikkim ILP.
+- The RAP is **free** and initially valid for **30 days**.
+- Protected areas (Tsomgo, North Sikkim) need an **extra permit** on top of the RAP. You must travel **in a group of two or more** with a **registered Sikkim travel agent**.
+- **Not allowed for foreigners:** Nathula Pass, Zuluk and the Old Silk Route (Kupup, Gnathang), and Gurudongmar Lake. In North Sikkim foreigners can go as far as **Thangu Valley**, **Yumthang** and **Zero Point**.
+
+More detail: [Sikkim permits for foreign nationals](/guide/foreign-nationals-permit).
+
+## Tsomgo Lake and Baba Mandir
+
+- Permit needed for **everyone**, arranged by a **registered tour operator** or travel agency
+- Documents: Voter ID, driving licence or passport, plus 2 photos
+- Open **daily**, subject to weather and road conditions
+- Operators usually confirm permits the afternoon before you go
+
+## Nathula Pass
+
+- **Indian citizens only.** Foreigners are not allowed.
+- Your **registered operator applies a day ahead**, and daily slots are limited, so book early.
+- Documents: Voter ID, driving licence or passport, plus 2 photos (no Aadhaar or PAN)
+- **Usually open Wednesday to Sunday, closed Monday and Tuesday.** Always confirm for your date, because the army can close it for weather.
+- **Cost:** the government fee is about **₹200 per person**. With the vehicle and operator charges, a Nathula trip package usually comes to **₹4,000–5,000 per vehicle**.
+- At **14,400 ft**, Nathula is **strongly discouraged for children under 5** and for people with heart or blood pressure problems. See [Is Nathula safe with high blood pressure?](/guide/nathula-blood-pressure)
+
+Which day to go: [Nathula on a Wednesday vs Sunday](/guide/nathula-permit-wed-sun).
+
+## Kupup, Zuluk and the Old Silk Route
+
+- **Indian citizens only.** Foreigners are not allowed beyond Rongli.
+- Your **Zuluk homestay** usually arranges it through the **Rongli SDPO office**, or a **Gangtok operator** can. The Rongli office keeps limited hours, so don't count on getting it on a Sunday.
+- Documents: Voter ID, driving licence or passport, plus 2 photos
+- Open daily, except when heavy winter snow blocks the road
+
+Plan the route: [Kupup Lake day trip from Gangtok](/guide/kupup-lake-day-trip) · [Zuluk's hairpin bends in winter](/guide/zuluk-hairpin-bends-winter)
+
+## North Sikkim: Lachung, Yumthang and Zero Point
+
+- Permit (PAP) needed for **everyone**. Your **registered operator** applies **24–48 hours** before you leave Gangtok.
+- Documents: Voter ID, driving licence or passport, plus 2 photos
+- **Foreigners:** allowed up to Yumthang and Zero Point, in groups of 2+
+- **Zero Point:** there's no official extra permit, but local taxi drivers usually charge **about ₹3,000–3,500 extra per vehicle** to drive beyond Yumthang
+
+## North Sikkim: Lachen, Thangu and Gurudongmar
+
+- Permit (PAP) needed for **everyone**, through a **registered operator**, **24–48 hours** ahead
+- Documents: **Voter ID or driving licence**, plus 2 photos. No Aadhaar or PAN. Minors: a birth certificate.
+- **Foreigners:** up to Thangu only, in groups of 2+
+- **Young children:** operators report that children under 5 aren't allowed past the army checkposts. Confirm with your operator before booking.
+
+Full details, including timings and army cut-offs: [Best time to visit Gurudongmar Lake](/guide/gurudongmar-frozen-lake-best-time).
+
+## Dzongu
+
+Dzongu is a protected reserve for the Lepcha community.
+
+- You **must have a confirmed homestay booking**. Your host sponsors your permit.
+- Send your host your **Voter ID or passport and a photo** **3–4 days ahead**. They get the permit issued at the **DC office in Mangan**.
+- You collect it at the Mangan or Sankalang checkpost.
+
+Step by step: [Dzongu permit with a homestay](/guide/dzongu-permit-homestay).
+
+## Goecha La and Dzongri trek
+
+Trekking permits for Khangchendzonga National Park are processed by a **registered trekking agency** at **Yuksom**, and include park entry and camping charges. Foreigners need a valid RAP and must trek in groups of two or more. Your agency will tell you the exact documents for your dates.
+
+## Where you don't need a permit (Indian citizens)
+
+Gangtok (including MG Marg, Rumtek and Hanuman Tok), **Pelling**, **Ravangla**, **Namchi**, **Temi Tea Garden**, **Yuksom** town and most of South and West Sikkim. Just carry a photo ID.
+
+## Tips that save a day
+
+- **Apply 1–2 days ahead** through your operator, especially for Nathula, where slots are limited.
+- **Bring originals and photocopies**, and extra photos.
+- **Don't plan Nathula on a Monday or Tuesday.**
+- **Build in a buffer day.** Weather or the army can close Nathula, Zuluk or North Sikkim at short notice.
+- **Check the rules close to your date.** They change, and this guide reflects what we know as of October 2026.
+
+Want a plan with the permits built in? [Plan your Sikkim trip](/chat): Himato's itineraries include permit info for every stop.
+
+## FAQ
+
+**Do Indians need a permit to visit Sikkim?**
+Not to enter Sikkim or to visit Gangtok, Pelling, Ravangla, Namchi or Temi. You do need a permit for protected areas: Tsomgo Lake, Nathula, Zuluk, North Sikkim and Dzongu.
+
+**Is Aadhaar card accepted for Sikkim permits?**
+No. For protected-area permits, carry a Voter ID, driving licence or passport, plus passport-size photos. Minors can use a birth certificate.
+
+**Can I get a Sikkim protected-area permit myself?**
+Generally no. For Tsomgo, Nathula and North Sikkim, a registered Sikkim tour operator applies on your behalf. For Dzongu, your homestay host does.
+
+**Which days is Nathula Pass open?**
+Usually Wednesday to Sunday. It's closed on Monday and Tuesday, and can also close for weather.
+
+**Can foreigners visit Nathula, Zuluk or Gurudongmar?**
+No. Foreigners can visit Tsomgo, Lachung, Yumthang, Zero Point and Thangu Valley with the right permits, in groups of two or more, through a registered agent.
+
+**How do foreigners get the Sikkim permit in 2026?**
+Online, through the e-FRRO portal, before travelling. Paper permits on arrival were stopped in January 2026. The Restricted Area Permit is free and valid for 30 days.
+
+**How far in advance should I apply for a North Sikkim permit?**
+Your operator needs your documents at least 24–48 hours before you leave Gangtok.
+        `
+    },
+    {
         id: 'foreign-nationals-permit',
         title: "How to get a Sikkim permit for foreign nationals (ILP vs. PAP)",
         shortDescription: "The Expat/Foreigner Guide.",
@@ -630,7 +770,7 @@ Start from Hilley (reachable by car). Walk 4km on a flat, well-paved path to Gur
 Sikkim shares borders with 3 countries, making rules strict.
 
 ## The ILP (Inner Line Permit)
-Free. Get it at the Rangpo border checkpost or online. Allows entry to Gangtok, South, and West Sikkim.
+Officially the Restricted Area Permit (RAP). Free, valid for 30 days. **Since 12 January 2026 it's online only:** apply through the e-FRRO portal before you travel, as paper permits are no longer issued at Rangpo. Allows entry to Gangtok, South and West Sikkim. See the [complete Sikkim permits guide](/guide/sikkim-permits-guide).
 
 ## The PAP (Protected Area Permit) for North Sikkim
 *   **Must:** Be in a group of 2 or more. Solo foreigners are NOT allowed.
@@ -1526,6 +1666,8 @@ Currently quiet, but famous for the **Bhaley Dunga** rock that protrudes like a 
 Sunday is packed with domestic tourists (weekend rush). Wednesday is the first day it opens after the break. 
 *   **Pro:** Fresh snow (if it snowed Mon/Tue).
 *   **Con:** High demand for passes as backlog clears. Book 2 days prior!
+
+Which permit do you need for the rest of your trip? See the [complete Sikkim permits guide](/guide/sikkim-permits-guide).
         `
     },
     {
