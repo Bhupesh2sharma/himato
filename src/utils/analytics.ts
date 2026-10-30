@@ -60,7 +60,7 @@ if (typeof window !== 'undefined') {
   }
 }
 
-const attribution = () => {
+export const attribution = () => {
   let session: Landing | null = null;
   let first: Landing | null = null;
   try {

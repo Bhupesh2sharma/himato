@@ -311,6 +311,8 @@ class ApiClient {
   }
 
   // Public: tourist sends their itinerary to selected agents.
+  // A quote request: lands in the Himato admin inbox; preferred agents are
+  // only contacted once an admin approves it.
   async createLead(data: {
     agentIds: string[];
     touristName: string;
@@ -318,7 +320,8 @@ class ApiClient {
     touristEmail?: string;
     message?: string;
     itineraryData: any;
-  }): Promise<{ status: string; data: { count: number; slug: string | null } }> {
+    attribution?: { landingPage?: string; firstLandingPage?: string; referrer?: string };
+  }): Promise<{ status: string; data: { requestId: string; preferredCount: number; slug: string | null } }> {
     return this.request('/api/leads', { method: 'POST', body: JSON.stringify(data) });
   }
 

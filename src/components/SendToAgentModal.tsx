@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, Loader2, Phone, Users, MapPin, BadgeCheck } from 'lucide-react';
 import { apiClient } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-import { track } from '../utils/analytics';
+import { track, attribution } from '../utils/analytics';
 
 interface Agent {
     _id: string;
@@ -72,7 +72,8 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
             return next;
         });
 
-    const canSubmit = selected.size > 0 && form.name.trim() && form.phone.trim() && !submitting;
+    // Agents are optional preferences; our team reviews every request first.
+    const canSubmit = form.name.trim() && form.phone.trim() && !submitting;
 
     const submit = async () => {
         if (!canSubmit) return;
@@ -86,9 +87,14 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                 touristEmail: form.email.trim() || undefined,
                 message: form.message.trim() || undefined,
                 itineraryData: data,
+                attribution: (({ landing_page, first_landing_page, landing_referrer }) => ({
+                    landingPage: landing_page,
+                    firstLandingPage: first_landing_page,
+                    referrer: landing_referrer,
+                }))(attribution()),
             });
-            setDone(res.data.count);
-            track('lead_sent_to_agent', { agents: res.data.count });
+            setDone(res.data.preferredCount);
+            track('lead_sent_to_agent', { preferred_agents: res.data.preferredCount });
         } catch (err: any) {
             setError(err.message || 'Could not send. Please try again.');
         } finally {
@@ -114,9 +120,9 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                         {/* Header */}
                         <header className="flex items-center justify-between px-6 py-4 border-b border-black/8">
                             <div>
-                                <p className="text-[10px] uppercase tracking-[0.18em] text-ai-accent font-bold">Get quotes</p>
+                                <p className="text-[10px] uppercase tracking-[0.18em] text-ai-accent font-bold">Get free quotes</p>
                                 <h3 className="text-lg font-bold text-ai-text">Send to a travel agent</h3>
-                                <p className="text-xs text-ai-muted mt-0.5">Vetted Sikkim agencies — they'll call you back with a custom quote.</p>
+                                <p className="text-xs text-ai-muted mt-0.5">Our team reviews your trip and connects you with vetted Sikkim agencies for a custom quote.</p>
                             </div>
                             <button onClick={onClose} className="text-ai-muted hover:text-ai-text" aria-label="Close">
                                 <X className="w-5 h-5" />
@@ -135,15 +141,17 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                                     <Check className="w-8 h-8 text-white" strokeWidth={3} />
                                 </motion.div>
                                 <h4 className="text-2xl font-bold text-ai-text">
-                                    Request sent{form.name ? `, ${form.name.trim().split(' ')[0]}` : ''}!
+                                    Request received{form.name ? `, ${form.name.trim().split(' ')[0]}` : ''}!
                                 </h4>
                                 <p className="text-sm text-ai-muted mt-1.5">
-                                    Your itinerary is on its way to {done} {done === 1 ? 'agent' : 'agents'}.
+                                    {done > 0
+                                        ? `Our team will review your trip and pass it to ${done === 1 ? 'the agent' : 'the agents'} you chose.`
+                                        : 'Our team will review your trip and match you with the right local agents.'}
                                 </p>
 
                                 {/* Who it went to — concrete + reassuring */}
                                 <div className="flex flex-wrap justify-center gap-2 mt-4">
-                                    {agents.filter((a) => selected.has(a._id)).map((a, i) => (
+                                    {done > 0 && agents.filter((a) => selected.has(a._id)).map((a, i) => (
                                         <span key={a._id} className="inline-flex items-center gap-1.5 pl-1 pr-3 py-1 rounded-full bg-ai-dark border border-black/8">
                                             <span className="w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold flex-none"
                                                 style={{ background: AVATAR_ACCENTS[i % AVATAR_ACCENTS.length] }}>
@@ -158,7 +166,7 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                                 {form.phone && (
                                     <div className="mt-5 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-ai-accent/8 border border-ai-accent/20">
                                         <Phone className="w-4 h-4 text-ai-accent" />
-                                        <span className="text-sm text-ai-text">Keep your phone handy — they'll call <span className="font-bold">{form.phone}</span></span>
+                                        <span className="text-sm text-ai-text">Keep your phone handy: we'll reach you on <span className="font-bold">{form.phone}</span></span>
                                     </div>
                                 )}
 
@@ -172,7 +180,7 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                                     {/* Agent picker */}
                                     <div>
                                         <div className="flex items-center justify-between mb-2">
-                                            <p className="text-xs font-bold uppercase tracking-wider text-ai-muted">Choose agents</p>
+                                            <p className="text-xs font-bold uppercase tracking-wider text-ai-muted">Preferred agents <span className="normal-case tracking-normal font-medium">(optional)</span></p>
                                             {selected.size > 0 && (
                                                 <span className="text-[11px] font-semibold text-ai-accent">{selected.size} selected</span>
                                             )}
@@ -249,7 +257,7 @@ export function SendToAgentModal({ isOpen, onClose, data, preselectAgentId }: Pr
                                         className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-ai-accent text-white text-sm font-bold hover:bg-ai-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Phone className="w-4 h-4" />}
-                                        {selected.size > 0 ? `Request callback from ${selected.size} agent${selected.size === 1 ? '' : 's'}` : 'Select agents to continue'}
+                                        Request free quotes
                                     </button>
                                 </div>
                             </>
