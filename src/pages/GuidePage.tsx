@@ -268,7 +268,7 @@ export const GuidePage = () => {
                                 <button
                                     onClick={() => {
                                         track('guide_plan_clicked', { guide: topic.id });
-                                        navigate('/', { state: { prompt: `Plan a trip based on: ${topic.title}` } });
+                                        navigate(`/chat?prompt=${encodeURIComponent(`Plan my Sikkim trip based on: ${topic.title}`)}`);
                                     }}
                                     className="w-full py-4 rounded-xl font-semibold text-sm transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 group"
                                     style={{ background: '#f6f1e7', color: '#0e1116', boxShadow: '0 8px 24px -6px rgba(0,0,0,0.4)' }}

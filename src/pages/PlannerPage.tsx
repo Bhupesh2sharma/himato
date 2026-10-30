@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { ItineraryResult } from '../components/ItineraryResult';
 import { ClientItineraryView } from '../components/ClientItineraryView';
@@ -23,6 +23,9 @@ type SearchRequest = { prompt: string };
 export function PlannerPage() {
     const { id } = useParams<{ id?: string }>();
     const navigate = useNavigate();
+    // /chat?prompt=… (guide "Customise this trip" links) prefills the planner
+    const [searchParams] = useSearchParams();
+    const initialPrompt = (searchParams.get('prompt') || '').slice(0, 500);
     const { isAuthenticated, user, logout } = useAuth();
     const [showSplash, setShowSplash] = useState(() => {
         const seen = localStorage.getItem('himato_splash_seen');
@@ -160,7 +163,7 @@ export function PlannerPage() {
                         >
                             {view === 'home' ? (
                                 <>
-                                    <Hero onSearch={handleSearch} isSearching={isSearching} error={error} />
+                                    <Hero onSearch={handleSearch} isSearching={isSearching} error={error} initialPrompt={initialPrompt} />
                                 </>
                             ) : (
                                 <motion.div

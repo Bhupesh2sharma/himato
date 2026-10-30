@@ -4,7 +4,7 @@ export interface SeoTopic {
     title: string;
     shortDescription: string;
     description: string;
-    category: 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
+    category: 'Itinerary' | 'Offbeat' | 'Spiritual' | 'Workation' | 'Family' | 'Adventure' | 'Logistics' | 'Food' | 'Seasonal' | 'Hidden Gem' | 'History';
     image: string;
     content: string; // Markdown content for the guide
     /** Direct 1–3 sentence answer shown as "Quick answer" and used in FAQ schema / AI answers. Falls back to `description`. */
@@ -14,6 +14,205 @@ export interface SeoTopic {
 }
 
 export const SEO_TOPICS: SeoTopic[] = [
+    {
+        id: 'sikkim-itinerary-5-days',
+        title: "5-Day Sikkim Itinerary: Gangtok, Tsomgo Lake & Lachung–Yumthang (2026)",
+        shortDescription: "The classic first Sikkim trip, day by day: drive times, overnight stops, permits and what to book.",
+        description: "Five days covers Gangtok, Tsomgo Lake and North Sikkim's Lachung and Yumthang Valley.",
+        answer: "A 5-day Sikkim itinerary: Day 1 arrive in Gangtok (about 4.5 hours from Bagdogra), Day 2 Tsomgo Lake and Baba Mandir (plus Nathula Wednesday to Sunday), Day 3 drive to Lachung (about 6.5 hours), Day 4 Yumthang Valley and back to Gangtok, Day 5 Gangtok sights and departure. You need permits for Tsomgo and North Sikkim, arranged by a registered tour operator.",
+        updated: '2026-10-30',
+        category: 'Itinerary',
+        image: '/yumgthang.jpeg',
+        content: `
+# 5-Day Sikkim Itinerary
+
+Five days is the most popular length for a first Sikkim trip. It covers **Gangtok**, the high-altitude **Tsomgo Lake**, and North Sikkim's **Lachung and Yumthang Valley**, without the extra day Gurudongmar needs. Expect long mountain drives: hill roads average 18–30 km an hour, so the times below are realistic, not map estimates.
+
+## The plan at a glance
+
+| Day | Route | Drive | Overnight |
+|---|---|---|---|
+| 1 | Bagdogra / NJP → Gangtok | ~4–4.5 hours (113–123 km) | Gangtok |
+| 2 | Tsomgo Lake + Baba Mandir (+ Nathula) | ~2 hours each way | Gangtok |
+| 3 | Gangtok → Lachung | ~6.5 hours (117 km) | Lachung |
+| 4 | Yumthang Valley, then back to Gangtok | ~1.5 hours each way + ~6.5 hours | Gangtok |
+| 5 | Gangtok sights → Bagdogra / NJP | ~4–4.5 hours | — |
+
+## Day 1: Arrive in Gangtok
+
+Fly into **Bagdogra** (about 123 km, ~4.5 hours) or arrive by train at **NJP** (about 113 km, ~4 hours) and drive up to Gangtok. Spend the evening on **MG Marg**, the walking street in the centre of town.
+
+**Do today:** give your tour operator your ID and photos for the Tsomgo and North Sikkim permits. Use a Voter ID, driving licence or passport; Aadhaar is not accepted.
+
+## Day 2: Tsomgo Lake, Baba Mandir and Nathula
+
+Drive about 40 km (~2 hours) to **Tsomgo Lake**, then on to **Baba Harbhajan Singh Mandir**. If it's **Wednesday to Sunday** and you're an Indian citizen, you can add **Nathula Pass** (about 54 km from Gangtok, ~3 hours). Back in Gangtok by evening.
+
+## Day 3: Gangtok to Lachung
+
+The long drive north to **Lachung** takes about **6.5 hours** for 117 km, with waterfalls and viewpoints along the way. Leave early; it gets dark early in the hills. Overnight in Lachung.
+
+## Day 4: Yumthang Valley, then back to Gangtok
+
+Leave Lachung early for **Yumthang Valley** (about 25 km, ~1.5 hours), the "Valley of Flowers". If the road is open, you can continue to **Zero Point** (about 23 km more, ~1.5 hours); local drivers usually charge about **₹3,000–3,500 extra per vehicle** for it. Return to Lachung for lunch, then drive back to Gangtok (~6.5 hours). This is the longest day of the trip.
+
+## Day 5: Gangtok sights and departure
+
+If your flight or train is in the afternoon, fit in a short morning in Gangtok, such as **Enchey Monastery** or the **Do Drul Chorten**, then drive back to Bagdogra or NJP (~4–4.5 hours). Allow a buffer for traffic on the gorge road near Rangpo and Sevoke.
+
+## Permits you need
+
+| Place | Permit | Who arranges it |
+|---|---|---|
+| Tsomgo Lake, Baba Mandir | Yes | Registered tour operator, the day before |
+| Nathula | Yes, Indians only | Registered tour operator, a day ahead (limited slots) |
+| Lachung, Yumthang, Zero Point | Yes (PAP) | Registered tour operator, 24–48 hours ahead |
+
+Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Best time for this itinerary
+
+- **October to November:** clearest skies and mountain views. See [Sikkim in November](/guide/sikkim-in-november).
+- **March to May:** rhododendrons and flowers at Yumthang.
+- **December to February:** snow at Tsomgo and Yumthang, but roads can close. See [Sikkim in December](/guide/sikkim-in-december) and [January](/guide/sikkim-in-january).
+- **June to September:** monsoon; landslides can delay the North Sikkim drive.
+
+## Tips
+
+- **North Sikkim is usually done as a package** (vehicle, stay, meals and permits) from Gangtok. Book it before you arrive in peak season.
+- **Nathula is closed on Monday and Tuesday.** Plan Day 2 for Wednesday to Sunday if you want it.
+- **Pack warm layers** for Tsomgo and Yumthang, even in summer.
+- **Foreign nationals** can do this itinerary except Nathula, with permits through a registered agent, in groups of two or more.
+
+## Want to change it?
+
+[Customise this 5-day plan](/chat?prompt=5%20days%20in%20Sikkim%3A%20Gangtok%2C%20Tsomgo%20Lake%20and%20Lachung%20with%20Yumthang%20Valley): tell Himato your dates, who's coming and your budget, and get your own day-by-day version with permit info.
+
+Need more time? See the [7-day Sikkim itinerary](/guide/sikkim-itinerary-7-days), which adds Gurudongmar Lake and Pelling.
+
+## FAQ
+
+**Is 5 days enough for Sikkim?**
+Yes, for Gangtok, Tsomgo Lake and Lachung with Yumthang. To add Gurudongmar Lake you need at least one more day, and Pelling needs two more.
+
+**Can I include Gurudongmar Lake in 5 days?**
+Not comfortably. Gurudongmar needs a night in Lachen and a 3:30–4:30 AM start, which takes the trip to 6–7 days.
+
+**How far is Lachung from Gangtok?**
+About 117 km, which takes around 6.5 hours by road.
+
+**Do I need a permit for this 5-day Sikkim trip?**
+Yes, for Tsomgo Lake, Nathula and North Sikkim (Lachung, Yumthang). A registered tour operator arranges them with your Voter ID, driving licence or passport and photos.
+
+**What is the best month for a 5-day Sikkim trip?**
+October to November for clear views, or March to May for flowers. December to February brings snow but more road closures.
+        `
+    },
+    {
+        id: 'sikkim-itinerary-7-days',
+        title: "7-Day Sikkim Itinerary: Gangtok, Gurudongmar, Yumthang & Pelling (2026)",
+        shortDescription: "A week covering Gangtok, both valleys of North Sikkim and West Sikkim, with drive times, stays and permits.",
+        description: "Seven days covers Gangtok, Tsomgo Lake, Gurudongmar Lake, Yumthang Valley, Ravangla and Pelling.",
+        answer: "A 7-day Sikkim itinerary: Day 1 arrive in Gangtok, Day 2 Tsomgo Lake and Baba Mandir (plus Nathula Wednesday to Sunday), Day 3 drive to Lachen (about 7 hours), Day 4 Gurudongmar Lake at dawn then on to Lachung, Day 5 Yumthang Valley and back to Gangtok, Day 6 Ravangla and on to Pelling, Day 7 Pelling and departure (about 5 hours to Bagdogra).",
+        updated: '2026-10-30',
+        category: 'Itinerary',
+        image: '/gurudungmar.jpg',
+        content: `
+# 7-Day Sikkim Itinerary
+
+A week lets you see the best of Sikkim: **Gangtok**, **Tsomgo Lake**, both valleys of **North Sikkim** (Gurudongmar Lake and Yumthang) and **West Sikkim** (Ravangla and Pelling, with Kanchenjunga views). It's a full week with several long drives: mountain roads average 18–30 km an hour.
+
+## The plan at a glance
+
+| Day | Route | Drive | Overnight |
+|---|---|---|---|
+| 1 | Bagdogra / NJP → Gangtok | ~4–4.5 hours | Gangtok |
+| 2 | Tsomgo Lake + Baba Mandir (+ Nathula) | ~2 hours each way | Gangtok |
+| 3 | Gangtok → Lachen | ~7 hours (123 km) | Lachen |
+| 4 | Gurudongmar Lake at dawn → Lachen → Lachung | ~3.5 hours each way + ~3 hours | Lachung |
+| 5 | Yumthang Valley → Gangtok | ~1.5 hours each way + ~6.5 hours | Gangtok |
+| 6 | Gangtok → Ravangla → Pelling | ~3 hours + ~2.5 hours | Pelling |
+| 7 | Pelling → Bagdogra | ~5 hours (135 km) | — |
+
+## Day 1: Arrive in Gangtok
+
+Drive from **Bagdogra** (about 123 km, ~4.5 hours) or **NJP** (about 113 km, ~4 hours). Evening on **MG Marg**. Hand your tour operator your ID and photos for the Tsomgo and North Sikkim permits (Voter ID, driving licence or passport; not Aadhaar).
+
+## Day 2: Tsomgo Lake, Baba Mandir and Nathula
+
+**Tsomgo Lake** is about 40 km (~2 hours) from Gangtok, with **Baba Mandir** beyond it. Indian citizens can add **Nathula Pass** from **Wednesday to Sunday**. Back to Gangtok for the night.
+
+## Day 3: Gangtok to Lachen
+
+Drive north to **Lachen** (about 123 km, ~7 hours). The night in Lachen (about 9,000 ft) is required to acclimatise before Gurudongmar. Eat early and sleep early.
+
+## Day 4: Gurudongmar Lake, then Lachung
+
+Leave Lachen between **3:30 and 4:30 AM** for **Gurudongmar Lake** (17,800 ft; about 62 km, ~3.5 hours). You must pass the army checkposts by **10–11 AM**, and you'll usually get **30–45 minutes** at the lake. Head back to Lachen for lunch, then drive to **Lachung** (about 49 km, ~3 hours).
+
+Read before you go: [Best time to visit Gurudongmar Lake](/guide/gurudongmar-frozen-lake-best-time), including the altitude advice for children, seniors and anyone with heart or blood-pressure conditions.
+
+## Day 5: Yumthang Valley, then back to Gangtok
+
+Morning at **Yumthang Valley** (about 25 km, ~1.5 hours). **Zero Point** is about 23 km further if the road is open (usually ~₹3,000–3,500 extra per vehicle). Then the long drive back to Gangtok (~6.5 hours).
+
+## Day 6: Ravangla and Pelling
+
+Drive to **Ravangla** (about 64 km, ~3 hours) for **Buddha Park**, then on to **Pelling** (about 50 km, ~2.5 hours). On a clear evening, Pelling has some of the best Kanchenjunga views in Sikkim.
+
+## Day 7: Pelling and departure
+
+Catch the sunrise over Kanchenjunga, visit the **Pelling Skywalk** or **Pemayangtse Monastery** if time allows, then drive to **Bagdogra** (about 135 km, ~5 hours). Choose an afternoon or evening flight.
+
+## Permits you need
+
+| Place | Permit | Who arranges it |
+|---|---|---|
+| Tsomgo Lake, Baba Mandir | Yes | Registered tour operator, the day before |
+| Nathula | Yes, Indians only | Registered tour operator, a day ahead |
+| Lachen, Gurudongmar | Yes (PAP), Indians only for Gurudongmar | Registered tour operator, 24–48 hours ahead |
+| Lachung, Yumthang, Zero Point | Yes (PAP) | Registered tour operator, 24–48 hours ahead |
+| Ravangla, Pelling | No (Indian citizens) | — |
+
+Full details: [Sikkim permits guide](/guide/sikkim-permits-guide).
+
+## Best time for this itinerary
+
+- **April to June** and **October to November** are best: Gurudongmar is usually reachable and skies are clearer in autumn.
+- **December to February:** snow often closes the road to Gurudongmar and Zero Point. Swap Day 4 for a rest day in Lachung or Gangtok. See [Sikkim in December](/guide/sikkim-in-december) and [January](/guide/sikkim-in-january).
+- **July to September:** monsoon landslides make North Sikkim unreliable.
+
+## Tips
+
+- **North Sikkim is usually booked as a 3-day / 2-night package** from Gangtok (Days 3 to 5 here), covering vehicle, stays, meals and permits.
+- **Travelling with young children or seniors?** Consider skipping Gurudongmar and spending Day 4 in Lachung instead. See [Is Thangu Valley safe for kids under 5?](/guide/thangu-valley-kids-safety).
+- **Foreign nationals** can't visit Nathula or Gurudongmar. Replace them with an extra day in Gangtok or Pelling.
+- **Build in a buffer** in winter or monsoon, as roads can close at short notice.
+
+## Want to change it?
+
+[Customise this 7-day plan](/chat?prompt=7%20days%20in%20Sikkim%3A%20Gangtok%2C%20Tsomgo%2C%20Lachen%20with%20Gurudongmar%20Lake%2C%20Lachung%20with%20Yumthang%2C%20Ravangla%20and%20Pelling): tell Himato your dates, group and budget, and get your own day-by-day version with permit info.
+
+Shorter trip? See the [5-day Sikkim itinerary](/guide/sikkim-itinerary-5-days).
+
+## FAQ
+
+**Is 7 days enough for Sikkim?**
+Yes. Seven days covers Gangtok, Tsomgo Lake, Gurudongmar, Yumthang, Ravangla and Pelling, with several long drives.
+
+**Should I do Gurudongmar or Yumthang?**
+In 7 days you can do both: Gurudongmar from Lachen, then Yumthang from Lachung. If you're short on time or travelling with young children, choose Yumthang.
+
+**How far is Pelling from Gangtok?**
+About 124 km, or around 5 hours by road. This itinerary breaks the drive at Ravangla.
+
+**Can I do this 7-day Sikkim trip in winter?**
+Partly. From December to February snow often closes the roads to Gurudongmar and Zero Point, so plan an alternative for those days.
+
+**Do foreigners need a different itinerary?**
+Yes. Foreign nationals can't visit Nathula or Gurudongmar, but can do Tsomgo, Lachung, Yumthang, Ravangla and Pelling with the right permits in groups of two or more.
+        `
+    },
     // --- Category 1: The "Offbeat & Unexplored" ---
     {
         id: 'dzongu-permit-homestay',

@@ -49,7 +49,7 @@ const SEO_START = '<!-- seo:start -->';
 const SEO_END = '<!-- seo:end -->';
 const ROOT_EMPTY = '<div id="root"></div>';
 
-const CATEGORY_ORDER = ['Hidden Gem', 'Offbeat', 'Adventure', 'Spiritual', 'Family', 'Food', 'Logistics', 'Workation', 'Seasonal', 'History'];
+const CATEGORY_ORDER = ['Itinerary', 'Hidden Gem', 'Offbeat', 'Adventure', 'Spiritual', 'Family', 'Food', 'Logistics', 'Workation', 'Seasonal', 'History'];
 
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

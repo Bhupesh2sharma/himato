@@ -16,6 +16,7 @@ import { optimizedSrc } from '../data/optimizedImages';
  */
 
 const CATEGORY_ORDER: SeoTopic['category'][] = [
+    'Itinerary',
     'Hidden Gem',
     'Offbeat',
     'Adventure',
@@ -29,6 +30,7 @@ const CATEGORY_ORDER: SeoTopic['category'][] = [
 ];
 
 const CATEGORY_BLURB: Record<SeoTopic['category'], string> = {
+    'Itinerary': 'Day-by-day Sikkim plans with drive times, stays and permits, ready to customise.',
     'Hidden Gem': 'Spots most blogs miss — and a few we wish they would keep missing.',
     'Offbeat': 'Restricted reserves and slow-travel valleys for those who skip the bus tours.',
     'Adventure': 'Treks, hot springs, hairpin bends, paragliding — the parts of Sikkim that get the legs working.',

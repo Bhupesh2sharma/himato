@@ -16,6 +16,7 @@ const CATEGORY_COLOR: Record<string, string> = {
     Food:         '#c9a961',
     Seasonal:     '#2f4a3a',
     'Hidden Gem': '#b73f25',
+    Itinerary:    '#2f4a3a',
     History:      '#7ba9c4',
     Logistics:    '#6b7280',
 };

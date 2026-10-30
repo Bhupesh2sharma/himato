@@ -35,10 +35,12 @@ interface HeroProps {
     onSearch: (prompt: string) => void | Promise<void>;
     isSearching: boolean;
     error?: string;
+    /** Prefills the request box (e.g. from a guide's "Customise this trip" link). */
+    initialPrompt?: string;
 }
 
-export const Hero = ({ onSearch, isSearching, error }: HeroProps) => {
-    const [prompt, setPrompt] = useState('');
+export const Hero = ({ onSearch, isSearching, error, initialPrompt = '' }: HeroProps) => {
+    const [prompt, setPrompt] = useState(initialPrompt);
     const [isExpanded, setIsExpanded] = useState(false);
     const [query, setQuery] = useState('');
     const [placeholderIndex, setPlaceholderIndex] = useState(0);
